@@ -1,5 +1,6 @@
 package;
 
+import flixel.addons.display.FlxBackdrop;
 #if desktop
 import sys.thread.Thread;
 #end
@@ -257,6 +258,13 @@ class TitleState extends MusicBeatState
 
 		Conductor.changeBPM(titleJSON.bpm);
 		persistentUpdate = true;
+
+		var bg:FlxBackdrop = new FlxBackdrop(Paths.image("cumbg"), XY, 0, 0);
+		bg.velocity.set(100, 100);
+		// bg.antialiasing = ClientPrefs.globalAntialiasing;
+		// bg.setGraphicSize(Std.int(bg.width * 0.6));
+		// bg.updateHitbox();
+		add(bg);
 
 		var bg:FlxSprite = new FlxSprite();
 

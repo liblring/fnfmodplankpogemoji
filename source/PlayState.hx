@@ -364,19 +364,19 @@ class PlayState extends MusicBeatState
 
 		var rating:Rating = new Rating('good');
 		rating.ratingMod = 0.7;
-		rating.score = 200;
+		rating.score = -1;
 		rating.noteSplash = false;
 		ratingsData.push(rating);
 
 		var rating:Rating = new Rating('bad');
 		rating.ratingMod = 0.4;
-		rating.score = 100;
+		rating.score = -2;
 		rating.noteSplash = false;
 		ratingsData.push(rating);
 
 		var rating:Rating = new Rating('shit');
 		rating.ratingMod = 0;
-		rating.score = 50;
+		rating.score = -3;
 		rating.noteSplash = false;
 		ratingsData.push(rating);
 
@@ -524,7 +524,7 @@ class PlayState extends MusicBeatState
 				color.updateHitbox();
 				color.scale.set(2.5, 2.5);
 				add(color);
-				var images:BGSprite = new BGSprite('planks/images', -50, 200, 1, 1);
+				var images:BGSprite = new BGSprite('planks/images', -50, 200, 0.8, 0.8);
 				images.setGraphicSize(Std.int(images.width * 1.1));
 				images.updateHitbox();
 				images.scale.set(1.9, 1.9);
@@ -534,6 +534,13 @@ class PlayState extends MusicBeatState
 				sky.updateHitbox();
 				add(sky);
 				sky.scale.set(1.9, 1.9);
+
+			case 'greatest': // Week Greatest
+				var great:BGSprite = new BGSprite('great/greater', 0, 200, 1, 1);
+				great.setGraphicSize(Std.int(great.width * 1.1));
+				great.updateHitbox();
+				great.scale.set(2, 2);
+				add(great);
 
 			case 'stage': // Week 1
 				var bg:BGSprite = new BGSprite('stageback', -600, -200, 0.9, 0.9);
@@ -4429,7 +4436,7 @@ class PlayState extends MusicBeatState
 		//
 
 		var rating:FlxSprite = new FlxSprite();
-		var score:Int = 350;
+		var score:Int = 1;
 
 		// tryna do MS based judgment due to popular demand
 		var daRating:Rating = Conductor.judgeNote(note, noteDiff / playbackRate);
@@ -5331,7 +5338,7 @@ class PlayState extends MusicBeatState
 				{
 					FlxG.save.flush();
 				}
-				FlxG.log.add('Deaths: ' + Achievements.henchmenDeath);
+				FlxG.log.add('deaths - ' + Achievements.henchmenDeath);
 				#end
 			}
 		}
@@ -5703,15 +5710,15 @@ class PlayState extends MusicBeatState
 			// Rating FC
 			ratingFC = "";
 			if (sicks > 0)
-				ratingFC = "SFC";
+				ratingFC = "good full";
 			if (goods > 0)
-				ratingFC = "GFC";
+				ratingFC = "meh foll";
 			if (bads > 0 || shits > 0)
-				ratingFC = "FC";
+				ratingFC = "full";
 			if (songMisses > 0 && songMisses < 10)
-				ratingFC = "SDCB";
+				ratingFC = "wtf you missed?";
 			else if (songMisses >= 10)
-				ratingFC = "Clear";
+				ratingFC = "wtf is wrong with you how are you missing";
 		}
 		updateScore(badHit); // score will only update after rating is calculated, if it's a badHit, it shouldn't bounce -Ghost
 		setOnLuas('rating', ratingPercent);

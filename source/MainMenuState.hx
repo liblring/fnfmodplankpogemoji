@@ -1,6 +1,6 @@
 package;
 
-#if desktop
+#if discord_rpc
 import Discord.DiscordClient;
 #end
 import flixel.FlxG;
@@ -50,7 +50,7 @@ class MainMenuState extends MusicBeatState
 		#end
 		WeekData.loadTheFirstEnabledMod();
 
-		#if desktop
+		#if discord_rpc
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Menus", null);
 		#end
@@ -156,11 +156,11 @@ class MainMenuState extends MusicBeatState
 	}
 
 	#if ACHIEVEMENTS_ALLOWED
-	// Unlocks "Freaky on a Friday Night" achievement
+	// Unlocks "Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky" achievement
 	function giveAchievement() {
-		add(new AchievementObject('friday_night_play', camAchievement));
-		FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
-		trace('Giving achievement "friday_night_play"');
+		// add(new AchievementObject('friday_night_play', camAchievement));
+		// FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
+		// trace('Giving achievement "friday_night_play"');
 	}
 	#end
 

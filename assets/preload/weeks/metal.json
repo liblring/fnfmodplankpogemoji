@@ -1,8 +1,8 @@
 {
 	"songs": [
 		[
-			"plankyer",
-			"plank",
+			"metalshitter",
+			"metalbeatbox",
 			[
 				126,
 				88,
@@ -13,7 +13,7 @@
 	"hiddenUntilUnlocked": false,
 	"hideFreeplay": false,
 	"weekBackground": "stage",
-	"difficulties": "hard",
+	"difficulties": "hard, metal",
 	"weekCharacters": [
 		"dad",
 		"bf",
@@ -27,6 +27,6 @@
 		253
 	],
 	"hideStoryMode": false,
-	"weekBefore": "tutorial",
+	"weekBefore": "planker",
 	"startUnlocked": true
 }

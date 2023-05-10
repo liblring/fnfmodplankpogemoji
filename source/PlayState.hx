@@ -518,6 +518,11 @@ class PlayState extends MusicBeatState
 
 		switch (curStage)
 		{
+
+			case 'white': // Wheek
+			var bg:BGSprite = new BGSprite('bgassetsorsmth/man', -200, -200, 0, 0);
+			add(bg);
+
 			case 'plankyer': // Week PLank
 				var color:BGSprite = new BGSprite('planks/color', -50, 0, 1, 1);
 				color.setGraphicSize(Std.int(color.width * 1.1));

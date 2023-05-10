@@ -211,7 +211,7 @@ class TitleState extends MusicBeatState
 		Conductor.changeBPM(titleJSON.bpm);
 		persistentUpdate = true;
 
-		var bg:FlxBackdrop = new FlxBackdrop(Paths.image("cumbg"), XY, 0, 0);
+		var bg:FlxBackdrop = new FlxBackdrop(Paths.image("mnalk"), XY, 0, 0);
 		bg.velocity.set(100, 100);
 		// bg.antialiasing = ClientPrefs.globalAntialiasing;
 		// bg.setGraphicSize(Std.int(bg.width * 0.6));

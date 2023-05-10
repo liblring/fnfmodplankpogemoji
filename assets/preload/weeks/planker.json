@@ -8,6 +8,15 @@
 				88,
 				80
 			]
+		],
+		[
+			"mnalk",
+			"mnalk",
+			[
+				255,
+				255,
+				255
+			]
 		]
 	],
 	"hiddenUntilUnlocked": false,
@@ -19,8 +28,8 @@
 		"bf",
 		"gf"
 	],
-	"storyName": "Your New Week",
-	"weekName": "Custom Week",
+	"storyName": "im using controls",
+	"weekName": "ctrls?",
 	"freeplayColor": [
 		146,
 		113,

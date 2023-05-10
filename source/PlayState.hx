@@ -518,6 +518,10 @@ class PlayState extends MusicBeatState
 
 		switch (curStage)
 		{
+			case 'gartenofpeakpeak': // peak
+				var bg:BGSprite = new BGSprite('gartenofpeak', -150, -50, 1, 1);
+				bg.scale.set(1.5, 1.5);
+				add(bg);
 
 			case 'white': // Wheek
 			var bg:BGSprite = new BGSprite('bgassetsorsmth/man', -200, -200, 0, 0);

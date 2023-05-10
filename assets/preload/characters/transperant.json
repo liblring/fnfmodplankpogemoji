@@ -1,15 +1,15 @@
 {
 	"animations": [
 		{
-			"loop": false,
 			"offsets": [
 				1321,
-				150
+				130
 			],
-			"anim": "idle",
+			"loop": false,
 			"fps": 24,
-			"name": "idlelmao",
-			"indices": []
+			"anim": "idle",
+			"indices": [],
+			"name": "idlelmao"
 		}
 	],
 	"no_antialiasing": false,
@@ -26,8 +26,8 @@
 		255
 	],
 	"camera_position": [
-		340,
-		340
+		290,
+		520
 	],
 	"sing_duration": 4,
 	"scale": 0.5

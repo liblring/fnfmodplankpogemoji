@@ -35,6 +35,7 @@ function onCountdownTick(counter)
 		setObjectCamera('thetext', 'other')
 		setTextSize('thetext', 30)
 		addLuaText('thetext')
+		setTextFont('thetext', 'funy.ttf')
 		doTweenY('showthefunny', 'thetext', 500, 1, 'sineOut')
 		runTimer('unfunny', 3)
 	end
@@ -47,3 +48,8 @@ function onTimerCompleted(tag, loops, loopsLeft)
 	end
 end
 
+function onCreatePost()
+    setTextFont('scoreTxt', 'funy.ttf')
+    setTextFont('botplayTxt', 'funy.ttf')
+    setTextFont('timeTxt', 'funy.ttf')
+end

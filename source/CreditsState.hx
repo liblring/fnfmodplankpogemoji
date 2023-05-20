@@ -82,9 +82,9 @@ class CreditsState extends MusicBeatState
 
 		var pisspoop:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
 			['lario forest'],
-			['libing',		'lib',		'director or some shit i forgot (im on crack while writing this)',								'https://www.youtube.com/channel/UCwH4gcjdN-gWPGunlBxAnQQ',	'ffcaca'],
-			['PlankDev',			'plank',			'coder + like composer + like the guy who turned this into a serious mod bravo plank!',							'https://github.com/ThePlank',		'4a2e00'],
-			['Nick',			'dantesguy',			'coder + like artist + like animator, made opd sprites for mnalk lets fokin go mate innit',							'https://github.com/ThePlank',		'ffffff'],
+			['libing',	'lib',		'director or some shit i forgot (im on crack while writing this)',							'https://www.youtube.com/channel/UCwH4gcjdN-gWPGunlBxAnQQ',	'ffcaca'],
+			['PlankDev','plank',    'coder + like composer + like the guy who turned this into a serious mod bravo plank!',		'https://github.com/ThePlank',		'4a2e00'],
+			['Nick',    'dantesguy','coder + like artist + like animator, made opd sprites for mnalk lets fokin go mate innit',	'https://github.com/Nikerlo',		'ffffff'],
 			[''],
 			['Shadow Mario Team'],
 			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',								'https://twitter.com/Shadow_Mario_',	'444444'],

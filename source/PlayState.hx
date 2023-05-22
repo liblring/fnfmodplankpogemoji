@@ -364,19 +364,19 @@ class PlayState extends MusicBeatState
 
 		var rating:Rating = new Rating('good');
 		rating.ratingMod = 0.7;
-		rating.score = -1;
+		rating.score = 3;
 		rating.noteSplash = false;
 		ratingsData.push(rating);
 
 		var rating:Rating = new Rating('bad');
 		rating.ratingMod = 0.4;
-		rating.score = -2;
+		rating.score = 2;
 		rating.noteSplash = false;
 		ratingsData.push(rating);
 
 		var rating:Rating = new Rating('shit');
 		rating.ratingMod = 0;
-		rating.score = -3;
+		rating.score = 1;
 		rating.noteSplash = false;
 		ratingsData.push(rating);
 
@@ -523,9 +523,13 @@ class PlayState extends MusicBeatState
 				bg.scale.set(1.5, 1.5);
 				add(bg);
 
+			case 'thg': // peak
+				var thg:BGSprite = new BGSprite('topbg', -25, -150, 1, 1);
+				add(thg);
+
 			case 'white': // Wheek
-			var bg:BGSprite = new BGSprite('bgassetsorsmth/man', -200, -200, 0, 0);
-			add(bg);
+				var bg:BGSprite = new BGSprite('bgassetsorsmth/man', -200, -200, 0, 0);
+				add(bg);
 
 			case 'plankyer': // Week PLank
 				var color:BGSprite = new BGSprite('planks/color', -50, 0, 1, 1);
@@ -4445,7 +4449,7 @@ class PlayState extends MusicBeatState
 		//
 
 		var rating:FlxSprite = new FlxSprite();
-		var score:Int = 1;
+		var score:Int = 4;
 
 		// tryna do MS based judgment due to popular demand
 		var daRating:Rating = Conductor.judgeNote(note, noteDiff / playbackRate);

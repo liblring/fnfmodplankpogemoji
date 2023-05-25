@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="menu_paidplay.png">
+	<!-- Created with Adobe Animate version 18.0.2.126 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="paidplay basic0000" x="0" y="95" width="288" height="83" frameX="0" frameY="-2" frameWidth="288" frameHeight="85"/>
+	<SubTexture name="paidplay basic0001" x="0" y="0" width="287" height="85" frameX="0" frameY="0" frameWidth="288" frameHeight="85"/>
+	<SubTexture name="paidplay basic0002" x="0" y="368" width="287" height="78" frameX="0" frameY="-7" frameWidth="288" frameHeight="85"/>
+	<SubTexture name="paidplay basic0003" x="0" y="279" width="287" height="79" frameX="0" frameY="-6" frameWidth="288" frameHeight="85"/>
+	<SubTexture name="paidplay basic0004" x="0" y="188" width="288" height="81" frameX="0" frameY="-4" frameWidth="288" frameHeight="85"/>
+	<SubTexture name="paidplay white0000" x="0" y="95" width="288" height="83" frameX="0" frameY="-2" frameWidth="288" frameHeight="85"/>
+	<SubTexture name="paidplay white0001" x="0" y="0" width="287" height="85" frameX="0" frameY="0" frameWidth="288" frameHeight="85"/>
+	<SubTexture name="paidplay white0002" x="0" y="368" width="287" height="78" frameX="0" frameY="-7" frameWidth="288" frameHeight="85"/>
+	<SubTexture name="paidplay white0003" x="0" y="279" width="287" height="79" frameX="0" frameY="-6" frameWidth="288" frameHeight="85"/>
+	<SubTexture name="paidplay white0004" x="0" y="188" width="288" height="81" frameX="0" frameY="-4" frameWidth="288" frameHeight="85"/>
+</TextureAtlas>

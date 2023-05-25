@@ -33,7 +33,7 @@ class MainMenuState extends MusicBeatState
 	private var camAchievement:FlxCamera;
 	
 	var optionShit:Array<String> = [
-		'freeplay',
+		'paidplay',
 		'credits',
 		'options'
 	];
@@ -92,7 +92,7 @@ class MainMenuState extends MusicBeatState
 		magenta.antialiasing = ClientPrefs.globalAntialiasing;
 		magenta.color = 0xFFfd719b;
 		add(magenta);
-		
+
 		// magenta.scrollFactor.set();
 
 		menuItems = new FlxTypedGroup<FlxSprite>();
@@ -231,7 +231,7 @@ class MainMenuState extends MusicBeatState
 
 								switch (daChoice)
 								{
-									case 'freeplay':
+									case 'paidplay':
 										MusicBeatState.switchState(new FreeplayState());
 									case 'credits':
 										MusicBeatState.switchState(new CreditsState());

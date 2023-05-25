@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="tophat.png">
+<SubTexture name="i0000" x="706" y="467" width="214" height="423" frameX="-23" frameY="-45" frameWidth="283" frameHeight="477" />
+<SubTexture name="i0001" x="706" y="467" width="214" height="423" frameX="-23" frameY="-45" frameWidth="283" frameHeight="477" />
+<SubTexture name="i0002" x="706" y="467" width="214" height="423" frameX="-23" frameY="-45" frameWidth="283" frameHeight="477" />
+<SubTexture name="r0000" x="0" y="467" width="267" height="431" frameX="-4" frameY="-36" frameWidth="283" frameHeight="477" />
+<SubTexture name="r0001" x="897" y="0" width="248" height="433" frameX="-16" frameY="-34" frameWidth="283" frameHeight="477" />
+<SubTexture name="r0002" x="650" y="0" width="247" height="434" frameX="-17" frameY="-33" frameWidth="283" frameHeight="477" />
+<SubTexture name="d0000" x="0" y="898" width="235" height="373" frameX="-9" frameY="-104" frameWidth="283" frameHeight="477" />
+<SubTexture name="d0001" x="1145" y="383" width="234" height="381" frameX="-5" frameY="-96" frameWidth="283" frameHeight="477" />
+<SubTexture name="d0002" x="1145" y="0" width="234" height="383" frameX="-5" frameY="-94" frameWidth="283" frameHeight="477" />
+<SubTexture name="l0000" x="920" y="467" width="224" height="416" frameX="-13" frameY="-57" frameWidth="283" frameHeight="477" />
+<SubTexture name="l0001" x="488" y="467" width="218" height="426" frameX="-21" frameY="-44" frameWidth="283" frameHeight="477" />
+<SubTexture name="l0002" x="267" y="467" width="221" height="428" frameX="-21" frameY="-42" frameWidth="283" frameHeight="477" />
+<SubTexture name="u0000" x="0" y="0" width="211" height="467" frameX="-26" frameY="0" frameWidth="283" frameHeight="477" />
+<SubTexture name="u0001" x="431" y="0" width="219" height="449" frameX="-20" frameY="-18" frameWidth="283" frameHeight="477" />
+<SubTexture name="u0002" x="211" y="0" width="220" height="450" frameX="-19" frameY="-17" frameWidth="283" frameHeight="477" />
+</TextureAtlas>

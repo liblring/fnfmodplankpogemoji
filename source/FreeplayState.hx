@@ -111,8 +111,11 @@ class FreeplayState extends MusicBeatState
 
 		for (i in 0...songs.length)
 		{
-			var songText:Alphabet = new Alphabet(90, 320, songs[i].songName, true);
+			var songText:Alphabet = new Alphabet(FlxG.width / 2, 320, songs[i].songName, true);
 			songText.isMenuItem = true;
+			songText.changeX = false;
+			songText.snapToPosition();
+			songText.alignment = CENTERED;
 			songText.targetY = i - curSelected;
 			grpSongs.add(songText);
 
@@ -126,7 +129,7 @@ class FreeplayState extends MusicBeatState
 			Paths.currentModDirectory = songs[i].folder;
 			var icon:HealthIcon = new HealthIcon(songs[i].songCharacter);
 			icon.sprTracker = songText;
-
+			icon.x = songText.width - 100;
 			// using a FlxGroup is too much fuss!
 			iconArray.push(icon);
 			add(icon);

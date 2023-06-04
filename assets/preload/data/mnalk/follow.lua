@@ -1,8 +1,8 @@
 
 local xx = 300;
-local yy = 850;
+local yy = 950;
 local xx2 = 950;
-local yy2 = 900;
+local yy2 = 1000;
 local ofs = 23;
 local followchars = true;
 local del = 0;

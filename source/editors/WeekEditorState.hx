@@ -367,7 +367,7 @@ class WeekEditorState extends MusicBeatState
 
 		#if desktop
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("Week Editor", "Editting: " + weekFileName);
+		DiscordClient.changePresence("who needs a fucking week", "edits: " + weekFileName);
 		#end
 	}
 	

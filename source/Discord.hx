@@ -17,7 +17,7 @@ class DiscordClient
 	{
 		trace("Discord Client starting...");
 		DiscordRpc.start({
-			clientID: "863222024192262205",
+			clientID: "1115276156841771090",
 			onReady: onReady,
 			onError: onError,
 			onDisconnected: onDisconnected
@@ -45,7 +45,7 @@ class DiscordClient
 			details: "mnalking rn",
 			state: null,
 			largeImageKey: 'icon',
-			largeImageText: "mnalk opd"
+			largeImageText: "toyota corrola ruining our mod, plank"
 		});
 	}
 

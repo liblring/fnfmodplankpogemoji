@@ -41,7 +41,7 @@ class CreditsState extends MusicBeatState
 	{
 		#if desktop
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("mnalking rn", null);
+		DiscordClient.changePresence("hold on let him see the devs", null);
 		#end
 
 		persistentUpdate = true;
@@ -88,27 +88,27 @@ class CreditsState extends MusicBeatState
 			[''],
 			['Shadow Mario Team'],
 			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',								'https://twitter.com/Shadow_Mario_',	'444444'],
-			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',								'https://twitter.com/Shadow_Mario_',	'444444'],
-			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',								'https://twitter.com/Shadow_Mario_',	'444444'],
+			['Shadow Mario',		'shadowmario',		'Shadow Mario',			                    					'https://twitter.com/Shadow_Mario_',	'444444'],
+			['Shadow Mario',		'shadowmario',		'The Best BLJer On The Earth',				    				'https://twitter.com/Shadow_Mario_',	'444444'],
 			[''],
 			['Former Shadow Mario'],
-			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',								'https://twitter.com/Shadow_Mario_',	'444444'],
+			['Shadow Mario',		'shadowmario',		'Created Shadow Mario and then left wtf',						'https://twitter.com/Shadow_Mario_',	'444444'],
 			[''],
 			['Shadow Mario Contributors'],
-			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',								'https://twitter.com/Shadow_Mario_',	'444444'],
-			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',								'https://twitter.com/Shadow_Mario_',	'444444'],
-			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',								'https://twitter.com/Shadow_Mario_',	'444444'],
-			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',								'https://twitter.com/Shadow_Mario_',	'444444'],
-			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',								'https://twitter.com/Shadow_Mario_',	'444444'],
-			['Keoiki',				'keoiki',			'Note Splash Animations',										'https://twitter.com/Keoiki_',			'D2D2D2'],
-			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',								'https://twitter.com/Shadow_Mario_',	'444444'],
-			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',								'https://twitter.com/Shadow_Mario_',	'444444'],
+			['Shadow Mario',		'shadowmario',		'Shadow Mario`s Dad',								'https://twitter.com/Shadow_Mario_',	'444444'],
+			['Shadow Mario',		'shadowmario',		'Shadow Mario`s Mom',								'https://twitter.com/Shadow_Mario_',	'444444'],
+			['Shadow Mario',		'shadowmario',		'Shadow Mario`s Grandpa',								'https://twitter.com/Shadow_Mario_',	'444444'],
+			['Shadow Mario',		'shadowmario',		'Shadow Mario`s Grandma',								'https://twitter.com/Shadow_Mario_',	'444444'],
+			['Shadow Mario',		'shadowmario',		'Shadow Mario`s Grandgrandpa',								'https://twitter.com/Shadow_Mario_',	'444444'],
+			['Keoiki',				'keoiki',			'help me im stuck in the infinite field of shadow mario',		'https://twitter.com/Keoiki_',			'D2D2D2'],
+			['Shadow Mario',		'shadowmario',		'Shadow Mario`s Grandgrandma',								'https://twitter.com/Shadow_Mario_',	'444444'],
+			['Shadow Mario',		'shadowmario',		'Shadow Mario`s Uncle',								'https://twitter.com/Shadow_Mario_',	'444444'],
 			[''],
 			["Shadow Lario Crew"],
-			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',								'https://twitter.com/Shadow_Mario_',	'444444'],
-			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',								'https://twitter.com/Shadow_Mario_',	'444444'],
-			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',								'https://twitter.com/Shadow_Mario_',	'444444'],
-			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',								'https://twitter.com/Shadow_Mario_',	'444444']
+			['Shadow Mario',		'shadowmario',		'everybody wanna be a shadow mario',								'https://twitter.com/Shadow_Mario_',	'444444'],
+			['Shadow Mario',		'shadowmario',		'get a lotta engines drive in fancy codes',								'https://twitter.com/Shadow_Mario_',	'444444'],
+			['Shadow Mario',		'shadowmario',		'everybody wanna be a shadow mario',								'https://twitter.com/Shadow_Mario_',	'444444'],
+			['Shadow Mario',		'shadowmario',		'idk whats the 4th lyric but shadow mario',								'https://twitter.com/Shadow_Mario_',	'444444']
 		];
 		
 		for(i in pisspoop){

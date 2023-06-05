@@ -52,7 +52,7 @@ class MainMenuState extends MusicBeatState
 
 		#if discord_rpc
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("mnalking rn", null);
+		DiscordClient.changePresence("he is mainmenustating", null);
 		#end
 		debugKeys = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
 

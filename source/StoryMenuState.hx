@@ -90,7 +90,7 @@ class StoryMenuState extends MusicBeatState
 
 		#if desktop
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("mnalking rn", null);
+		DiscordClient.changePresence("somehow is in the storym ode", null);
 		#end
 
 		var num:Int = 0;

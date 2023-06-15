@@ -40,6 +40,7 @@ class FreeplayState extends MusicBeatState
 	var lerpRating:Float = 0;
 	var intendedScore:Int = 0;
 	var intendedRating:Float = 0;
+	var twobullshits:FlxSprite;
 
 	private var grpSongs:FlxTypedGroup<Alphabet>;
 	private var curPlaying:Bool = false;
@@ -139,6 +140,11 @@ class FreeplayState extends MusicBeatState
 			// songText.screenCenter(X);
 		}
 		WeekData.setDirectoryFromWeek();
+		
+		twobullshits = new FlxSprite().loadGraphic(Paths.image('these-fuckers'));
+		twobullshits.antialiasing = ClientPrefs.globalAntialiasing;
+		add(twobullshits);
+		twobullshits.screenCenter();
 
 		scoreText = new FlxText(FlxG.width * 0.7, 5, 0, "", 32);
 		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT);

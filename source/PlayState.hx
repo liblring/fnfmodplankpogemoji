@@ -81,11 +81,11 @@ class PlayState extends MusicBeatState
 
 	public static var ratingStuff:Array<Dynamic> = [
 		['is not real', 0.2], // From 0% to 19%
-		['is real', 0.4], // From 20% to 39%
+		['is this gonna be on FM?', 0.4], // From 20% to 39%
 		['is real', 0.5], // From 40% to 49%
 		['is real', 0.6], // From 50% to 59%
 		['is real', 0.69], // From 60% to 68%
-		['is real', 0.7], // 69%
+		['NUH UH!', 0.7], // 69%
 		['is real', 0.8], // From 70% to 79%
 		['is real', 0.9], // From 80% to 89%
 		['is real', 1], // From 90% to 99%
@@ -518,6 +518,18 @@ class PlayState extends MusicBeatState
 
 		switch (curStage)
 		{
+			case 'astagewithoneimage': // Wheek
+			GameOverSubstate.deathSoundName = 'fnf_loss_sfx-pixel';
+			GameOverSubstate.loopSoundName = 'gameOver-pixel';
+			GameOverSubstate.endSoundName = 'gameOverEnd-pixel';
+
+			var mhmhm:BGSprite = new BGSprite('bgassetsorsmth/man', -200, -200, 0, 0);
+			mhmhm.scale.set(1.4, 1.4);
+			add(mhmhm);
+			var bg:BGSprite = new BGSprite('bgassetsorsmth/astagewithoneimage', 250, 120, 1, 1);
+			bg.scale.set(1.4, 1.4);
+			add(bg);
+
 			case 'gartenofpeakpeak': // peak
 				var bg:BGSprite = new BGSprite('gartenofpeak', -150, -50, 1, 1);
 				bg.scale.set(1.5, 1.5);

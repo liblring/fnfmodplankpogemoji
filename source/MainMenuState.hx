@@ -33,12 +33,13 @@ class MainMenuState extends MusicBeatState
 	private var camAchievement:FlxCamera;
 
 	var optionShit:Array<MainMenuButton> = [
-		{x: 200,  y: 270, scale: 2.2, name:     'freeplay'},
-		{x: 550,  y: 270, scale: 2.2, name: 'credits'},
-		{x: 10,   y: 450, scale: 4,   name:    'options'},
+		{x: 400,  y: 70, scale: 2.7, name:     'freeplay'},
+		{x: 750,  y: 370, scale: 4, name: 'credits'},
+		{x: 210,   y: 550, scale: 3,   name:    'options'},
 	];
 
 	var magenta:FlxSprite;
+	var gifcat:FlxSprite;
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
 	var debugKeys:Array<FlxKey>;
@@ -75,6 +76,13 @@ class MainMenuState extends MusicBeatState
 		bg.screenCenter();
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
+
+		gifcat = new FlxSprite(75, 75);
+		gifcat.frames = Paths.getSparrowAtlas('catbounce');
+		gifcat.animation.addByPrefix('bouncer', "cat bounce", 24);
+		gifcat.animation.play("bouncer", 24);
+		gifcat.antialiasing = ClientPrefs.globalAntialiasing;
+		add(gifcat);
 
 		camFollow = new FlxObject(0, 0, 1, 1);
 		camFollowPos = new FlxObject(0, 0, 1, 1);
@@ -206,9 +214,10 @@ class MainMenuState extends MusicBeatState
 
 		super.update(elapsed);
 
-		menuItems.forEach(function(spr:FlxSprite) {
-			spr.screenCenter(X);
-		});
+		menuItems.forEach(function(spr:FlxSprite)
+			{
+				spr.x = (560 + FlxMath.lerp(Math.sin(spr.ID - curSelected) * 100, spr.x, lerpVal)) - 80;
+			});
 	}
 
 	function changeItem(huh:Int = 0) {

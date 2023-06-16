@@ -5,9 +5,6 @@ thefunny = 'whar';
 
 function onCreate()
 	textthing = getRandomInt(1,8);
-end
-
-function onCreatePost()
 	if textthing == 1 then
 		thefunny = 'lets shit metal'
 	elseif textthing == 2 then
@@ -21,7 +18,7 @@ function onCreatePost()
 	elseif textthing == 6 then
 		thefunny = 'hey alexa, play mu_war.wav'
 	elseif textthing == 7 then
-		thefunny = 'I\'m using tilt controls!'
+		thefunny = 'Im using tilt controls!'
 	elseif textthing == 8 then
 		thefunny = 'source/Conductor.hx:135: new BPM map BUDDY []'
 	end

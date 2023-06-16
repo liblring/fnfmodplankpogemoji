@@ -103,7 +103,7 @@ class MainMenuState extends MusicBeatState
 			menuItems.add(menuItem);
 		}
 
-		FlxG.camera.follow(camFollowPos, null, 1);
+		//FlxG.camera.follow(camFollowPos, null, 1);
 
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, "HOLY SHIT ITS THE FABLED MOD CALLED MNALK OPD YOW V" + psychEngineVersion, 12);
 		versionShit.scrollFactor.set();

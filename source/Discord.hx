@@ -1,7 +1,9 @@
 package;
 
+#if (!hl)
 import Sys.sleep;
 import discord_rpc.DiscordRpc;
+#end
 
 #if LUA_ALLOWED
 import llua.Lua;
@@ -12,6 +14,7 @@ using StringTools;
 
 class DiscordClient
 {
+	#if (!hl)
 	public static var isInitialized:Bool = false;
 	public function new()
 	{
@@ -98,5 +101,48 @@ class DiscordClient
 			changePresence(details, state, smallImageKey, hasStartTimestamp, endTimestamp);
 		});
 	}
+	#end
+	#else
+	public static var isInitialized:Bool = false;
+	public function new()
+	{
+		//stub
+	}
+	
+	public static function shutdown()
+	{
+		//stub
+	}
+	
+	static function onReady()
+	{
+		//stub
+	}
+
+	static function onError(_code:Int, _message:String)
+	{
+		trace('Error! $_code : $_message');
+	}
+
+	static function onDisconnected(_code:Int, _message:String)
+	{
+		trace('Disconnected! $_code : $_message');
+	}
+
+	public static function initialize()
+	{
+		//stub
+	}
+
+	public static function changePresence(details:String, state:Null<String>, ?smallImageKey : String, ?hasStartTimestamp : Bool, ?endTimestamp: Float)
+	{
+		// stub
+	}
+
+	#if LUA_ALLOWED
+	public static function addLuaCallbacks(lua:State) {
+		// stub
+	}
+	#end
 	#end
 }

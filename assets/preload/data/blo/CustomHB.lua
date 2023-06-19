@@ -2,7 +2,7 @@
 
 function onCreate()
 
-    makeLuaSprite('customhb', 'example', 0, 625)
+    makeLuaSprite('customhb', 'Example', 0, 625)
 
     -- "customhb" Its the name of Sprite --
     -- "Example.png" Its the Image of Custom Health Bar, You can give other name, --

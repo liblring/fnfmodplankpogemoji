@@ -65,9 +65,9 @@
 	"healthicon": "plank",
 	"flip_x": false,
 	"healthbar_colors": [
-		106,
-		78,
-		62
+		100,
+		72,
+		22
 	],
 	"camera_position": [
 		-20,

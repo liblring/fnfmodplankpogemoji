@@ -1,6 +1,6 @@
 {
 	"song": {
-		"player1": "plankedguy",
+		"player1": "plankedguyplayable",
 		"notes": [
 			{
 				"sectionNotes": [
@@ -8952,6 +8952,26 @@
 				"sectionBeats": 4,
 				"changeBPM": false,
 				"mustHitSection": true
+			},
+			{
+				"gfSection": false,
+				"altAnim": false,
+				"typeOfSection": 0,
+				"sectionNotes": [],
+				"bpm": 230,
+				"sectionBeats": 4,
+				"changeBPM": false,
+				"mustHitSection": true
+			},
+			{
+				"gfSection": false,
+				"altAnim": false,
+				"typeOfSection": 0,
+				"sectionNotes": [],
+				"bpm": 230,
+				"sectionBeats": 4,
+				"changeBPM": false,
+				"mustHitSection": true
 			}
 		],
 		"player2": "lorelibing",
@@ -11296,7 +11316,7 @@
 		"player3": null,
 		"initialSpeed": 1.215,
 		"sliderVelocities": null,
-		"song": "hypothesis",
+		"song": "lore",
 		"needsVoices": false,
 		"validScore": true,
 		"stage": "stage",

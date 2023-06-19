@@ -2,8 +2,8 @@
 	"animations": [
 		{
 			"offsets": [
-				-1341,
-				-156
+				-1291,
+				-176
 			],
 			"loop": false,
 			"fps": 24,
@@ -13,8 +13,8 @@
 		},
 		{
 			"offsets": [
-				-1343,
-				-186
+				-1303,
+				-206
 			],
 			"loop": false,
 			"fps": 24,
@@ -24,8 +24,8 @@
 		},
 		{
 			"offsets": [
-				-1400,
-				-193
+				-1300,
+				-196
 			],
 			"loop": false,
 			"fps": 24,
@@ -36,10 +36,10 @@
 		{
 			"loop": false,
 			"offsets": [
-				-1338,
-				-188
+				-1217,
+				-196
 			],
-			"anim": "singRIGHT",
+			"anim": "singLEFT",
 			"fps": 24,
 			"name": "right",
 			"indices": []
@@ -47,10 +47,10 @@
 		{
 			"loop": false,
 			"offsets": [
-				-237,
-				-86
+				-1328,
+				-106
 			],
-			"anim": "singLEFT",
+			"anim": "singRIGHT",
 			"fps": 24,
 			"name": "left",
 			"indices": []
@@ -70,8 +70,8 @@
 		193
 	],
 	"camera_position": [
-		-1390,
-		470
+		-1410,
+		410
 	],
 	"sing_duration": 4,
 	"scale": 0.55

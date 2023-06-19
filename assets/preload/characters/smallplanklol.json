@@ -1,0 +1,78 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				147,
+				-266
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "left"
+		},
+		{
+			"offsets": [
+				123,
+				-268
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "down"
+		},
+		{
+			"offsets": [
+				126,
+				-252
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "up"
+		},
+		{
+			"offsets": [
+				127,
+				-266
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "right"
+		},
+		{
+			"offsets": [
+				130,
+				-260
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "idle"
+		}
+	],
+	"no_antialiasing": true,
+	"image": "characters/smallplanklol",
+	"position": [
+		200,
+		130
+	],
+	"healthicon": "plank",
+	"flip_x": false,
+	"healthbar_colors": [
+		100,
+		72,
+		22
+	],
+	"camera_position": [
+		-230,
+		300
+	],
+	"sing_duration": 5.7,
+	"scale": 1.4
+}

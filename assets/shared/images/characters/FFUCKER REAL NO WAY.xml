@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="FFUCKER REAL NO WAY.png">
+	<!-- Created with Adobe Animate version 22.0.3.179 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="LEF0000" x="0" y="0" width="129" height="98"/>
+	<SubTexture name="LEF0001" x="0" y="0" width="129" height="98"/>
+	<SubTexture name="LEF0002" x="134" y="0" width="126" height="98" frameX="-2" frameY="0" frameWidth="129" frameHeight="98"/>
+	<SubTexture name="LEF0003" x="134" y="0" width="126" height="98" frameX="-2" frameY="0" frameWidth="129" frameHeight="98"/>
+	<SubTexture name="LEF0004" x="134" y="0" width="126" height="98" frameX="-2" frameY="0" frameWidth="129" frameHeight="98"/>
+	<SubTexture name="don0000" x="265" y="0" width="193" height="105" frameX="0" frameY="-2" frameWidth="193" frameHeight="107"/>
+	<SubTexture name="don0001" x="265" y="0" width="193" height="105" frameX="0" frameY="-2" frameWidth="193" frameHeight="107"/>
+	<SubTexture name="don0002" x="0" y="110" width="188" height="106" frameX="-2" frameY="0" frameWidth="193" frameHeight="107"/>
+	<SubTexture name="don0003" x="0" y="110" width="188" height="106" frameX="-2" frameY="0" frameWidth="193" frameHeight="107"/>
+	<SubTexture name="don0004" x="0" y="110" width="188" height="106" frameX="-2" frameY="0" frameWidth="193" frameHeight="107"/>
+	<SubTexture name="idel0000" x="193" y="110" width="142" height="92" frameX="0" frameY="-4" frameWidth="142" frameHeight="97"/>
+	<SubTexture name="idel0001" x="193" y="110" width="142" height="92" frameX="0" frameY="-4" frameWidth="142" frameHeight="97"/>
+	<SubTexture name="idel0002" x="340" y="110" width="137" height="94" frameX="-3" frameY="-3" frameWidth="142" frameHeight="97"/>
+	<SubTexture name="idel0003" x="0" y="221" width="134" height="95" frameX="-4" frameY="-2" frameWidth="142" frameHeight="97"/>
+	<SubTexture name="idel0004" x="139" y="221" width="132" height="96" frameX="-5" frameY="0" frameWidth="142" frameHeight="97"/>
+	<SubTexture name="rig0000" x="276" y="221" width="135" height="80"/>
+	<SubTexture name="rig0001" x="276" y="221" width="135" height="80"/>
+	<SubTexture name="rig0002" x="0" y="322" width="132" height="80" frameX="0" frameY="0" frameWidth="135" frameHeight="80"/>
+	<SubTexture name="rig0003" x="0" y="322" width="132" height="80" frameX="0" frameY="0" frameWidth="135" frameHeight="80"/>
+	<SubTexture name="rig0004" x="0" y="322" width="132" height="80" frameX="0" frameY="0" frameWidth="135" frameHeight="80"/>
+	<SubTexture name="urp0000" x="137" y="322" width="137" height="153" frameX="-3" frameY="0" frameWidth="142" frameHeight="153"/>
+	<SubTexture name="urp0001" x="137" y="322" width="137" height="153" frameX="-3" frameY="0" frameWidth="142" frameHeight="153"/>
+	<SubTexture name="urp0002" x="279" y="322" width="142" height="148" frameX="0" frameY="-4" frameWidth="142" frameHeight="153"/>
+	<SubTexture name="urp0003" x="279" y="322" width="142" height="148" frameX="0" frameY="-4" frameWidth="142" frameHeight="153"/>
+	<SubTexture name="urp0004" x="279" y="322" width="142" height="148" frameX="0" frameY="-4" frameWidth="142" frameHeight="153"/>
+</TextureAtlas>

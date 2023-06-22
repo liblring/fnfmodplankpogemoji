@@ -104,7 +104,7 @@ class VisualsUISubState extends BaseOptionsMenu
 			'pauseMusic',
 			'string',
 			'Tea Time',
-			['None', 'Breakfast', 'Tea Time']);
+			['None', 'Breakfast', 'Tea Time', 'mnalking rn']);
 		addOption(option);
 		option.onChange = onChangePauseMusic;
 		

@@ -518,6 +518,14 @@ class PlayState extends MusicBeatState
 
 		switch (curStage)
 		{
+			case 'blobg': // Wheek
+			var mhmhm:BGSprite = new BGSprite('bgassetsorsmth/man', -200, -200, 0, 0);
+			mhmhm.scale.set(1.4, 1.4);
+			add(mhmhm);
+			var bg:BGSprite = new BGSprite('bgassetsorsmth/blobg', 250, 120, 1, 1);
+			bg.scale.set(1.4, 1.4);
+			add(bg);
+
 			case 'astagewithoneimage': // Wheek
 			GameOverSubstate.deathSoundName = 'fnf_loss_sfx-pixel';
 			GameOverSubstate.loopSoundName = 'gameOver-pixel';

@@ -216,7 +216,7 @@ class MainMenuState extends MusicBeatState
 
 		menuItems.forEach(function(spr:FlxSprite)
 			{
-				spr.x = (560 + FlxMath.lerp(Math.sin(spr.ID - curSelected) * 100, spr.x, lerpVal)) - 80;
+				spr.x = FlxMath.lerp(spr.x, ((spr.ID == curSelected) ? FlxG.width * 0.5 : FlxG.width * 0.6), 0.15);
 			});
 	}
 

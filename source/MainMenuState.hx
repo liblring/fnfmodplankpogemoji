@@ -43,6 +43,13 @@ class MainMenuState extends MusicBeatState
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
 	var debugKeys:Array<FlxKey>;
+	private final levicummingsgaylord:Array<String> = [
+		'sillycatgooberwhat',
+		'you-can-download-the-new-mnalk-opd-yow-v3-build-right-now!',
+		'insertamenbreakorselectamenbreak',
+		'SHUTTHEFUCL',
+		'hiiiplaaank'
+	  ];
 
 	override function create()
 	{
@@ -84,6 +91,10 @@ class MainMenuState extends MusicBeatState
 		gifcat.antialiasing = ClientPrefs.globalAntialiasing;
 		add(gifcat);
 
+		var siller:FlxSprite = new FlxSprite(50, 0, Paths.image('sillymenuimages/${levicummingsgaylord[FlxG.random.int(0, levicummingsgaylord.length)]}'));
+		siller.y = FlxG.height - siller.height - 50;
+		add(siller);
+
 		camFollow = new FlxObject(0, 0, 1, 1);
 		camFollowPos = new FlxObject(0, 0, 1, 1);
 		add(camFollow);
@@ -113,9 +124,9 @@ class MainMenuState extends MusicBeatState
 
 		//FlxG.camera.follow(camFollowPos, null, 1);
 
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, "HOLY SHIT ITS THE FABLED MOD CALLED MNALK OPD YOW V" + psychEngineVersion, 12);
+		var versionShit:FlxText = new FlxText(12, 0, FlxG.width, "HOLY SHIT ITS THE FABLED MOD CALLED MNALK OPD YOW V" + psychEngineVersion, 12);
 		versionShit.scrollFactor.set();
-		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		versionShit.setFormat(Paths.font("peppino.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
 
 		changeItem();

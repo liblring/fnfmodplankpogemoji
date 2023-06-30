@@ -2260,11 +2260,12 @@ class PlayState extends MusicBeatState
 		card.updateHitbox();
 
 		card.x = -card.width;
+		card.y = FlxG.height - card.height;
 
 		FlxTween.tween(card, {x: 10}, 0.75, {ease: FlxEase.expoOut});
 
 		new FlxTimer().start(2.75, (tmr) -> {
-			FlxTween.tween(card, {x: -card.width}, 1, {ease: FlxEase.expoOut});
+			FlxTween.tween(card, {y: FlxG.height}, 1, {ease: FlxEase.expoOut});
 		});
 
 		card.cameras = [camHUD];

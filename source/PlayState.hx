@@ -2256,13 +2256,13 @@ class PlayState extends MusicBeatState
 		if (image == null) return null;
 		var card:FlxSprite = new FlxSprite(0, 0, image);
 
-		card.scale.set(0.8, 0.8);
+		card.scale.set(1, 1);
 		card.updateHitbox();
 
 		card.x = -card.width;
 		card.y = FlxG.height - card.height;
 
-		FlxTween.tween(card, {x: 10}, 0.75, {ease: FlxEase.expoOut});
+		FlxTween.tween(card, {x: 0}, 0.75, {ease: FlxEase.expoOut});
 
 		new FlxTimer().start(2.75, (tmr) -> {
 			FlxTween.tween(card, {y: FlxG.height}, 1, {ease: FlxEase.expoOut});

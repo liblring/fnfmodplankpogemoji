@@ -2228,6 +2228,10 @@ class PlayState extends MusicBeatState
 		FlxTween.tween(timeBar, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
 		FlxTween.tween(timeTxt, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
 
+		var card:Null<FlxSprite> = createTitleCard();
+		if (card != null)
+			add(card);
+
 		switch (curStage)
 		{
 			case 'tank':
@@ -2245,6 +2249,26 @@ class PlayState extends MusicBeatState
 		#end
 		setOnLuas('songLength', songLength);
 		callOnLuas('onSongStart', []);
+	}
+
+	function createTitleCard():FlxSprite {
+		var image:FlxGraphic = Paths.image('songcards/${SONG.song.toLowerCase()}');
+		if (image == null) return null;
+		var card:FlxSprite = new FlxSprite(0, 0, image);
+
+		card.scale.set(0.8, 0.8);
+		card.updateHitbox();
+
+		card.x = -card.width;
+
+		FlxTween.tween(card, {x: 10}, 0.75, {ease: FlxEase.expoOut});
+
+		new FlxTimer().start(2.75, (tmr) -> {
+			FlxTween.tween(card, {x: -card.width}, 1, {ease: FlxEase.expoOut});
+		});
+
+		card.cameras = [camHUD];
+		return card;
 	}
 
 	var debugNum:Int = 0;

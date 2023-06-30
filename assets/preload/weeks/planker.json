@@ -58,9 +58,27 @@
 			"planked",
 			"plankedguy",
 			[
-				152,
-				63,
-				193
+				132,
+				43,
+				173
+			]
+		],
+		[
+			"crackpipe",
+			"raldi",
+			[
+				26,
+				209,
+				26
+			]
+		],
+		[
+			"planksexuality",
+			"temporary-planksexual",
+			[
+				90,
+				173,
+				95
 			]
 		]
 	],

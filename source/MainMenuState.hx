@@ -34,7 +34,7 @@ class MainMenuState extends MusicBeatState
 
 	var optionShit:Array<MainMenuButton> = [
 		{x: 400,  y: 70, scale: 2.7, name:     'freeplay'},
-		{x: 750,  y: 370, scale: 4, name: 'credits'},
+		{x: 750,  y: 340, scale: 4, name: 'credits'},
 		{x: 210,   y: 550, scale: 3,   name:    'options'},
 	];
 
@@ -48,7 +48,8 @@ class MainMenuState extends MusicBeatState
 		'you-can-download-the-new-mnalk-opd-yow-v3-build-right-now!',
 		'insertamenbreakorselectamenbreak',
 		'SHUTTHEFUCL',
-		'hiiiplaaank'
+		'hiiiplaaank',
+		'himatpat'
 	  ];
 
 	override function create()
@@ -91,8 +92,8 @@ class MainMenuState extends MusicBeatState
 		gifcat.antialiasing = ClientPrefs.globalAntialiasing;
 		add(gifcat);
 
-		var siller:FlxSprite = new FlxSprite(50, 0, Paths.image('sillymenuimages/${levicummingsgaylord[FlxG.random.int(0, levicummingsgaylord.length)]}'));
-		siller.y = FlxG.height - siller.height - 50;
+		var siller:FlxSprite = new FlxSprite(20, 0, Paths.image('sillymenuimages/${levicummingsgaylord[FlxG.random.int(0, levicummingsgaylord.length)]}'));
+		siller.y = FlxG.height - siller.height - 20;
 		add(siller);
 
 		camFollow = new FlxObject(0, 0, 1, 1);

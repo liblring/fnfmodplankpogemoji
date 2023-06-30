@@ -1,5 +1,6 @@
 package;
 
+import vlc.MP4Sprite;
 import flixel.graphics.FlxGraphic;
 #if desktop
 import Discord.DiscordClient;
@@ -337,6 +338,8 @@ class PlayState extends MusicBeatState
 	// stores the last combo score objects in an array
 	public static var lastScore:Array<FlxSprite> = [];
 
+	var yourmom:MP4Sprite;
+
 	override public function create()
 	{
 		// trace('Playback Rate: ' + playbackRate);
@@ -518,34 +521,43 @@ class PlayState extends MusicBeatState
 
 		switch (curStage)
 		{
+			case 'planksexualllitaisdjuasfd': // planksexual shiiit
+				var bg:BGSprite = new BGSprite('bgassetsorsmth/man', -200, -200, 0, 0);
+				add(bg);
+				yourmom = new MP4Sprite(0, 300);
+				yourmom.scrollFactor.set(1, 1);
+				yourmom.alpha = 0;
+				yourmom.scale.set(1.2, 1.2);
+				yourmom.playVideo(Paths.video('planksexualwee'), true);
+				add(yourmom);
+
 			case 'htage': // Week 1
-			var hbg:BGSprite = new BGSprite('htage_back', -450, -200, 1, 1);
-			add(hbg);
-			var htageFront:BGSprite = new BGSprite('htage_front', -450, -200, 1, 1);
-			add(htageFront);
-			var htageCurtains:BGSprite = new BGSprite('htage_curtains', -450, -200, 1.3, 1.3);
-			add(htageCurtains);
-			
+				var hbg:BGSprite = new BGSprite('htage_back', -450, -200, 1, 1);
+				add(hbg);
+				var htageFront:BGSprite = new BGSprite('htage_front', -450, -200, 1, 1);
+				add(htageFront);
+				var htageCurtains:BGSprite = new BGSprite('htage_curtains', -450, -200, 1.3, 1.3);
+				add(htageCurtains);
 
 			case 'blobg': // Wheek
-			var mhmhm:BGSprite = new BGSprite('bgassetsorsmth/man', -200, -200, 0, 0);
-			mhmhm.scale.set(1.4, 1.4);
-			add(mhmhm);
-			var bg:BGSprite = new BGSprite('bgassetsorsmth/blobg', 250, 120, 1, 1);
-			bg.scale.set(1.4, 1.4);
-			add(bg);
+				var mhmhm:BGSprite = new BGSprite('bgassetsorsmth/man', -200, -200, 0, 0);
+				mhmhm.scale.set(1.4, 1.4);
+				add(mhmhm);
+				var bg:BGSprite = new BGSprite('bgassetsorsmth/blobg', 250, 120, 1, 1);
+				bg.scale.set(1.4, 1.4);
+				add(bg);
 
 			case 'astagewithoneimage': // Wheek
-			GameOverSubstate.deathSoundName = 'fnf_loss_sfx-pixel';
-			GameOverSubstate.loopSoundName = 'gameOver-pixel';
-			GameOverSubstate.endSoundName = 'gameOverEnd-pixel';
+				GameOverSubstate.deathSoundName = 'fnf_loss_sfx-pixel';
+				GameOverSubstate.loopSoundName = 'gameOver-pixel';
+				GameOverSubstate.endSoundName = 'gameOverEnd-pixel';
 
-			var mhmhm:BGSprite = new BGSprite('bgassetsorsmth/man', -200, -200, 0, 0);
-			mhmhm.scale.set(1.4, 1.4);
-			add(mhmhm);
-			var bg:BGSprite = new BGSprite('bgassetsorsmth/astagewithoneimage', 250, 120, 1, 1);
-			bg.scale.set(1.4, 1.4);
-			add(bg);
+				var mhmhm:BGSprite = new BGSprite('bgassetsorsmth/man', -200, -200, 0, 0);
+				mhmhm.scale.set(1.4, 1.4);
+				add(mhmhm);
+				var bg:BGSprite = new BGSprite('bgassetsorsmth/astagewithoneimage', 250, 120, 1, 1);
+				bg.scale.set(1.4, 1.4);
+				add(bg);
 
 			case 'gartenofpeakpeak': // peak
 				var bg:BGSprite = new BGSprite('gartenofpeak', -150, -50, 1, 1);
@@ -5164,6 +5176,15 @@ class PlayState extends MusicBeatState
 	override function beatHit()
 	{
 		super.beatHit();
+
+		if (SONG.song.toLowerCase() == 'planksexuality') {
+			switch(curBeat) {
+			  case 46 | 206:
+				FlxTween.tween(yourmom, {alpha: 1}, 0.5, {ease:FlxEase.sineInOut});
+			  case 150 | 268:
+				FlxTween.tween(yourmom, {alpha: 0}, 0.5, {ease:FlxEase.sineInOut});
+			}
+		  }
 
 		if (lastBeatHit >= curBeat)
 		{

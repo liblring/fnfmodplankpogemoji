@@ -85,7 +85,7 @@ class CreditsState extends MusicBeatState
 			['libing',	'lib',		'director or some shit i forgot (im on crack while writing this)',							'https://www.youtube.com/channel/UCwH4gcjdN-gWPGunlBxAnQQ',	'ffcaca'],
 			['PlankDev','plank',    'coder + like composer + like the guy who turned this into a serious mod bravo plank!',		'https://github.com/ThePlank',		'4a2e00'],
 			['Nick',    'dantesguy','coder + like artist + like animator, made opd sprites for mnalk lets fokin go mate innit',	'https://github.com/Nikerlo',		'ffffff'],
-			['FlyingFeltBoot','flyingfeltwhat','help with random bullshit like hypothesis dantes sprites and planked guy i guess',	'https://github.com/Nikerlo',		'7a4a35'],
+			['FlyingFeltBoot','flyingfeltwhat','help with random bullshit like hypothesis dantes sprites i guess',	'https://github.com/Nikerlo',		'7a4a35'],
 			[''],
 			['Shadow Mario Team'],
 			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',								'https://twitter.com/Shadow_Mario_',	'444444'],

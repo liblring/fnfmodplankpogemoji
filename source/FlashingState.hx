@@ -20,15 +20,24 @@ class FlashingState extends MusicBeatState
 	{
 		super.create();
 
-		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.WHITE);
 		add(bg);
 
 		warnText = new FlxText(0, 0, FlxG.width,
-			"hey this mod contains uhm, a cover and not an original song\n
-			ok good bye!!",
+			"hey fucker this mod contains             lights\n
+			\n
+			it contains lights that can literally fucking kill you if youre epileptic such as:\n
+			-flashing lights\n
+			-lights\n
+			and stiff cocks\n
+			thats it\n
+			\n
+			press enter to say \"go fuck yourself lights\"\npress escape to say \"lights stay\"",
 			32);
-		warnText.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
+		warnText.setFormat(Paths.font("vcr.ttf"), 32, 0xFF644816, LEFT);
+		warnText.setBorderStyle(OUTLINE, FlxColor.BLACK, 2, 1);
 		warnText.screenCenter(Y);
+		FlxG.sound.playMusic(Paths.music('flashingstate'), 1);
 		add(warnText);
 	}
 
@@ -37,6 +46,9 @@ class FlashingState extends MusicBeatState
 		if(!leftState) {
 			var back:Bool = controls.BACK;
 			if (controls.ACCEPT || back) {
+				FlxG.sound.music.stop();
+				FlxG.sound.music.destroy();
+				FlxG.sound.music = null;
 				leftState = true;
 				FlxTransitionableState.skipNextTransIn = true;
 				FlxTransitionableState.skipNextTransOut = true;

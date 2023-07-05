@@ -85,7 +85,12 @@ class MainMenuState extends MusicBeatState
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
 
-		gifcat = new FlxSprite(75, 75);
+		var bigmenushit:FlxSprite = new FlxSprite(0).loadGraphic(Paths.image('bigmenubullshit'));
+		bigmenushit.screenCenter();
+		bigmenushit.antialiasing = ClientPrefs.globalAntialiasing;
+		add(bigmenushit);
+
+		gifcat = new FlxSprite(50, 50);
 		gifcat.frames = Paths.getSparrowAtlas('catbounce');
 		gifcat.animation.addByPrefix('bouncer', "cat bounce", 24);
 		gifcat.animation.play("bouncer", 24);

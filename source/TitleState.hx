@@ -212,20 +212,11 @@ class TitleState extends MusicBeatState
 		persistentUpdate = true;
 
 		var bg:FlxBackdrop = new FlxBackdrop(Paths.image("mnalk"), XY, 0, 0);
-		bg.velocity.set(100, 100);
+		bg.velocity.set(100, 0);
 		// bg.antialiasing = ClientPrefs.globalAntialiasing;
 		// bg.setGraphicSize(Std.int(bg.width * 0.6));
 		// bg.updateHitbox();
 		add(bg);
-
-		logoBl = new FlxSprite(titleJSON.titlex, titleJSON.titley);
-		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
-
-		logoBl.antialiasing = ClientPrefs.globalAntialiasing;
-		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
-		logoBl.animation.play('bump');
-		logoBl.updateHitbox();
-		// logoBl.color = FlxColor.BLACK;
 
 		swagShader = new ColorSwap();
 		gfDance = new FlxSprite(titleJSON.gfx, titleJSON.gfy);
@@ -235,11 +226,25 @@ class TitleState extends MusicBeatState
 		gfDance.animation.addByIndices('danceRight', 'gfDance', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
 		gfDance.antialiasing = ClientPrefs.globalAntialiasing;
 		gfDance.scale.set(0.9, 0.9);
-		gfDance.alpha = 0.9;
-		gfDance.angle = 355;
+		gfDance.alpha = 1;
+		gfDance.angle = 330;
+
+		var bigtitleshit:FlxSprite = new FlxSprite(0).loadGraphic(Paths.image('titlescreenshite'));
+		bigtitleshit.screenCenter();
+		bigtitleshit.antialiasing = ClientPrefs.globalAntialiasing;
+		
+		logoBl = new FlxSprite(titleJSON.titlex, titleJSON.titley);
+		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
+
+		logoBl.antialiasing = ClientPrefs.globalAntialiasing;
+		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
+		logoBl.animation.play('bump');
+		logoBl.updateHitbox();
+		// logoBl.color = FlxColor.BLACK;
 
 		add(gfDance);
 		gfDance.shader = swagShader.shader;
+		add(bigtitleshit);
 		add(logoBl);
 		logoBl.shader = swagShader.shader;
 
@@ -281,7 +286,6 @@ class TitleState extends MusicBeatState
 		
 		titleText.antialiasing = ClientPrefs.globalAntialiasing;
 		titleText.animation.play('idle');
-		titleText.screenCenter(X);
 		// titleText.scale.set(1.25, 1.25);
 		// FlxTween.tween(titleText, {"scale.x": 1, "scale.y": 1}, 1, {ease: FlxEase.elasticInOut, type: PINGPONG});
 		add(titleText);
@@ -369,28 +373,11 @@ class TitleState extends MusicBeatState
 				pressedEnter = true;
 			#end
 		}
-		
-		if (newTitle) {
-			titleTimer += CoolUtil.boundTo(elapsed, 0, 1);
-			if (titleTimer > 2) titleTimer -= 2;
-		}
 
 		// EASTER EGG
 
 		if (initialized && !transitioning && skippedIntro)
 		{
-			if (newTitle && !pressedEnter)
-			{
-				var timer:Float = titleTimer;
-				if (timer >= 1)
-					timer = (-timer) + 2;
-				
-				timer = FlxEase.quadInOut(timer);
-				
-				titleText.color = FlxColor.interpolate(titleTextColors[0], titleTextColors[1], timer);
-				titleText.alpha = FlxMath.lerp(titleTextAlphas[0], titleTextAlphas[1], timer);
-			}
-			
 			if(pressedEnter)
 			{
 				titleText.color = FlxColor.WHITE;

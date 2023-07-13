@@ -73,9 +73,6 @@ function onUpdate()
 end
 
 function onCreate()
-
-    setProperty('skipCountdown',true)
-    
     -- cool cenimatic aspect ratio/black bars
 	makeLuaSprite('bartop','',-200,-30)
 	makeGraphic('bartop',2000,100,'000000')

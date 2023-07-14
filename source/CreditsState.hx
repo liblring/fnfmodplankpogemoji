@@ -161,6 +161,8 @@ class CreditsState extends MusicBeatState
 		descBox.sprTracker = descText;
 		add(descText);
 
+		FlxG.sound.playMusic(Paths.music('creditsbyfrums'), 1, true);
+
 		bg.color = getCurrentBGColor();
 		intendedColor = bg.color;
 		changeSelection();
@@ -220,6 +222,7 @@ class CreditsState extends MusicBeatState
 				}
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				MusicBeatState.switchState(new MainMenuState());
+				FlxG.sound.playMusic(Paths.music('freakyMenu'), 1, true);
 				quitting = true;
 			}
 		}

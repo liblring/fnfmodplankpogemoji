@@ -3,8 +3,8 @@
 		{
 			"loop": false,
 			"offsets": [
-				-310,
-				-339
+				-110,
+				-359
 			],
 			"anim": "danceLeft",
 			"fps": 24,
@@ -14,8 +14,8 @@
 		{
 			"loop": false,
 			"offsets": [
-				-310,
-				-339
+				-110,
+				-359
 			],
 			"anim": "danceRight",
 			"fps": 24,
@@ -24,46 +24,46 @@
 		},
 		{
 			"offsets": [
-				-310,
-				-339
+				-110,
+				-359
 			],
-			"indices": [],
+			"loop": false,
 			"fps": 24,
 			"anim": "singLEFT",
-			"loop": false,
+			"indices": [],
 			"name": "idle"
 		},
 		{
 			"offsets": [
-				-310,
-				-339
+				-110,
+				-359
 			],
-			"indices": [],
+			"loop": false,
 			"fps": 24,
 			"anim": "singRIGHT",
-			"loop": false,
+			"indices": [],
 			"name": "idle"
 		},
 		{
 			"offsets": [
-				-310,
-				-339
+				-110,
+				-359
 			],
-			"indices": [],
+			"loop": false,
 			"fps": 24,
 			"anim": "singDOWN",
-			"loop": false,
+			"indices": [],
 			"name": "idle"
 		},
 		{
 			"offsets": [
-				-310,
-				-339
+				-110,
+				-359
 			],
-			"indices": [],
+			"loop": false,
 			"fps": 24,
 			"anim": "singUP",
-			"loop": false,
+			"indices": [],
 			"name": "idle"
 		}
 	],
@@ -74,15 +74,15 @@
 		0
 	],
 	"healthicon": "gf",
-	"flip_x": false,
+	"flip_x": true,
 	"healthbar_colors": [
 		165,
 		0,
 		77
 	],
 	"camera_position": [
-		100,
-		260
+		40,
+		220
 	],
 	"sing_duration": 4,
 	"scale": 3.6

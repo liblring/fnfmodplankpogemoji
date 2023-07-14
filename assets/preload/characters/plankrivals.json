@@ -1,63 +1,63 @@
 {
 	"animations": [
 		{
-			"loop": false,
 			"offsets": [
-				-270,
-				-260
+				-130,
+				-320
 			],
+			"loop": false,
+			"fps": 24,
 			"anim": "idle",
-			"fps": 24,
-			"name": "idle",
-			"indices": []
+			"indices": [],
+			"name": "idle"
 		},
 		{
-			"loop": false,
 			"offsets": [
-				-55,
-				-290
+				-44,
+				-302
 			],
+			"loop": false,
+			"fps": 24,
 			"anim": "singLEFT",
-			"fps": 24,
-			"name": "left",
-			"indices": []
+			"indices": [],
+			"name": "left"
 		},
 		{
-			"loop": false,
 			"offsets": [
-				-281,
-				-370
+				-192,
+				-304
 			],
+			"loop": false,
+			"fps": 24,
 			"anim": "singRIGHT",
-			"fps": 24,
-			"name": "right",
-			"indices": []
+			"indices": [],
+			"name": "right"
 		},
 		{
-			"loop": false,
 			"offsets": [
-				-276,
-				-297
+				-146,
+				-312
 			],
+			"loop": false,
+			"fps": 24,
 			"anim": "singDOWN",
-			"fps": 24,
-			"name": "down",
-			"indices": []
+			"indices": [],
+			"name": "down"
 		},
 		{
-			"loop": false,
 			"offsets": [
-				-232,
-				513
+				-144,
+				-272
 			],
-			"anim": "singUP",
+			"loop": false,
 			"fps": 24,
-			"name": "up",
-			"indices": []
+			"anim": "singUP",
+			"indices": [],
+			"name": "up"
 		}
 	],
 	"no_antialiasing": false,
-	"image": "characters/plankrivals",
+	"image": "characters/plankriavls",
 	"position": [
 		0,
 		0
@@ -65,13 +65,13 @@
 	"healthicon": "plankrivals",
 	"flip_x": false,
 	"healthbar_colors": [
-		95,
-		73,
-		53
+		100,
+		72,
+		22
 	],
 	"camera_position": [
-		80,
-		250
+		40,
+		310
 	],
 	"sing_duration": 4,
 	"scale": 1.4

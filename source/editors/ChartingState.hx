@@ -30,7 +30,6 @@ import flixel.group.FlxSpriteGroup;
 import flixel.input.keyboard.FlxKey;
 import flixel.math.FlxMath;
 import flixel.math.FlxPoint;
-import flixel.system.FlxSound;
 import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
@@ -55,9 +54,8 @@ import sys.io.File;
 #end
 
 
-@:access(flixel.system.FlxSound._sound)
-@:access(openfl.media.Sound.__buffer)
-
+@:access(flixel.system.FlxSound)
+@:access(openfl.media.Sound)
 class ChartingState extends MusicBeatState
 {
 	public static var noteTypeList:Array<String> = //Used for backwards compatibility with 0.1 - 0.3.2 charts, though, you should add your hardcoded custom note types here too.
@@ -2189,6 +2187,8 @@ class ChartingState extends MusicBeatState
 		var st:Float = sectionStartTime();
 		var et:Float = st + (Conductor.stepCrochet * steps);
 
+		@:privateAccess {
+
 		if (FlxG.save.data.chart_waveformInst) {
 			var sound:FlxSound = FlxG.sound.music;
 			if (sound._sound != null && sound._sound.__buffer != null) {
@@ -2222,6 +2222,7 @@ class ChartingState extends MusicBeatState
 				);
 			}
 		}
+	}
 
 		// Draws
 		var gSize:Int = Std.int(GRID_SIZE * 8);

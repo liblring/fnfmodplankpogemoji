@@ -370,6 +370,20 @@ class Paths
 		trace('oh no its returning null NOOOO');
 		return null;
 	}
+	public static function directGraphic(key:String) {
+		if(!currentTrackedAssets.exists(key)) {
+			var newGraphic:FlxGraphic = FlxG.bitmap.add(BitmapData.fromFile(key), false, key);
+			newGraphic.persist = true;
+			currentTrackedAssets.set(key, newGraphic);
+			localTrackedAssets.push(key);
+			return currentTrackedAssets.get(key);
+		} else {
+			localTrackedAssets.push(key);
+			return currentTrackedAssets.get(key);
+		}
+		trace('oh no its returning null NOOOO');
+		return null;
+	}
 
 	public static var currentTrackedSounds:Map<String, Sound> = [];
 	public static function returnSound(path:String, key:String, ?library:String) {

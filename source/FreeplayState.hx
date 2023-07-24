@@ -107,7 +107,6 @@ class FreeplayState extends MusicBeatState
 		bg.screenCenter();
 
 		grpSongs = new FlxTypedGroup<Alphabet>();
-		add(grpSongs);
 
 		for (i in 0...songs.length)
 		{
@@ -142,8 +141,8 @@ class FreeplayState extends MusicBeatState
 		
 		twobullshits = new FlxSprite().loadGraphic(Paths.image('these-fuckers'));
 		twobullshits.antialiasing = ClientPrefs.globalAntialiasing;
+		add(grpSongs);
 		add(twobullshits);
-		twobullshits.screenCenter();
 
 		scoreText = new FlxText(FlxG.width * 0.7, 5, 0, "", 32);
 		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT);

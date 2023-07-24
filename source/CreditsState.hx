@@ -13,25 +13,29 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
+import flixel.group.FlxSpriteGroup;
 #if MODS_ALLOWED
 import sys.FileSystem;
 import sys.io.File;
 #end
 import lime.utils.Assets;
+import flxgif.FlxGifSprite;
+import flixel.util.typeLimit.OneOfTwo;
 
 using StringTools;
 
 class CreditsState extends MusicBeatState
 {
-	var curSelected:Int = -1;
-
-	private var grpOptions:FlxTypedGroup<Alphabet>;
-	private var iconArray:Array<AttachedSprite> = [];
+	private var grpOptions:MenuList;
+	private var iconArray:Array<FlxSprite> = [];
 	private var creditsStuff:Array<Array<String>> = [];
 
+	var corn:OneOfTwo<FlxSprite, FlxGifSprite>;
+	var iamscreamingandcreaming:FlxText;
 	var bg:FlxSprite;
 	var descText:FlxText;
 	var intendedColor:Int;
+	var outlin:OutlineShader = new OutlineShader();
 	var colorTween:FlxTween;
 	var descBox:AttachedSprite;
 
@@ -39,6 +43,7 @@ class CreditsState extends MusicBeatState
 
 	override function create()
 	{
+		outlin.outlineSize = 12;
 		#if desktop
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("hold on let him see the devs", null);
@@ -49,41 +54,20 @@ class CreditsState extends MusicBeatState
 		add(bg);
 		bg.screenCenter();
 		
-		grpOptions = new FlxTypedGroup<Alphabet>();
+		grpOptions = new MenuList(0, 0, VERTICAL(true));
+		grpOptions.focused = true;
+		grpOptions.moveWithCurSelection = true;
+		grpOptions.padding = 50;
+		grpOptions.x = 100;
+		grpOptions.onMove.add(changeSelection);
+		grpOptions.screenCenter(Y);
+		grpOptions.onSelect.add((sel) -> if (creditsStuff[sel][3] != null) CoolUtil.browserLoad(creditsStuff[sel][3]));
 		add(grpOptions);
 
-		#if MODS_ALLOWED
-		var path:String = 'modsList.txt';
-		if(FileSystem.exists(path))
-		{
-			var leMods:Array<String> = CoolUtil.coolTextFile(path);
-			for (i in 0...leMods.length)
-			{
-				if(leMods.length > 1 && leMods[0].length > 0) {
-					var modSplit:Array<String> = leMods[i].split('|');
-					if(!Paths.ignoreModFolders.contains(modSplit[0].toLowerCase()) && !modsAdded.contains(modSplit[0]))
-					{
-						if(modSplit[1] == '1')
-							pushModCreditsToList(modSplit[0]);
-						else
-							modsAdded.push(modSplit[0]);
-					}
-				}
-			}
-		}
-
-		var arrayOfFolders:Array<String> = Paths.getModDirectories();
-		arrayOfFolders.push('');
-		for (folder in arrayOfFolders)
-		{
-			pushModCreditsToList(folder);
-		}
-		#end
-
-		var pisspoop:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
+		var pisspoop:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color - image folder
 			['lario forest'],
-			['libing',	'lib',		'director or some shit i forgot (im on crack while writing this)',							'https://www.youtube.com/channel/UCwH4gcjdN-gWPGunlBxAnQQ',	'ffcaca'],
-			['PlankDev','plank',    'coder + like composer + like the guy who turned this into a serious mod bravo plank!',		'https://github.com/ThePlank',		'4a2e00'],
+			['libing',	'lib',		'director or some shit i forgot (im on crack while writing this)',							'https://www.youtube.com/channel/UCwH4gcjdN-gWPGunlBxAnQQ',	'ffcaca', 'liber'],
+			['PlankDev','plank',    'coder + like composer + like the guy who turned this into a serious mod bravo plank!',		'https://github.com/ThePlank',		'4a2e00', 'plnk'],
 			['Nick',    'dantesguy','coder + like artist + like animator, made opd sprites for mnalk lets fokin go mate innit',	'https://github.com/Nikerlo',		'ffffff'],
 			['FlyingFeltBoot','flyingfeltwhat','help with random bullshit like hypothesis dantes sprites i guess',	'https://github.com/Nikerlo',		'7a4a35'],
 			[''],
@@ -119,32 +103,31 @@ class CreditsState extends MusicBeatState
 		for (i in 0...creditsStuff.length)
 		{
 			var isSelectable:Bool = !unselectableCheck(i);
-			var optionText:Alphabet = new Alphabet(FlxG.width / 2, 300, creditsStuff[i][0], !isSelectable);
-			optionText.isMenuItem = true;
-			optionText.targetY = i;
-			optionText.changeX = false;
-			optionText.snapToPosition();
-			grpOptions.add(optionText);
+			var optionText:FlxText = new FlxText(0, 0, 500, creditsStuff[i][0]);
+			optionText.setFormat(Paths.font('vcr.ttf'), 42, FlxColor.BLACK, LEFT, OUTLINE, FlxColor.WHITE);
+			optionText.setBorderStyle(OUTLINE, 	FlxColor.WHITE, 4, 2);
+			optionText.active = isSelectable;
 
 			if(isSelectable) {
-				if(creditsStuff[i][5] != null)
-				{
-					Paths.currentModDirectory = creditsStuff[i][5];
-				}
-
-				var icon:AttachedSprite = new AttachedSprite('credits/' + creditsStuff[i][1]);
-				icon.xAdd = optionText.width + 10;
-				icon.sprTracker = optionText;
+				var icon:FlxSprite = new FlxSprite(optionText.text.length * (42 / 2) + 12, 0, Paths.image('credits/' + creditsStuff[i][1]));
+				icon.y = optionText.height / 2 - icon.height / 2;
 	
 				// using a FlxGroup is too much fuss!
 				iconArray.push(icon);
-				add(icon);
-				Paths.currentModDirectory = '';
+				var idiot:FlxSpriteGroup = new FlxSpriteGroup();
+				idiot.add(icon);
+				idiot.add(optionText);
+				grpOptions.add(idiot);
 
-				if(curSelected == -1) curSelected = i;
-			}
-			else optionText.alignment = CENTERED;
+				if(grpOptions.members[grpOptions.curSelection].active == false) grpOptions.curSelection = i;
+			} else {
+				optionText.setFormat(Paths.font('vcr.ttf'), 42, FlxColor.WHITE, LEFT, OUTLINE, FlxColor.WHITE);
+				optionText.setBorderStyle(OUTLINE, 	FlxColor.BLACK, 4, 2);
+				grpOptions.add(optionText);
+			} 
 		}
+
+		add(new FlxSprite().loadGraphic(Paths.image('creditorial!!!/femboyfg')));
 		
 		descBox = new AttachedSprite();
 		descBox.makeGraphic(1, 1, FlxColor.BLACK);
@@ -162,59 +145,38 @@ class CreditsState extends MusicBeatState
 		add(descText);
 
 		FlxG.sound.playMusic(Paths.music('creditsbyfrums'), 1, true);
+		Conductor.changeBPM(94);
+
+		iamscreamingandcreaming = new FlxText(0, 0, 0, 'random image selected by the dev');
+		iamscreamingandcreaming.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		iamscreamingandcreaming.borderSize = 2.4;
 
 		bg.color = getCurrentBGColor();
 		intendedColor = bg.color;
-		changeSelection();
+
+		changeSelection(grpOptions.curSelection);
+
 		super.create();
+	}
+
+	override public function beatHit() {
+		super.beatHit();
+		FlxG.camera.zoom += 0.02;
 	}
 
 	var quitting:Bool = false;
 	var holdTime:Float = 0;
 	override function update(elapsed:Float)
 	{
+		Conductor.songPosition = FlxG.sound.music.time;
 		if (FlxG.sound.music.volume < 0.7)
 		{
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
 		}
+		FlxG.camera.zoom = FlxMath.lerp(FlxG.camera.zoom, 1, 0.15);
 
 		if(!quitting)
 		{
-			if(creditsStuff.length > 1)
-			{
-				var shiftMult:Int = 1;
-				if(FlxG.keys.pressed.SHIFT) shiftMult = 3;
-
-				var upP = controls.UI_UP_P;
-				var downP = controls.UI_DOWN_P;
-
-				if (upP)
-				{
-					changeSelection(-shiftMult);
-					holdTime = 0;
-				}
-				if (downP)
-				{
-					changeSelection(shiftMult);
-					holdTime = 0;
-				}
-
-				if(controls.UI_DOWN || controls.UI_UP)
-				{
-					var checkLastHold:Int = Math.floor((holdTime - 0.5) * 10);
-					holdTime += elapsed;
-					var checkNewHold:Int = Math.floor((holdTime - 0.5) * 10);
-
-					if(holdTime > 0.5 && checkNewHold - checkLastHold > 0)
-					{
-						changeSelection((checkNewHold - checkLastHold) * (controls.UI_UP ? -shiftMult : shiftMult));
-					}
-				}
-			}
-
-			if(controls.ACCEPT && (creditsStuff[curSelected][3] == null || creditsStuff[curSelected][3].length > 4)) {
-				CoolUtil.browserLoad(creditsStuff[curSelected][3]);
-			}
 			if (controls.BACK)
 			{
 				if(colorTween != null) {
@@ -227,75 +189,65 @@ class CreditsState extends MusicBeatState
 			}
 		}
 		
-		for (item in grpOptions.members)
-		{
-			if(!item.bold)
-			{
-				var lerpVal:Float = CoolUtil.boundTo(elapsed * 12, 0, 1);
-				if(item.targetY == 0)
-				{
-					var lastX:Float = item.x;
-					item.screenCenter(X);
-					item.x = FlxMath.lerp(lastX, item.x - 70, lerpVal);
-				}
-				else
-				{
-					item.x = FlxMath.lerp(item.x, 200 + -40 * Math.abs(item.targetY), lerpVal);
-				}
-			}
-		}
 		super.update(elapsed);
 	}
 
 	var moveTween:FlxTween = null;
-	function changeSelection(change:Int = 0)
+	function changeSelection(curSelected:Int)
 	{
-		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
-		do {
-			curSelected += change;
-			if (curSelected < 0)
-				curSelected = creditsStuff.length - 1;
-			if (curSelected >= creditsStuff.length)
-				curSelected = 0;
-		} while(unselectableCheck(curSelected));
-
 		var newColor:Int =  getCurrentBGColor();
 		if(newColor != intendedColor) {
 			if(colorTween != null) {
 				colorTween.cancel();
 			}
 			intendedColor = newColor;
-			colorTween = FlxTween.color(bg, 1, bg.color, intendedColor, {
+			colorTween = FlxTween.color(bg, 0.75, bg.color, intendedColor, { ease: FlxEase.expoOut,
 				onComplete: function(twn:FlxTween) {
 					colorTween = null;
 				}
 			});
 		}
 
-		var bullShit:Int = 0;
-
-		for (item in grpOptions.members)
-		{
-			item.targetY = bullShit - curSelected;
-			bullShit++;
-
-			if(!unselectableCheck(bullShit-1)) {
-				item.alpha = 0.6;
-				if (item.targetY == 0) {
-					item.alpha = 1;
-				}
-			}
-		}
-
 		descText.text = creditsStuff[curSelected][2];
 		descText.y = FlxG.height - descText.height + offsetThing - 60;
 
 		if(moveTween != null) moveTween.cancel();
-		moveTween = FlxTween.tween(descText, {y : descText.y + 75}, 0.25, {ease: FlxEase.sineOut});
+		moveTween = FlxTween.tween(descText, {y : descText.y + 75}, 0.25, {ease: FlxEase.expoOut});
+		if (creditsStuff[curSelected][5] != null) {
+			var femboyPath:String = FileSystem.absolutePath('assets\\images\\creditorial!!!\\yow\\${creditsStuff[curSelected][5]}');
+			var tomboyFiles:Array<String> = FileSystem.readDirectory(femboyPath);
+			var gexed:String = femboyPath + '\\${tomboyFiles[FlxG.random.int(0, tomboyFiles.length - 1)]}';
+			commitHateCrime(gexed);
+		}  else {
+			cast(corn, FlxSprite).visible = false;
+		}
 
 		descBox.setGraphicSize(Std.int(descText.width + 20), Std.int(descText.height + 25));
 		descBox.updateHitbox();
 	}
+
+	function commitHateCrime(pathShit:String):Void {
+		if (corn != null) cast(corn, FlxSprite).destroy();
+		if (pathShit.endsWith('.gif')) { 
+			corn = new FlxGifSprite();
+			cast(corn, FlxGifSprite).loadGif(sys.io.File.getBytes(pathShit));
+		} else {
+			corn = new FlxSprite();
+			cast(corn, FlxSprite).loadGraphic(Paths.directGraphic(pathShit));
+		}
+		add(cast(corn, FlxSprite));
+
+		if (cast(corn, FlxSprite).height > 353) cast(corn, FlxSprite).setGraphicSize(0, 353);
+		cast(corn, FlxSprite).updateHitbox();
+		cast(corn, FlxSprite).setPosition(FlxG.width * 0.6, 0);
+		cast(corn, FlxSprite).screenCenter(Y);
+		cast(corn, FlxSprite).shader = outlin;
+		iamscreamingandcreaming.fieldWidth = cast(corn, FlxSprite).width;
+		iamscreamingandcreaming.setPosition(FlxG.width * 0.6, cast(corn, FlxSprite).y);
+		iamscreamingandcreaming.y -= iamscreamingandcreaming.height;
+		add(iamscreamingandcreaming);
+	}
+
 
 	#if MODS_ALLOWED
 	private var modsAdded:Array<String> = [];
@@ -323,7 +275,7 @@ class CreditsState extends MusicBeatState
 	#end
 
 	function getCurrentBGColor() {
-		var bgColor:String = creditsStuff[curSelected][4];
+		var bgColor:String = creditsStuff[grpOptions.curSelection][4];
 		if(!bgColor.startsWith('0x')) {
 			bgColor = '0xFF' + bgColor;
 		}

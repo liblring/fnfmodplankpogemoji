@@ -30,7 +30,7 @@ class CreditsState extends MusicBeatState
 	private var iconArray:Array<FlxSprite> = [];
 	private var creditsStuff:Array<Array<String>> = [];
 
-	var corn:OneOfTwo<FlxSprite, FlxGifSprite>;
+	var corn:FlxSprite;
 	var iamscreamingandcreaming:FlxText;
 	var bg:FlxSprite;
 	var descText:FlxText;
@@ -219,7 +219,7 @@ class CreditsState extends MusicBeatState
 			var gexed:String = femboyPath + '\\${tomboyFiles[FlxG.random.int(0, tomboyFiles.length - 1)]}';
 			commitHateCrime(gexed);
 		}  else {
-			cast(corn, FlxSprite).visible = false;
+			corn.visible = false;
 		}
 
 		descBox.setGraphicSize(Std.int(descText.width + 20), Std.int(descText.height + 25));
@@ -227,23 +227,18 @@ class CreditsState extends MusicBeatState
 	}
 
 	function commitHateCrime(pathShit:String):Void {
-		if (corn != null) cast(corn, FlxSprite).destroy();
-		if (pathShit.endsWith('.gif')) { 
-			corn = new FlxGifSprite();
-			cast(corn, FlxGifSprite).loadGif(sys.io.File.getBytes(pathShit));
-		} else {
-			corn = new FlxSprite();
-			cast(corn, FlxSprite).loadGraphic(Paths.directGraphic(pathShit));
-		}
-		add(cast(corn, FlxSprite));
+		if (corn != null) corn.destroy();
+		corn = new FlxSprite();
+		corn.loadGraphic(Paths.directGraphic(pathShit));
+		add(corn);
 
-		if (cast(corn, FlxSprite).height > 353) cast(corn, FlxSprite).setGraphicSize(0, 353);
-		cast(corn, FlxSprite).updateHitbox();
-		cast(corn, FlxSprite).setPosition(FlxG.width * 0.6, 0);
-		cast(corn, FlxSprite).screenCenter(Y);
-		cast(corn, FlxSprite).shader = outlin;
-		iamscreamingandcreaming.fieldWidth = cast(corn, FlxSprite).width;
-		iamscreamingandcreaming.setPosition(FlxG.width * 0.6, cast(corn, FlxSprite).y);
+		if (corn.height > 353) corn.setGraphicSize(0, 353);
+		corn.updateHitbox();
+		corn.setPosition(FlxG.width * 0.6, 0);
+		corn.screenCenter(Y);
+		corn.shader = outlin;
+		iamscreamingandcreaming.fieldWidth = corn.width;
+		iamscreamingandcreaming.setPosition(FlxG.width * 0.6, corn.y);
 		iamscreamingandcreaming.y -= iamscreamingandcreaming.height;
 		add(iamscreamingandcreaming);
 	}

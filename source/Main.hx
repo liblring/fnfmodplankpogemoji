@@ -154,6 +154,8 @@ class Main extends Sprite
 			}
 		}
 
+		trace(errMsg);
+
 		errMsg += "\nUncaught Error: " + message + "\nPlease report this error to the GitHub page: https://github.com/ShadowMario/FNF-PsychEngine\n\n> Crash Handler written by: sqirra-rng";
 
 		if (!FileSystem.exists("./crash/"))

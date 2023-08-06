@@ -2537,7 +2537,7 @@ class PlayState extends MusicBeatState
 
 	function eventNoteEarlyTrigger(event:EventNote):Float
 	{
-		var returnedValue:Null<Float> = callOnLuas('eventEarlyTrigger', [event.event, event.value1, event.value2, event.strumTime], [], [0]);
+		var returnedValue:Null<Float> = Std.parseFloat(callOnLuas('eventEarlyTrigger', [event.event, event.value1, event.value2, event.strumTime], [], [0]));
 		if (returnedValue != null && returnedValue != 0 && returnedValue != FunkinLua.Function_Continue)
 		{
 			return returnedValue;

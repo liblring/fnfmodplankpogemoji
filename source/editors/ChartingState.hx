@@ -1680,15 +1680,12 @@ class ChartingState extends MusicBeatState
 				LoadingState.loadAndSwitchState(new PlayState());
 			}
 
-			if(curSelectedNote != null && curSelectedNote[1] > -1) {
+			if(curSelectedNote != null && !Std.isOfType(curSelectedNote[1], Array)) {
 				if (FlxG.keys.justPressed.E)
-				{
 					changeNoteSustain(Conductor.stepCrochet);
-				}
+
 				if (FlxG.keys.justPressed.Q)
-				{
 					changeNoteSustain(-Conductor.stepCrochet);
-				}
 			}
 
 
@@ -2666,12 +2663,13 @@ class ChartingState extends MusicBeatState
 
 	function setupNoteData(i:Array<Dynamic>, isNextSection:Bool):Note
 	{
-		var daNoteInfo = i[1];
+		var daNoteInfo:Dynamic = i[1];
 		var daStrumTime = i[0];
 		var daSus:Dynamic = i[2];
 
-		var note:Note = new Note(daStrumTime, daNoteInfo % 4, null, null, true);
+		var note:Note;
 		if(daSus != null) { //Common note
+			note = new Note(daStrumTime, Std.int(daNoteInfo) % 4, null, null, true);
 			if(!Std.isOfType(i[3], String)) //Convert old note type to new note type format
 			{
 				i[3] = noteTypeIntMap.get(i[3]);
@@ -2683,6 +2681,7 @@ class ChartingState extends MusicBeatState
 			note.sustainLength = daSus;
 			note.noteType = i[3];
 		} else { //Event note
+			note = new Note(daStrumTime, 0, null, null, true);
 			note.loadGraphic(Paths.image('eventArrow'));
 			note.eventName = getEventName(i[1]);
 			note.eventLength = i[1].length;
@@ -3053,11 +3052,15 @@ class ChartingState extends MusicBeatState
 
 	function getSectionBeats(?section:Null<Int> = null)
 	{
-		if (section == null) section = curSec;
 		var val:Null<Float> = null;
-		
-		if(_song.notes[section] != null) val = _song.notes[section].sectionBeats;
-		return val != null ? val : 4;
+		if (section == null)
+			section = curSec;
+
+		if(_song.notes[section] == null || _song.notes[section].sectionBeats == 0)
+			val = 4;
+		else
+			val = _song.notes[section].sectionBeats;
+		return val;
 	}
 }
 

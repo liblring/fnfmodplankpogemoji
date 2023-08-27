@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="blehplank.png">
+	<!-- Created with Adobe Animate version 20.5.1.31044 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="down0000" x="0" y="0" width="147" height="231" frameX="0" frameY="-7" frameWidth="147" frameHeight="238"/>
+	<SubTexture name="down0001" x="0" y="0" width="147" height="231" frameX="0" frameY="-7" frameWidth="147" frameHeight="238"/>
+	<SubTexture name="down0002" x="147" y="0" width="137" height="236" frameX="-9" frameY="0" frameWidth="147" frameHeight="238"/>
+	<SubTexture name="down0003" x="147" y="0" width="137" height="236" frameX="-9" frameY="0" frameWidth="147" frameHeight="238"/>
+	<SubTexture name="idle0000" x="284" y="0" width="135" height="236"/>
+	<SubTexture name="idle0001" x="284" y="0" width="135" height="236"/>
+	<SubTexture name="idle0002" x="284" y="0" width="135" height="236"/>
+	<SubTexture name="idle0003" x="284" y="0" width="135" height="236"/>
+	<SubTexture name="idle0004" x="284" y="0" width="135" height="236"/>
+	<SubTexture name="idle0005" x="284" y="0" width="135" height="236"/>
+	<SubTexture name="idle0006" x="419" y="0" width="135" height="236"/>
+	<SubTexture name="idle0007" x="419" y="0" width="135" height="236"/>
+	<SubTexture name="idle0008" x="419" y="0" width="135" height="236"/>
+	<SubTexture name="idle0009" x="419" y="0" width="135" height="236"/>
+	<SubTexture name="idle0010" x="419" y="0" width="135" height="236"/>
+	<SubTexture name="idle0011" x="419" y="0" width="135" height="236"/>
+	<SubTexture name="left0000" x="554" y="0" width="150" height="235" frameX="0" frameY="-1" frameWidth="150" frameHeight="236"/>
+	<SubTexture name="left0001" x="554" y="0" width="150" height="235" frameX="0" frameY="-1" frameWidth="150" frameHeight="236"/>
+	<SubTexture name="left0002" x="704" y="0" width="139" height="236" frameX="-9" frameY="0" frameWidth="150" frameHeight="236"/>
+	<SubTexture name="left0003" x="704" y="0" width="139" height="236" frameX="-9" frameY="0" frameWidth="150" frameHeight="236"/>
+	<SubTexture name="miss0000" x="0" y="236" width="135" height="155"/>
+	<SubTexture name="miss0001" x="0" y="236" width="135" height="155"/>
+	<SubTexture name="miss0002" x="0" y="236" width="135" height="155"/>
+	<SubTexture name="miss0003" x="0" y="236" width="135" height="155"/>
+	<SubTexture name="right0000" x="135" y="236" width="148" height="234" frameX="0" frameY="0" frameWidth="148" frameHeight="236"/>
+	<SubTexture name="right0001" x="135" y="236" width="148" height="234" frameX="0" frameY="0" frameWidth="148" frameHeight="236"/>
+	<SubTexture name="right0002" x="283" y="236" width="140" height="236" frameX="0" frameY="0" frameWidth="148" frameHeight="236"/>
+	<SubTexture name="right0003" x="283" y="236" width="140" height="236" frameX="0" frameY="0" frameWidth="148" frameHeight="236"/>
+	<SubTexture name="up0000" x="423" y="236" width="144" height="242" frameX="0" frameY="0" frameWidth="144" frameHeight="245"/>
+	<SubTexture name="up0001" x="423" y="236" width="144" height="242" frameX="0" frameY="0" frameWidth="144" frameHeight="245"/>
+	<SubTexture name="up0002" x="567" y="236" width="139" height="240" frameX="0" frameY="-5" frameWidth="144" frameHeight="245"/>
+	<SubTexture name="up0003" x="567" y="236" width="139" height="240" frameX="0" frameY="-5" frameWidth="144" frameHeight="245"/>
+</TextureAtlas>

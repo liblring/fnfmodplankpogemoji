@@ -141,6 +141,7 @@ class FreeplayState extends MusicBeatState
 		
 		twobullshits = new FlxSprite().loadGraphic(Paths.image('these-fuckers'));
 		twobullshits.antialiasing = ClientPrefs.globalAntialiasing;
+		twobullshits.scale.set(1.05, 1.05);
 		add(grpSongs);
 		add(twobullshits);
 

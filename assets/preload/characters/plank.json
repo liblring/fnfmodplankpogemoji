@@ -3,8 +3,8 @@
 		{
 			"loop": false,
 			"offsets": [
-				235,
-				490
+				-1463,
+				-586
 			],
 			"anim": "idle",
 			"fps": 24,
@@ -14,8 +14,8 @@
 		{
 			"loop": false,
 			"offsets": [
-				237,
-				490
+				-1382,
+				-531
 			],
 			"anim": "singLEFT",
 			"fps": 24,
@@ -25,8 +25,8 @@
 		{
 			"loop": false,
 			"offsets": [
-				217,
-				462
+				-1429,
+				-676
 			],
 			"anim": "singDOWN",
 			"fps": 24,
@@ -36,8 +36,8 @@
 		{
 			"loop": false,
 			"offsets": [
-				204,
-				513
+				-1451,
+				-587
 			],
 			"anim": "singUP",
 			"fps": 24,
@@ -47,8 +47,8 @@
 		{
 			"loop": false,
 			"offsets": [
-				254,
-				489
+				-1414,
+				-558
 			],
 			"anim": "singRIGHT",
 			"fps": 24,
@@ -56,11 +56,11 @@
 			"indices": []
 		}
 	],
-	"no_antialiasing": false,
-	"image": "characters/planker",
+	"no_antialiasing": true,
+	"image": "characters/planknew",
 	"position": [
-		0,
-		350
+		-1310,
+		-350
 	],
 	"healthicon": "plank",
 	"flip_x": false,
@@ -70,9 +70,9 @@
 		22
 	],
 	"camera_position": [
-		-20,
-		-110
+		1460,
+		690
 	],
 	"sing_duration": 4,
-	"scale": 0.4
+	"scale": 0.75
 }

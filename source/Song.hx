@@ -131,7 +131,8 @@ class Song
 				daSong = songData.song;
 				daBpm = songData.bpm; */
 
-		var songJson:Dynamic = parseJSONshit(rawJson);
+		var songJson:SwagSong = parseJSONshit(rawJson);
+		if (songJson.shitass == null) songJson.shitass = []; //ooOPS FIX CRASH ON SONGS THAT DONT HAVE SHITASS
 		if(jsonInput != 'events') StageData.loadDirectory(songJson);
 		onLoadJson(songJson);
 		return songJson;

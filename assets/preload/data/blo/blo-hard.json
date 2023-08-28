@@ -4661,6 +4661,7 @@
 		"arrowSkin": "",
 		"needsVoices": true,
 		"speed": 2.7,
-		"bpm": 153
+		"bpm": 153,
+		"shitass": ["camFollowBalls"]
 	}
 }

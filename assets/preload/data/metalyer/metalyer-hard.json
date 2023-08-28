@@ -5273,6 +5273,7 @@
 		"needsVoices": true,
 		"validScore": true,
 		"speed": 2.8,
-		"bpm": 134
+		"bpm": 134,
+		"shitass": ["camFollowBalls"]
 	}
 }

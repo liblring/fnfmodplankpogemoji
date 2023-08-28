@@ -29,6 +29,8 @@ typedef SwagSong =
 	var arrowSkin:String;
 	var splashSkin:String;
 	var validScore:Bool;
+
+	@:optional var shitass:Array<String>;
 }
 
 class Song

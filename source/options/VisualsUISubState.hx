@@ -124,6 +124,13 @@ class VisualsUISubState extends BaseOptionsMenu
 			true);
 		addOption(option);
 
+		var option:Option = new Option('Comera movement on hit',
+			"so like you know that one thing where the camera moves when you or the opponent hits a note?// yeah this removes that",
+			'camFollowShit',
+			'bool',
+			true);
+		addOption(option);
+
 		super();
 	}
 

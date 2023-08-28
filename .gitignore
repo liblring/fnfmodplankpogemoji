@@ -22,3 +22,5 @@ export/*
 
 assets/preload/data/sous/*
 assets/songs/sous/*
+*.sublime-project
+*.sublime-workspace

@@ -536,6 +536,18 @@ class PlayState extends MusicBeatState
 				add(yourmom);
 				#end
 
+				var topbar:FlxSprite = new FlxSprite(-200, -30);
+				topbar.makeGraphic(2000, 100, FlxColor.BLACK);
+				topbar.cameras = [camHUD];
+				topbar.scrollFactor.set();
+				add(topbar);
+
+				var botttombar:FlxSprite = new FlxSprite(-200, 650);
+				botttombar.makeGraphic(2000, 100, FlxColor.BLACK);
+				botttombar.cameras = [camHUD];
+				botttombar.scrollFactor.set();
+				add(botttombar);
+
 			case 'htage': // Week 1
 				var hbg:BGSprite = new BGSprite('htage_back', -450, -200, 1, 1);
 				add(hbg);
@@ -3864,7 +3876,6 @@ class PlayState extends MusicBeatState
 			camFollow.set(gf.getMidpoint().x, gf.getMidpoint().y);
 			camFollow.x += gf.cameraPosition[0] + girlfriendCameraOffset[0];
 			camFollow.y += gf.cameraPosition[1] + girlfriendCameraOffset[1];
-			tweenCamIn();
 			callOnLuas('onMoveCamera', ['gf']);
 			return;
 		}
@@ -3882,51 +3893,32 @@ class PlayState extends MusicBeatState
 	}
 
 	var cameraTwn:FlxTween;
+	var focusedOnDad:Bool = false;
 
-	public function moveCamera(isDad:Bool)
-	{
+	public function getCameraPosition(isDad:Bool) {
+		var camFollowArray:Array<Float> = [];
 		if (isDad)
 		{
-			camFollow.set(dad.getMidpoint().x + 150, dad.getMidpoint().y - 100);
-			camFollow.x += dad.cameraPosition[0] + opponentCameraOffset[0];
-			camFollow.y += dad.cameraPosition[1] + opponentCameraOffset[1];
-			tweenCamIn();
+			camFollowArray = [dad.getMidpoint().x + 150, dad.getMidpoint().y - 100];
+			camFollowArray[0] += dad.cameraPosition[0] + opponentCameraOffset[0];
+			camFollowArray[1] += dad.cameraPosition[1] + opponentCameraOffset[1];
 		}
 		else
 		{
-			camFollow.set(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
-			camFollow.x -= boyfriend.cameraPosition[0] - boyfriendCameraOffset[0];
-			camFollow.y += boyfriend.cameraPosition[1] + boyfriendCameraOffset[1];
-
-			if (Paths.formatToSongPath(SONG.song) == 'tutorial' && cameraTwn == null && FlxG.camera.zoom != 1)
-			{
-				cameraTwn = FlxTween.tween(FlxG.camera, {zoom: 1}, (Conductor.stepCrochet * 4 / 1000), {
-					ease: FlxEase.elasticInOut,
-					onComplete: function(twn:FlxTween)
-					{
-						cameraTwn = null;
-					}
-				});
-			}
+			camFollowArray = [boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100];
+			camFollowArray[0] -= boyfriend.cameraPosition[0] - boyfriendCameraOffset[0];
+			camFollowArray[1] += boyfriend.cameraPosition[1] + boyfriendCameraOffset[1];
 		}
+		return camFollowArray;
 	}
 
-	function tweenCamIn()
-	{
-		if (Paths.formatToSongPath(SONG.song) == 'tutorial' && cameraTwn == null && FlxG.camera.zoom != 1.3)
-		{
-			cameraTwn = FlxTween.tween(FlxG.camera, {zoom: 1.3}, (Conductor.stepCrochet * 4 / 1000), {
-				ease: FlxEase.elasticInOut,
-				onComplete: function(twn:FlxTween)
-				{
-					cameraTwn = null;
-				}
-			});
-		}
+	public function moveCamera(isDad:Bool) {
+		focusedOnDad = isDad;
+		var pos:Array<Float> = getCameraPosition(isDad);
+		camFollow.set(pos[0], pos[1]);
 	}
 
-	function snapCamFollowToPos(x:Float, y:Float)
-	{
+	function snapCamFollowToPos(x:Float, y:Float) {
 		camFollow.set(x, y);
 		camFollowPos.setPosition(x, y);
 	}
@@ -4786,6 +4778,7 @@ class PlayState extends MusicBeatState
 			note.noteType,
 			note.isSustainNote
 		]);
+		updateCameraFollow();
 
 		if (!note.isSustainNote)
 		{
@@ -4907,6 +4900,7 @@ class PlayState extends MusicBeatState
 			var leData:Int = Math.round(Math.abs(note.noteData));
 			var leType:String = note.noteType;
 			callOnLuas('goodNoteHit', [notes.members.indexOf(note), leData, leType, isSus]);
+			updateCameraFollow();
 
 			if (!note.isSustainNote)
 			{
@@ -4915,6 +4909,17 @@ class PlayState extends MusicBeatState
 				note.destroy();
 			}
 		}
+	}
+
+	public var fuckingkillyourself:Array<Array<Int>> = [[-1, 0], [0, 1], [0, -1], [1, 0]];
+	public function updateCameraFollow() {
+		if (!SONG.shitass.contains('camFollowBalls') || !ClientPrefs.camFollowShit) return;
+		var target:Character = (focusedOnDad ? dad : boyfriend);
+		var animIndex:Int = singAnimations.indexOf(target.animation.curAnim.name);
+		if (animIndex == -1) return;
+		var pos:Array<Float> = getCameraPosition(focusedOnDad);
+		camFollow.x = pos[0] + fuckingkillyourself[animIndex][0] * 10;
+		camFollow.y = pos[1] + fuckingkillyourself[animIndex][1] * 10;
 	}
 
 	public function spawnNoteSplashOnNote(note:Note)

@@ -21,6 +21,7 @@ import sys.io.File;
 import lime.utils.Assets;
 import flxgif.FlxGifSprite;
 import flixel.util.typeLimit.OneOfTwo;
+import flixel.addons.effects.chainable.FlxOutlineEffect;
 
 using StringTools;
 
@@ -35,15 +36,14 @@ class CreditsState extends MusicBeatState
 	var bg:FlxSprite;
 	var descText:FlxText;
 	var intendedColor:Int;
-	var outlin:OutlineShader = new OutlineShader();
+	var outlin:FlxOutlineEffect = new FlxOutlineEffect(NORMAL, FlxColor.WHITE, 12);
 	var colorTween:FlxTween;
 	var descBox:AttachedSprite;
 
 	var offsetThing:Float = -75;
 
 	override function create()
-	{
-		outlin.outlineSize = 12;
+	{	
 		#if desktop
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("hold on let him see the devs", null);
@@ -68,7 +68,7 @@ class CreditsState extends MusicBeatState
 			['lario forest'],
 			['libing',	'lib',		'director or some shit i forgot (im on crack while writing this)',							'https://www.youtube.com/channel/UCwH4gcjdN-gWPGunlBxAnQQ',	'ffcaca', 'liber'],
 			['PlankDev','plank',    'coder + like composer + like the guy who turned this into a serious mod bravo plank!',		'https://github.com/ThePlank',		'4a2e00',                          'plnk'],
-			['Nick',    'dantesguy','coder + like artist + like animator, made opd sprites for mnalk lets fokin go mate innit',	'https://github.com/Nikerlo',		'ffffff'],
+			['Nick',    'dantesguy','coder + like artist + like animator, made opd sprites for mnalk lets fokin go mate innit',	'https://github.com/Nikerlo',		'ffffff',                         'slave'],
 			['FlyingFeltBoot','flyingfeltwhat','help with random bullshit like hypothesis dantes sprites i guess',	            'https://github.com/Nikerlo',		'7a4a35'],
 			['Betopia', 'betty',    'so like, artist, i guess',		                                                            'https://twitter.com/betpowo',		'996666',                          'betp'],
 			[''],
@@ -158,6 +158,8 @@ class CreditsState extends MusicBeatState
 		bg.color = getCurrentBGColor();
 		intendedColor = bg.color;
 
+		corn = new FlxSprite();
+
 		changeSelection(grpOptions.curSelection);
 
 		super.create();
@@ -177,15 +179,14 @@ class CreditsState extends MusicBeatState
 		{
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
 		}
-		FlxG.camera.zoom = FlxMath.lerp(FlxG.camera.zoom, 1, 0.15);
+		FlxG.camera.zoom = FlxMath.lerp(FlxG.camera.zoom, 1, 0.16);
 
 		if(!quitting)
 		{
 			if (controls.BACK)
 			{
-				if(colorTween != null) {
+				if(colorTween != null)
 					colorTween.cancel();
-				}
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				MusicBeatState.switchState(new MainMenuState());
 				FlxG.sound.playMusic(Paths.music('freakyMenu'), 1, true);
@@ -223,7 +224,8 @@ class CreditsState extends MusicBeatState
 			var gexed:String = femboyPath + '\\${tomboyFiles[FlxG.random.int(0, tomboyFiles.length - 1)]}';
 			commitHateCrime(gexed);
 		}  else {
-			corn.visible = false;
+			remove(corn);
+			remove(iamscreamingandcreaming);
 		}
 
 		descBox.setGraphicSize(Std.int(descText.width + 20), Std.int(descText.height + 25));
@@ -231,18 +233,19 @@ class CreditsState extends MusicBeatState
 	}
 
 	function commitHateCrime(pathShit:String):Void {
-		if (corn != null) corn.destroy();
-		corn = new FlxSprite();
 		corn.loadGraphic(Paths.directGraphic(pathShit));
 		add(corn);
+		add(iamscreamingandcreaming);
+		corn.scale.set(1, 1);
+		corn.updateHitbox();
 
 		if (corn.height > 353) corn.setGraphicSize(0, 353);
 		corn.updateHitbox();
-		corn.setPosition(FlxG.width * 0.6, 0);
+		corn.setPosition(FlxG.width * 0.7 - corn.width / 2, 0);
 		corn.screenCenter(Y);
-		corn.shader = outlin;
+		// corn.pixels = outlin.apply(corn.pixels); cffi is killing me
 		iamscreamingandcreaming.fieldWidth = corn.width;
-		iamscreamingandcreaming.setPosition(FlxG.width * 0.6, corn.y);
+		iamscreamingandcreaming.setPosition(corn.x, corn.y);
 		iamscreamingandcreaming.y -= iamscreamingandcreaming.height;
 		add(iamscreamingandcreaming);
 	}

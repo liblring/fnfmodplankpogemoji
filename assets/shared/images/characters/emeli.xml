@@ -1,27 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TextureAtlas imagePath="emeli.png">
-	<!-- Created with Adobe Animate version 20.5.1.31044 -->
+	<!-- Created with Adobe Animate version 20.5.0.29329 -->
 	<!-- http://www.adobe.com/products/animate.html -->
-	<SubTexture name="down0000" x="0" y="0" width="113" height="185"/>
-	<SubTexture name="down0001" x="0" y="0" width="113" height="185"/>
-	<SubTexture name="down0002" x="113" y="0" width="113" height="185"/>
-	<SubTexture name="down0003" x="113" y="0" width="113" height="185"/>
-	<SubTexture name="idle0000" x="226" y="0" width="113" height="185"/>
-	<SubTexture name="idle0001" x="226" y="0" width="113" height="185"/>
-	<SubTexture name="idle0002" x="226" y="0" width="113" height="185"/>
-	<SubTexture name="idle0003" x="226" y="0" width="113" height="185"/>
-	<SubTexture name="idle0004" x="226" y="0" width="113" height="185"/>
-	<SubTexture name="idle0005" x="226" y="0" width="113" height="185"/>
-	<SubTexture name="left0000" x="339" y="0" width="113" height="185"/>
-	<SubTexture name="left0001" x="339" y="0" width="113" height="185"/>
-	<SubTexture name="left0002" x="452" y="0" width="113" height="185"/>
-	<SubTexture name="left0003" x="452" y="0" width="113" height="185"/>
-	<SubTexture name="right0000" x="0" y="185" width="113" height="185"/>
-	<SubTexture name="right0001" x="0" y="185" width="113" height="185"/>
-	<SubTexture name="right0002" x="113" y="185" width="113" height="185"/>
-	<SubTexture name="right0003" x="113" y="185" width="113" height="185"/>
-	<SubTexture name="up0000" x="226" y="185" width="113" height="185"/>
-	<SubTexture name="up0001" x="226" y="185" width="113" height="185"/>
-	<SubTexture name="up0002" x="339" y="185" width="113" height="185"/>
-	<SubTexture name="up0003" x="339" y="185" width="113" height="185"/>
+	<SubTexture name="dow0000" x="2" y="1100" width="348" height="547"/>
+	<SubTexture name="dow0001" x="352" y="1100" width="348" height="547"/>
+	<SubTexture name="idl0000" x="1051" y="1100" width="347" height="547"/>
+	<SubTexture name="idl0001" x="702" y="2" width="348" height="546" frameX="0" frameY="-1" frameWidth="347" frameHeight="547"/>
+	<SubTexture name="idl0002" x="353" y="550" width="348" height="546" frameX="0" frameY="-1" frameWidth="347" frameHeight="547"/>
+	<SubTexture name="lef0000" x="1052" y="551" width="347" height="547"/>
+	<SubTexture name="lef0001" x="702" y="1099" width="347" height="547"/>
+	<SubTexture name="rit0000" x="1052" y="2" width="347" height="547"/>
+	<SubTexture name="rit0001" x="703" y="550" width="347" height="547"/>
+	<SubTexture name="u0000" x="2" y="2" width="349" height="547"/>
+	<SubTexture name="u0001" x="2" y="551" width="349" height="547"/>
 </TextureAtlas>

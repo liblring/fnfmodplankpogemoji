@@ -1,78 +1,78 @@
 {
 	"animations": [
 		{
+			"loop": true,
 			"offsets": [
-				-1513,
-				-686
+				0,
+				0
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "idle",
-			"indices": [],
-			"name": "idle"
+			"fps": 9,
+			"name": "idl",
+			"indices": []
 		},
 		{
-			"offsets": [
-				-1513,
-				-686
-			],
 			"loop": false,
-			"fps": 24,
+			"offsets": [
+				-1,
+				0
+			],
 			"anim": "singLEFT",
-			"indices": [],
-			"name": "left"
+			"fps": 9,
+			"name": "lef",
+			"indices": []
 		},
 		{
-			"offsets": [
-				-1513,
-				-686
-			],
 			"loop": false,
-			"fps": 24,
+			"offsets": [
+				0,
+				0
+			],
 			"anim": "singDOWN",
-			"indices": [],
-			"name": "down"
+			"fps": 9,
+			"name": "dow",
+			"indices": []
 		},
 		{
-			"offsets": [
-				-1513,
-				-686
-			],
 			"loop": false,
-			"fps": 24,
+			"offsets": [
+				1,
+				0
+			],
 			"anim": "singUP",
-			"indices": [],
-			"name": "up"
+			"fps": 9,
+			"name": "u",
+			"indices": []
 		},
 		{
-			"offsets": [
-				-1513,
-				-686
-			],
 			"loop": false,
-			"fps": 24,
+			"offsets": [
+				0,
+				0
+			],
 			"anim": "singRIGHT",
-			"indices": [],
-			"name": "right"
+			"fps": 9,
+			"name": "rit",
+			"indices": []
 		}
 	],
-	"no_antialiasing": true,
+	"no_antialiasing": false,
 	"image": "characters/emeli",
 	"position": [
-		-1310,
-		-350
+		60,
+		170
 	],
 	"healthicon": "emeli",
 	"flip_x": false,
 	"healthbar_colors": [
-		242,
-		72,
+		249,
+		94,
 		255
 	],
 	"camera_position": [
-		1380,
-		890
+		-70,
+		40
 	],
-	"sing_duration": 4,
-	"scale": 2.75
+	"sing_duration": 2.50000000000001,
+	"scale": 1
 }

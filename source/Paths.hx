@@ -30,6 +30,12 @@ class Paths
 	inline public static var SOUND_EXT = #if web "mp3" #else "ogg" #end;
 	inline public static var VIDEO_EXT = "mp4";
 
+	inline static public function instPath(song:String):String
+		return 'songs:assets/songs/${formatToSongPath(song)}/Inst.$SOUND_EXT';
+	
+	inline static public function voicesPath(song:String):String
+		return 'songs:assets/songs/${formatToSongPath(song)}/Voices.$SOUND_EXT';
+
 	#if MODS_ALLOWED
 	public static var ignoreModFolders:Array<String> = [
 		'characters',

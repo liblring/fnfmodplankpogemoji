@@ -1,5 +1,6 @@
 package;
 
+import flixel.addons.display.FlxBackdrop;
 #if discord_rpc
 import Discord.DiscordClient;
 #end
@@ -90,7 +91,23 @@ class MainMenuState extends MusicBeatState
 		bigmenushit.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bigmenushit);
 
-		gifcat = new FlxSprite(50, 50);
+		var eventThingy:FlxBackdrop = new FlxBackdrop(Paths.image('sidewaysthingyidk'), Y);
+		eventThingy.velocity.set(0, 55);
+		eventThingy.x = 0;
+		eventThingy.scale.set(1.2, 1.2);
+		eventThingy.antialiasing = ClientPrefs.globalAntialiasing;
+		add(eventThingy);
+
+		var eventThingy2:FlxBackdrop = new FlxBackdrop(Paths.image('sidewaysthingyidk'), Y);
+		eventThingy2.velocity.set(0, -55);
+		eventThingy2.x = 1180;
+		eventThingy2.scale.set(1.2, 1.2);
+		eventThingy2.flipX = true;
+		eventThingy2.updateHitbox();
+		eventThingy2.antialiasing = ClientPrefs.globalAntialiasing;
+		add(eventThingy2);
+
+		gifcat = new FlxSprite(100, 50);
 		gifcat.frames = Paths.getSparrowAtlas('catbounce');
 		gifcat.animation.addByPrefix('bouncer', "cat bounce", 24);
 		gifcat.animation.play("bouncer", 24);

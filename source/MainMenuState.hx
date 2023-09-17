@@ -232,7 +232,7 @@ class MainMenuState extends MusicBeatState
 									MusicBeatState.switchState(new FreeplayState());
 								case 'credits':
 									MusicBeatState.switchState(new CreditsState());
-								case 'acquirentsnts':
+								case 'acquirents':
 									MusicBeatState.switchState(new AchievementsMenuState());
 								case 'options':
 									LoadingState.loadAndSwitchState(new options.OptionsState());

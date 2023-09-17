@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="menu_acquirentsnts.png">
+	<!-- Created with Adobe Animate version 20.5.1.31044 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="acquirents basic0000" x="0" y="0" width="578" height="150"/>
+	<SubTexture name="acquirents basic0001" x="1166" y="0" width="487" height="150" frameX="-45" frameY="0" frameWidth="578" frameHeight="150"/>
+	<SubTexture name="acquirents basic0002" x="0" y="310" width="448" height="150" frameX="-64" frameY="0" frameWidth="578" frameHeight="150"/>
+	<SubTexture name="acquirents basic0003" x="1388" y="155" width="438" height="150" frameX="-69" frameY="0" frameWidth="578" frameHeight="150"/>
+	<SubTexture name="acquirents basic0004" x="453" y="310" width="445" height="150" frameX="-66" frameY="0" frameWidth="578" frameHeight="150"/>
+	<SubTexture name="acquirents basic0005" x="478" y="155" width="450" height="150" frameX="-63" frameY="0" frameWidth="578" frameHeight="150"/>
+	<SubTexture name="acquirents basic0006" x="478" y="155" width="450" height="150" frameX="-63" frameY="0" frameWidth="578" frameHeight="150"/>
+	<SubTexture name="acquirents basic0007" x="478" y="155" width="450" height="150" frameX="-63" frameY="0" frameWidth="578" frameHeight="150"/>
+	<SubTexture name="acquirents white0000" x="583" y="0" width="578" height="150"/>
+	<SubTexture name="acquirents white0001" x="0" y="155" width="473" height="150" frameX="-52" frameY="0" frameWidth="578" frameHeight="150"/>
+	<SubTexture name="acquirents white0002" x="1350" y="310" width="440" height="150" frameX="-68" frameY="0" frameWidth="578" frameHeight="150"/>
+	<SubTexture name="acquirents white0003" x="903" y="310" width="442" height="150" frameX="-67" frameY="0" frameWidth="578" frameHeight="150"/>
+	<SubTexture name="acquirents white0004" x="933" y="155" width="450" height="150" frameX="-63" frameY="0" frameWidth="578" frameHeight="150"/>
+	<SubTexture name="acquirents white0005" x="933" y="155" width="450" height="150" frameX="-63" frameY="0" frameWidth="578" frameHeight="150"/>
+</TextureAtlas>

@@ -34,9 +34,10 @@ class MainMenuState extends MusicBeatState
 	private var camAchievement:FlxCamera;
 
 	var optionShit:Array<MainMenuButton> = [
-		{x: 400,  y: 70, scale: 2.7, name:     'freeplay'},
-		{x: 750,  y: 340, scale: 4, name: 'credits'},
-		{x: 210,   y: 550, scale: 3,   name:    'options'},
+		{x: 400,  y: 70,   scale: 2.7,  name:    'freeplay'},
+		{x: 750,  y: 270,  scale: 4,    name: 	 'credits'},
+		{x: 550,  y: 370,  scale: 4,    name: 	 'acquirents'},
+		{x: 210,  y: 550,  scale: 3,    name:    'options'},
 	];
 
 	var magenta:FlxSprite;
@@ -231,6 +232,8 @@ class MainMenuState extends MusicBeatState
 									MusicBeatState.switchState(new FreeplayState());
 								case 'credits':
 									MusicBeatState.switchState(new CreditsState());
+								case 'acquirentsnts':
+									MusicBeatState.switchState(new AchievementsMenuState());
 								case 'options':
 									LoadingState.loadAndSwitchState(new options.OptionsState());
 							}

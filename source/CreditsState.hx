@@ -243,7 +243,7 @@ class CreditsState extends MusicBeatState
 		corn.updateHitbox();
 		corn.setPosition(FlxG.width * 0.7 - corn.width / 2, 0);
 		corn.screenCenter(Y);
-		// corn.pixels = outlin.apply(corn.pixels); cffi is killing me
+		// corn.pixels = outlin.apply(corn.pixels); // cffi is killing me
 		iamscreamingandcreaming.fieldWidth = corn.width;
 		iamscreamingandcreaming.setPosition(corn.x, corn.y);
 		iamscreamingandcreaming.y -= iamscreamingandcreaming.height;

@@ -74,6 +74,8 @@ import sys.io.File;
 import vlc.MP4Handler;
 #end
 
+import flixel.util.FlxSignal;
+
 using StringTools;
 
 class PlayState extends MusicBeatState
@@ -886,6 +888,13 @@ class PlayState extends MusicBeatState
 
 		generateSong(SONG.song);
 
+		if (SONG.song.toLowerCase() == 'planksexuality') 
+			if (FlxG.random.bool(5))
+				SONG.shitass.push('qhar?!?!');
+			else
+				SONG.shitass.remove('qhar?!?!');
+
+
 		// After all characters being loaded, it makes then invisible 0.01s later so that the player won't freeze when you change characters
 		// add(strumLine);
 
@@ -939,13 +948,13 @@ class PlayState extends MusicBeatState
 		iconP1.y = healthBar.y - 75;
 		iconP1.visible = !ClientPrefs.hideHud;
 		iconP1.alpha = ClientPrefs.healthBarAlpha;
-		add(iconP1);
 
 		iconP2 = new HealthIcon(dad.healthIcon, false);
 		iconP2.y = healthBar.y - 75;
 		iconP2.visible = !ClientPrefs.hideHud;
 		iconP2.alpha = ClientPrefs.healthBarAlpha;
 		add(iconP2);
+		add(iconP1);
 		reloadHealthBarColors();
 
 		scoreTxt = new FlxText(0, healthBarBG.y + 36, FlxG.width, "", 20);
@@ -1270,9 +1279,9 @@ class PlayState extends MusicBeatState
 	{
 		if (generatedMusic)
 		{
-			// if (vocals != null)
-				// vocals.pitch = value;
-			// FlxG.sound.music.pitch = value;
+			if (vocals != null)
+				vocals.pitch = value;
+			FlxG.sound.music.pitch = value;
 		}
 		playbackRate = value;
 		FlxAnimationController.globalSpeed = value;
@@ -2187,13 +2196,13 @@ class PlayState extends MusicBeatState
 		vocals.pause();
 
 		FlxG.sound.music.time = time;
-		// FlxG.sound.music.pitch = playbackRate;
+		FlxG.sound.music.pitch = playbackRate;
 		FlxG.sound.music.play();
 
 		if (Conductor.songPosition <= vocals.length)
 		{
 			vocals.time = time;
-			// vocals.pitch = playbackRate;
+			vocals.pitch = playbackRate;
 		}
 		vocals.play();
 		Conductor.songPosition = time;
@@ -2223,7 +2232,7 @@ class PlayState extends MusicBeatState
 		lastReportedPlayheadPosition = 0;
 
 		FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 1, false);
-		// FlxG.sound.music.pitch = playbackRate;
+		FlxG.sound.music.pitch = playbackRate;
 		FlxG.sound.music.onComplete = finishSong.bind();
 		vocals.play();
 
@@ -2316,7 +2325,7 @@ class PlayState extends MusicBeatState
 		else
 			vocals = new FlxSound();
 
-		// vocals.pitch = playbackRate;
+		vocals.pitch = playbackRate;
 		FlxG.sound.list.add(vocals);
 		FlxG.sound.list.add(new FlxSound().loadEmbedded(Paths.inst(PlayState.SONG.song)));
 
@@ -2766,12 +2775,12 @@ class PlayState extends MusicBeatState
 		vocals.pause();
 
 		FlxG.sound.music.play();
-		// FlxG.sound.music.pitch = playbackRate;
+		FlxG.sound.music.pitch = playbackRate;
 		Conductor.songPosition = FlxG.sound.music.time;
 		if (Conductor.songPosition <= vocals.length)
 		{
 			vocals.time = Conductor.songPosition;
-			// vocals.pitch = playbackRate;
+			vocals.pitch = playbackRate;
 		}
 		vocals.play();
 	}
@@ -3023,6 +3032,13 @@ class PlayState extends MusicBeatState
 		else
 			iconP2.animation.curAnim.curFrame = 0;
 
+		if (SONG.shitass.contains('qhar?!?!')) {
+			iconP2.animation.curAnim.curFrame = 0;
+			iconP2.origin.x = -500;
+			iconP1.animation.curAnim.curFrame = 1;
+			iconP1.flipX = true;
+		}
+
 		if (FlxG.keys.anyJustPressed(debugKeysCharacter) && !endingSong && !inCutscene)
 		{
 			persistentUpdate = false;
@@ -3134,7 +3150,7 @@ class PlayState extends MusicBeatState
 					keyShit();
 				}
 				else if (boyfriend.animation.curAnim != null
-					&& boyfriend.holdTimer > Conductor.stepCrochet * (0.0011/* / FlxG.sound.music.pitch*/) * boyfriend.singDuration
+					&& boyfriend.holdTimer > Conductor.stepCrochet * (0.0011 / FlxG.sound.music.pitch) * boyfriend.singDuration
 						&& boyfriend.animation.curAnim.name.startsWith('sing')
 						&& !boyfriend.animation.curAnim.name.endsWith('miss'))
 				{
@@ -4110,7 +4126,7 @@ class PlayState extends MusicBeatState
 				{
 					CustomFadeTransition.nextCamera = null;
 				}
-				MusicBeatState.switchState(new FreeplayState());
+				MusicBeatState.switchState(new PaidplayState());
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 				changedDifficulty = false;
 			}
@@ -4585,7 +4601,7 @@ class PlayState extends MusicBeatState
 				#end
 			}
 			else if (boyfriend.animation.curAnim != null
-				&& boyfriend.holdTimer > Conductor.stepCrochet * (0.0011/* / FlxG.sound.music.pitch*/) * boyfriend.singDuration
+				&& boyfriend.holdTimer > Conductor.stepCrochet * (0.0011 / FlxG.sound.music.pitch) * boyfriend.singDuration
 					&& boyfriend.animation.curAnim.name.startsWith('sing')
 					&& !boyfriend.animation.curAnim.name.endsWith('miss'))
 			{
@@ -5170,7 +5186,7 @@ class PlayState extends MusicBeatState
 			FlxG.stage.removeEventListener(KeyboardEvent.KEY_UP, onKeyRelease);
 		}
 		FlxAnimationController.globalSpeed = 1;
-		// FlxG.sound.music.pitch = 1;
+		FlxG.sound.music.pitch = 1;
 		super.destroy();
 	}
 

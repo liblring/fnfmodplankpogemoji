@@ -1986,8 +1986,8 @@ class ChartingState extends MusicBeatState
 		if (playbackSpeed >= 3)
 			playbackSpeed = 3;
 
-		// FlxG.sound.music.pitch = playbackSpeed;
-		// vocals.pitch = playbackSpeed;
+		FlxG.sound.music.pitch = playbackSpeed;
+		vocals.pitch = playbackSpeed;
 
 		bpmTxt.text =
 		Std.string(FlxMath.roundDecimal(Conductor.songPosition / 1000, 2)) + " / " + Std.string(FlxMath.roundDecimal(FlxG.sound.music.length / 1000, 2)) +

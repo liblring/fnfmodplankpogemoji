@@ -121,7 +121,10 @@ class Highscore
 		if (!songRating.exists(daSong))
 			setRating(daSong, 0);
 
-		return songRating.get(daSong);
+		var intendedRating:Float = 0;
+		try { intendedRating = songRating.get(daSong); } catch(e) {}
+
+		return intendedRating;
 	}
 
 	public static function getWeekScore(week:String, diff:Int):Int

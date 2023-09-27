@@ -1,78 +1,78 @@
 {
 	"animations": [
 		{
-			"loop": false,
+			"indices": [],
 			"offsets": [
 				-1463,
 				-586
 			],
-			"anim": "idle",
 			"fps": 24,
-			"name": "idle",
-			"indices": []
+			"anim": "idle",
+			"loop": false,
+			"name": "idle"
 		},
 		{
-			"loop": false,
+			"indices": [],
 			"offsets": [
 				-1382,
 				-531
 			],
-			"anim": "singLEFT",
 			"fps": 24,
-			"name": "left",
-			"indices": []
+			"anim": "singLEFT",
+			"loop": false,
+			"name": "left"
 		},
 		{
-			"loop": false,
+			"indices": [],
 			"offsets": [
 				-1429,
 				-676
 			],
-			"anim": "singDOWN",
 			"fps": 24,
-			"name": "down",
-			"indices": []
+			"anim": "singDOWN",
+			"loop": false,
+			"name": "down"
 		},
 		{
-			"loop": false,
+			"indices": [],
 			"offsets": [
 				-1451,
 				-587
 			],
-			"anim": "singUP",
 			"fps": 24,
-			"name": "up",
-			"indices": []
+			"anim": "singUP",
+			"loop": false,
+			"name": "up"
 		},
 		{
-			"loop": false,
+			"indices": [],
 			"offsets": [
 				-1414,
 				-558
 			],
-			"anim": "singRIGHT",
 			"fps": 24,
-			"name": "right",
-			"indices": []
+			"anim": "singRIGHT",
+			"loop": false,
+			"name": "right"
 		}
-	],
-	"no_antialiasing": true,
-	"image": "characters/planknew",
-	"position": [
-		-1310,
-		-350
-	],
-	"healthicon": "plank",
-	"flip_x": false,
-	"healthbar_colors": [
-		100,
-		72,
-		22
 	],
 	"camera_position": [
 		1460,
 		690
 	],
-	"sing_duration": 4,
-	"scale": 0.75
+	"flip_x": false,
+	"healthbar_colors": [
+		102,
+		51,
+		51
+	],
+	"healthicon": "plank",
+	"image": "characters/planknew",
+	"no_antialiasing": true,
+	"position": [
+		-1310,
+		-350
+	],
+	"scale": 0.75,
+	"sing_duration": 4
 }

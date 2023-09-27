@@ -485,10 +485,10 @@ class ModsMenuState extends MusicBeatState
 				TitleState.initialized = false;
 				TitleState.closedState = false;
 				FlxG.sound.music.fadeOut(0.3);
-				if(FreeplayState.vocals != null)
+				if(PaidplayState.vocals != null)
 				{
-					FreeplayState.vocals.fadeOut(0.3);
-					FreeplayState.vocals = null;
+					PaidplayState.vocals.fadeOut(0.3);
+					PaidplayState.vocals = null;
 				}
 				FlxG.camera.fade(FlxColor.BLACK, 0.5, false, FlxG.resetGame, false);
 			}

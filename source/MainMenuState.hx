@@ -33,11 +33,11 @@ class MainMenuState extends MusicBeatState
 	private var camGame:FlxCamera;
 	private var camAchievement:FlxCamera;
 
-	var optionShit:Array<MainMenuButton> = [
-		{x: 400,  y: 70,   scale: 2.7,  name:    'freeplay'},
-		{x: 750,  y: 270,  scale: 4,    name: 	 'credits'},
-		{x: 550,  y: 370,  scale: 4,    name: 	 'acquirents'},
-		{x: 210,  y: 550,  scale: 3,    name:    'options'},
+	final optionShit:Array<MainMenuButton> = [
+		{x: 100,  y: 70,   scale: 2.7,  name:    'freeplay'},
+		{x: 100,  y: 270,  scale: 4,    name: 	 'credits'},
+		{x: 100,  y: 370,  scale: 4,    name: 	 'acquirents'},
+		{x: 100,  y: 550,  scale: 3,    name:    'options'},
 	];
 
 	var magenta:FlxSprite;
@@ -144,6 +144,7 @@ class MainMenuState extends MusicBeatState
 			menuItem.setGraphicSize(Std.int(menuItem.height * option.scale));
 			menuItem.updateHitbox();
 			menuItems.add(menuItem);
+			menuItem.offset.set(option.x, 0);
 		}
 
 		//FlxG.camera.follow(camFollowPos, null, 1);
@@ -185,7 +186,7 @@ class MainMenuState extends MusicBeatState
 	override function update(elapsed:Float) {
 		if (FlxG.sound.music.volume < 0.8) {
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
-			if(FreeplayState.vocals != null) FreeplayState.vocals.volume += 0.5 * elapsed;
+			if(PaidplayState.vocals != null) PaidplayState.vocals.volume += 0.5 * elapsed;
 		}
 
 		var lerpVal:Float = CoolUtil.boundTo(elapsed * 7.5, 0, 1);
@@ -229,7 +230,7 @@ class MainMenuState extends MusicBeatState
 
 							switch (daChoice) {
 								case 'freeplay':
-									MusicBeatState.switchState(new FreeplayState());
+									MusicBeatState.switchState(new PaidplayState());
 								case 'credits':
 									MusicBeatState.switchState(new CreditsState());
 								case 'acquirents':
@@ -251,10 +252,7 @@ class MainMenuState extends MusicBeatState
 
 		super.update(elapsed);
 
-		menuItems.forEach(function(spr:FlxSprite)
-			{
-				spr.x = FlxMath.lerp(spr.x, ((spr.ID == curSelected) ? FlxG.width * 0.5 : FlxG.width * 0.6), 0.15);
-			});
+		menuItems.forEach((spr:FlxSprite) -> spr.x = FlxMath.lerp(spr.x, ((spr.ID == curSelected) ? FlxG.width * 0.5 : FlxG.width * 0.6), 0.15));
 	}
 
 	function changeItem(huh:Int = 0) {
@@ -271,13 +269,9 @@ class MainMenuState extends MusicBeatState
 
 			if (spr.ID == curSelected) {
 				spr.animation.play('selected');
-				var add:Float = 0;
-				if(menuItems.length > 4) {
-					add = menuItems.length * 8;
-				}
-				camFollow.setPosition(spr.getGraphicMidpoint().x, spr.getGraphicMidpoint().y - add);
-				spr.centerOffsets();
+				// spr.centerOffsets();
 			}
+			spr.offset.set(optionShit[spr.ID].x, 0);
 		});
 	}
 }

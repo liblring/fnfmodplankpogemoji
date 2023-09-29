@@ -52,7 +52,9 @@ class MainMenuState extends MusicBeatState
 		'SHUTTHEFUCL',
 		'hiiiplaaank',
 		'himatpat',
-		'trademark'
+		'trademark',
+		'daniel',
+		'sockngvoskcn;kvscnknvsck'
 	  ];
 
 	override function create()

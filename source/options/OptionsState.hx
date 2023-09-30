@@ -24,6 +24,7 @@ import flixel.util.FlxTimer;
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
 import Controls;
+import options.*;
 
 using StringTools;
 
@@ -47,7 +48,7 @@ class OptionsState extends MusicBeatState
 			case 'Gameplay':
 				openSubState(new options.GameplaySettingsSubState());
 			case 'Adjust Delay and Combo':
-				LoadingState.loadAndSwitchState(new options.NoteOffsetState());
+				LoadingState.loadAndSwitchState(NoteOffsetState);
 		}
 	}
 

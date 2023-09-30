@@ -38,16 +38,22 @@ class MusicBeatState extends FlxUIState
 
 	public function new() {
 		super();
-		// if (!FlxTransitionableState.skipNextTransOut) {
-			pastStateBitmap = new BitmapData(Std.int(FlxG.width), Std.int(FlxG.height));
+		if(pastStateBitmap == null) pastStateBitmap = new BitmapData(FlxG.width, FlxG.height);
+
+		// if (!FlxTransitionableState.skipNextTransOut)
 			pastStateBitmap.draw(FlxG.game);
-		// }
 	}
 
 	override function create() {
 		camBeat = FlxG.camera;
 		super.create();
-		if(pastStateBitmap != null) openSubState(new ShatterTransition(pastStateBitmap));
+		// if (!FlxTransitionableState.skipNextTransOut)
+			openSubState(new ShatterTransition(pastStateBitmap));
+	}
+
+	override public function destroy() {
+		pastStateBitmap.dispose();
+		super.destroy();
 	}
 
 	override function update(elapsed:Float)

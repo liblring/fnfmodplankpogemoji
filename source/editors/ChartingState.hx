@@ -1665,7 +1665,7 @@ class ChartingState extends MusicBeatState
 			if (FlxG.keys.justPressed.ESCAPE)
 			{
 				autosaveSong();
-				LoadingState.loadAndSwitchState(new editors.EditorPlayState(sectionStartTime()));
+				LoadingState.loadAndSwitchState(editors.EditorPlayState, [sectionStartTime()]);
 			}
 			if (FlxG.keys.justPressed.ENTER)
 			{
@@ -1677,7 +1677,7 @@ class ChartingState extends MusicBeatState
 
 				//if(_song.stage == null) _song.stage = stageDropDown.selectedLabel;
 				StageData.loadDirectory(_song);
-				LoadingState.loadAndSwitchState(new PlayState());
+				LoadingState.loadAndSwitchState(PlayState);
 			}
 
 			if(curSelectedNote != null && !Std.isOfType(curSelectedNote[1], Array)) {
@@ -1691,7 +1691,7 @@ class ChartingState extends MusicBeatState
 
 			if (FlxG.keys.justPressed.BACKSPACE) {
 				PlayState.chartingMode = false;
-				MusicBeatState.switchState(new editors.MasterEditorMenu());
+				MusicBeatState.switchState(cast editors.MasterEditorMenu);
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 				FlxG.mouse.visible = false;
 				return;

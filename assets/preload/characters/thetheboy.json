@@ -1,122 +1,122 @@
 {
 	"animations": [
 		{
-			"loop": false,
+			"indices": [],
 			"offsets": [
 				-83,
 				-30
 			],
-			"anim": "idle",
 			"fps": 24,
-			"name": "idle",
-			"indices": []
+			"anim": "idle",
+			"loop": false,
+			"name": "idle"
 		},
 		{
-			"loop": false,
+			"indices": [],
 			"offsets": [
 				-44,
 				-14
 			],
-			"anim": "singDOWN",
 			"fps": 24,
-			"name": "down",
-			"indices": []
+			"anim": "singDOWN",
+			"loop": false,
+			"name": "down"
 		},
 		{
+			"indices": [],
 			"offsets": [
 				118,
 				-20
 			],
-			"loop": false,
 			"fps": 24,
 			"anim": "singLEFT",
-			"indices": [],
+			"loop": false,
 			"name": "left"
 		},
 		{
+			"indices": [],
 			"offsets": [
 				-62,
 				-28
 			],
-			"loop": false,
 			"fps": 24,
 			"anim": "singUP",
-			"indices": [],
+			"loop": false,
 			"name": "up"
 		},
 		{
+			"indices": [],
 			"offsets": [
 				-71,
 				-6
 			],
-			"loop": false,
 			"fps": 24,
 			"anim": "singRIGHT",
-			"indices": [],
+			"loop": false,
 			"name": "right"
 		},
 		{
+			"indices": [],
 			"offsets": [
 				-45,
 				-24
 			],
-			"loop": false,
 			"fps": 24,
 			"anim": "singDOWNmiss",
-			"indices": [],
+			"loop": false,
 			"name": "miss down"
 		},
 		{
+			"indices": [],
 			"offsets": [
 				116,
 				-20
 			],
-			"loop": false,
 			"fps": 24,
 			"anim": "singLEFTmiss",
-			"indices": [],
+			"loop": false,
 			"name": "miss left"
 		},
 		{
+			"indices": [],
 			"offsets": [
 				-68,
 				-27
 			],
-			"loop": false,
 			"fps": 24,
 			"anim": "singUPmiss",
-			"indices": [],
+			"loop": false,
 			"name": "miss up"
 		},
 		{
+			"indices": [],
 			"offsets": [
 				-58,
 				-10
 			],
-			"loop": false,
 			"fps": 24,
 			"anim": "singRIGHTmiss",
-			"indices": [],
+			"loop": false,
 			"name": "miss right"
 		}
-	],
-	"no_antialiasing": true,
-	"image": "characters/thetheboy",
-	"position": [
-		-150,
-		380
-	],
-	"healthicon": "thetheboy",
-	"flip_x": true,
-	"healthbar_colors": [
-		225,
-		120,
-		255
 	],
 	"camera_position": [
 		-40,
 		40
 	],
-	"sing_duration": 4,
-	"scale": 0.9
+	"flip_x": true,
+	"healthbar_colors": [
+		131,
+		64,
+		206
+	],
+	"healthicon": "thetheboy",
+	"image": "characters/thetheboy",
+	"no_antialiasing": true,
+	"position": [
+		-150,
+		380
+	],
+	"scale": 0.9,
+	"sing_duration": 4
 }

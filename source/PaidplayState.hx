@@ -114,9 +114,9 @@ class PaidplayState extends MusicBeatState
 			}
 			
 			if (FlxG.keys.pressed.SHIFT){
-				LoadingState.loadAndSwitchState(new ChartingState());
+				LoadingState.loadAndSwitchState(ChartingState);
 			}else{
-				LoadingState.loadAndSwitchState(new PlayState());
+				LoadingState.loadAndSwitchState(PlayState);
 			}
 
 			FlxG.sound.music.volume = 0;

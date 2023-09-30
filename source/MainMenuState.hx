@@ -239,7 +239,7 @@ class MainMenuState extends MusicBeatState
 								case 'acquirents':
 									MusicBeatState.switchState(new AchievementsMenuState());
 								case 'options':
-									LoadingState.loadAndSwitchState(new options.OptionsState());
+									LoadingState.loadAndSwitchState(options.OptionsState, false);
 							}
 						});
 					}

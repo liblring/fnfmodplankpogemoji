@@ -15,6 +15,7 @@ import lime.utils.Assets as LimeAssets;
 import lime.utils.AssetLibrary;
 import lime.utils.AssetManifest;
 import haxe.io.Path;
+import openfl.display.BitmapData;
 
 class LoadingState extends MusicBeatState
 {
@@ -24,16 +25,19 @@ class LoadingState extends MusicBeatState
 	// If you're compiling to dajlhgldkdhglah (or something that doesn't use NO_PRELOAD_ALL), search for getNextState instead
 	// I'd recommend doing it on both actually lol
 	// TO DO: Make this easier
-	var target:FlxState;
+	var target:Class<FlxState>;
+	var targetArgs:Array<Dynamic>;
+	var showLoading:Bool;
 	var stopMusic = false;
 	var directory:String;
 	var callbacks:MultiCallback;
 	var targetShit:Float = 0;
 
-	function new(target:FlxState, stopMusic:Bool, directory:String)
-	{
+	function new(target:Class<FlxState>, targetArgs:Array<Dynamic>, showLoading:Bool, stopMusic:Bool, directory:String) {
 		super();
 		this.target = target;
+		this.targetArgs = targetArgs;
+		this.showLoading = showLoading;
 		this.stopMusic = stopMusic;
 		this.directory = directory;
 	}
@@ -41,8 +45,8 @@ class LoadingState extends MusicBeatState
 	var funkay:FlxSprite;
 	var loadBar:FlxSprite;
 
-	override function create()
-	{
+	override function create() {
+		if (showLoading) openSubState(new ShatterTransition(pastStateBitmap));
 		var bg:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, 0xffcaff4d);
 		add(bg);
 		funkay = new FlxSprite(0, 0).loadGraphic(Paths.getPath('images/funkay.png', IMAGE));
@@ -72,18 +76,17 @@ class LoadingState extends MusicBeatState
 			}*/
 			checkLibrary("shared");
 			if (directory != null && directory.length > 0 && directory != 'shared')
-			{
 				checkLibrary(directory);
-			}
 
 			var fadeTime = 0.5;
-			FlxG.camera.fade(FlxG.camera.bgColor, fadeTime, true);
-			new FlxTimer().start(fadeTime + MIN_TIME, function(_) introComplete());
+			if (showLoading) {
+				FlxG.camera.fade(FlxG.camera.bgColor, fadeTime, true);
+				new FlxTimer().start(fadeTime + MIN_TIME, function(_) introComplete()); 
+			} else introComplete();
 		});
 	}
 
-	function checkLoadSong(path:String)
-	{
+	function checkLoadSong(path:String) {
 		if (!Assets.cache.hasSound(path))
 		{
 			var library = Assets.getLibrary("songs");
@@ -100,9 +103,7 @@ class LoadingState extends MusicBeatState
 		}
 	}
 
-	function checkLibrary(library:String)
-	{
-		trace(Assets.hasLibrary(library));
+	function checkLibrary(library:String) {
 		if (Assets.getLibrary(library) == null)
 		{
 			@:privateAccess
@@ -117,41 +118,32 @@ class LoadingState extends MusicBeatState
 		}
 	}
 
-	override function update(elapsed:Float)
-	{
+	override function update(elapsed:Float) {
 		super.update(elapsed);
-		if (callbacks != null)
-		{
+		if (callbacks != null) {
 			targetShit = FlxMath.remapToRange(callbacks.numRemaining / callbacks.length, 1, 0, 0, 1);
 			loadBar.scale.x += 0.5 * (targetShit - loadBar.scale.x);
 		}
 	}
 
-	function onLoad()
-	{
+	function onLoad() {
 		if (stopMusic && FlxG.sound.music != null)
 			FlxG.sound.music.stop();
 
-		MusicBeatState.switchState(target);
+		MusicBeatState.switchState(createYourMother(target, targetArgs));
 	}
 
 	static function getSongPath()
-	{
 		return Paths.instPath(PlayState.SONG.song);
-	}
 
 	static function getVocalPath()
-	{
 		return Paths.voicesPath(PlayState.SONG.song);
-	}
 
-	inline static public function loadAndSwitchState(target:FlxState, stopMusic = false)
-	{
-		MusicBeatState.switchState(getNextState(target, stopMusic));
-	}
+	inline static public function loadAndSwitchState(target:Class<FlxState>, showLoading = true, ?args, stopMusic = false)
+		MusicBeatState.switchState(getNextState(target, showLoading, args, stopMusic));
 
-	static function getNextState(target:FlxState, stopMusic = false):FlxState
-	{
+	static function getNextState(target:Class<FlxState>, showLoading = true, args:Array<Dynamic>, stopMusic = false):FlxState {
+		if (args == null) args = [];
 		var directory:String = 'shared';
 		var weekDir:String = StageData.forceNextDirectory;
 		StageData.forceNextDirectory = null;
@@ -172,32 +164,28 @@ class LoadingState extends MusicBeatState
 		}
 
 		if (!loaded)
-			return new LoadingState(target, stopMusic, directory);
+			return new LoadingState(target, args, showLoading, stopMusic, directory);
 		if (stopMusic && FlxG.sound.music != null)
 			FlxG.sound.music.stop();
 
-		return target;
+		return createYourMother(target, args);
 	}
+
+	static public function createYourMother(target:Class<FlxState>, args:Array<Dynamic>):FlxState
+		return Type.createInstance(target, args);
 
 	static function isSoundLoaded(path:String):Bool
-	{
 		return Assets.cache.hasSound(path);
-	}
 
 	static function isLibraryLoaded(library:String):Bool
-	{
 		return Assets.getLibrary(library) != null;
-	}
 
-	override function destroy()
-	{
+	override function destroy() {
 		super.destroy();
-
 		callbacks = null;
 	}
 
-	static function initSongsManifest()
-	{
+	static function initSongsManifest() {
 		var id = "songs";
 		var promise = new Promise<AssetLibrary>();
 
@@ -263,8 +251,7 @@ class LoadingState extends MusicBeatState
 	}
 }
 
-class MultiCallback
-{
+class MultiCallback {
 	public var callback:Void->Void;
 	public var logId:String = null;
 	public var length(default, null) = 0;
@@ -273,14 +260,12 @@ class MultiCallback
 	var unfired = new Map<String, Void->Void>();
 	var fired = new Array<String>();
 
-	public function new(callback:Void->Void, logId:String = null)
-	{
+	public function new(callback:Void->Void, logId:String = null) {
 		this.callback = callback;
 		this.logId = logId;
 	}
 
-	public function add(id = "untitled")
-	{
+	public function add(id = "untitled") {
 		id = '$length:$id';
 		length++;
 		numRemaining++;
@@ -311,10 +296,8 @@ class MultiCallback
 	}
 
 	inline function log(msg):Void
-	{
 		if (logId != null)
 			trace('$logId: $msg');
-	}
 
 	public function getFired()
 		return fired.copy();

@@ -1,4 +1,0 @@
-
-
-Value 1: lua name
-Value 2: true/false

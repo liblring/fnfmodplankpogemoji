@@ -1,0 +1,4 @@
+the bars from movies
+
+alue 1: amount of zoom added to camera (use 0 to go back to default)
+malue 2: bar intensity (0 removes the bar)

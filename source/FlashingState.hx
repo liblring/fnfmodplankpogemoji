@@ -20,6 +20,9 @@ class FlashingState extends MusicBeatState
 	var goober:FlxSprite;
 	override function create()
 	{
+		persistentUpdate = true;
+		persistentDraw = true;
+		
 		super.create();
 
 		Paths.image('thumbsup');

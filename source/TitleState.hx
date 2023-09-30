@@ -70,19 +70,12 @@ class TitleState extends MusicBeatState
 		FlxG.sound.volumeUpKeys = volumeUpKeys;
 		FlxG.keys.preventDefaultKeys = [TAB];
 
-		PlayerSettings.init();
 
 		// DEBUG BULLSHIT
 
 		swagShader = new ColorSwap();
 
 		super.create();
-
-		FlxG.save.bind('funkin', CoolUtil.getSavePath());
-
-		ClientPrefs.loadPrefs();
-
-		Highscore.load();
 
 		// IGNORE THIS!!!
 		titleJSON = Json.parse(Paths.getTextFromFile('images/gfDanceTitle.json'));
@@ -91,13 +84,6 @@ class TitleState extends MusicBeatState
 			StoryMenuState.weekCompleted = FlxG.save.data.weekCompleted;
 
 		FlxG.mouse.visible = false;
-
-		if(!FlashingState.leftState) {
-			FlxTransitionableState.skipNextTransIn = true;
-			FlxTransitionableState.skipNextTransOut = true;
-			MusicBeatState.switchState(new FlashingState());
-			return;
-		}
 
 		if(FlxG.save.data != null && FlxG.save.data.fullscreen)
 		{

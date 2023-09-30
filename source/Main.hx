@@ -33,7 +33,7 @@ class Main extends Sprite
 	var game = {
 		width: 1280, // WINDOW width
 		height: 720, // WINDOW height
-		initialState: TitleState, // initial game state
+		initialState: DumbassWaringScreenState, // initial game state
 		zoom: -1.0, // game state bounds
 		framerate: 60, // default framerate
 		skipSplash: true, // if the default flixel splash screen should be skipped
@@ -75,6 +75,14 @@ class Main extends Sprite
 
 	private function setupGame():Void
 	{
+		#if (CRASH_HANDLER && !hl)
+		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);
+		#end
+		
+		#if (CRASH_HANDLER && hl)
+		hl.Api.setErrorHandler(onCrash);
+		#end
+
 		var stageWidth:Int = Lib.current.stage.stageWidth;
 		var stageHeight:Int = Lib.current.stage.stageHeight;
 
@@ -90,6 +98,11 @@ class Main extends Sprite
 		ClientPrefs.loadDefaultKeys();
 		addChild(new FlxGame(game.width, game.height, game.initialState, #if (flixel < "5.0.0") game.zoom, #end game.framerate, game.framerate, game.skipSplash, game.startFullscreen));
 
+		PlayerSettings.init();
+		FlxG.save.bind('funkin', CoolUtil.getSavePath());
+		ClientPrefs.loadPrefs();
+		Highscore.load();
+
 		#if !mobile
 		fpsVar = new FPS(10, 3);
 		addChild(fpsVar);
@@ -103,14 +116,6 @@ class Main extends Sprite
 		#if html5
 		FlxG.autoPause = false;
 		FlxG.mouse.visible = false;
-		#end
-		
-		#if (CRASH_HANDLER && !hl)
-		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);
-		#end
-		
-		#if (CRASH_HANDLER && hl)
-		hl.Api.setErrorHandler(onCrash);
 		#end
 
 		#if desktop

@@ -1,105 +1,105 @@
-# your mom
-Engine originally used on [Mind Games Mod](https://gamebanana.com/mods/301107), intended to be a fix for the vanilla version's many issues while keeping the casual play aspect of it. Also aiming to be an easier alternative to newbie coders.
+s ssss sss
+ssssss ssssssssss ssss ss sssss sssss sssssssssssssssssssssssssssssssssssssssss ssssssss ss ss s sss sss sss sssssss sssssssss ssss ssssss sssss sssssss sss ssssss ssss ssssss ss sss ssss ssssss ss ss ss ssssss sssssssssss ss ssssss sssssss
 
-## Installation:
-You must have [the most up-to-date version of Haxe](https://haxe.org/download/), seriously, stop using 4.1.5, it misses some stuff.
+ss sssssssssssss
+sss ssss ssss ssss ssss ssssssssss sssssss ss ssssssssssssssssssssssssssssssssss ssssssssss ssss sssss ssssss ss ssssss ssss ssssss
 
-open up a Command Prompt/PowerShell or Terminal, type `haxelib install hmm`
+ssss ss s sssssss sssssssssssssssss ss sssssssss ssss ssssssss sssssss ssss
 
-after it finishes, simply type `haxelib run hmm install` in order to install all the needed libraries for *Psych Engine!*
+sssss ss sssssssss ssssss ssss ssssssss sss sss ssssssss ss sssss ss sssssss sss sss ssssss sssssssss sss ssssss ssssssss
 
-## Customization:
+ss ssssssssssssss
 
-if you wish to disable things like *Lua Scripts* or *Video Cutscenes*, you can read over to `Project.xml`
+ss sss ssss ss sssssss ssssss ssss ssss ssssssss ss ssssss sssssssssss sss sss ssss ssss ss sssssssssssss
 
-inside `Project.xml`, you will find several variables to customize Psych Engine to your liking
+ssssss ssssssssssssss sss ssss ssss sssssss sssssssss ss sssssssss sssss ssssss ss ssss ssssss
 
-to start you off, disabling Videos should be simple, simply Delete the line `"VIDEOS_ALLOWED"` or comment it out by wrapping the line in XML-like comments, like this `<!-- YOUR_LINE_HERE -->`
+ss sssss sss ssss sssssssss ssssss ssssss ss sssssss ssssss ssssss sss ssss ssssssssssssssssss ss sssssss ss sss ss ssssssss sss ssss ss ssssssss sssssssss ssss ssss sssss ssssssssssssss ssss
 
-same goes for *Lua Scripts*, comment out or delete the line with `LUA_ALLOWED`, this and other customization options are all available within the `Project.xml` file
+ssss ssss sss ssss sssssssss sssssss sss ss ssssss sss ssss ssss ssssssssssssss ssss sss sssss sssssssssssss sssssss sss sss sssssssss ssssss sss sssssssssssss ssss
 
-## Credits:
-* Shadow Mario - Programmer
-* RiverOaken - Artist
-* Yoshubs - Assistant Programmer
+ss ssssssss
+s ssssss sssss s ssssssssss
+s ssssssssss s ssssss
+s sssssss s sssssssss ssssssssss
 
-### Special Thanks
-* bbpanzu - Ex-Programmer
-* Yoshubs - New Input System
-* SqirraRNG - Crash Handler and Base code for Chart Editor's Waveform
-* KadeDev - Fixed some cool stuff on Chart Editor and other PRs
-* iFlicky - Composer of Psync and Tea Time, also made the Dialogue Sounds
-* PolybiusProxy - .MP4 Video Loader Library (hxCodec)
-* Keoiki - Note Splash Animations
-* Smokey - Sprite Atlas Support
-* Nebula the Zorua - LUA JIT Fork and some Lua reworks
-_____________________________________
+sss sssssss ssssss
+s sssssss s sssssssssssss
+s sssssss s sss sssss ssssss
+s sssssssss s sssss sssssss sss ssss ssss sss sssss ssssssss ssssssss
+s sssssss s sssss ssss ssss sssss ss sssss ssssss sss sssss sss
+s sssssss s ssssssss ss sssss sss sss sssss ssss ssss sss ssssssss ssssss
+s sssssssssssss s ssss sssss ssssss sssssss sssssssss
+s ssssss s ssss ssssss ssssssssss
+s ssssss s ssssss sssss sssssss
+s ssssss sss sssss s sss sss ssss sss ssss sss sssssss
+sssssssssssssssssssssssssssssssssssss
 
-# Features
+s ssssssss
 
-## Attractive animated dialogue boxes:
+ss ssssssssss ssssssss ssssssss ssssss
 
-![](https://user-images.githubusercontent.com/44785097/127706669-71cd5cdb-5c2a-4ecc-871b-98a276ae8070.gif)
-
-
-## Mod Support
-* Probably one of the main points of this engine, you can code in .lua files outside of the source code, making your own weeks without even messing with the source!
-* Comes with a Mod Organizing/Disabling Menu.
+ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
 
 
-## Atleast one change to every week:
-### Week 1:
-  * New Dad Left sing sprite
-  * Unused stage lights are now used
-### Week 2:
-  * Both BF and Skid & Pump does "Hey!" animations
-  * Thunders does a quick light flash and zooms the camera in slightly
-  * Added a quick transition/cutscene to Monster
-### Week 3:
-  * BF does "Hey!" during Philly Nice
-  * Blammed has a cool new colors flash during that sick part of the song
-### Week 4:
-  * Better hair physics for Mom/Boyfriend (Maybe even slightly better than Week 7's :eyes:)
-  * Henchmen die during all songs. Yeah :(
-### Week 5:
-  * Bottom Boppers and GF does "Hey!" animations during Cocoa and Eggnog
-  * On Winter Horrorland, GF bops her head slower in some parts of the song.
-### Week 6:
-  * On Thorns, the HUD is hidden during the cutscene
-  * Also there's the Background girls being spooky during the "Hey!" parts of the Instrumental
+ss sss sssssss
+s ssssssss sss ss sss ssss ssssss ss ssss sssssss sss sss ssss ss ssss sssss sssssss ss sss ssssss sssss ssssss ssss sss sssss sssssss ssss sssssss ssss sss sssssss
+s sssss ssss s sss ssssssssssssssssssss sssss
 
-## Cool new Chart Editor changes and countless bug fixes
-![](https://github.com/ShadowMario/FNF-PsychEngine/blob/main/docs/img/chart.png?raw=true)
-* You can now chart "Event" notes, which are bookmarks that trigger specific actions that usually were hardcoded on the vanilla version of the game.
-* Your song's BPM can now have decimal values
-* You can manually adjust a Note's strum time if you're really going for milisecond precision
-* You can change a note's type on the Editor, it comes with two example types:
-  * Alt Animation: Forces an alt animation to play, useful for songs like Ugh/Stress
-  * Hey: Forces a "Hey" animation instead of the base Sing animation, if Boyfriend hits this note, Girlfriend will do a "Hey!" too.
 
-## Multiple editors to assist you in making your own Mod
-![Screenshot_3](https://user-images.githubusercontent.com/44785097/144629914-1fe55999-2f18-4cc1-bc70-afe616d74ae5.png)
-* Working both for Source code modding and Downloaded builds!
+ss sssssss sss ssssss ss sssss sssss
+sss ssss ss
+  s sss sss ssss ssss ssssss
+  s ssssss sssss ssssss sss sss ssss
+sss ssss ss
+  s ssss ss sss ssss s ssss ssss ssssss ssssssssss
+  s ssssssss ssss s sssss sssss sssss sss sssss sss ssssss ss ssssssss
+  s sssss s sssss sssssssssssssssssss ss sssssss
+sss ssss ss
+  s ss ssss ssssss ssssss ssssss ssss
+  s sssssss sss s ssss sss ssssss sssss ssssss ssss ssss ssss ss sss ssss
+sss ssss ss
+  s ssssss ssss sssssss sss sssssssssssss ssssss ssss ssssssss ssssss ssss ssss sss sssssss
+  s ssssssss sss ssssss sss ssssss ssss ss
+sss ssss ss
+  s ssssss sssssss sss ss ssss ssssss ssssssssss ssssss sssss sss ssssss
+  s ss ssssss sssssssssss ss ssss sss ssss ssssss ss ssss sssss ss sss sssss
+sss ssss ss
+  s ss sssssss sss sss ss ssssss ssssss sss ssssssss
+  s ssss sssssss sss ssssssssss sssss sssss ssssss ssssss sss ssssss sssss ss sss ssssssssssss
 
-## Story mode menu rework:
-![](https://i.imgur.com/UB2EKpV.png)
-* Added a different BG to every song (less Tutorial)
-* All menu characters are now in individual spritesheets, makes modding it easier.
+ss ssss sss sssss ssssss sssssss sss sssssssss sss sssss
+sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
+s sss sss sss sssss sssssss ssssss sssss sss sssssssss ssss sssssss ssssssss sssssss ssss sssssss ssss sssssssss ss sss sssssss sssssss ss sss sssss
+s ssss ssssss sss sss sss ssss sssssss ssssss
+s sss sss ssssssss ssssss s ssssss sssss ssss ss ssssss ssssss sssss sss ssssssssss sssssssss
+s sss sss ssssss s ssssss ssss ss sss sssssss ss sssss ssss sss sssssss ssssss
+  s sss ssssssssss ssssss ss sss sssssssss ss sssss ssssss sss sssss ssss ssssssssss
+  s ssss ssssss s sssss sssssssss sssssss ss sss ssss ssss ssssssssss ss sssssssss ssss ssss sssss ssssssssss ssss ss s ssssss ssss
 
-## Credits menu
-![Screenshot_1](https://user-images.githubusercontent.com/44785097/144632635-f263fb22-b879-4d6b-96d6-865e9562b907.png)
-* You can add a head icon, name, description and a Redirect link for when the player presses Enter while the item is currently selected.
+ss ssssssss sssssss ss ssssss sss ss ssssss ssss sss sss
+ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
+s sssssss ssss sss ssssss ssss sssssss sss ssssssssss sssssss
 
-## Awards/Achievements
-* The engine comes with 16 example achievements that you can mess with and learn how it works (Check Achievements.hx and search for "checkForAchievement" on PlayState.hx)
+ss sssss ssss ssss sssssss
+ssssssssssssssssssssssssssssssssssss
+s sssss s sssssssss ss ss sssss ssss sssss sssssssss
+s sss ssss ssssssssss sss sss ss ssssssssss sssssssssssss sssss sssssss ss sssssss
 
-## Options menu:
-* You can change Note colors, Delay and Combo Offset, Controls and Preferences there.
- * On Preferences you can toggle Downscroll, Middlescroll, Anti-Aliasing, Framerate, Low Quality, Note Splashes, Flashing Lights, etc.
+ss sssssss ssss
+ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
+s sss sss sss s ssss sssss sssss sssssssssss sss s ssssssss ssss sss ssss sss ssssss sssssss sssss sssss sss ssss ss sssssssss sssssssss
 
-## Other gameplay features:
-* When the enemy hits a note, their strum note also glows.
-* Lag doesn't impact the camera movement and player icon scaling anymore.
-* Some stuff based on Week 7's changes has been put in (Background colors on Freeplay, Note splashes)
-* You can reset your Score on Freeplay/Story Mode by pressing Reset button.
-* You can listen to a song or adjust Scroll Speed/Damage taken/etc. on Freeplay by pressing Space.
+ss sssssssssssssssssss
+s sss ssssss sssss ssss ss sssssss ssssssssssss ssss sss sss ssss ssss sss sssss sss ss sssss ssssss sssssssssssssss sss ssssss sss sssssssssssssssssssss ss sssssssssssss
+
+ss sssssss sssss
+s sss sss ssssss ssss sssssss sssss sss sssss sssssss ssssssss sss sssssssssss ssssss
+ s ss sssssssssss sss sss ssssss sssssssssss sssssssssssss ssssssssssssss ssssssssss sss ssssssss ssss sssssssss ssssssss sssssss ssss
+
+ss sssss ssssssss sssssssss
+s ssss sss sssss ssss s sssss sssss sssss ssss ssss ssssss
+s sss sssssss ssssss sss ssssss ssssssss sss ssssss ssss sssssss ssssssss
+s ssss sssss sssss ss ssss sss sssssss sss ssss sss ss sssssssssss ssssss ss sssssssss ssss sssssssss
+s sss sss sssss ssss sssss ss ssssssssssssss ssss ss ssssssss sssss sssssss
+s sss sss ssssss ss s ssss ss ssssss ssssss ssssssssssss ssssssssss ss ssssssss ss ssssssss ssssss

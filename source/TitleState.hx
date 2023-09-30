@@ -37,9 +37,7 @@ import flixel.util.FlxTimer;
 import openfl.Assets;
 
 using StringTools;
-typedef TitleData =
-{
-
+typedef TitleData = {
 	titlex:Float,
 	titley:Float,
 	startx:Float,
@@ -47,8 +45,9 @@ typedef TitleData =
 	gfx:Float,
 	gfy:Float,
 	backgroundSprite:String,
-	bpm:Int
+	bpm:Float
 }
+
 class TitleState extends MusicBeatState
 {
 	public static var muteKeys:Array<FlxKey> = [FlxKey.ZERO];

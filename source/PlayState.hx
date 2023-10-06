@@ -349,6 +349,8 @@ class PlayState extends MusicBeatState
 	override public function create()
 	{
 		// trace('Playback Rate: ' + playbackRate);
+		//trace('could I get some bitches please :plead:');
+
 		Paths.clearStoredMemory();
 
 		// for lua

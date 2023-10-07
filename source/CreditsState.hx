@@ -74,7 +74,7 @@ class CreditsState extends MusicBeatState
 			['lario forest'],
 			['libing',	'lib',		'director or some shit i forgot (im on crack while writing this)',							'https://www.youtube.com/channel/UCwH4gcjdN-gWPGunlBxAnQQ',	'ffcaca', 'liber'],
 			['PlankDev','plank',    'coder + like composer + like the guy who turned this into a serious mod bravo plank!',		'https://github.com/ThePlank',		'4a2e00',                          'plnk'],
-			['Nick',    'dantesguy','coder + like artist + like animator, made opd sprites for mnalk lets fokin go mate innit',	'https://github.com/Nikerlo',		'ffffff',                          'nick'],
+			['Nick',    'dantesguy','coder + like artist + like animator, made opd sprites for mnalk lets fokin go mate innit',	'https://github.com/NickMGC',		'ffffff',                          'nick'],
 			['FlyingFeltBoot','flyingfeltwhat','help with random bullshit like hypothesis dantes sprites i guess',	            'https://github.com/Nikerlo',		'7a4a35'],
 			['Betopia', 'betty',    'so like, artist, i guess',		                                                            'https://twitter.com/betpowo',		'996666',                          'betp'],
 			['chi',     'chii',     'artist, animator, stuff, gay sex i dunno',	                        						'https://www.tumblr.com/cheddarchiing?source=share', '8C00FF'],

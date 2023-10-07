@@ -1560,7 +1560,7 @@ class PlayState extends MusicBeatState
 						note.alpha = note.multAlpha;
 						if (ClientPrefs.middleScroll && !note.mustPress)
 						{
-							note.alpha *= 0.35;
+							note.alpha *= 0.349; //very important change trust guys it's gonna make the difference it's gonna make the mod so awesom!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
 						}
 					}
 				});

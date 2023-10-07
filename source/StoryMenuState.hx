@@ -280,6 +280,7 @@ class StoryMenuState extends MusicBeatState
 	var movedBack:Bool = false;
 	var selectedWeek:Bool = false;
 	var stopspamming:Bool = false;
+	var uhmm:Bool = false;
 
 	function selectWeek()
 	{

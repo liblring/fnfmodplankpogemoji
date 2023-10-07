@@ -1,9 +1,10 @@
 package;
 
+import flixel.FlxCamera;
 #if desktop
 import Discord.DiscordClient;
 #end
-import flash.text.TextField; //used import????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????? guys wtf
+import flash.text.TextField; // //used import????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????? guys wtf
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.display.FlxGridOverlay;
@@ -27,6 +28,7 @@ using StringTools;
 
 class CreditsState extends MusicBeatState
 {
+	//lol private
 	private var grpOptions:MenuList;
 	private var iconArray:Array<FlxSprite> = [];
 	private var creditsStuff:Array<Array<String>> = [];
@@ -41,6 +43,10 @@ class CreditsState extends MusicBeatState
 	var descBox:AttachedSprite;
 
 	var offsetThing:Float = -75;
+
+	var hiimnint:FlxSprite;
+	var sillytween:FlxTween;
+	var sorryguys:FlxCamera; //:pensive:
 
 	override function create()
 	{	
@@ -75,6 +81,7 @@ class CreditsState extends MusicBeatState
 			['Unholywanderer','mod','guy, did stuff, coded 1 single line in',	                        						'https://gamebanana.com/members/1908754', '1abc96',					   'holy'],
 			['sinnvakr','sinn',     'i dunno this guy just randomly joined i dont know anything about him',	            		'https://www.youtube.com/@sinnvakr','7a4a35'],
 			['wacker',  'wacker',	'coder, charter, stuff like that, i frogot sorry',	           							    'https://www.youtube.com/@wackynix171/videos','7a4a35'],
+			["Nint","Nint",          "changed one number by 0.001 and put himself in the credits",                               "https://www.bigrat.monster", "ff8000",                                "mint"],
 			[''],
 			['d'],
 			['d',	'd',		'd (dont press enter)',							'https://www.youtube.com/watch?v=mYiBdMnIT88',	'FFFF00', 'd'],
@@ -165,7 +172,14 @@ class CreditsState extends MusicBeatState
 		corn = new FlxSprite();
 
 		changeSelection(grpOptions.curSelection);
-
+		FlxG.cameras.add(sorryguys = new FlxCamera(0,0,FlxG.width,FlxG.height), false);
+		sorryguys.bgColor.alpha = 0;
+		hiimnint = new FlxSprite(0,0,"assets/images/creditorial!!!/yow/silly.jpg");
+		hiimnint.setGraphicSize(FlxG.width, FlxG.height);
+		hiimnint.updateHitbox();
+		hiimnint.alpha = 0.00001;
+		hiimnint.camera = sorryguys;
+		add(hiimnint);
 		super.create();
 	}
 
@@ -195,6 +209,7 @@ class CreditsState extends MusicBeatState
 				MusicBeatState.switchState(new MainMenuState());
 				FlxG.sound.playMusic(Paths.music('freakyMenu'), 1, true);
 				quitting = true;
+				FlxG.cameras.remove(sorryguys);
 			}
 		}
 		
@@ -234,6 +249,17 @@ class CreditsState extends MusicBeatState
 
 		descBox.setGraphicSize(Std.int(descText.width + 20), Std.int(descText.height + 25));
 		descBox.updateHitbox();
+
+
+		if (curSelected == 10){ //i guess i could change this to creditsStuff[curSelected][0] == "Nint" but idk
+				//for some stupid fucking reason if i try using .visible the game kills itself so idk
+				add(hiimnint);
+				if (sillytween != null) sillytween.cancel();
+				hiimnint.alpha = 0;
+				sillytween = FlxTween.tween(hiimnint, {alpha: 1}, 0.25, {startDelay: 0.5, ease: FlxEase.sineIn});
+			
+		}
+		else  if (members.contains(hiimnint)) remove(hiimnint);
 	}
 
 	function commitHateCrime(pathShit:String):Void {

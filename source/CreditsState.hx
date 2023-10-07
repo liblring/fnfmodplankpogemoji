@@ -259,7 +259,7 @@ class CreditsState extends MusicBeatState
 		descBox.updateHitbox();
 
 
-		if (curSelected == 10){ //i guess i could change this to creditsStuff[curSelected][0] == "Nint" but idk
+		if (creditsStuff[curSelected][0] == "Nint"){ //now its not dependant on id i think
 				//for some stupid fucking reason if i try using .visible the game kills itself so idk
 				add(hiimnint);
 				if (sillytween != null) sillytween.cancel();

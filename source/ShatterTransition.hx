@@ -43,6 +43,7 @@ class ShatterTransition extends MusicBeatSubstate {
 		}
 		
 		shatterMask.animation.finishCallback = (name) -> {
+			pastStateImage.dispose();
 			transitionSprite.destroy();
 			shatterMask.destroy();
 			close();

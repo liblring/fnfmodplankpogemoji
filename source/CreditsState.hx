@@ -75,6 +75,7 @@ class CreditsState extends MusicBeatState
 			['libing',	'lib',		'director or some shit i forgot (im on crack while writing this)',							'https://www.youtube.com/channel/UCwH4gcjdN-gWPGunlBxAnQQ',	'ffcaca', 'liber'],
 			['PlankDev','plank',    'coder + like composer + like the guy who turned this into a serious mod bravo plank!',		'https://github.com/ThePlank',		'4a2e00',                          'plnk'],
 			['Nick',    'dantesguy','coder + like artist + like animator, made opd sprites for mnalk lets fokin go mate innit',	'https://github.com/NickMGC',		'ffffff',                          'nick'],
+<<<<<<< Updated upstream
 			['FlyingFeltBoot','flyingfeltwhat','help with random bullshit like hypothesis dantes sprites i guess',	            'https://github.com/Nikerlo',		'7a4a35'],
 			['Betopia', 'betty',    'so like, artist, i guess',		                                                            'https://twitter.com/betpowo',		'996666',                          'betp'],
 			['chi',     'chii',     'artist, animator, stuff, gay sex i dunno',	                        						'https://www.tumblr.com/cheddarchiing?source=share', '8C00FF'],
@@ -82,9 +83,16 @@ class CreditsState extends MusicBeatState
 			['sinnvakr','sinn',     'i dunno this guy just randomly joined i dont know anything about him',	            		'https://www.youtube.com/@sinnvakr','7a4a35'],
 			['wacker',  'wacker',	'coder, charter, stuff like that, i frogot sorry',	           							    'https://www.youtube.com/@wackynix171/videos','7a4a35'],
 			["Nint","Nint",          "changed one number by 0.001 and put himself in the credits",                               "https://www.bigrat.monster", "ff8000",                                "mint"],
+=======
+			['FlyingFeltBoot','flyingfeltwhat','help with random bullshit like hypothesis dantes sprites i guess',	            '@flyingfeltboot on discord',		                                 '7a4a35'],
+			['Betopia', 'betty',    'so like, artist, i guess',		                                                            'https://twitter.com/betpowo',		'996666',                          'betp'],
+			['chi',     'chii',     'artist, animator, stuff, gay sex i dunno',	                        						'https://www.tumblr.com/cheddarchiing?source=share',                 '8C00FF'],
+			['sinnvakr','sinn',     'i dunno this guy just randomly joined i dont know anything about him',	            		'https://www.youtube.com/@sinnvakr',                                 '7a4a35'],
+			['wacker',  'wacker',	'coder, charter, stuff like that, i frogot sorry',	           							    'https://www.youtube.com/@wackynix171/videos',                       '7a4a35'],
+>>>>>>> Stashed changes
 			[''],
 			['d'],
-			['d',	'd',		'd (dont press enter)',							'https://www.youtube.com/watch?v=mYiBdMnIT88',	'FFFF00', 'd'],
+			['d',	    'd',		'd (dont press enter)',						                                                'https://www.youtube.com/watch?v=mYiBdMnIT88',               'FFFF00',    'd'],
 			[''],
 			['Shadow Mario Team'],
 			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',								'https://twitter.com/Shadow_Mario_',	'444444'],

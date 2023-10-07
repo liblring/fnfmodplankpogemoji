@@ -21,7 +21,6 @@ class ShatterTransition extends MusicBeatSubstate {
 	}
 	');
 	private var shatterMask:FlxSprite;
-
 	private var transitionSprite:FlxSprite;
 
 	public function new(pastStateImage:BitmapData) {
@@ -51,7 +50,6 @@ class ShatterTransition extends MusicBeatSubstate {
 
 		add(shatterMask);
 		add(transitionSprite);
-
 
 		camera = FlxG.cameras.list[FlxG.cameras.list.length - 1];
 	}

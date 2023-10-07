@@ -551,6 +551,14 @@ class PlayState extends MusicBeatState
 				bg.scale.set(1.4, 1.4);
 				add(bg);
 
+			case 'zloty': // yeah man
+				var mhmhm:BGSprite = new BGSprite('bgassetsorsmth/man', -200, -200, 0, 0);
+				mhmhm.scale.set(1.4, 1.4);
+				add(mhmhm);
+				var paint:BGSprite = new BGSprite('bgassetsorsmth/imagine', 525, 300, 1, 1);
+				paint.scale.set(0.5, 0.5);
+				add(paint);
+
 			case 'astagewithoneimage': // Wheek
 				GameOverSubstate.deathSoundName = 'fnf_loss_sfx-pixel';
 				GameOverSubstate.loopSoundName = 'gameOver-pixel';

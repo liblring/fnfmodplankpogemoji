@@ -179,6 +179,7 @@ class CreditsState extends MusicBeatState
 		hiimnint.alpha = 0.00001;
 		hiimnint.camera = sorryguys;
 		add(hiimnint);
+		add(new FlxSprite(300,300,"assets/images/creditorial!!!/yow/d/toyotacorolla.png));
 		super.create();
 	}
 

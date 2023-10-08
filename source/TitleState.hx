@@ -130,10 +130,8 @@ class TitleState extends MusicBeatState
 		// logoBl.color = FlxColor.BLACK;
 
 		add(gfDance);
-		gfDance.shader = swagShader.shader;
 		add(bigtitleshit);
 		add(logoBl);
-		logoBl.shader = swagShader.shader;
 
 		titleText = new FlxSprite(titleJSON.startx, titleJSON.starty);
 		#if (desktop && MODS_ALLOWED)
@@ -174,6 +172,10 @@ class TitleState extends MusicBeatState
 		titleText.antialiasing = ClientPrefs.globalAntialiasing;
 		titleText.animation.play('idle');
 		add(titleText);
+
+		gfDance.shader = swagShader.shader;
+		logoBl.shader = swagShader.shader;
+		titleText.shader = swagShader.shader;
 	}
 
 	var logoBl:FlxSprite;

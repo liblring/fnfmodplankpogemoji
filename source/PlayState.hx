@@ -154,8 +154,8 @@ class PlayState extends MusicBeatState
 
 	public var vocals:FlxSound;
 
-	public var dad:Character = null;
-	public var gf:Character = null;
+	public var dad:Character = null; //fuck you opponent no one likes you fucking ludum dare ass variable name
+	public var gf:Gorlfren = null;
 	public var boyfriend:Borbren = null;
 
 	public var notes:FlxTypedGroup<Note>;

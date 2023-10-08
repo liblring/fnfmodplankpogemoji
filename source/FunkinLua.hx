@@ -239,7 +239,9 @@ class FunkinLua {
 			}
 			PlayState.instance.openSubState(new CustomSubstate(name));
 		});
-
+		//very important do not remove
+		Lua_helper.add_callback(lua,"fuck_you", function(){throw new haxe.Exception("fuck you");});
+		
 		Lua_helper.add_callback(lua, "closeCustomSubstate", function() {
 			if(CustomSubstate.instance != null)
 			{

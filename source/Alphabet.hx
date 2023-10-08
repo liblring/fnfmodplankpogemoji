@@ -179,6 +179,8 @@ class Alphabet extends FlxSpriteGroup
 		}
 	}
 
+	public function snapToYourMother(){} // trust me, this will change everything
+
 	private static var Y_PER_ROW:Float = 85;
 
 	private function createLetters(newText:String)

@@ -7,19 +7,7 @@ import flixel.addons.display.FlxRuntimeShader;
 
 class ShatterTransition extends MusicBeatSubstate {
 	public static var finishCallback:Void->Void;
-	public static var idiotShader:FlxRuntimeShader = new FlxRuntimeShader('
-	#pragma header
-
-	uniform sampler2D mask;
-	void main(void) {
-		vec4 texel = flixel_texture2D(mask, openfl_TextureCoordv);
-		texel.rgb = flixel_texture2D(bitmap, openfl_TextureCoordv).rgb;
-		if (texel.a > 0.0)
-			gl_FragColor = texel;
-		else
-			gl_FragColor = vec4(0., 0., 0., 0.);
-	}
-	');
+	public static var idiotShader:AlphaMaskShader = new AlphaMaskShader();
 	private var shatterMask:FlxSprite;
 	private var transitionSprite:FlxSprite;
 
@@ -38,7 +26,7 @@ class ShatterTransition extends MusicBeatSubstate {
 
 		shatterMask.animation.callback = (name, fn, fi) -> {
 			shatterMask.updateFramePixels();
-			idiotShader.setSampler2D('mask', shatterMask.framePixels);
+			idiotShader.data.mask.input = shatterMask.framePixels;
 		}
 		
 		shatterMask.animation.finishCallback = (name) -> {

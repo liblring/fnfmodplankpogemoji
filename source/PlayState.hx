@@ -3101,7 +3101,7 @@ class PlayState extends MusicBeatState
 		else
 		{
 			var achieve:String = checkForAchievement([
-				'rude', 'week2_nomiss', 'week3_nomiss', 'week4_nomiss', 'week5_nomiss', 'week6_nomiss', 'week7_nomiss', 'ur_bad', 'ur_good', 'hype',
+				'week2_nomiss', 'week3_nomiss', 'week4_nomiss', 'week5_nomiss', 'week6_nomiss', 'week7_nomiss', 'ur_bad', 'ur_good', 'hype',
 				'two_keys', 'toastie', 'debugger'
 			]);
 

@@ -15,7 +15,7 @@ import sys.FileSystem;
 #end
 import openfl.utils.AssetType;
 import openfl.utils.Assets;
-import tjson.JSON as Json;
+import tjson.TJSON as Json;
 
 using StringTools;
 

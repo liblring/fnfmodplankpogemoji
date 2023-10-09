@@ -184,6 +184,7 @@ class Alphabet extends FlxSpriteGroup
 		trace('nint is stupid!!!');
 		trace("there i fixed the function for you :]");
 		trace('nint i will kill you i swear keep one eye open');
+		trace("thanks im looking forward to it colon three");
 	} 
 	private static var Y_PER_ROW:Float = 85;
 

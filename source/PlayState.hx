@@ -719,7 +719,7 @@ class PlayState extends MusicBeatState
 		dadGroup.add(dad);
 		startCharacterLua(dad.curCharacter);
 
-		boyfriend = new Borbren(0, 0, SONG.player1);
+		boyfriend = new Borbren(0, 0, SONG.player1, true);
 		startCharacterPos(boyfriend);
 		boyfriendGroup.add(boyfriend);
 		startCharacterLua(boyfriend.curCharacter);
@@ -1186,7 +1186,7 @@ class PlayState extends MusicBeatState
 			case 0:
 				if (!boyfriendMap.exists(newCharacter))
 				{
-					var newBorbren:Borbren = new Borbren(0, 0, newCharacter);
+					var newBorbren:Borbren = new Borbren(0, 0, newCharacter, true);
 					boyfriendMap.set(newCharacter, newBorbren);
 					boyfriendGroup.add(newBorbren);
 					startCharacterPos(newBorbren);

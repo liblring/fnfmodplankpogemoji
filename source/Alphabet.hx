@@ -179,8 +179,10 @@ class Alphabet extends FlxSpriteGroup
 		}
 	}
 
-	public function snapToYourMother(){trace('nint is stupid!!!');} // trust me, this will change everything
-
+	public function snapToYourMother(){ // trust me, this will change everything
+		trace('nint is stupid!!!');
+		trace("there i fixed the function for you :]");
+	} 
 	private static var Y_PER_ROW:Float = 85;
 
 	private function createLetters(newText:String)

@@ -104,8 +104,7 @@ class Main extends Sprite
 		Highscore.load();
 
 		#if !mobile
-		fpsVar = new FPS(10, 3);
-		addChild(fpsVar);
+		addChild(fpsVar = new FPS(10, 3));
 		Lib.current.stage.align = "tl";
 		Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
 		if(fpsVar != null) {

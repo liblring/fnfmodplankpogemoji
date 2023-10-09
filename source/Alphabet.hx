@@ -182,6 +182,7 @@ class Alphabet extends FlxSpriteGroup
 	public function snapToYourMother(){ // trust me, this will change everything
 		trace('nint is stupid!!!');
 		trace("there i fixed the function for you :]");
+		trace('nint i will kill you i swear keep one eye open');
 	} 
 	private static var Y_PER_ROW:Float = 85;
 

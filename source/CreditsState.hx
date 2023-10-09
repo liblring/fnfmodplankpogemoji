@@ -81,7 +81,7 @@ class CreditsState extends MusicBeatState
 			['Unholywanderer','mod','guy, did stuff, coded 1 single line in',	                        						'https://gamebanana.com/members/1908754', '1abc96',					   'holy'],
 			['sinnvakr','sinn',     'i dunno this guy just randomly joined i dont know anything about him',	            		'https://www.youtube.com/@sinnvakr','c7feff',						   'sinn'],
 			['wacker',  'wacker',	'coder, charter, stuff like that, i frogot sorry',	           							    'https://www.youtube.com/@wackynix171/videos','6c4bdf',				   'wack'],
-			["Nint","Nint",          "changed one number by 0.001 and put himself in the credits",                              "https://www.bigrat.monster",		"ff8000",                          "mint"],
+			["Nint","Nint",          "joined, fucked up the source, fixed it, changed a number by .001, and pushed random shit daily",                              "https://www.bigrat.monster",		"ff8000",                          "mint"],
 			[''],
 			['d'],
 			['d',	    'd',		'd (dont press enter)',						                                                'https://www.youtube.com/watch?v=mYiBdMnIT88',               'FFFF00',    'd'],

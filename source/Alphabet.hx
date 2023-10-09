@@ -179,6 +179,7 @@ class Alphabet extends FlxSpriteGroup
 		}
 	}
 
+	@:keep
 	public function snapToYourMother(){ // trust me, this will change everything
 		trace('nint is stupid!!!');
 		trace("there i fixed the function for you :]");

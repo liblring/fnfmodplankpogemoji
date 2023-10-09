@@ -41,7 +41,7 @@ class NotesSubState extends MusicBeatSubstate
 	var blackBG:FlxSprite;
 	var hsbText:Alphabet;
 
-	var posX = 230;
+	final posX = 230;
 	public function new() {
 		super();
 		

@@ -1,7 +1,7 @@
 package;
 
 import flixel.FlxSprite;
-import flixel.graphics.frames.FlxAtlasFrames;
+import flixel.graphics.frames.FlxAtlasFrames; //is this used¿
 
 class CheckboxThingie extends FlxSprite
 {
@@ -51,8 +51,7 @@ class CheckboxThingie extends FlxSprite
 		return check;
 	}
 
-	private function animationFinished(name:String)
-	{
+	private function animationFinished(name:String){
 		switch(name)
 		{
 			case 'checking':

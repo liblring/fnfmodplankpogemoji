@@ -1,2 +1,2 @@
 package;
-typedef Borbren = Character;
+class Borbren{public function new(x,y,n) return new Character(x,y,n,true);}

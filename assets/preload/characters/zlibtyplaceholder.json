@@ -65,9 +65,9 @@
 	"healthicon": "zlibty",
 	"flip_x": false,
 	"healthbar_colors": [
-		153,
-		153,
-		153
+		125,
+		132,
+		151
 	],
 	"camera_position": [
 		-80,

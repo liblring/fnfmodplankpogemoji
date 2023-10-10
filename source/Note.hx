@@ -102,7 +102,7 @@ class Note extends FlxSprite
 		return value;
 	}
 
-	public function resizeByRatio(ratio:Float) //haha funny twitter shit
+	public function resizeByRatio(ratio:Float) //haha funny x shit
 	{
 		if(isSustainNote && !animation.curAnim.name.endsWith('end'))
 		{

@@ -2260,7 +2260,7 @@ class PlayState extends MusicBeatState
 		iconP2.scale.set(mult, mult);
 		iconP2.updateHitbox();
 
-		var iconOffset:Int = (SONG.song == "3zloty" ? 38 : 26); //is this true or gay sex
+		var iconOffset:Int = (SONG.song == "3zloty" ? 32 : 26); //is this true or gay sex
 
 		iconP1.x = healthBar.x
 			+ (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01))

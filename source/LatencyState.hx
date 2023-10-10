@@ -16,7 +16,7 @@ class LatencyState extends FlxState
 	{
 		FlxG.sound.playMusic(Paths.sound('soundTest'));
 
-		add(noteGrp = new FlxTypedGroup<Note>();
+		add(noteGrp = new FlxTypedGroup<Note>());
 
 		for (i in 0...32)
 		{

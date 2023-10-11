@@ -555,7 +555,7 @@ class PlayState extends MusicBeatState
 				var mhmhm:BGSprite = new BGSprite('bgassetsorsmth/man', -200, -200, 0, 0);
 				mhmhm.scale.set(1.4, 1.4);
 				add(mhmhm);
-				var paint:BGSprite = new BGSprite('bgassetsorsmth/imagine', 525, 300, 1, 1);
+				var paint:BGSprite = new BGSprite('bgassetsorsmth/imagine', 225, 300, 1, 1);
 				paint.scale.set(0.5, 0.5);
 				add(paint);
 

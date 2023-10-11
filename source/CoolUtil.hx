@@ -48,7 +48,7 @@ class CoolUtil
 		}
 		return Paths.formatToSongPath(fileSuffix);
 	}
-
+	@:keep
 	public static function getTotalBitches(person:String):String
 	{
 		return 'aint none bro';

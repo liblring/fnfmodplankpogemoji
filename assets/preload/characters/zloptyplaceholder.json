@@ -65,9 +65,9 @@
 	"healthicon": "zlopty",
 	"flip_x": true,
 	"healthbar_colors": [
-		102,
-		51,
-		51
+		140,
+		82,
+		56
 	],
 	"camera_position": [
 		130,

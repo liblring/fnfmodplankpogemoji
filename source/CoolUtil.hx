@@ -49,6 +49,11 @@ class CoolUtil
 		return Paths.formatToSongPath(fileSuffix);
 	}
 
+	public static function getTotalBitches(person:String):String
+	{
+		return 'aint none bro';
+	}
+
 	public static function difficultyString():String
 	{
 		return difficulties[PlayState.storyDifficulty].toUpperCase();

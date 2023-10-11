@@ -8,7 +8,7 @@ enum abstract FlxBallState(String) to String {
 }
 
 class FlxMyBalls extends FlxBasic {
-  public var state:FlxBallState = ITCHING;
+  public var state(default, never):FlxBallState = ITCHING;
   
   public function new() {
     super();

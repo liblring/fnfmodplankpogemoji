@@ -1,0 +1,3 @@
+Add option roblox input
+Add option hitsound y/n
+Add song pro gamer

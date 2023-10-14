@@ -345,10 +345,7 @@ class AlphaCharacter extends FlxSprite
 		{
 			if(isTypeAlphabet(lowercase))
 			{
-				if(lowercase != character)
-					suffix = ' uppercase';
-				else
-					suffix = ' lowercase';
+				suffix = (lowercase != character ? ' uppercase' : ' lowercase');
 			}
 			else
 			{

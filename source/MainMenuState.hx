@@ -120,8 +120,12 @@ class MainMenuState extends MusicBeatState
 		gifcat.antialiasing = ClientPrefs.globalAntialiasing;
 		add(gifcat);
 
-		var siller:FlxSprite = new FlxSprite(20, 0, Paths.image('sillymenuimages/${levicummingsgaylord[FlxG.random.int(0, levicummingsgaylord.length)]}'));
+		var siller:FlxSprite = new FlxSprite(0, 0, Paths.image('sillymenuimages/${levicummingsgaylord[FlxG.random.int(0, levicummingsgaylord.length)]}'));
+		siller.antialiasing = ClientPrefs.globalAntialiasing;
 		siller.y = FlxG.height - siller.height - 20;
+		if (siller.width > FlxG.width / 2 - 20) siller.setGraphicSize(Std.int(FlxG.width / 2 - 20), Std.int(siller.height));
+		siller.updateHitbox();
+		siller.x = 20;
 		add(siller);
 
 		camFollow = new FlxObject(0, 0, 1, 1);

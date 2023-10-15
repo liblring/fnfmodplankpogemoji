@@ -95,6 +95,7 @@ class PaidplayState extends MusicBeatState
 		bgColor = 0xFF828282;
 
 		grpOptions = new MenuList(0, 0, VERTICAL(true));
+		grpOptions.moveDirection.x = 0.15;
 		grpOptions.focused = true;
 		grpOptions.moveWithCurSelection = true;
 		grpOptions.padding = 50;
@@ -190,6 +191,7 @@ class PaidplayState extends MusicBeatState
 	}
 
 	override function closeSubState() {
+		if (FlxG.state.subState is ShatterTransition) return super.closeSubState();
 		changeSelection(0);
 		persistentUpdate = true;
 		super.closeSubState();

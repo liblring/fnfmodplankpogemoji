@@ -149,6 +149,8 @@ class PaidplayState extends MusicBeatState
 			icon.x = songText.text.length * (42 / 2) + 12;
 			// using a FlxGroup is too much fuss!
 			icon.y = songText.height / 2 - icon.height / 2;
+			@:privateAccess
+			icon.flipX = icon.char == "zlibty";
 
 			var idiot:FlxSpriteGroup = new FlxSpriteGroup();
 			idiot.add(icon);

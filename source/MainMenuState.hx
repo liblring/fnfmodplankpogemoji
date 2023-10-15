@@ -53,6 +53,8 @@ class MainMenuState extends MusicBeatState
 		'hiiiplaaank',
 		'himatpat',
 		'trademark',
+		'glade',
+		'stilic',
 		'daniel',
 		'sockngvoskcn;kvscnknvsck'
 	  ];

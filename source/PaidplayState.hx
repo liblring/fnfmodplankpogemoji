@@ -277,9 +277,10 @@ class PaidplayState extends MusicBeatState
 				#if PRELOAD_ALL
 				destroyFreeplayVocals();
 				FlxG.sound.music.volume = 0;
-				Paths.currentModDirectory = cast (songs[grpOptions.curSelection], SongMetadata).folder;
-				var poop:String = Highscore.formatSong(cast (songs[grpOptions.curSelection], SongMetadata).songName.toLowerCase(), curDifficulty);
-				PlayState.SONG = Song.loadFromJson(poop, cast (songs[grpOptions.curSelection], SongMetadata).songName.toLowerCase());
+				var sogn:SongMetadata = cast (songs[grpOptions.curSelection], SongMetadata);
+				Paths.currentModDirectory = sogn.folder;
+				var poop:String = Highscore.formatSong(sogn.songName.toLowerCase(), curDifficulty);
+				PlayState.SONG = Song.loadFromJson(poop, sogn.songName.toLowerCase());
 				if (PlayState.SONG.needsVoices)
 					vocals = new FlxSound().loadEmbedded(Paths.voices(PlayState.SONG.song));
 				else
@@ -330,8 +331,9 @@ class PaidplayState extends MusicBeatState
 		lastDifficultyName = CoolUtil.difficulties[curDifficulty];
 
 		#if !switch
-		intendedScore = Highscore.getScore(cast (songs[grpOptions.curSelection], SongMetadata).songName, curDifficulty);
-		intendedRating = Highscore.getRating(cast (songs[grpOptions.curSelection], SongMetadata).songName, curDifficulty);
+		var sogn:SongMetadata = cast (songs[grpOptions.curSelection], SongMetadata);
+		intendedScore = Highscore.getScore(sogn.songName, curDifficulty);
+		intendedRating = Highscore.getRating(sogn.songName, curDifficulty);
 		#end
 
 		PlayState.storyDifficulty = curDifficulty;
@@ -342,7 +344,8 @@ class PaidplayState extends MusicBeatState
 	{
 		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 
-		var newColor:Int = cast (songs[grpOptions.curSelection], SongMetadata).color;
+		var sogn:SongMetadata = cast (songs[grpOptions.curSelection], SongMetadata);
+		var newColor:Int = sogn.color;
 		if(newColor != intendedColor) {
 			if(colorTween != null) {
 				colorTween.cancel();
@@ -353,14 +356,13 @@ class PaidplayState extends MusicBeatState
 
 		// selector.y = (70 * grpOptions.curSelection) + 30;
 
-		var sogn:SongMetadata = cast (songs[grpOptions.curSelection], SongMetadata);
 		#if !switch
 		intendedScore = Highscore.getScore(sogn.songName, curDifficulty);
 		intendedRating = Highscore.getRating(sogn.songName, curDifficulty);
 		#end
 		
-		Paths.currentModDirectory = cast (songs[grpOptions.curSelection], SongMetadata).folder;
-		PlayState.storyWeek = cast (songs[grpOptions.curSelection], SongMetadata).week;
+		Paths.currentModDirectory = sogn.folder;
+		PlayState.storyWeek = sogn.week;
 
 		var ermmwhattheblast:String = (Paths.fileExists('images/paidplay/bigbonerdownthelane/${sogn.songName}.png', IMAGE) ? 'paidplay/bigbonerdownthelane/${sogn.songName}' : 'paidplay/bigbonerdownthelane/placeholder');
 		ermmmmwhatdatuna.loadGraphic(Paths.image(ermmwhattheblast));

@@ -41,6 +41,7 @@ class PaidplayState extends MusicBeatState
 	var intendedScore:Int = 0;
 	var intendedRating:Float = 0;
 	var twobullshits:FlxSprite;
+	var ermmmmwhatdatuna:FlxSprite;
 
 	private var grpOptions:MenuList;
 	private var curPlaying:Bool = false;
@@ -154,8 +155,11 @@ class PaidplayState extends MusicBeatState
 			if(grpOptions.members[grpOptions.curSelection].active == false) grpOptions.curSelection = songs.indexOf(song);
 		}
 		WeekData.setDirectoryFromWeek();
+
+		add(ermmmmwhatdatuna = new FlxSprite(0, 0, Paths.image('paidplay/bigbonerdownthelane/placeholder')));
+		ermmmmwhatdatuna.x = FlxG.width - ermmmmwhatdatuna.width;
 		
-		add(new FlxSprite(479, 0, Paths.image('paidplay/lin e')));
+		add(new FlxSprite(481, 0, Paths.image('paidplay/lin e')));
 
 		Main.fpsVar.defaultTextFormat = new TextFormat("Lato", 18, 0xFFFFFFFF, null, null, null, null, null, RIGHT);
 
@@ -165,10 +169,10 @@ class PaidplayState extends MusicBeatState
 		add(grpOptions);
 		add(twobullshits);
 
-		scoreText = new FlxText(0, 5, FlxG.width, "", 32);
+		scoreText = new FlxText(5, 5, FlxG.width - 10, "", 32);
 		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, LEFT);
 
-		diffText = new FlxText(0, 0, FlxG.width, "", 24);
+		diffText = new FlxText(5, 0, FlxG.width - 10, "", 24);
 		diffText.y = FlxG.height - diffText.height;
 		diffText.font = scoreText.font;
 		add(diffText);
@@ -197,30 +201,12 @@ class PaidplayState extends MusicBeatState
 	}
 
 	public function addSong(songName:String, weekNum:Int, songCharacter:String, color:Int)
-	{
 		songs.push(new SongMetadata(songName, weekNum, songCharacter, color));
-	}
 
 	function weekIsLocked(name:String):Bool {
 		var leWeek:WeekData = WeekData.weeksLoaded.get(name);
 		return (!leWeek.startUnlocked && leWeek.weekBefore.length > 0 && (!StoryMenuState.weekCompleted.exists(leWeek.weekBefore) || !StoryMenuState.weekCompleted.get(leWeek.weekBefore)));
 	}
-
-	/*public function addWeek(songs:Array<String>, weekNum:Int, weekColor:Int, ?songCharacters:Array<String>)
-	{
-		if (songCharacters == null)
-			songCharacters = ['bf'];
-
-		var num:Int = 0;
-		for (song in songs)
-		{
-			addSong(song, weekNum, songCharacters[num]);
-			this.songs[this.songs.length-1].color = weekColor;
-
-			if (songCharacters.length != 1)
-				num++;
-		}
-	}*/
 
 	var instPlaying:Int = -1;
 	public static var vocals:FlxSound = null;
@@ -350,7 +336,7 @@ class PaidplayState extends MusicBeatState
 	function changeSelection(change:Int = 0)
 	{
 		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
-		
+
 		var newColor:Int = cast (songs[grpOptions.curSelection], SongMetadata).color;
 		if(newColor != intendedColor) {
 			if(colorTween != null) {
@@ -362,13 +348,17 @@ class PaidplayState extends MusicBeatState
 
 		// selector.y = (70 * grpOptions.curSelection) + 30;
 
+		var sogn:SongMetadata = cast (songs[grpOptions.curSelection], SongMetadata);
 		#if !switch
-		intendedScore = Highscore.getScore(cast (songs[grpOptions.curSelection], SongMetadata).songName, curDifficulty);
-		intendedRating = Highscore.getRating(cast (songs[grpOptions.curSelection], SongMetadata).songName, curDifficulty);
+		intendedScore = Highscore.getScore(sogn.songName, curDifficulty);
+		intendedRating = Highscore.getRating(sogn.songName, curDifficulty);
 		#end
 		
 		Paths.currentModDirectory = cast (songs[grpOptions.curSelection], SongMetadata).folder;
 		PlayState.storyWeek = cast (songs[grpOptions.curSelection], SongMetadata).week;
+
+		var ermmwhattheblast:String = (Paths.fileExists('images/paidplay/bigbonerdownthelane/${sogn.songName}.png', IMAGE) ? 'paidplay/bigbonerdownthelane/${sogn.songName}' : 'paidplay/bigbonerdownthelane/placeholder');
+		ermmmmwhatdatuna.loadGraphic(Paths.image(ermmwhattheblast));
 
 		CoolUtil.difficulties = CoolUtil.defaultDifficulties.copy();
 		var diffStr:String = WeekData.getCurrentWeek().difficulties;

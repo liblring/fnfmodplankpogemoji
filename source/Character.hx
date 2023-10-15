@@ -326,11 +326,8 @@ class Character extends FlxSprite
 			if(danceIdle)
 			{
 				danced = !danced;
-
-				if (danced)
-					playAnim('danceRight' + idleSuffix);
-				else
-					playAnim('danceLeft' + idleSuffix);
+				var daAnim:String = (danced ? 'Right' : 'Left') + idleSuffix;
+				playAnim('dance' + daAnim);
 			}
 			else if(animation.getByName('idle' + idleSuffix) != null) {
 					playAnim('idle' + idleSuffix);

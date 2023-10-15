@@ -36,7 +36,7 @@ class FPS extends Sprite {
 	public var outlineTexts:Array<TextField> = [];
 	private var outlineWidth:Int = 2;
 	private var outlineQuality:Int = 8;
-	var defaultTextFormat:TextFormat;
+	public var defaultTextFormat(default, set):TextFormat;
 
 	public var text(default, set):String; 
 
@@ -47,13 +47,11 @@ class FPS extends Sprite {
 		this.x = x;
 		this.y = y;
 
-		this.defaultTextFormat = new TextFormat("Lato", 18, normalColor);
 
 		baseText = new TextField();
-		baseText.defaultTextFormat = this.defaultTextFormat;
 		baseText.selectable = false;
 		baseText.mouseEnabled = false;
-		baseText.width = FlxG.width;
+		baseText.width = FlxG.width - x * 2;
 
 		currentFPS = 0;
 		currentMemory = 0;
@@ -63,7 +61,6 @@ class FPS extends Sprite {
 			var otext:TextField = new TextField();
 			otext.x = Math.sin(i) *outlineWidth;
 			otext.y = Math.cos(i) *outlineWidth;
-			otext.defaultTextFormat = this.defaultTextFormat;
 			otext.textColor = outlineColor;
 			otext.width = baseText.width;
 			outlineTexts.push(otext);
@@ -73,6 +70,7 @@ class FPS extends Sprite {
 		addChild(baseText);
 
 		text = "FPS: ";
+		this.defaultTextFormat = new TextFormat("Lato", 18, normalColor);
 
 	}
 
@@ -104,6 +102,15 @@ class FPS extends Sprite {
 		for (text in outlineTexts) {
 			text.text = value;
 		}
-		return value;
+		return text = value;
+	}
+
+	private function set_defaultTextFormat(format:TextFormat):TextFormat {
+		baseText.defaultTextFormat = format;
+		for (text in outlineTexts) {
+			text.defaultTextFormat = format;
+			text.textColor = outlineColor;
+		}
+		return defaultTextFormat = format;
 	}
 }

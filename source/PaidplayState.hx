@@ -21,6 +21,7 @@ import WeekData;
 #if MODS_ALLOWED
 import sys.FileSystem;
 #end
+import openfl.text.TextFormat;
 
 using StringTools;
 
@@ -33,7 +34,6 @@ class PaidplayState extends MusicBeatState
 	var curDifficulty:Int = -1;
 	private static var lastDifficultyName:String = '';
 
-	var scoreBG:FlxSprite;
 	var scoreText:FlxText;
 	var diffText:FlxText;
 	var lerpScore:Int = 0;
@@ -155,20 +155,21 @@ class PaidplayState extends MusicBeatState
 		}
 		WeekData.setDirectoryFromWeek();
 		
+		add(new FlxSprite(479, 0, Paths.image('paidplay/lin e')));
+
+		Main.fpsVar.defaultTextFormat = new TextFormat("Lato", 18, 0xFFFFFFFF, null, null, null, null, null, RIGHT);
+
 		twobullshits = new FlxSprite().loadGraphic(Paths.image('these-fuckers'));
 		twobullshits.antialiasing = ClientPrefs.globalAntialiasing;
 		twobullshits.scale.set(1.05, 1.05);
 		add(grpOptions);
 		add(twobullshits);
 
-		scoreText = new FlxText(FlxG.width * 0.7, 5, 0, "", 32);
-		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT);
+		scoreText = new FlxText(0, 5, FlxG.width, "", 32);
+		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, LEFT);
 
-		scoreBG = new FlxSprite(scoreText.x - 6, 0).makeGraphic(1, 66, 0xFF000000);
-		scoreBG.alpha = 0.6;
-		add(scoreBG);
-
-		diffText = new FlxText(scoreText.x, scoreText.y + 36, 0, "", 24);
+		diffText = new FlxText(0, 0, FlxG.width, "", 24);
+		diffText.y = FlxG.height - diffText.height;
 		diffText.font = scoreText.font;
 		add(diffText);
 
@@ -181,23 +182,6 @@ class PaidplayState extends MusicBeatState
 		changeSelection();
 		changeDiff();
 
-		var swag:Alphabet = new Alphabet(1, 0, "swag");
-
-		var textBG:FlxSprite = new FlxSprite(0, FlxG.height - 26).makeGraphic(FlxG.width, 26, 0xFF000000);
-		textBG.alpha = 0.6;
-		add(textBG);
-
-		#if PRELOAD_ALL
-		var leText:String = "press SPACE to listen to the thing // presss,, ujm, ctrl to open the gp change man // rpress rEset to Rreset your scoe and acc,, i guess";
-		var size:Int = 16;
-		#else
-		var leText:String = "presss,, ujm, ctrl to open the gp change man // rpress rEset to Rreset your scoe and acc,, i guess";
-		var size:Int = 18;
-		#end
-		var text:FlxText = new FlxText(textBG.x, textBG.y + 4, FlxG.width, leText, size);
-		text.setFormat(Paths.font("vcr.ttf"), size, FlxColor.WHITE, RIGHT);
-		text.scrollFactor.set();
-		add(text);
 		super.create();
 	}
 
@@ -205,6 +189,11 @@ class PaidplayState extends MusicBeatState
 		changeSelection(0);
 		persistentUpdate = true;
 		super.closeSubState();
+	}
+
+	override public function destroy() {
+		super.destroy();
+		Main.fpsVar.defaultTextFormat = new TextFormat("Lato", 18, 0xFFFFFFFF, null, null, null, null, null, LEFT);
 	}
 
 	public function addSong(songName:String, weekNum:Int, songCharacter:String, color:Int)
@@ -259,7 +248,6 @@ class PaidplayState extends MusicBeatState
 		}
 
 		scoreText.text = 'personale - ' + lerpScore + ' (' + ratingSplit.join('.');
-		positionHighscore();
 
 		var upP = controls.UI_UP_P;
 		var downP = controls.UI_DOWN_P;
@@ -340,6 +328,7 @@ class PaidplayState extends MusicBeatState
 
 	function changeDiff(change:Int = 0)
 	{
+		diffText.visible = CoolUtil.difficulties.length > 1;
 		curDifficulty += change;
 
 		if (curDifficulty < 0)
@@ -356,13 +345,12 @@ class PaidplayState extends MusicBeatState
 
 		PlayState.storyDifficulty = curDifficulty;
 		diffText.text = '< ' + CoolUtil.difficultyString() + ' >';
-		positionHighscore();
 	}
 
 	function changeSelection(change:Int = 0)
 	{
 		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
-			
+		
 		var newColor:Int = cast (songs[grpOptions.curSelection], SongMetadata).color;
 		if(newColor != intendedColor) {
 			if(colorTween != null) {
@@ -421,15 +409,7 @@ class PaidplayState extends MusicBeatState
 		{
 			curDifficulty = newPos;
 		}
-	}
-
-	private function positionHighscore() {
-		scoreText.x = FlxG.width - scoreText.width - 6;
-
-		scoreBG.scale.x = FlxG.width - scoreText.x + 6;
-		scoreBG.x = FlxG.width - (scoreBG.scale.x / 2);
-		diffText.x = Std.int(scoreBG.x + (scoreBG.width / 2));
-		diffText.x -= diffText.width / 2;
+		changeDiff();
 	}
 }
 

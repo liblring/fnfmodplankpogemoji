@@ -91,8 +91,11 @@ class PaidplayState extends MusicBeatState
 		}
 		WeekData.loadTheFirstEnabledMod();
 
-
-		bgColor = 0xFF828282;
+		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
+		bg.antialiasing = ClientPrefs.globalAntialiasing;
+		add(bg);
+		bg.screenCenter();
+		bg.color = 0xFF828282;
 
 		grpOptions = new MenuList(0, 0, VERTICAL(true));
 		grpOptions.moveDirection.x = 0.15;
@@ -345,7 +348,7 @@ class PaidplayState extends MusicBeatState
 				colorTween.cancel();
 			}
 			intendedColor = newColor;
-			colorTween = FlxTween.color(flixelcangokillitself, 1, flixelcangokillitself.color, newColor, {onUpdate: (twn) -> bgColor = flixelcangokillitself.color, onComplete: (twn) -> colorTween = null});
+			colorTween = FlxTween.color(flixelcangokillitself, 1, flixelcangokillitself.color, newColor, {onUpdate: (twn) -> bg.color = flixelcangokillitself.color, onComplete: (twn) -> colorTween = null});
 		}
 
 		// selector.y = (70 * grpOptions.curSelection) + 30;

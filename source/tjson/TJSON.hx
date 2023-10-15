@@ -269,10 +269,8 @@ class TJSONParser{
                               hexValue += 10 + nc - 95;
                             else throw "Not a hex digit";
                         }
-                        
-						var utf = new haxe.Utf8();
-						utf.addChar(hexValue);
-						symbol += utf.toString();
+
+						symbol += (String.fromCharCode(hexValue):UnicodeString);
                         
 						continue;
 					}
@@ -377,7 +375,7 @@ class TJSONEncoder{
 			throw("Provided object is not an object.");
 		}
 		var st:EncodeStyle;
-		if(Std.is(style, EncodeStyle)){
+		if(style is EncodeStyle){
 			st = style;
 		}
 		else if(style == 'fancy'){
@@ -385,10 +383,10 @@ class TJSONEncoder{
 		}
 		else st = new SimpleStyle();
 		var buffer = new StringBuf();
-		if(Std.is(obj,Array) || Std.is(obj,List)) {
+		if(obj is Array || obj is List) {
 			buffer.add(encodeIterable( obj, st, 0));
 
-		} else if(Std.is(obj, haxe.ds.StringMap)){
+		} else if(obj is haxe.ds.StringMap){
 			buffer.add(encodeMap(obj, st, 0));
 		} else {
 			cacheEncode(obj);
@@ -491,26 +489,26 @@ class TJSONEncoder{
 	}
 
 	private function encodeValue( value:Dynamic, style:EncodeStyle, depth:Int):String {
-		if(Std.is(value, Int) || Std.is(value,Float)){
+		if(value is Int || value is Float){
 				return Std.string(value);
 		}
-		else if(Std.is(value,Array) || Std.is(value,List)){
+		else if(value is Array || value is List){
 			var v: Array<Dynamic> = value;
 			return encodeIterable(v,style,depth+1);
 		}
-		else if(Std.is(value,List)){
+		else if(value is List){
 			var v: List<Dynamic> = value;
 			return encodeIterable(v,style,depth+1);
 
 		}
-		else if(Std.is(value,haxe.ds.StringMap)){
+		else if(value is haxe.ds.StringMap){
 			return encodeMap(value,style,depth+1);
 
 		}
-		else if(Std.is(value,String)){
+		else if(value is String){
 			return('"'+Std.string(value).replace("\\","\\\\").replace("\n","\\n").replace("\r","\\r").replace('"','\\"')+'"');
 		}
-		else if(Std.is(value,Bool)){
+		else if(value is Bool){
 			return Std.string(value);
 		}
 		else if(Reflect.isObject(value)){

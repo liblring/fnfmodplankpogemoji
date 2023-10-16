@@ -1,7 +1,6 @@
 package;
-import flixel.system.FlxAssets.FlxShader;
 
-class AlphaMaskShader extends FlxShader {
+class AlphaMaskShader extends flixel.system.FlxAssets.FlxShader {
 	@:glFragmentSource('
 	#pragma header
 

@@ -22,9 +22,6 @@ class BackgroundDancer extends FlxSprite
 	{
 		danceDir = !danceDir;
 
-		if (danceDir)
-			animation.play('danceRight', true);
-		else
-			animation.play('danceLeft', true);
+		animation.play('dance' + (danceDir ? 'Right' : 'Left'), true);
 	}
 }

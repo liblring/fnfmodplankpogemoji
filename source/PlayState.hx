@@ -514,6 +514,7 @@ class PlayState extends MusicBeatState
 			case 'planksexualllitaisdjuasfd': // planksexual shiiit
 				var bg:BGSprite = new BGSprite('bgassetsorsmth/man', -200, -200, 0, 0);
 				add(bg);
+
 				#if VIDEOS_ALLOWED
 				yourmom = new MP4Sprite(0, 300);
 				yourmom.scrollFactor.set(1, 1);
@@ -522,6 +523,12 @@ class PlayState extends MusicBeatState
 				yourmom.playVideo(Paths.video('planksexualwee'), true);
 				add(yourmom);
 				#end
+
+				// var kill = new AV1VideoSprite.Video();
+				// kill.scale.set(1.2, 1.2);
+				// kill.loadPath(haxe.io.Path.normalize(Sys.getCwd() + Paths.video('plansaenasjnasnfjadsganosflgfasokn.mkv')));
+				// kill.play();
+				// add(kill);
 
 				var topbar:FlxSprite = new FlxSprite(-200, -30);
 				topbar.makeGraphic(2000, 100, FlxColor.BLACK);

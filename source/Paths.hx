@@ -204,7 +204,7 @@ class Paths
 			return file;
 		}
 		#end
-		return 'assets/videos/$key.$VIDEO_EXT';
+		return 'assets/videos/$key';
 	}
 
 	static public function sound(key:String, ?library:String):Sound

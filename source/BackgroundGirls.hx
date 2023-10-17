@@ -23,13 +23,11 @@ class BackgroundGirls extends FlxSprite
 	public function swapDanceType():Void
 	{
 		isPissed = !isPissed;
-		if(!isPissed) { //Gets unpissed
-			animation.addByIndices('danceLeft', 'BG girls group', CoolUtil.numberArray(14), "", 24, false);
-			animation.addByIndices('danceRight', 'BG girls group', CoolUtil.numberArray(30, 15), "", 24, false);
-		} else { //Pisses
-			animation.addByIndices('danceLeft', 'BG fangirls dissuaded', CoolUtil.numberArray(14), "", 24, false);
-			animation.addByIndices('danceRight', 'BG fangirls dissuaded', CoolUtil.numberArray(30, 15), "", 24, false);
-		}
+		var prefix:String = (isPissed ? 'BG fangirls dissuaded' : 'BG girls group');
+
+		animation.addByIndices('danceLeft', prefix, CoolUtil.numberArray(14), "", 24, false);
+		animation.addByIndices('danceRight', prefix, CoolUtil.numberArray(30, 15), "", 24, false);
+
 		dance();
 	}
 
@@ -37,9 +35,6 @@ class BackgroundGirls extends FlxSprite
 	{
 		danceDir = !danceDir;
 
-		if (danceDir)
-			animation.play('danceRight', true);
-		else
-			animation.play('danceLeft', true);
+		animation.play('dance' + (danceDir ? 'Right' : 'Left'), true);
 	}
 }

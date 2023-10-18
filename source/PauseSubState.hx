@@ -13,7 +13,9 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.FlxCamera;
 import flixel.util.FlxStringUtil;
+import openfl.filters.ShaderFilter;
 
+@:access(flixel.FlxGame._filters)
 class PauseSubState extends MusicBeatSubstate
 {
 	var grpMenuShit:MenuList;
@@ -25,10 +27,16 @@ class PauseSubState extends MusicBeatSubstate
 
 	var pauseMusic:FlxSound;
 
+	static var killballs:HalftoneShader = new HalftoneShader();
+	static var ass:ShaderFilter = new ShaderFilter(killballs);
+
 	public static var songName:String = '';
 
 	public function new(x:Float, y:Float)
 	{
+		killballs.scale.value = [10];
+		if (FlxG.game._filters == null) FlxG.game._filters = [];
+		FlxG.game._filters.push(ass);
 		super();
 
 		pauseMusic = new FlxSound();
@@ -43,7 +51,8 @@ class PauseSubState extends MusicBeatSubstate
 		FlxG.sound.list.add(pauseMusic);
 
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
-		bg.alpha = 0.6;
+		FlxTween.tween(bg, {alpha: 0.6}, 0.6, {ease: FlxEase.expoOut});
+		bg.alpha = 1;
 		bg.scrollFactor.set();
 		add(bg);
 
@@ -52,6 +61,8 @@ class PauseSubState extends MusicBeatSubstate
 		thingamabob.scale.scale(gaySexScale);
 		thingamabob.updateHitbox();
 		thingamabob.screenCenter(Y);
+		thingamabob.x -= FlxG.width;
+		FlxTween.tween(thingamabob, {x: 0}, 0.6, {ease: FlxEase.expoOut});
 		add(thingamabob);
 
 		grpMenuShit = new MenuList(0, 0, VERTICAL(true));
@@ -101,8 +112,11 @@ class PauseSubState extends MusicBeatSubstate
 			thingsprite.updateHitbox();
 
 			thingsprite.x = FlxG.width * thingAnchors[thing][0] - thingsprite.width * thingAnchors[thing][0];
-			thingsprite.y = FlxG.height * thingAnchors[thing][1] - thingsprite.height * thingAnchors[thing][1];
 			add(thingsprite);
+			var gay:Float = FlxG.height * thingAnchors[thing][1] - thingsprite.height * thingAnchors[thing][1];
+			thingsprite.y = gay;
+			thingsprite.y += FlxG.height;
+			FlxTween.tween(thingsprite, {y: gay}, 0.6, {ease: FlxEase.expoOut, startDelay: thing / 10});
 		}
 	}
 
@@ -121,10 +135,8 @@ class PauseSubState extends MusicBeatSubstate
 
 	var holdTime:Float = 0;
 	var cantUnpause:Float = 0.1;
-	override function update(elapsed:Float)
-	{
+	override function update(elapsed:Float) {
 		cantUnpause -= elapsed;
-
 		super.update(elapsed);
 	}
 
@@ -134,19 +146,17 @@ class PauseSubState extends MusicBeatSubstate
 		FlxG.sound.music.volume = 0;
 		PlayState.instance.vocals.volume = 0;
 
-		if(noTrans)
-		{
+		if(noTrans) {
 			FlxTransitionableState.skipNextTransOut = true;
 			FlxG.resetState();
 		}
 		else
-		{
 			MusicBeatState.resetState();
-		}
 	}
 
 	override function destroy()
 	{
+		FlxG.game._filters.remove(ass);
 		pauseMusic.destroy();
 
 		super.destroy();

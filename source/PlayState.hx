@@ -2608,10 +2608,9 @@ class PlayState extends MusicBeatState
 	function openChartEditor()
 	{
 		persistentUpdate = false;
-		paused = true;
+		paused = chartingMode = true;
 		cancelMusicFadeTween();
 		MusicBeatState.switchState(new ChartingState());
-		chartingMode = true;
 
 		#if desktop
 		DiscordClient.changePresence("fucken charting idk", null, null, true);

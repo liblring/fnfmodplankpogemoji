@@ -2607,6 +2607,7 @@ class PlayState extends MusicBeatState
 
 	function openChartEditor()
 	{
+		trace("why");
 		persistentUpdate = false;
 		paused = chartingMode = true;
 		cancelMusicFadeTween();

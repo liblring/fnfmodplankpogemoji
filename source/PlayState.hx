@@ -1774,7 +1774,7 @@ class PlayState extends MusicBeatState
 			FlxTween.tween(card, {y: FlxG.height}, 1, {ease: FlxEase.expoOut});
 		});
 
-		card.cameras = [camHUD];
+		card.cameras = [camOther];
 		return card;
 	}
 
@@ -3913,7 +3913,7 @@ class PlayState extends MusicBeatState
 			{
 				var animToPlay:String = singAnimations[Std.int(Math.abs(note.noteData))];
 
-				/// not using a tenary operator because fuck you its gonna be too fucking long
+				// not using a tenary operator because fuck you its gonna be too fucking long
 				var charToAnimate:Character = boyfriend;
 				if (note.gfNote) if (gf != null) charToAnimate = gf;
 				charToAnimate.playAnim(animToPlay + note.animSuffix, true);

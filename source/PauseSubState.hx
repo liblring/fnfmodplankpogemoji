@@ -115,7 +115,7 @@ class PauseSubState extends MusicBeatSubstate
 			add(thingsprite);
 			var gay:Float = FlxG.height * thingAnchors[thing][1] - thingsprite.height * thingAnchors[thing][1];
 			thingsprite.y = gay;
-			thingsprite.y += FlxG.height;
+			thingsprite.y += (thing <= 1 ? -FlxG.height : FlxG.height);
 			FlxTween.tween(thingsprite, {y: gay}, 0.6, {ease: FlxEase.expoOut, startDelay: thing / 10});
 		}
 	}

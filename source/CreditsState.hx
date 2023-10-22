@@ -85,6 +85,7 @@ class CreditsState extends MusicBeatState
 			[''],
 			['d'],
 			['d',	    'd',		'd (dont press enter)',						                                                'https://www.youtube.com/watch?v=mYiBdMnIT88',               'FFFF00',    'd'],
+			['sans',	'snas',		'holy shit its sand undetale',						                                        'https://www.youtube.com/watch?v=Ixv7qcJ1AI4',               'FFFFFF',    'snans'],
 			[''],
 			['keoiki Team'],
 			['Keoiki',				'keoiki',			'cat',		'https://twitter.com/Keoiki_',			'D2D2D2'],

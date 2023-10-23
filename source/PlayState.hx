@@ -3911,14 +3911,15 @@ class PlayState extends MusicBeatState
 
 			if (!note.noAnimation)
 			{
-				var animToPlay:String = singAnimations[Std.int(Math.abs(note.noteData))];
+				var animToPlay:String = singAnimations[cast Math.abs(note.noteData)];
 
-				// not using a tenary operator because fuck you its gonna be too fucking long
-				var charToAnimate:Character = boyfriend;
-				if (note.gfNote) if (gf != null) charToAnimate = gf;
+				// // not using a tenary operator because fuck you its gonna be too fucking long
+				//using a ternary operator because fuck you plank you cant even spell ternary correctly
+				var charToAnimate:Character = (note.gfNote && gf != null ? gf : boyfriend);
 				charToAnimate.playAnim(animToPlay + note.animSuffix, true);
 				charToAnimate.holdTimer = 0;
-				if (note.isSustainNote) charToAnimate.animation.curAnim.pause();
+				charToAnimate.animation.curAnim.paused = note.isSustainNote;
+				//the urge to check for animation name so hold ends unpause the animation
 
 				if (note.noteType == 'Hey!')
 				{

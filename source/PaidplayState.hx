@@ -27,7 +27,7 @@ using StringTools;
 
 class PaidplayState extends MusicBeatState
 {
-	var songs:Array<flixel.util.typeLimit.OneOfTwo<SongMetadata, String>> = [];
+	var songs:Array<haxe.extern.EitherType<SongMetadata, String>> = [];
 
 	var selector:FlxText;
 	private static var curSelected:Int = 0;

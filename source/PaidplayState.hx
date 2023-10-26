@@ -147,7 +147,9 @@ class PaidplayState extends MusicBeatState
 			songText.setBorderStyle(OUTLINE, 	FlxColor.WHITE, 4, 2);
 
 			var icon:HealthIcon = new HealthIcon(cast (song, SongMetadata).songCharacter);
-			icon.setPosition(songText.text.length * (42 / 2) + 12, songText.height / 2 - icon.height / 2);
+			icon.x = songText.text.length * (42 / 2) + 12;
+			// using a FlxGroup is too much fuss!
+			icon.y = songText.height / 2 - icon.height / 2;
 			icon.flipX = icon.char == "zlibty";
 
 			var idiot:FlxSpriteGroup = new FlxSpriteGroup();

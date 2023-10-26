@@ -1,133 +1,133 @@
 {
 	"animations": [
 		{
-			"loop": true,
+			"indices": [],
 			"offsets": [
 				0,
 				0
 			],
-			"anim": "idle",
 			"fps": 9,
-			"name": "idl",
-			"indices": []
+			"anim": "idle",
+			"loop": true,
+			"name": "idl"
 		},
 		{
-			"loop": false,
+			"indices": [],
 			"offsets": [
 				80,
 				0
 			],
-			"anim": "singLEFT",
 			"fps": 9,
-			"name": "lef",
-			"indices": []
+			"anim": "singLEFT",
+			"loop": false,
+			"name": "lef"
 		},
 		{
-			"loop": false,
+			"indices": [],
 			"offsets": [
 				40,
 				-180
 			],
-			"anim": "singDOWN",
 			"fps": 9,
-			"name": "dow",
-			"indices": []
+			"anim": "singDOWN",
+			"loop": false,
+			"name": "dow"
 		},
 		{
-			"loop": false,
+			"indices": [],
 			"offsets": [
 				-39,
 				-112
 			],
-			"anim": "singUP",
 			"fps": 9,
-			"name": "u",
-			"indices": []
+			"anim": "singUP",
+			"loop": false,
+			"name": "u"
 		},
 		{
-			"loop": false,
+			"indices": [],
 			"offsets": [
 				-90,
 				-10
 			],
-			"anim": "singRIGHT",
 			"fps": 9,
-			"name": "rit",
-			"indices": []
+			"anim": "singRIGHT",
+			"loop": false,
+			"name": "rit"
 		},
 		{
-			"loop": false,
+			"indices": [],
 			"offsets": [
 				90,
 				630
 			],
+			"fps": 1,
 			"anim": "singLEFTmiss",
-			"fps": 1,
-			"name": "explo.jpg",
-			"indices": []
+			"loop": false,
+			"name": "explo.jpg"
 		},
 		{
-			"loop": false,
+			"indices": [],
 			"offsets": [
 				90,
 				630
 			],
+			"fps": 1,
 			"anim": "singDOWNmiss",
-			"fps": 1,
-			"name": "explo.jpg",
-			"indices": []
+			"loop": false,
+			"name": "explo.jpg"
 		},
 		{
-			"loop": false,
+			"indices": [],
 			"offsets": [
 				90,
 				630
 			],
+			"fps": 1,
 			"anim": "singUPmiss",
-			"fps": 1,
-			"name": "explo.jpg",
-			"indices": []
+			"loop": false,
+			"name": "explo.jpg"
 		},
 		{
-			"loop": false,
+			"indices": [],
 			"offsets": [
 				90,
 				630
 			],
+			"fps": 1,
 			"anim": "singRIGHTmiss",
-			"fps": 1,
-			"name": "explo.jpg",
-			"indices": []
+			"loop": false,
+			"name": "explo.jpg"
 		},
 		{
-			"loop": false,
+			"indices": [],
 			"offsets": [
 				90,
 				630
 			],
-			"anim": "miss",
 			"fps": 1,
-			"name": "explo.jpg",
-			"indices": []
+			"anim": "miss",
+			"loop": false,
+			"name": "explo.jpg"
 		}
-	],
-	"no_antialiasing": false,
-	"image": "characters/blehplank",
-	"position": [
-		-130,
-		100
-	],
-	"healthicon": "bleh",
-	"flip_x": true,
-	"healthbar_colors": [
-		203,
-		83,
-		255
 	],
 	"camera_position": [
 		100,
 		120
 	],
-	"sing_duration": 2.5,
-	"scale": 1
+	"flip_x": true,
+	"healthbar_colors": [
+		209,
+		197,
+		255
+	],
+	"healthicon": "bleh",
+	"image": "characters/blehplank",
+	"no_antialiasing": false,
+	"position": [
+		-130,
+		100
+	],
+	"scale": 1,
+	"sing_duration": 2.5
 }

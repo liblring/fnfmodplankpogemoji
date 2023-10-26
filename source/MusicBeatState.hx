@@ -15,6 +15,7 @@ import flixel.FlxState;
 import flixel.FlxCamera;
 import flixel.FlxBasic;
 import openfl.display.BitmapData;
+import lime.math.Rectangle;
 
 class MusicBeatState extends FlxUIState
 {
@@ -35,10 +36,13 @@ class MusicBeatState extends FlxUIState
 
 	public function new() {
 		super();
-		if(pastStateBitmap == null) pastStateBitmap = new BitmapData(FlxG.width, FlxG.height);
 
-		// if (!FlxTransitionableState.skipNextTransOut)
-			pastStateBitmap.draw(FlxG.game);
+		var pastVisibleYourMom:Bool = Main.fpsVar.visible;
+		Main.fpsVar.visible = false;
+		// todo: refactor this so it acounts in when the player resizes the window
+		pastStateBitmap = BitmapData.fromImage(FlxG.stage.window.readPixels());
+		Main.fpsVar.visible = pastVisibleYourMom;
+
 	}
 
 	override function create() {

@@ -17,6 +17,8 @@ class ShatterTransition extends MusicBeatSubstate {
 		transitionSprite = new FlxSprite(0, 0, pastStateImage);
 		transitionSprite.scrollFactor.set();
 
+		transitionSprite.setGraphicSize(FlxG.width, FlxG.height);
+
 		transitionSprite.shader = idiotShader;
 
 		shatterMask = new FlxSprite(0, 0);

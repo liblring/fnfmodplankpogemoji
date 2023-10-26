@@ -30,7 +30,7 @@ class PaidplayState extends MusicBeatState
 	var songs:Array<haxe.extern.EitherType<SongMetadata, String>> = [];
 
 	var selector:FlxText;
-	private static var curSelected:Int = 0;
+	private static var lastSelected:Int = 1; // not 0 because im dumb and too lazy to ąóęąśłęóąśłęóąśóęą
 	var curDifficulty:Int = -1;
 	private static var lastDifficultyName:String = '';
 
@@ -106,6 +106,7 @@ class PaidplayState extends MusicBeatState
 		grpOptions.onMove.add(changeSelection);
 		grpOptions.screenCenter(Y);
 		grpOptions.onSelect.add((sel) -> {
+			lastSelected = sel;
 			persistentUpdate = false;
 			var songLowercase:String = Paths.formatToSongPath(cast (songs[grpOptions.curSelection], SongMetadata).songName);
 			var poop:String = Highscore.formatSong(songLowercase, curDifficulty);
@@ -149,7 +150,6 @@ class PaidplayState extends MusicBeatState
 			icon.x = songText.text.length * (42 / 2) + 12;
 			// using a FlxGroup is too much fuss!
 			icon.y = songText.height / 2 - icon.height / 2;
-			@:privateAccess
 			icon.flipX = icon.char == "zlibty";
 
 			var idiot:FlxSpriteGroup = new FlxSpriteGroup();
@@ -189,6 +189,7 @@ class PaidplayState extends MusicBeatState
 			lastDifficultyName = CoolUtil.defaultDifficulty;
 		curDifficulty = Math.round(Math.max(0, CoolUtil.defaultDifficulties.indexOf(lastDifficultyName)));
 		
+		grpOptions.curSelection = lastSelected;
 		changeSelection();
 		changeDiff();
 

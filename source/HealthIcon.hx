@@ -10,6 +10,7 @@ class HealthIcon extends FlxSprite
 	public var sprTracker:FlxSprite;
 	private var isOldIcon:Bool = false;
 	private var isPlayer:Bool = false;
+	@:allow(PaidplayState)
 	private var char:String = '';
 
 	public function new(char:String = 'bf', isPlayer:Bool = false)

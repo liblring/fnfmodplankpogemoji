@@ -13,7 +13,7 @@ import flixel.util.FlxColor;
 import flixel.util.FlxGradient;
 import flixel.FlxState;
 import flixel.FlxCamera;
-import flixel.FlxBasic;
+import flixel.FlxBasic as FlxBasic;
 import openfl.display.BitmapData;
 import lime.math.Rectangle;
 

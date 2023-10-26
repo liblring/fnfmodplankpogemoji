@@ -1,21 +1,21 @@
 package;
 
-import Conductor.BPMChangeEvent;
-import flixel.FlxG;
-import flixel.addons.ui.FlxUIState;
-import flixel.math.FlxRect;
-import flixel.util.FlxTimer;
-import flixel.addons.transition.FlxTransitionableState;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.FlxSprite;
-import flixel.util.FlxColor;
-import flixel.util.FlxGradient;
-import flixel.FlxState;
-import flixel.FlxCamera;
+import Conductor.BPMChangeEvent as BPMChangeEvent;
+import flixel.FlxG as FlxG;
+import flixel.addons.ui.FlxUIState as FlxUIState;
+import flixel.math.FlxRect as FlxRect;
+import flixel.util.FlxTimer as FlxTimer;
+import flixel.addons.transition.FlxTransitionableState as FlxTransitionableState;
+import flixel.tweens.FlxEase as FlxEase;
+import flixel.tweens.FlxTween as FlxTween;
+import flixel.FlxSprite as FlxSprite;
+import flixel.util.FlxColor as FlxColor;
+import flixel.util.FlxGradient as FlxGradient;
+import flixel.FlxState as FlxState;
+import flixel.FlxCamera as FlxCamera;
 import flixel.FlxBasic as FlxBasic;
-import openfl.display.BitmapData;
-import lime.math.Rectangle;
+import openfl.display.BitmapData as BitmapData;
+import lime.math.Rectangle as Rectangle;
 
 class MusicBeatState extends FlxUIState
 {

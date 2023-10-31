@@ -63,6 +63,11 @@ class Paths
 
 	public static var dumpExclusions:Array<String> =
 	[
+		'assets/images/icon.png',
+		'assets/images/gameframe/close.png',
+		'assets/images/gameframe/maximize.png',
+		'assets/images/gameframe/minimize.png',
+		'assets/images/gameframe/unmaximize.png',
 		'assets/music/freakyMenu.$SOUND_EXT',
 		'assets/shared/music/breakfast.$SOUND_EXT',
 		'assets/shared/music/tea-time.$SOUND_EXT',

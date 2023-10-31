@@ -127,10 +127,9 @@ class Video extends FlxSprite
 
 		
 		buffer = new FrameBuffer(webm, bufferSize);
-
         buffer.nextFrame();
-        trace(webm, codec, buffer.currentFrame());
-		buffer.prepareFrame(webm, codec, true);
+		buffer.prepareFrame(webm, codec, false);
+		
         startTime = Timer.stamp();
 		playing = true;
 

@@ -59,9 +59,11 @@ class FPS extends Sprite {
 
 		for (i in 0...outlineQuality) {
 			var otext:TextField = new TextField();
-			otext.x = Math.sin(i) *outlineWidth;
-			otext.y = Math.cos(i) *outlineWidth;
+			otext.x = Math.sin(i) * outlineWidth;
+			otext.y = Math.cos(i) * outlineWidth;
 			otext.textColor = outlineColor;
+			otext.selectable = false;
+			otext.mouseEnabled = false;
 			otext.width = baseText.width;
 			outlineTexts.push(otext);
 			addChild(otext);

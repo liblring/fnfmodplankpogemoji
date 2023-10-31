@@ -274,7 +274,6 @@ class ChartingState extends MusicBeatState
 
 		if(curSec >= _song.notes.length) curSec = _song.notes.length - 1;
 
-		FlxG.mouse.visible = true;
 		//FlxG.save.bind('funkin', CoolUtil.getSavePath());
 
 		tempBpm = _song.bpm;
@@ -1546,7 +1545,6 @@ class ChartingState extends MusicBeatState
 			strumLineNotes.members[i].y = strumLine.y;
 		}
 
-		FlxG.mouse.visible = true;//cause reasons. trust me
 		camPos.y = strumLine.y;
 		if(!disableAutoScrolling.checked) {
 			if (Math.ceil(strumLine.y) >= gridBG.height)
@@ -1670,7 +1668,6 @@ class ChartingState extends MusicBeatState
 			if (FlxG.keys.justPressed.ENTER)
 			{
 				autosaveSong();
-				FlxG.mouse.visible = false;
 				PlayState.SONG = _song;
 				FlxG.sound.music.stop();
 				if(vocals != null) vocals.stop();
@@ -1693,7 +1690,6 @@ class ChartingState extends MusicBeatState
 				PlayState.chartingMode = false;
 				MusicBeatState.switchState(cast editors.MasterEditorMenu);
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
-				FlxG.mouse.visible = false;
 				return;
 			}
 

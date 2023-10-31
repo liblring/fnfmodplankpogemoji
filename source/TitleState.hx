@@ -57,7 +57,6 @@ class TitleState extends MusicBeatState
 	var titleJSON:TitleData;
 
 	override public function create():Void { // todo: add big balls
-		flixel.FlxG.mouse.visible = true;
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 
@@ -83,7 +82,6 @@ class TitleState extends MusicBeatState
 		if (FlxG.save.data.weekCompleted != null)
 			StoryMenuState.weekCompleted = FlxG.save.data.weekCompleted;
 
-		FlxG.mouse.visible = false;
 
 		if(FlxG.save.data != null && FlxG.save.data.fullscreen)
 		{
@@ -231,7 +229,6 @@ class TitleState extends MusicBeatState
 				transitioning = true;
 
 				new FlxTimer().start(1, function(tmr:FlxTimer) {
-					flixel.FlxG.mouse.visible = false;
 					MusicBeatState.switchState(new MainMenuState());
 				});
 			}

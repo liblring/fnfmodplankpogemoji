@@ -198,7 +198,6 @@ class CharacterEditorState extends MusicBeatState
 		addAnimationsUI();
 		UI_characterbox.selected_tab_id = 'Character';
 
-		FlxG.mouse.visible = true;
 		reloadCharacterOptions();
 
 		super.create();
@@ -1121,7 +1120,6 @@ class CharacterEditorState extends MusicBeatState
 					MusicBeatState.switchState(new editors.MasterEditorMenu());
 					FlxG.sound.playMusic(Paths.music('freakyMenu'));
 				}
-				FlxG.mouse.visible = false;
 				return;
 			}
 

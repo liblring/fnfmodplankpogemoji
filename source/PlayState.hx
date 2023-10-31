@@ -3907,7 +3907,16 @@ class PlayState extends MusicBeatState
 					combo = 9999;
 				popUpScore(note);
 			}
-			health += note.hitHealth * healthGain;
+
+			if (note.willKillYouInstantly)
+			{
+				health = 0;
+				doDeathCheck();
+			}
+			else
+			{
+				health += note.hitHealth * healthGain;
+			}
 
 			if (!note.noAnimation)
 			{

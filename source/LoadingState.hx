@@ -16,6 +16,7 @@ import lime.utils.AssetLibrary;
 import lime.utils.AssetManifest;
 import haxe.io.Path;
 import openfl.display.BitmapData;
+import sys.FileSystem;
 
 class LoadingState extends MusicBeatState
 {
@@ -49,8 +50,12 @@ class LoadingState extends MusicBeatState
 		if (showLoading) openSubState(new ShatterTransition(pastStateBitmap));
 		var bg:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, 0xffcaff4d);
 		add(bg);
-		funkay = new FlxSprite(0, 0).loadGraphic(Paths.getPath('images/funkay.png', IMAGE));
-		funkay.setGraphicSize(0, FlxG.height);
+
+		var imagePath:String = FileSystem.absolutePath('assets\\images\\hdgfhdgfhgdhfgdhfgdhgfhdgfhdgfhdgfhdgfhdghfgdhfghdgfhdghfghfgdhgfhdgfhdg');
+		var tomboyFiles:Array<String> = FileSystem.readDirectory(imagePath);
+
+		funkay = new FlxSprite(0, 0, Paths.directGraphic('$imagePath\\${tomboyFiles[FlxG.random.int(0, tomboyFiles.length - 1)]}'));
+		funkay.setGraphicSize(FlxG.width, FlxG.height);
 		funkay.updateHitbox();
 		funkay.antialiasing = ClientPrefs.globalAntialiasing;
 		add(funkay);

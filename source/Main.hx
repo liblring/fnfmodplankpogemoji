@@ -316,9 +316,9 @@ class WindowBorder extends Sprite {
 			targetWindow.y = yBalls - Std.int(dragOffset[1]) - 8;
 		});
 		targetWindow.onResize.add((x, y) -> redraw());
-		targetWindow.onFullscreen.add(() -> visible = !FlxG.fullscreen);
 		targetWindow.onMaximize.add(() -> cast(buttonArray[1].getChildAt(1), Bitmap).bitmapData = Paths.image('gameframe/unmaximize').bitmap);
 		targetWindow.onRestore.add(() -> cast(buttonArray[1].getChildAt(1), Bitmap).bitmapData = Paths.image('gameframe/maximize').bitmap);
+		hideTimer = Timer.delay(() -> FlxG.mouse.visible = visible = false, 1500);
 	}
 
 	public function redraw() {

@@ -165,12 +165,13 @@ class MusicBeatState extends FlxUIState
 
 	public function sectionHit():Void
 	{
-		//trace('Section: ' + curSection + ', Beat: ' + curBeat + ', Step: ' + curStep);
+		// trace('Section: ' + curSection + ', Beat: ' + curBeat + ', Step: ' + curStep);
 	}
 
 	function getBeatsOnSection() {
-		var val:Null<Float> = 4; 
-		try val = PlayState.SONG.notes[curSection].sectionBeats catch(e) {}
+		var val:Float = 4; 
+		try val = PlayState.SONG.notes[curSection].sectionBeats catch(estrogen) {};
+		if (val == 0) val = 4;
 		return val;
 	}
 }

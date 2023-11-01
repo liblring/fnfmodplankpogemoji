@@ -185,7 +185,7 @@ class PlayState extends MusicBeatState
 	private var curSongFolder:String = "";
 
 	public var gfSpeed:Int = 1;
-	public var health:Float = 1;
+	public var health:Float = 1.00001;
 	public var combo:Int = 0;
 
 	private var healthBarBG:AttachedSprite;

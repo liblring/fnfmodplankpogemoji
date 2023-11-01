@@ -169,12 +169,8 @@ class MusicBeatState extends FlxUIState
 	}
 
 	function getBeatsOnSection() {
-		var val:Null<Float> = null;
-
-		if(PlayState.SONG == null || PlayState.SONG.notes[curSection] != null)
-			val = 4;
-		else
-			val = PlayState.SONG.notes[curSection].sectionBeats;
+		var val:Null<Float> = 4; 
+		try val = PlayState.SONG.notes[curSection].sectionBeats catch(e) {}
 		return val;
 	}
 }

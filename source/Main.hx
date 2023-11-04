@@ -424,12 +424,9 @@ class WindowBorder extends Sprite {
 	}
 
 	private static function __init__() {
-		// try borderColor = Std.parseInt(getRegistryKey('HKCU\\SOFTWARE\\Microsoft\\Windows\\DWM', 'AccentColor')) catch(e) {
-			// try borderColor = Std.int(GameframeNatives.getAccentColour()) catch(estrogen) {
-				// try borderColor = GameframeNatives.getSystemColour(10) catch(estrogen) {}
-			// }
-		// }
-		// borderColor = 0x99008c;
+		try borderColor = GameframeNatives.getRealAccentColour() catch(e)
+			try borderColor = Std.int(GameframeNatives.getAccentColour()) catch(estrogen)
+				try borderColor = GameframeNatives.getSystemColour(10) catch(estrogen) {}
 	}
 }
 
@@ -439,7 +436,9 @@ class GameframeNatives {
 	public static function getDoubleClickTime():Int return 0;
 	public static function getSystemColour(index:Int):Int return 0;
 	public static function getAccentColour():hl.F64 return 0;
-	public static function getImmersiveColour(index:hl.F64):hl.F64 return 0; // this doesent even work
+	public static function getRealAccentColour():Int return 0;
+
 	public static function hookShadow():Void {}
 	public static function setShadow(enabled:Bool):Void {}
+	public static function getShadow():Bool return false;
 }

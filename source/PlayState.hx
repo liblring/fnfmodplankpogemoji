@@ -1019,13 +1019,9 @@ class PlayState extends MusicBeatState
 		precacheList.set('missnote3', 'sound');
 
 		if (PauseSubState.songName != null)
-		{
 			precacheList.set(PauseSubState.songName, 'music');
-		}
 		else if (ClientPrefs.pauseMusic != 'None')
-		{
 			precacheList.set(Paths.formatToSongPath(ClientPrefs.pauseMusic), 'music');
-		}
 
 		precacheList.set('alphabet', 'image');
 
@@ -1045,11 +1041,9 @@ class PlayState extends MusicBeatState
 
 		cacheCountdown();
 		cachePopUpScore();
-		for (key => type in precacheList)
-		{
+		for (key => type in precacheList) {
 			// trace('Key $key is type $type');
-			switch (type)
-			{
+			switch (type) {
 				case 'image':
 					Paths.image(key);
 				case 'sound':

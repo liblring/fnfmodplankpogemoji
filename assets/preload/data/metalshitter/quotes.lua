@@ -44,9 +44,3 @@ function onTimerCompleted(tag, loops, loopsLeft)
 		doTweenY('removethefunny', 'thetext', 1500, 1, 'sineIn')
 	end
 end
-
-function onCreatePost()
-    setTextFont('scoreTxt', 'funy.ttf')
-    setTextFont('botplayTxt', 'funy.ttf')
-    setTextFont('timeTxt', 'funy.ttf')
-end

@@ -18,6 +18,8 @@ class ShatterTransition extends MusicBeatSubstate {
 		transitionSprite.scrollFactor.set();
 
 		transitionSprite.setGraphicSize(FlxG.width, FlxG.height);
+		transitionSprite.updateHitbox();
+		transitionSprite.x = transitionSprite.y = 0;
 
 		transitionSprite.shader = idiotShader;
 

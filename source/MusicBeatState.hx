@@ -39,8 +39,9 @@ class MusicBeatState extends FlxUIState
 
 		var pastVisibleYourMom:Bool = Main.fpsVar.visible;
 		Main.fpsVar.visible = false;
-		// todo: refactor this so it acounts in when the player resizes the window
-		pastStateBitmap = BitmapData.fromImage(FlxG.stage.window.readPixels());
+		pastStateBitmap = BitmapData.fromImage(FlxG.stage.window.readPixels(new Rectangle(
+			FlxG.scaleMode.offset.x, FlxG.scaleMode.offset.y, 
+			FlxG.scaleMode.scale.x * FlxG.width, FlxG.scaleMode.scale.y * FlxG.height)));
 		Main.fpsVar.visible = pastVisibleYourMom;
 
 	}

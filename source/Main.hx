@@ -18,6 +18,8 @@ import openfl.text.TextFormat;
 import openfl.display.Bitmap;
 import openfl.geom.Rectangle;
 import openfl.events.MouseEvent;
+import openfl.ui.MouseCursor;
+import openfl.ui.Mouse;
 
 import haxe.Timer;
 
@@ -98,9 +100,10 @@ class Main extends Sprite
 		}
 	
 		ClientPrefs.loadDefaultKeys();
-		addChild(new FlxGame(game.width, game.height, game.initialState, #if (flixel < "5.0.0") game.zoom, #end game.framerate, game.framerate, game.skipSplash, game.startFullscreen));
+		addChild(new FlxGame(game.width, game.height, game.initialState, game.framerate, game.framerate, game.skipSplash, game.startFullscreen));
+		FlxG.sound.soundTray.parent.removeChild(FlxG.sound.soundTray);
+		addChild(FlxG.sound.soundTray); // terrible fix but eh fuck it
 
-		// FlxG.stage.window.borderless = true;
 		FlxG.mouse.useSystemCursor = true;
 
 		PlayerSettings.init();
@@ -108,14 +111,11 @@ class Main extends Sprite
 		ClientPrefs.loadPrefs();
 		Highscore.load();
 
-		#if !mobile
 		addChild(fpsVar = new FPS(10, 3));
 		Lib.current.stage.align = "tl";
 		Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
-		if(fpsVar != null) {
+		if(fpsVar != null)
 			fpsVar.visible = ClientPrefs.showFPS;
-		}
-		#end
 
 		#if desktop
 		if (!DiscordClient.isInitialized) {
@@ -129,7 +129,14 @@ class Main extends Sprite
 		// addChild(new Achievements.AchievementGayThing('rude'));
 		addChild(border = new WindowBorder(FlxG.stage.window));
 		// border.alpha = 0.5;
-
+		border.addEventListener('show', (evnt) -> {
+			fpsVar.x = 8;
+			fpsVar.y = 8 + 35 + 2;
+		});
+		border.addEventListener('hide', (evnt) -> {
+			fpsVar.x = 10;
+			fpsVar.y = 3;
+		});
 	}
 
 	// Code was entirely made by sqirra-rng for their fnf engine named "Izzy Engine", big props to them!!!
@@ -193,6 +200,8 @@ class Main extends Sprite
 
 // holy hell this code is hot garbage
 // someone remind me to refactor this later
+@:access(openfl.ui.MouseCursor) // IM COME YOU
+@:access(lime.ui.Window)
 class WindowBorder extends Sprite {
 	private var borderShape:Shape;
 	private var captionShape:Shape;
@@ -202,7 +211,12 @@ class WindowBorder extends Sprite {
 
 	private var lastClickTime:Float = 0;
 	private var dragging:Bool = false;
+	private var resizing:Bool = false;
 	private var dragOffset:Array<Float> = [0, 0];
+	private var resizeBools:Array<Bool> = [false, false];
+	private var resizeAnchors:Array<Int> = [0, 0];
+	private var resizeSize:Array<Int> = [0, 0];
+	private var resizePos:Array<Int> = [0, 0];
 
 	private var hideTimer:Timer;
 	private var captionButtons:Sprite;
@@ -210,12 +224,16 @@ class WindowBorder extends Sprite {
 
 	private static final doubleClickTime:Int = GameframeNatives.getDoubleClickTime();
 
+	@:allow(flixel.system.ui.FlxSoundTray)
+	private static var borderColor(default, null):Int = 0x99008c;
+
 	private var targetWindow:lime.ui.Window;
 	public function new(target:lime.ui.Window) {
 		targetWindow = target;
 		targetWindow.borderless = true;
 		super();
 		borderShape = new Shape();
+
 		captionContainer = new Sprite();
 		captionContainer.x = captionContainer.y = 8;
 
@@ -303,35 +321,115 @@ class WindowBorder extends Sprite {
 		redraw();
 
 		FlxG.stage.addEventListener(MouseEvent.MOUSE_MOVE, (evnt) -> {
-			FlxG.mouse.visible = visible = true;
-			hideTimer?.stop();
-			hideTimer = Timer.delay(() -> FlxG.mouse.visible = visible = false, 1500);
+			if (!resizing) {
+				var targetCursor:MouseCursor = AUTO;
+				var bottomLeft:Bool = evnt.stageX <= 4 && evnt.stageY >= targetWindow.height - 8;
+				var topRight:Bool = evnt.stageX >= targetWindow.width - 8 && evnt.stageY <= 4;
+				var topLeft:Bool = evnt.stageX <= 4 && evnt.stageY <= 4;
+				var bottomRight:Bool = evnt.stageX >= targetWindow.width - 8 && evnt.stageY >= targetWindow.height - 8;
+				if (bottomLeft || topRight) targetCursor = __RESIZE_NESW;
+				if (topLeft || bottomRight) targetCursor = __RESIZE_NWSE;
+				if (!(evnt.stageX <= 4 || evnt.stageX >= targetWindow.width - 8) && (evnt.stageY <= 4 || evnt.stageY >= targetWindow.height - 8)) targetCursor = __RESIZE_NS;
+				if ((evnt.stageX <= 4 || evnt.stageX >= targetWindow.width - 8) && !(evnt.stageY <= 4 || evnt.stageY >= targetWindow.height - 8)) targetCursor = __RESIZE_WE;
+				switch (Mouse.cursor) {
+					case __RESIZE_WE: resizeBools = [true, false];
+					case __RESIZE_NS: resizeBools = [false, true];
+					case __RESIZE_NWSE | __RESIZE_NESW: resizeBools = [true, true];
+					default:
+				}
+				if (topLeft) resizeAnchors = [1, 1];
+				if (topRight) resizeAnchors = [0, 1];
+				if (bottomLeft) resizeAnchors = [1, 0];
+				if (bottomRight) resizeAnchors = [0, 0];
+				resizeSize = [targetWindow.width, targetWindow.height];
+				resizePos = [targetWindow.x, targetWindow.y];
+				Mouse.cursor = targetCursor;
+			}
+			timeout();
 		});
+
+		FlxG.stage.addEventListener(MouseEvent.MOUSE_DOWN, (evnt) -> if (Mouse.cursor != AUTO) resizing = true);
+		FlxG.stage.addEventListener(MouseEvent.MOUSE_UP, (evnt) -> if (Mouse.cursor != AUTO) resizing = false);
 		FlxG.stage.addEventListener(Event.ENTER_FRAME, (evnt) -> {
-			if (!dragging) return;
-			targetWindow.onRender.cancel(); // prevent lime from shitting itself when moving the window
+			if (dragging || resizing) targetWindow.onRender.cancel(); // prevent lime from shitting itself when moving the window
 			var xBalls = 0, yBalls = 0;
 			GameframeNatives.getMousePos(xBalls, yBalls);
-			targetWindow.x = xBalls - Std.int(dragOffset[0]) - 8;
-			targetWindow.y = yBalls - Std.int(dragOffset[1]) - 8;
+			if (resizing) {
+				if (resizeBools[0]) targetWindow.width = (xBalls - targetWindow.x + (resizeSize[0] * resizeAnchors[0]));
+				if (resizeBools[1]) targetWindow.height = (yBalls - targetWindow.y + (resizeSize[1] * resizeAnchors[1]));
+				if (resizeAnchors[0] == 1) targetWindow.x = resizePos[0] + resizeSize[0] - targetWindow.width;
+				if (resizeAnchors[1] == 1) targetWindow.y = resizePos[1] + resizeSize[1] - targetWindow.height;
+			}
+			if (dragging) targetWindow.move(xBalls - Std.int(dragOffset[0]) - 8, yBalls - Std.int(dragOffset[1]) - 8);
 		});
 		targetWindow.onResize.add((x, y) -> redraw());
 		targetWindow.onMaximize.add(() -> cast(buttonArray[1].getChildAt(1), Bitmap).bitmapData = Paths.image('gameframe/unmaximize').bitmap);
 		targetWindow.onRestore.add(() -> cast(buttonArray[1].getChildAt(1), Bitmap).bitmapData = Paths.image('gameframe/maximize').bitmap);
-		hideTimer = Timer.delay(() -> FlxG.mouse.visible = visible = false, 1500);
+		timeout();
+	}
+
+	private function timeout() {
+		FlxG.mouse.visible = visible = true;
+		dispatchEvent(new Event('show'));
+		hideTimer?.stop();
+		hideTimer = Timer.delay(() -> {
+			FlxG.mouse.visible = visible = false;
+			dispatchEvent(new Event('hide'));
+		}, 1500);
 	}
 
 	public function redraw() {
 		borderShape.graphics.clear();
 		captionShape.graphics.clear();
 
-		borderShape.graphics.lineStyle(2, 0x99008c, 0.3, true, NONE, SQUARE, MITER, 1.414);
+		borderShape.graphics.lineStyle(2, borderColor, 0.3, true, NONE, SQUARE, MITER, 1.414);
 		borderShape.graphics.drawRect(4, 4, targetWindow.width - 8, targetWindow.height - 8);
 
-		captionShape.graphics.beginFill(0x99008c, 0.2);
+		captionShape.graphics.beginFill(borderColor, 0.2);
 		captionShape.graphics.drawRoundRect(0, 0, targetWindow.width - 16, 35, 5);
 		captionText.width = targetWindow.width - 16 - 30 - captionButtons.width;
 		captionButtons.x = targetWindow.width - 16 - captionButtons.width;
+	}
+
+
+	private static function getRegistryKey(path:String, value:String):String { 
+		var rorcers:Process = new Process('reg', ['query', path, '/v', value]);
+		if(rorcers.exitCode() != 0) {
+			var error:String = rorcers.stderr.readAll().toString();
+			rorcers.close();
+			throw 'thats such a retro error,.,.,., $error';
+		}
+
+		var response = rorcers.stdout.readAll().toString();
+		rorcers.close();
+		var lines = response.split('\n');
+		for(line in lines) {
+			line = line.trim();
+			if(line.substr(0, 'path'.length).toLowerCase() == 'path') {
+				var column = 0;
+				var wasSpace = false;
+				for(pos in 0...line.length) {
+					var isSpace = line.isSpace(pos);
+					if(wasSpace && !isSpace) {
+						column++;
+						if(column == 2) {
+							return line.substr(pos);
+						}
+					}
+					wasSpace = isSpace;
+				}
+			}
+		}
+		throw 'wtfs that return is weird,.,.,.,., $response';
+	}
+
+	private static function __init__() {
+		// try borderColor = Std.parseInt(getRegistryKey('HKCU\\SOFTWARE\\Microsoft\\Windows\\DWM', 'AccentColor')) catch(e) {
+			// try borderColor = Std.int(GameframeNatives.getAccentColour()) catch(estrogen) {
+				// try borderColor = GameframeNatives.getSystemColour(10) catch(estrogen) {}
+			// }
+		// }
+		// borderColor = 0x99008c;
 	}
 }
 
@@ -340,4 +438,8 @@ class GameframeNatives {
 	public static function getMousePos(x:hl.Ref<Int>, y:hl.Ref<Int>):Void {}
 	public static function getDoubleClickTime():Int return 0;
 	public static function getSystemColour(index:Int):Int return 0;
+	public static function getAccentColour():hl.F64 return 0;
+	public static function getImmersiveColour(index:hl.F64):hl.F64 return 0; // this doesent even work
+	public static function hookShadow():Void {}
+	public static function setShadow(enabled:Bool):Void {}
 }

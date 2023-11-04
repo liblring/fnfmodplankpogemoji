@@ -195,7 +195,7 @@ class NoteOffsetState extends MusicBeatState
 		add(changeModeText);
 		updateMode();
 
-		Conductor.changeBPM(128.0);
+		Conductor.changeBPM(135.0);
 		FlxG.sound.playMusic(Paths.music('offsetSong'), 1, true);
 
 		super.create();
@@ -380,7 +380,7 @@ class NoteOffsetState extends MusicBeatState
 			gf.dance();
 		}
 		
-		if(curBeat % 4 == 2)
+		if(curBeat % 4 == 0)
 		{
 			FlxG.camera.zoom = 1.15;
 

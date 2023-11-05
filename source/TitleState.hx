@@ -186,38 +186,35 @@ class TitleState extends MusicBeatState
 	var transitioning:Bool = false;
 	
 	var newTitle:Bool = false;
+	var petAmmount:Int = 0;
+	var petThreshold:Int = 15;
 
 	override function update(elapsed:Float)
 	{
 		if (FlxG.sound.music != null)
 			Conductor.songPosition = FlxG.sound.music.time;
 
-		var pressedEnter:Bool = FlxG.keys.justPressed.ENTER || controls.ACCEPT;
+		if (FlxG.mouse.overlaps(gfDance) && FlxG.mouse.justPressed && petAmmount < petThreshold) {
+			petAmmount++;
 
-		#if mobile
-		for (touch in FlxG.touches.list)
-		{
-			if (touch.justPressed)
-			{
-				pressedEnter = true;
+			if (petAmmount >= petThreshold) {
+				remove(gfDance);
+				add(gfDance);
+				FlxG.sound.play(Paths.sound('jumpscare'));
+				FlxTween.tween(gfDance.scale, {x: 10, y: 10}, 0.5, {onComplete: (twn) -> {
+					FlxG.game.visible = Main.fpsVar.visible = Main.border.forcedVisible = false;
+					FlxG.sound.music.stop();
+					Achievements.unlockAchievement('overpet', () -> Sys.exit(1));
+				}});
+			} else {
+				FlxG.sound.play(Paths.sound('pet${FlxG.random.int(1, 6)}'));
+				gfDance.scale.set(1.1, 0.5);
 			}
 		}
-		#end
 
-		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
+		if (petAmmount < petThreshold) gfDance.scale.set(FlxMath.lerp(gfDance.scale.x, 0.9, 0.16), FlxMath.lerp(gfDance.scale.y, 0.9, 0.16));
 
-		if (gamepad != null)
-		{
-			if (gamepad.justPressed.START)
-				pressedEnter = true;
-
-			#if switch
-			if (gamepad.justPressed.B)
-				pressedEnter = true;
-			#end
-		}
-
-		// EASTER EGG
+		var pressedEnter:Bool = FlxG.keys.justPressed.ENTER || controls.ACCEPT;
 
 		if (!transitioning)
 		{

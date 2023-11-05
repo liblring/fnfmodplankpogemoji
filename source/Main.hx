@@ -126,7 +126,6 @@ class Main extends Sprite
 		}
 		#end
 
-		// addChild(new Achievements.AchievementGayThing('rude'));
 		addChild(border = new WindowBorder(FlxG.stage.window));
 		// border.alpha = 0.5;
 		border.addEventListener('show', (evnt) -> {
@@ -208,6 +207,7 @@ class WindowBorder extends Sprite {
 	private var captionContainer:Sprite;
 	private var captionText:TextField;
 	private var captionIcon:Bitmap;
+	public var forcedVisible:Bool = true;
 
 	private var lastClickTime:Float = 0;
 	private var dragging:Bool = false;
@@ -369,13 +369,17 @@ class WindowBorder extends Sprite {
 	}
 
 	private function timeout() {
-		FlxG.mouse.visible = visible = true;
-		dispatchEvent(new Event('show'));
-		hideTimer?.stop();
-		hideTimer = Timer.delay(() -> {
-			FlxG.mouse.visible = visible = false;
-			dispatchEvent(new Event('hide'));
-		}, 1500);
+		if (forcedVisible) {
+			FlxG.mouse.visible = visible = true;
+			dispatchEvent(new Event('show'));
+			hideTimer?.stop();
+			hideTimer = Timer.delay(() -> {
+				FlxG.mouse.visible = visible = false;
+				dispatchEvent(new Event('hide'));
+			}, 1500);
+			return;
+		}
+		FlxG.mouse.visible = visible = false;
 	}
 
 	public function redraw() {

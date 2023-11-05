@@ -1,3 +1,5 @@
+package;
+
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxCamera;
@@ -6,6 +8,13 @@ import flixel.tweens.FlxTween;
 import flixel.group.FlxSpriteGroup;
 import flixel.util.FlxColor;
 import flixel.text.FlxText;
+import haxe.Timer;
+import openfl.display.Sprite;
+import openfl.display.Bitmap;
+import openfl.text.TextField;
+import openfl.text.TextFormat;
+import openfl.filters.DropShadowFilter;
+import motion.Actuate;
 
 using StringTools;
 
@@ -13,6 +22,8 @@ class Achievements {
 	public static var achievementsStuff:Array<Dynamic> = [ //Name, Description, Achievement save tag, Hidden achievement
 		["Freaky on a Friday Night",	"Play on a Friday... Night.",						'friday_night_play',	 true],
 		["rude",						"how are yuou this rude smh,",						'rude',					false],
+		["the fuck are you doing",		"set your fps cap higher than your refresh rate",	'fps',					false],
+		["overpetted",					"what have you done",								'overpet',				false],
 		["No More Tricks",				"Beat Week 2 on Hard with no Misses.",				'week2_nomiss',			false],
 		["Call Me The Hitman",			"Beat Week 3 on Hard with no Misses.",				'week3_nomiss',			false],
 		["Lady Killer",					"Beat Week 4 on Hard with no Misses.",				'week4_nomiss',			false],
@@ -31,18 +42,28 @@ class Achievements {
 	public static var achievementsMap:Map<String, Bool> = new Map<String, Bool>();
 
 	public static var henchmenDeath:Int = 0;
-	public static function unlockAchievement(name:String):Void {
+	public static function unlockAchievement(name:String, ?onComplete:Void->Void):Void {
 		FlxG.log.add('Completed achievement "' + name +'"');
 		achievementsMap.set(name, true);
-		FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
+		var thingamabob:AchievementThing = new AchievementThing(name);
+		var sound = Paths.sound('trophy');
+
+		Paths.dumpExclusions.push('assets/images/achievements/$name.png'); // bullshit code but whatever, exclude the achievement image from clearing
+		Timer.delay(() -> {
+			FlxG.sound.play(sound, 0.7);
+			thingamabob.alpha = 0;
+			Actuate.tween(thingamabob, 0.25, {alpha: 1});
+			FlxG.stage.addChild(thingamabob);
+			Actuate.tween(thingamabob, 0.25, {alpha: 0}, false).onComplete(() -> {
+				Paths.dumpExclusions.remove('assets/images/achievements/$name.png');
+				FlxG.stage.removeChild(thingamabob);
+				if (onComplete != null) onComplete();
+			}).delay(6);
+		}, 1000);
 	}
 
-	public static function isAchievementUnlocked(name:String) {
-		if(achievementsMap.exists(name) && achievementsMap.get(name)) {
-			return true;
-		}
-		return false;
-	}
+	public static function isAchievementUnlocked(name:String) 
+		return achievementsMap.exists(name) && achievementsMap.get(name);
 
 	public static function getAchievementIndex(name:String) {
 		for (i in 0...achievementsStuff.length) {
@@ -63,6 +84,7 @@ class Achievements {
 			}
 		}
 	}
+
 }
 
 class AttachedAchievement extends FlxSprite {
@@ -98,62 +120,57 @@ class AttachedAchievement extends FlxSprite {
 	}
 }
 
-class AchievementObject extends FlxSpriteGroup {
-	public var onFinish:Void->Void = null;
-	var alphaTween:FlxTween;
-	public function new(name:String, ?camera:FlxCamera = null)
-	{
-		super(x, y);
-		ClientPrefs.saveSettings();
+class AchievementThing extends Sprite {
+	var achievementImage:Bitmap;
+	var descriptionText:TextField;
+	var achievementText:TextField;
 
-		var id:Int = Achievements.getAchievementIndex(name);
-		var achievementBG:FlxSprite = new FlxSprite(60, 50).makeGraphic(420, 120, FlxColor.BLACK);
-		achievementBG.scrollFactor.set();
+	public function new(achievement:String = 'rude') {
+		super();
+		x = y = 10;
+		var balls:Array<Dynamic> = Achievements.achievementsStuff[Achievements.getAchievementIndex(achievement)];
+		achievementImage = new Bitmap(Paths.image('achievements/$achievement').bitmap);
+		achievementImage.y = achievementImage.x = 5;
+		achievementImage.scaleX = 0.5;
+		achievementImage.scaleY = 0.5;
+		addChild(achievementImage);
 
-		var achievementIcon:FlxSprite = new FlxSprite(achievementBG.x + 10, achievementBG.y + 10).loadGraphic(Paths.image('achievements/' + name));
-		achievementIcon.scrollFactor.set();
-		achievementIcon.setGraphicSize(Std.int(achievementIcon.width * (2 / 3)));
-		achievementIcon.updateHitbox();
-		achievementIcon.antialiasing = ClientPrefs.globalAntialiasing;
+		graphics.lineStyle(2, 0x454346, 0.5);
+		graphics.beginFill(0x454346, 0.75);
+		graphics.drawRoundRect(0, 0, 400, achievementImage.height + 10, 12);
+		graphics.endFill();
 
-		var achievementName:FlxText = new FlxText(achievementIcon.x + achievementIcon.width + 20, achievementIcon.y + 16, 280, Achievements.achievementsStuff[id][0], 16);
-		achievementName.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT);
-		achievementName.scrollFactor.set();
+		var defaultTextFormat:TextFormat = new TextFormat(Paths.font('rodin.otf'), 18, 0xFFFFFF); 
+		var defaultTextFormatDescription:TextFormat = new TextFormat(Paths.font('rodin.otf'), 16, 0xFFFFFF); 
 
-		var achievementText:FlxText = new FlxText(achievementName.x, achievementName.y + 32, 280, Achievements.achievementsStuff[id][1], 16);
-		achievementText.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT);
-		achievementText.scrollFactor.set();
+		// todo: get some kind of alternative for DropShadowFilter because it breaks on textfields
+		// reported the bug at https://github.com/openfl/openfl/issues/2673
+		var dropshadow:DropShadowFilter = new DropShadowFilter();
+		dropshadow.quality = 3;
+		dropshadow.distance = 8;
+		dropshadow.blurX = dropshadow.blurY = 8;
+		dropshadow.angle = 45;
+		dropshadow.strength = 1;
 
-		add(achievementBG);
-		add(achievementName);
-		add(achievementText);
-		add(achievementIcon);
+		achievementText = new TextField();
+		descriptionText = new TextField();
 
-		var cam:Array<FlxCamera> = FlxCamera.defaultCameras;
-		if(camera != null) {
-			cam = [camera];
-		}
-		alpha = 0;
-		achievementBG.cameras = cam;
-		achievementName.cameras = cam;
-		achievementText.cameras = cam;
-		achievementIcon.cameras = cam;
-		alphaTween = FlxTween.tween(this, {alpha: 1}, 0.5, {onComplete: function (twn:FlxTween) {
-			alphaTween = FlxTween.tween(this, {alpha: 0}, 0.5, {
-				startDelay: 2.5,
-				onComplete: function(twn:FlxTween) {
-					alphaTween = null;
-					remove(this);
-					if(onFinish != null) onFinish();
-				}
-			});
-		}});
-	}
+		achievementText.mouseEnabled = descriptionText.mouseEnabled = false;
+		achievementText.selectable = descriptionText.selectable = false;
 
-	override function destroy() {
-		if(alphaTween != null) {
-			alphaTween.cancel();
-		}
-		super.destroy();
+		achievementText.filters = descriptionText.filters = [dropshadow];
+		achievementText.defaultTextFormat = defaultTextFormat;
+		descriptionText.defaultTextFormat = defaultTextFormatDescription;
+
+		achievementText.width = descriptionText.width = width;
+
+		achievementText.x = descriptionText.x =  achievementImage.x + achievementImage.width + 5;
+		achievementText.y = 10;
+		achievementText.text = 'You have earned an acquirent.';
+
+		descriptionText.y = 42;
+		descriptionText.text = balls[1];
+		addChild(achievementText);
+		addChild(descriptionText);
 	}
 }

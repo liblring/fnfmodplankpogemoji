@@ -29,8 +29,10 @@ import openfl.Lib;
 
 using StringTools;
 
-class GraphicsSettingsSubState extends BaseOptionsMenu
-{
+class GraphicsSettingsSubState extends BaseOptionsMenu {
+	private var fpsIndex:Int;
+	private var monitorRefreshRate:Int;
+
 	public function new()
 	{
 		title = 'Graphics';
@@ -68,6 +70,10 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 			60);
 		addOption(option);
 
+		fpsIndex = optionsArray.indexOf(option);
+		monitorRefreshRate = FlxG.stage.window.displayMode.refreshRate;
+		if (monitorRefreshRate == 144) monitorRefreshRate = 145; // some random ass perfectionists set the fps to 145
+
 		option.minValue = 60;
 		option.maxValue = 240;
 		option.displayFormat = '%v FPS';
@@ -77,18 +83,23 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		super();
 	}
 
-	function onChangeAntiAliasing()
-	{
-		for (sprite in members)
-		{
-			if(sprite != null && (sprite is FlxSprite) && !(sprite is FlxText)) {
-				cast(sprite, FlxSprite).antialiasing = ClientPrefs.globalAntialiasing;
-			}
+	override function changeSelection(change:Int = 0) {
+		super.changeSelection(change);
+		if (curSelected != fpsIndex && optionsArray[fpsIndex].getValue() > monitorRefreshRate) {
+			optionsArray[fpsIndex].setValue(monitorRefreshRate);
+			optionsArray[fpsIndex].onChange();
+			updateTextFrom(optionsArray[fpsIndex]);
+			if (!Achievements.isAchievementUnlocked('fps'))
+				Achievements.unlockAchievement('fps');
 		}
 	}
 
-	function onChangeFramerate()
-	{
+	function onChangeAntiAliasing()
+		for (sprite in members)
+			if(sprite != null && (sprite is FlxSprite) && !(sprite is FlxText))
+				cast(sprite, FlxSprite).antialiasing = ClientPrefs.globalAntialiasing;
+
+	function onChangeFramerate() {
 		if(ClientPrefs.framerate > FlxG.drawFramerate)
 		{
 			FlxG.updateFramerate = ClientPrefs.framerate;

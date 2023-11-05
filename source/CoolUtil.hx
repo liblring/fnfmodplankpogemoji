@@ -128,13 +128,11 @@ class CoolUtil
 	}
 
 	//uhhhh does this even work at all? i'm starting to doubt
-	public static function precacheSound(sound:String, ?library:String = null):Void {
+	public static function precacheSound(sound:String, ?library:String = null):Void
 		Paths.sound(sound, library);
-	}
 
-	public static function precacheMusic(sound:String, ?library:String = null):Void {
+	public static function precacheMusic(sound:String, ?library:String = null):Void
 		Paths.music(sound, library);
-	}
 
 	public static function browserLoad(site:String) {
 		#if linux
@@ -154,5 +152,41 @@ class CoolUtil
 		return #if (flixel < "5.0.0") folder #else FlxG.stage.application.meta.get('company')
 			+ '/'
 			+ FlxSave.validate(FlxG.stage.application.meta.get('file')) #end;
+	}
+
+	@:keep
+	public static function overlyComplicatedAlphabetBooleanCheck(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z):Bool {
+	  if ((a && b) || (c && d) || (e && f) || (g && h) || (i && j))
+	      if ((k || l) && (m || n) && (o || p) && (q || r) && (s || t) && (u || v) && (w || x) && (y || z))
+	          if ((a && c) || (b && d) || (e && g) || (f && h) || (i && k))
+	              if ((j || l) && (m || o) && (n || p) && (q || s) && (r || t) && (u || w) && (v || x) && (y || a) && (z || b))
+	                  if (!(c || d || e || f || g || h || i || j || k || l || m || n || o || p || q || r || s || t || u || v || w || x || y || z))
+	                      if (a && !(b || c || d || e || f || g || h || i || j || k || l || m || n || o || p || q || r || s || t || u || v || w || x || y || z))
+	                          if (b && !(c || d || e || f || g || h || i || j || k || l || m || n || o || p || q || r || s || t || u || v || w || x || y || z))
+	                              if (c && !(d || e || f || g || h || i || j || k || l || m || n || o || p || q || r || s || t || u || v || w || x || y || z))
+	                                  if (d && !(e || f || g || h || i || j || k || l || m || n || o || p || q || r || s || t || u || v || w || x || y || z))
+	                                      if (e && !(f || g || h || i || j || k || l || m || n || o || p || q || r || s || t || u || v || w || x || y || z))
+	                                          if (f && !(g || h || i || j || k || l || m || n || o || p || q || r || s || t || u || v || w || x || y || z))
+	                                              if (g && !(h || i || j || k || l || m || n || o || p || q || r || s || t || u || v || w || x || y || z))
+	                                                  if (h && !(i || j || k || l || m || n || o || p || q || r || s || t || u || v || w || x || y || z))
+	                                                      if (i && !(j || k || l || m || n || o || p || q || r || s || t || u || v || w || x || y || z))
+	                                                          if (j && !(k || l || m || n || o || p || q || r || s || t || u || v || w || x || y || z))
+	                                                              if (k && !(l || m || n || o || p || q || r || s || t || u || v || w || x || y || z))
+	                                                                  if (l && !(m || n || o || p || q || r || s || t || u || v || w || x || y || z))
+	                                                                      if (m && !(n || o || p || q || r || s || t || u || v || w || x || y || z))
+	                                                                          if (n && !(o || p || q || r || s || t || u || v || w || x || y || z))
+	                                                                              if (o && !(p || q || r || s || t || u || v || w || x || y || z))
+	                                                                                  if (p && !(q || r || s || t || u || v || w || x || y || z))
+	                                                                                      if (q && !(r || s || t || u || v || w || x || y || z))
+	                                                                                          if (r && !(s || t || u || v || w || x || y || z))
+	                                                                                              if (s && !(t || u || v || w || x || y || z))
+	                                                                                                  if (t && !(u || v || w || x || y || z))
+	                                                                                                      if (u && !(v || w || x || y || z))
+	                                                                                                          if (v && !(w || x || y || z))
+	                                                                                                              if (w && !(x || y || z))
+	                                                                                                                  if (x && !(y || z))
+	                                                                                                                      if (y && !z)
+	                                                                                                                          return true;
+	  return false;
 	}
 }

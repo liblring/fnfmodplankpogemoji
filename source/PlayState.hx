@@ -152,6 +152,7 @@ class PlayState extends MusicBeatState
 
 	public var spawnTime:Float = 2000;
 
+	public var inst:FlxSound;
 	public var vocals:FlxSound;
 
 	public var dad:Character = null; //fuck you opponent no one likes you fucking ludum dare ass variable name
@@ -163,6 +164,7 @@ class PlayState extends MusicBeatState
 	public var eventNotes:Array<EventNote> = [];
 
 	private var strumLine:FlxSprite;
+
 
 	// Handles the new epic mega sexy cam code that i've done
 	public var camFollow:FlxPoint;
@@ -283,7 +285,6 @@ class PlayState extends MusicBeatState
 	public var scoreTxt:FlxText;
 
 	var timeTxt:FlxText;
-	var scoreTxtTween:FlxTween;
 
 	public static var campaignScore:Int = 0;
 	public static var campaignMisses:Int = 0;
@@ -405,9 +406,7 @@ class PlayState extends MusicBeatState
 
 		// For the "Just the Two of Us" achievement
 		for (i in 0...keysArray.length)
-		{
 			keysPressed.push(false);
-		}
 
 		if (FlxG.sound.music != null)
 			FlxG.sound.music.stop();
@@ -1157,7 +1156,7 @@ class PlayState extends MusicBeatState
 		{
 			if (vocals != null)
 				vocals.pitch = value;
-			FlxG.sound.music.pitch = value;
+			inst.pitch = value;
 		}
 		playbackRate = value;
 		FlxAnimationController.globalSpeed = value;
@@ -1648,22 +1647,6 @@ class PlayState extends MusicBeatState
 			+ ' // the one piece: '
 			+ ratingName
 			+ (ratingName != '?' ? ' (${Highscore.floorDecimal(ratingPercent * 100, 2)}%) - $ratingFC' : '');
-
-		if (ClientPrefs.scoreZoom && !miss && !cpuControlled)
-		{
-			if (scoreTxtTween != null)
-			{
-				scoreTxtTween.cancel();
-			}
-			scoreTxt.scale.x = 1.075;
-			scoreTxt.scale.y = 1.075;
-			scoreTxtTween = FlxTween.tween(scoreTxt.scale, {x: 1, y: 1}, 0.2, {
-				onComplete: function(twn:FlxTween)
-				{
-					scoreTxtTween = null;
-				}
-			});
-		}
 		callOnLuas('onUpdateScore', [miss]);
 	}
 
@@ -1672,12 +1655,12 @@ class PlayState extends MusicBeatState
 		if (time < 0)
 			time = 0;
 
-		FlxG.sound.music.pause();
+		inst.pause();
 		vocals.pause();
 
-		FlxG.sound.music.time = time;
-		FlxG.sound.music.pitch = playbackRate;
-		FlxG.sound.music.play();
+		inst.time = time;
+		inst.pitch = playbackRate;
+		inst.play();
 
 		if (Conductor.songPosition <= vocals.length)
 		{
@@ -1711,9 +1694,7 @@ class PlayState extends MusicBeatState
 		previousFrameTime = FlxG.game.ticks;
 		lastReportedPlayheadPosition = 0;
 
-		FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 1, false);
-		FlxG.sound.music.pitch = playbackRate;
-		FlxG.sound.music.onComplete = finishSong.bind();
+
 		vocals.play();
 
 		if (startOnTime > 0)
@@ -1725,12 +1706,12 @@ class PlayState extends MusicBeatState
 		if (paused)
 		{
 			// trace('Oopsie doopsie! Paused sound');
-			FlxG.sound.music.pause();
+			inst.pause();
 			vocals.pause();
 		}
 
 		// Song duration in a float, useful for the time left feature
-		songLength = FlxG.sound.music.length;
+		songLength = inst.length;
 		FlxTween.tween(timeBar, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
 		FlxTween.tween(timeTxt, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
 
@@ -1798,14 +1779,18 @@ class PlayState extends MusicBeatState
 		var songData = SONG;
 		Conductor.changeBPM(songData.bpm);
 
+		inst = new FlxSound().loadEmbedded(Paths.inst(PlayState.SONG.song));
+		inst.pitch = playbackRate;
+		inst.onComplete = finishSong.bind();
+
 		if (SONG.needsVoices)
 			vocals = new FlxSound().loadEmbedded(Paths.voices(PlayState.SONG.song));
 		else
 			vocals = new FlxSound();
 
 		vocals.pitch = playbackRate;
+		FlxG.sound.list.add(inst);
 		FlxG.sound.list.add(vocals);
-		FlxG.sound.list.add(new FlxSound().loadEmbedded(Paths.inst(PlayState.SONG.song)));
 
 		notes = new FlxTypedGroup<Note>();
 		add(notes);
@@ -2049,9 +2034,9 @@ class PlayState extends MusicBeatState
 	{
 		if (paused)
 		{
-			if (FlxG.sound.music != null)
+			if (inst != null)
 			{
-				FlxG.sound.music.pause();
+				inst.pause();
 				vocals.pause();
 			}
 
@@ -2088,7 +2073,7 @@ class PlayState extends MusicBeatState
 	{
 		if (paused)
 		{
-			if (FlxG.sound.music != null && !startingSong)
+			if (inst != null && !startingSong)
 			{
 				resyncVocals();
 			}
@@ -2185,9 +2170,9 @@ class PlayState extends MusicBeatState
 
 		vocals.pause();
 
-		FlxG.sound.music.play();
-		FlxG.sound.music.pitch = playbackRate;
-		Conductor.songPosition = FlxG.sound.music.time;
+		inst.play();
+		inst.pitch = playbackRate;
+		Conductor.songPosition = inst.time;
 		if (Conductor.songPosition <= vocals.length)
 		{
 			vocals.time = Conductor.songPosition;
@@ -2347,7 +2332,7 @@ class PlayState extends MusicBeatState
 				}
 			}
 
-			// Conductor.lastSongPos = FlxG.sound.music.time;
+			// Conductor.lastSongPos = inst.time;
 		}
 
 		if (camZooming)
@@ -2402,7 +2387,7 @@ class PlayState extends MusicBeatState
 					keyShit();
 				}
 				else if (boyfriend.animation.curAnim != null
-					&& boyfriend.holdTimer > Conductor.stepCrochet * (0.0011 / FlxG.sound.music.pitch) * boyfriend.singDuration
+					&& boyfriend.holdTimer > Conductor.stepCrochet * (0.0011 / inst.pitch) * boyfriend.singDuration
 						&& boyfriend.animation.curAnim.name.startsWith('sing')
 						&& !boyfriend.animation.curAnim.name.endsWith('miss'))
 				{
@@ -2562,7 +2547,7 @@ class PlayState extends MusicBeatState
 			if (FlxG.keys.justPressed.ONE)
 			{
 				KillNotes();
-				FlxG.sound.music.onComplete();
+				inst.onComplete();
 			}
 			if (FlxG.keys.justPressed.TWO)
 			{ // Go 10 seconds into the future :O
@@ -2592,9 +2577,9 @@ class PlayState extends MusicBeatState
 			MusicBeatState.switchState(new GitarooPause());
 		}
 		else { */
-		if (FlxG.sound.music != null)
+		if (inst != null)
 		{
-			FlxG.sound.music.pause();
+			inst.pause();
 			vocals.pause();
 		}
 		openSubState(new PauseSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
@@ -2633,7 +2618,7 @@ class PlayState extends MusicBeatState
 				paused = true;
 
 				vocals.stop();
-				FlxG.sound.music.stop();
+				inst.stop();
 
 				persistentUpdate = false;
 				persistentDraw = false;
@@ -3044,7 +3029,7 @@ class PlayState extends MusicBeatState
 		var finishCallback:Void->Void = endSong; // In case you want to change it in a specific song.
 
 		updateTime = false;
-		FlxG.sound.music.volume = 0;
+		inst.volume = 0;
 		vocals.volume = 0;
 		vocals.pause();
 		if (ClientPrefs.noteOffset <= 0 || ignoreNoteOffset)
@@ -3180,7 +3165,7 @@ class PlayState extends MusicBeatState
 					prevCamFollowPos = camFollowPos;
 
 					PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0] + difficulty, PlayState.storyPlaylist[0]);
-					FlxG.sound.music.stop();
+					inst.stop();
 
 					if (winterHorrorlandNext)
 					{
@@ -3425,7 +3410,7 @@ class PlayState extends MusicBeatState
 			{
 				// more accurate hit time for the ratings?
 				var lastTime:Float = Conductor.songPosition;
-				Conductor.songPosition = FlxG.sound.music.time;
+				Conductor.songPosition = inst.time;
 
 				var canMiss:Bool = !ClientPrefs.ghostTapping;
 
@@ -3599,7 +3584,7 @@ class PlayState extends MusicBeatState
 			{
 			}
 			else if (boyfriend.animation.curAnim != null
-				&& boyfriend.holdTimer > Conductor.stepCrochet * (0.0011 / FlxG.sound.music.pitch) * boyfriend.singDuration
+				&& boyfriend.holdTimer > Conductor.stepCrochet * (0.0011 / inst.pitch) * boyfriend.singDuration
 					&& boyfriend.animation.curAnim.name.startsWith('sing')
 					&& !boyfriend.animation.curAnim.name.endsWith('miss'))
 			{
@@ -3998,17 +3983,15 @@ class PlayState extends MusicBeatState
 			FlxG.stage.removeEventListener(KeyboardEvent.KEY_UP, onKeyRelease);
 		}
 		FlxAnimationController.globalSpeed = 1;
-		FlxG.sound.music.pitch = 1;
+		inst.pitch = 1;
 		super.destroy();
 	}
 
 	public static function cancelMusicFadeTween()
 	{
-		if (FlxG.sound.music.fadeTween != null)
-		{
-			FlxG.sound.music.fadeTween.cancel();
-		}
-		FlxG.sound.music.fadeTween = null;
+		if (PlayState.instance.inst.fadeTween != null)
+			PlayState.instance.inst.fadeTween.cancel();
+		PlayState.instance.inst.fadeTween = null;
 	}
 
 	var lastStepHit:Int = -1;
@@ -4016,7 +3999,7 @@ class PlayState extends MusicBeatState
 	override function stepHit()
 	{
 		super.stepHit();
-		if (Math.abs(FlxG.sound.music.time - (Conductor.songPosition - Conductor.offset)) > (20 * playbackRate)
+		if (Math.abs(inst.time - (Conductor.songPosition - Conductor.offset)) > (20 * playbackRate)
 			|| (SONG.needsVoices && Math.abs(vocals.time - (Conductor.songPosition - Conductor.offset)) > (20 * playbackRate)))
 		{
 			resyncVocals();

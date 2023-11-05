@@ -27,14 +27,14 @@ using StringTools;
 
 class Paths
 {
-	inline public static var SOUND_EXT = #if web "mp3" #else "ogg" #end;
+	inline public static var SOUND_EXT = "ogg";
 	inline public static var VIDEO_EXT = "mp4";
 
-	inline static public function instPath(song:String):String
-		return 'songs:assets/songs/${formatToSongPath(song)}/Inst.$SOUND_EXT';
+	inline static public function instPath(song:String, ?withLibrary:Bool = true):String
+		return if (withLibrary) 'songs:assets/songs/${formatToSongPath(song)}/Inst.$SOUND_EXT' else 'assets/songs/${formatToSongPath(song)}/Inst.$SOUND_EXT';
 	
-	inline static public function voicesPath(song:String):String
-		return 'songs:assets/songs/${formatToSongPath(song)}/Voices.$SOUND_EXT';
+	inline static public function voicesPath(song:String, ?withLibrary:Bool = true):String
+		return if (withLibrary) 'songs:assets/songs/${formatToSongPath(song)}/Voices.$SOUND_EXT' else 'assets/songs/${formatToSongPath(song)}/Voices.$SOUND_EXT';
 
 	#if MODS_ALLOWED
 	public static var ignoreModFolders:Array<String> = [
@@ -229,6 +229,9 @@ class Paths
 		var file:Sound = returnSound('music', key, library);
 		return file;
 	}
+
+	inline static public function getPathForURLRequest(path:String):String
+		return 'file://${FileSystem.absolutePath('assets/$path')}';
 
 	inline static public function voices(song:String):Any
 	{

@@ -43,7 +43,7 @@ class PauseSubState extends MusicBeatSubstate
 		if(songName != null)
 			pauseMusic.loadEmbedded(Paths.music(songName), true, true);
 		else if (songName != 'None')
-			pauseMusic.loadEmbedded(Paths.music(Paths.formatToSongPath(ClientPrefs.pauseMusic)), true, true);
+			pauseMusic.loadEmbedded(Paths.music(Paths.formatToSongPath(ClientPrefs.data.pauseMusic)), true, true);
 
 		pauseMusic.volume = 0.5;
 		pauseMusic.play();
@@ -71,7 +71,7 @@ class PauseSubState extends MusicBeatSubstate
 		add(grpMenuShit);
 
 		grpMenuShit.onSelect.add((sel) -> {
-			if (!(cantUnpause <= 0 || !ClientPrefs.controllerMode)) return;
+			if (!(cantUnpause <= 0 || !ClientPrefs.data.controllerMode)) return;
 			switch (menuItems[sel])
 			{
 				case "resume":

@@ -92,7 +92,7 @@ class PaidplayState extends MusicBeatState
 		WeekData.loadTheFirstEnabledMod();
 
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
-		bg.antialiasing = ClientPrefs.globalAntialiasing;
+		bg.antialiasing = ClientPrefs.data.globalAntialiasing;
 		add(bg);
 		bg.screenCenter();
 		bg.color = 0xFF828282;
@@ -168,7 +168,7 @@ class PaidplayState extends MusicBeatState
 		Main.fpsVar.defaultTextFormat = new TextFormat("Lato", 18, 0xFFFFFFFF, null, null, null, null, null, RIGHT);
 
 		twobullshits = new FlxSprite().loadGraphic(Paths.image('these-fuckers'));
-		twobullshits.antialiasing = ClientPrefs.globalAntialiasing;
+		twobullshits.antialiasing = ClientPrefs.data.globalAntialiasing;
 		twobullshits.scale.set(1.05, 1.05);
 		add(grpOptions);
 		add(twobullshits);

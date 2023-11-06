@@ -57,14 +57,14 @@ class LoadingState extends MusicBeatState
 		funkay = new FlxSprite(0, 0, Paths.directGraphic('$imagePath\\${tomboyFiles[FlxG.random.int(0, tomboyFiles.length - 1)]}'));
 		funkay.setGraphicSize(FlxG.width, FlxG.height);
 		funkay.updateHitbox();
-		funkay.antialiasing = ClientPrefs.globalAntialiasing;
+		funkay.antialiasing = ClientPrefs.data.globalAntialiasing;
 		add(funkay);
 		funkay.scrollFactor.set();
 		funkay.screenCenter();
 
 		loadBar = new FlxSprite(0, FlxG.height - 20).makeGraphic(FlxG.width, 10, 0xffff16d2);
 		loadBar.screenCenter(X);
-		loadBar.antialiasing = ClientPrefs.globalAntialiasing;
+		loadBar.antialiasing = ClientPrefs.data.globalAntialiasing;
 		add(loadBar);
 
 		FlxG.camera.zoom = 1.1;

@@ -20,33 +20,21 @@ using StringTools;
 
 class Achievements {
 	public static var achievementsStuff:Array<Dynamic> = [ //Name, Description, Achievement save tag, Hidden achievement
-		["Freaky on a Friday Night",	"Play on a Friday... Night.",						'friday_night_play',	 true],
 		["rude",						"how are yuou this rude smh,",						'rude',					false],
 		["the fuck are you doing",		"set your fps cap higher than your refresh rate",	'fps',					false],
 		["overpetted",					"what have you done",								'overpet',				false],
-		["No More Tricks",				"Beat Week 2 on Hard with no Misses.",				'week2_nomiss',			false],
-		["Call Me The Hitman",			"Beat Week 3 on Hard with no Misses.",				'week3_nomiss',			false],
-		["Lady Killer",					"Beat Week 4 on Hard with no Misses.",				'week4_nomiss',			false],
-		["Missless Christmas",			"Beat Week 5 on Hard with no Misses.",				'week5_nomiss',			false],
-		["Highscore!!",					"Beat Week 6 on Hard with no Misses.",				'week6_nomiss',			false],
-		["God Effing Damn It!",			"Beat Week 7 on Hard with no Misses.",				'week7_nomiss',			false],
-		["What a Funkin' Disaster!",	"Complete a Song with a rating lower than 20%.",	'ur_bad',				false],
-		["Perfectionist",				"Complete a Song with a rating of 100%.",			'ur_good',				false],
-		["Roadkill Enthusiast",			"Watch the Henchmen die over 100 times.",			'roadkill_enthusiast',	false],
-		["Oversinging Much...?",		"Hold down a note for 10 seconds.",					'oversinging',			false],
-		["Hyperactive",					"Finish a Song without going Idle.",				'hype',					false],
-		["Just the Two of Us",			"Finish a Song pressing only two keys.",			'two_keys',				false],
-		["Toaster Gamer",				"Have you tried to run the game on a toaster?",		'toastie',				false],
-		["Debugger",					"Beat the \"Test\" Stage from the Chart Editor.",	'debugger',				 true]
 	];
+
 	public static var achievementsMap:Map<String, Bool> = new Map<String, Bool>();
 
 	public static var henchmenDeath:Int = 0;
 	public static function unlockAchievement(name:String, ?onComplete:Void->Void):Void {
+		if (isAchievementUnlocked(name)) { if (onComplete != null) onComplete(); return;} // doesent really make sence but shut up
 		FlxG.log.add('Completed achievement "' + name +'"');
 		achievementsMap.set(name, true);
 		var thingamabob:AchievementThing = new AchievementThing(name);
 		var sound = Paths.sound('trophy');
+		ClientPrefs.saveSettings();
 
 		Paths.dumpExclusions.push('assets/images/achievements/$name.png'); // bullshit code but whatever, exclude the achievement image from clearing
 		Timer.delay(() -> {
@@ -94,7 +82,7 @@ class AttachedAchievement extends FlxSprite {
 		super(x, y);
 
 		changeAchievement(name);
-		antialiasing = ClientPrefs.globalAntialiasing;
+		antialiasing = ClientPrefs.data.globalAntialiasing;
 	}
 
 	public function changeAchievement(tag:String) {

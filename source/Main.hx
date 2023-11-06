@@ -99,7 +99,7 @@ class Main extends Sprite
 			game.height = Math.ceil(stageHeight / game.zoom);
 		}
 	
-		ClientPrefs.loadDefaultKeys();
+		PlankPrefs.loadDefaultKeys();
 		addChild(new FlxGame(game.width, game.height, game.initialState, game.framerate, game.framerate, game.skipSplash, game.startFullscreen));
 		FlxG.sound.soundTray.parent.removeChild(FlxG.sound.soundTray);
 		addChild(FlxG.sound.soundTray); // terrible fix but eh fuck it
@@ -108,14 +108,14 @@ class Main extends Sprite
 
 		PlayerSettings.init();
 		FlxG.save.bind('funkin', CoolUtil.getSavePath());
-		ClientPrefs.loadPrefs();
+		PlankPrefs.loadPrefs();
 		Highscore.load();
 
 		addChild(fpsVar = new FPS(10, 3));
 		Lib.current.stage.align = "tl";
 		Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
 		if(fpsVar != null)
-			fpsVar.visible = ClientPrefs.data.showFPS;
+			fpsVar.visible = PlankPrefs.data.showFPS;
 
 		#if desktop
 		if (!DiscordClient.isInitialized) {

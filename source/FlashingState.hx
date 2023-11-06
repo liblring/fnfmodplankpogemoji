@@ -73,8 +73,8 @@ class FlashingState extends MusicBeatState
 				FlxTween.tween(FlxG.camera, {zoom: 1}, Conductor.crochet / 1000, {ease: flixel.tweens.FlxEase.expoOut});
 				beatHit();
 				if(back) {
-					ClientPrefs.data.flashing = false;
-					ClientPrefs.saveSettings();
+					PlankPrefs.data.flashing = false;
+					PlankPrefs.saveSettings();
 					goober.loadGraphic(Paths.image('disagree'));
 					FlxG.camera.flash(FlxColor.RED, 1);
 					FlxG.sound.play(Paths.sound('cancelMenu'));

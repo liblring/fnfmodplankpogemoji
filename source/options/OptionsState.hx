@@ -65,7 +65,7 @@ class OptionsState extends MusicBeatState
 		bg.updateHitbox();
 
 		bg.screenCenter();
-		bg.antialiasing = ClientPrefs.data.globalAntialiasing;
+		bg.antialiasing = PlankPrefs.data.globalAntialiasing;
 		add(bg);
 
 		grpOptions = new FlxTypedGroup<Alphabet>();
@@ -85,14 +85,14 @@ class OptionsState extends MusicBeatState
 		add(selectorRight);
 
 		changeSelection();
-		ClientPrefs.saveSettings();
+		PlankPrefs.saveSettings();
 
 		super.create();
 	}
 
 	override function closeSubState() {
 		super.closeSubState();
-		ClientPrefs.saveSettings();
+		PlankPrefs.saveSettings();
 	}
 
 	override function update(elapsed:Float) {

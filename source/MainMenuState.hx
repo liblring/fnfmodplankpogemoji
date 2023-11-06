@@ -56,7 +56,8 @@ class MainMenuState extends MusicBeatState
 		'glade',
 		'stilic',
 		'daniel',
-		'sockngvoskcn;kvscnknvsck'
+		'sockngvoskcn;kvscnknvsck',
+		'plankprefs',
 	  ];
 
 	override function create()
@@ -70,7 +71,7 @@ class MainMenuState extends MusicBeatState
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("he is mainmenustating", null);
 		#end
-		debugKeys = ClientPrefs.copyKey(ClientPrefs.data.keyBinds.get('debug_1'));
+		debugKeys = PlankPrefs.copyKey(PlankPrefs.data.keyBinds.get('debug_1'));
 
 		camGame = new FlxCamera();
 		camAchievement = new FlxCamera();
@@ -89,19 +90,19 @@ class MainMenuState extends MusicBeatState
 		bg.setGraphicSize(Std.int(bg.width * 1.175));
 		bg.updateHitbox();
 		bg.screenCenter();
-		bg.antialiasing = ClientPrefs.data.globalAntialiasing;
+		bg.antialiasing = PlankPrefs.data.globalAntialiasing;
 		add(bg);
 
 		var bigmenushit:FlxSprite = new FlxSprite(0).loadGraphic(Paths.image('bigmenubullshit'));
 		bigmenushit.screenCenter();
-		bigmenushit.antialiasing = ClientPrefs.data.globalAntialiasing;
+		bigmenushit.antialiasing = PlankPrefs.data.globalAntialiasing;
 		add(bigmenushit);
 
 		var eventThingy:FlxBackdrop = new FlxBackdrop(Paths.image('sidewaysthingyidk'), Y);
 		eventThingy.velocity.set(0, 55);
 		eventThingy.x = 0;
 		eventThingy.scale.set(1.2, 1.2);
-		eventThingy.antialiasing = ClientPrefs.data.globalAntialiasing;
+		eventThingy.antialiasing = PlankPrefs.data.globalAntialiasing;
 		add(eventThingy);
 
 		var eventThingy2:FlxBackdrop = new FlxBackdrop(Paths.image('sidewaysthingyidk'), Y);
@@ -110,18 +111,18 @@ class MainMenuState extends MusicBeatState
 		eventThingy2.scale.set(1.2, 1.2);
 		eventThingy2.flipX = true;
 		eventThingy2.updateHitbox();
-		eventThingy2.antialiasing = ClientPrefs.data.globalAntialiasing;
+		eventThingy2.antialiasing = PlankPrefs.data.globalAntialiasing;
 		add(eventThingy2);
 
 		gifcat = new FlxSprite(100, 50);
 		gifcat.frames = Paths.getSparrowAtlas('catbounce');
 		gifcat.animation.addByPrefix('bouncer', "cat bounce", 24);
 		gifcat.animation.play("bouncer", 24);
-		gifcat.antialiasing = ClientPrefs.data.globalAntialiasing;
+		gifcat.antialiasing = PlankPrefs.data.globalAntialiasing;
 		add(gifcat);
 
 		var siller:FlxSprite = new FlxSprite(0, 0, Paths.image('sillymenuimages/${levicummingsgaylord[FlxG.random.int(0, levicummingsgaylord.length)]}'));
-		siller.antialiasing = ClientPrefs.data.globalAntialiasing;
+		siller.antialiasing = PlankPrefs.data.globalAntialiasing;
 		siller.y = FlxG.height - siller.height - 20;
 		if (siller.width > FlxG.width / 2 - 20) siller.setGraphicSize(Std.int(FlxG.width / 2 - 20), Std.int(siller.height));
 		siller.updateHitbox();
@@ -149,7 +150,7 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('selected', option.name + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = i;
-			menuItem.antialiasing = ClientPrefs.data.globalAntialiasing;
+			menuItem.antialiasing = PlankPrefs.data.globalAntialiasing;
 			menuItem.setGraphicSize(Std.int(menuItem.height * option.scale));
 			menuItem.updateHitbox();
 			menuItems.add(menuItem);
@@ -173,7 +174,7 @@ class MainMenuState extends MusicBeatState
 		// 	if(!Achievements.isAchievementUnlocked(Achievements.achievementsStuff[achieveID][2])) { //It's a friday night. WEEEEEEEEEEEEEEEEEE
 		// 		Achievements.achievementsMap.set(Achievements.achievementsStuff[achieveID][2], true);
 		// 		giveAchievement();
-		// 		ClientPrefs.saveSettings();
+		// 		PlankPrefs.saveSettings();
 		// 	}
 		// }
 		#end
@@ -222,7 +223,7 @@ class MainMenuState extends MusicBeatState
 				selectedSomethin = true;
 				FlxG.sound.play(Paths.sound('confirmMenu'));
 
-				// if(ClientPrefs.data.flashing) FlxFlicker.flicker(magenta, 1.1, 0.15, false);
+				// if(PlankPrefs.data.flashing) FlxFlicker.flicker(magenta, 1.1, 0.15, false);
 
 				menuItems.forEach(function(spr:FlxSprite) {
 					if (curSelected != spr.ID) {

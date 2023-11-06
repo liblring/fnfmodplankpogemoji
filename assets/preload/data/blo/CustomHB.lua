@@ -20,7 +20,7 @@ function onCreate()
     setProperty('healthBarBG.visible', false)
     setProperty('healthBar.y', getProperty('healthBar.y') - 1)
 
-    if getPropertyFromClass('ClientPrefs', 'downScroll') == true then
+    if getPropertyFromClass('PlankPrefs', 'downScroll') == true then
         setProperty('customhb.y', 63.5)
     end
 end

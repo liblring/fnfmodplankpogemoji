@@ -99,7 +99,7 @@ class TitleState extends MusicBeatState
 
 		var bg:FlxBackdrop = new FlxBackdrop(Paths.image("mnalk"), XY, 0, 0);
 		bg.velocity.set(100, 0);
-		// bg.antialiasing = ClientPrefs.data.globalAntialiasing;
+		// bg.antialiasing = PlankPrefs.data.globalAntialiasing;
 		// bg.setGraphicSize(Std.int(bg.width * 0.6));
 		// bg.updateHitbox();
 		add(bg);
@@ -110,19 +110,19 @@ class TitleState extends MusicBeatState
 		gfDance.frames = Paths.getSparrowAtlas('gfDanceTitle');
 		gfDance.animation.addByIndices('danceLeft', 'gfDance', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
 		gfDance.animation.addByIndices('danceRight', 'gfDance', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
-		gfDance.antialiasing = ClientPrefs.data.globalAntialiasing;
+		gfDance.antialiasing = PlankPrefs.data.globalAntialiasing;
 		gfDance.scale.set(0.9, 0.9);
 		gfDance.alpha = 1;
 		gfDance.angle = 330;
 
 		var bigtitleshit:FlxSprite = new FlxSprite(0).loadGraphic(Paths.image('titlescreenshite'));
 		bigtitleshit.screenCenter();
-		bigtitleshit.antialiasing = ClientPrefs.data.globalAntialiasing;
+		bigtitleshit.antialiasing = PlankPrefs.data.globalAntialiasing;
 		
 		logoBl = new FlxSprite(titleJSON.titlex, titleJSON.titley);
 		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
 
-		logoBl.antialiasing = ClientPrefs.data.globalAntialiasing;
+		logoBl.antialiasing = PlankPrefs.data.globalAntialiasing;
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
 		logoBl.animation.play('bump');
 		logoBl.updateHitbox();
@@ -159,7 +159,7 @@ class TitleState extends MusicBeatState
 			newTitle = true;
 			
 			titleText.animation.addByPrefix('idle', "ENTER IDLE", 24);
-			titleText.animation.addByPrefix('press', ClientPrefs.data.flashing ? "ENTER PRESSED" : "ENTER FREEZE", 24);
+			titleText.animation.addByPrefix('press', PlankPrefs.data.flashing ? "ENTER PRESSED" : "ENTER FREEZE", 24);
 		}
 		else {
 			newTitle = false;
@@ -168,7 +168,7 @@ class TitleState extends MusicBeatState
 			titleText.animation.addByPrefix('press', "ENTER PRESSED", 24);
 		}
 		
-		titleText.antialiasing = ClientPrefs.data.globalAntialiasing;
+		titleText.antialiasing = PlankPrefs.data.globalAntialiasing;
 		titleText.animation.play('idle');
 		add(titleText);
 
@@ -220,7 +220,7 @@ class TitleState extends MusicBeatState
 		{
 			if(pressedEnter)
 			{
-				FlxG.camera.flash(ClientPrefs.data.flashing ? FlxColor.WHITE : 0x4CFFFFFF, 1);
+				FlxG.camera.flash(PlankPrefs.data.flashing ? FlxColor.WHITE : 0x4CFFFFFF, 1);
 				FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
 
 				transitioning = true;

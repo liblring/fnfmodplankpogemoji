@@ -36,7 +36,7 @@ class Option
 	public var showBoyfriend:Bool = false;
 	public var scrollSpeed:Float = 50; //Only works on int/float, defines how fast it scrolls per second while holding left/right
 
-	private var variable:String = null; //Variable from ClientPrefs.hx
+	private var variable:String = null; //Variable from PlankPrefs.hx
 	public var defaultValue:Dynamic = null;
 
 	public var curOption:Int = 0; //Don't change this
@@ -109,11 +109,11 @@ class Option
 
 	public function getValue():Dynamic
 	{
-		return Reflect.getProperty(ClientPrefs.data, variable);
+		return Reflect.getProperty(PlankPrefs.data, variable);
 	}
 	public function setValue(value:Dynamic)
 	{
-		Reflect.setProperty(ClientPrefs.data, variable, value);
+		Reflect.setProperty(PlankPrefs.data, variable, value);
 	}
 
 	public function setChild(child:Alphabet)

@@ -97,18 +97,18 @@ class GraphicsSettingsSubState extends BaseOptionsMenu {
 	function onChangeAntiAliasing()
 		for (sprite in members)
 			if(sprite != null && (sprite is FlxSprite) && !(sprite is FlxText))
-				cast(sprite, FlxSprite).antialiasing = ClientPrefs.data.globalAntialiasing;
+				cast(sprite, FlxSprite).antialiasing = PlankPrefs.data.globalAntialiasing;
 
 	function onChangeFramerate() {
-		if(ClientPrefs.data.framerate > FlxG.drawFramerate)
+		if(PlankPrefs.data.framerate > FlxG.drawFramerate)
 		{
-			FlxG.updateFramerate = ClientPrefs.data.framerate;
-			FlxG.drawFramerate = ClientPrefs.data.framerate;
+			FlxG.updateFramerate = PlankPrefs.data.framerate;
+			FlxG.drawFramerate = PlankPrefs.data.framerate;
 		}
 		else
 		{
-			FlxG.drawFramerate = ClientPrefs.data.framerate;
-			FlxG.updateFramerate = ClientPrefs.data.framerate;
+			FlxG.drawFramerate = PlankPrefs.data.framerate;
+			FlxG.updateFramerate = PlankPrefs.data.framerate;
 		}
 	}
 }

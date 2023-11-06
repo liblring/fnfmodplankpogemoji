@@ -336,7 +336,7 @@ class AlphaCharacter extends FlxSprite
 		super(x, y);
 		this.parent = parent;
 		image = 'alphabet';
-		antialiasing = ClientPrefs.data.globalAntialiasing;
+		antialiasing = PlankPrefs.data.globalAntialiasing;
 
 		var curLetter:Letter = allLetters.get('?');
 		var lowercase = character.toLowerCase();

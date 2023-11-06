@@ -7,7 +7,7 @@ import flixel.graphics.FlxGraphic;
 import Controls;
 
 @:publicFields
-class ClientData {
+class PlankData {
 	var downScroll:Bool = false;
 	var middleScroll:Bool = false;
 	var opponentStrums:Bool = true;
@@ -90,15 +90,15 @@ class ClientData {
 	];
 
 
-	@:allow(ClientPrefs)
+	@:allow(PlankPrefs)
 	private function new() {
 		
 	}
 }
 
-class ClientPrefs {
+class PlankPrefs {
 
-	public static var data:ClientData = new ClientData();
+	public static var data:PlankData = new PlankData();
 	public static var defaultKeys:Map<String, Array<FlxKey>> = null;
 
 	public static function loadDefaultKeys()

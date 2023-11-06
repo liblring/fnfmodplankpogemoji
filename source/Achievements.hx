@@ -23,6 +23,7 @@ class Achievements {
 		["rude",						"how are yuou this rude smh,",						'rude',					false],
 		["the fuck are you doing",		"set your fps cap higher than your refresh rate",	'fps',					false],
 		["overpetted",					"what have you done",								'overpet',				false],
+		["help with my flower",			"try to run a lua script",					'helpwithmyflower',				false],
 	];
 
 	public static var achievementsMap:Map<String, Bool> = new Map<String, Bool>();
@@ -34,7 +35,7 @@ class Achievements {
 		achievementsMap.set(name, true);
 		var thingamabob:AchievementThing = new AchievementThing(name);
 		var sound = Paths.sound('trophy');
-		ClientPrefs.saveSettings();
+		PlankPrefs.saveSettings();
 
 		Paths.dumpExclusions.push('assets/images/achievements/$name.png'); // bullshit code but whatever, exclude the achievement image from clearing
 		Timer.delay(() -> {
@@ -82,7 +83,7 @@ class AttachedAchievement extends FlxSprite {
 		super(x, y);
 
 		changeAchievement(name);
-		antialiasing = ClientPrefs.data.globalAntialiasing;
+		antialiasing = PlankPrefs.data.globalAntialiasing;
 	}
 
 	public function changeAchievement(tag:String) {

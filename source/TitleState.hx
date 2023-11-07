@@ -55,6 +55,16 @@ class TitleState extends MusicBeatState
 	public static var volumeUpKeys:Array<FlxKey> = [FlxKey.NUMPADPLUS, FlxKey.PLUS];
 
 	var titleJSON:TitleData;
+	var logo:FlxSprite;
+	var gfDance:FlxSprite;
+	var danceLeft:Bool = false;
+	var titleText:FlxSprite;
+	var swagShader:ColorSwap;
+
+	var transitioning:Bool = false;
+	
+	var petAmmount:Int = 0;
+	var petThreshold:Int = 15;
 
 	override public function create():Void { // todo: add big balls
 		Paths.clearStoredMemory();
@@ -84,24 +94,17 @@ class TitleState extends MusicBeatState
 
 
 		if(FlxG.save.data != null && FlxG.save.data.fullscreen)
-		{
 			FlxG.fullscreen = FlxG.save.data.fullscreen;
-			//trace('LOADED FULLSCREEN SETTING!!');
-		}
+
 		persistentUpdate = true;
 		persistentDraw = true;
 
-		if(FlxG.sound.music == null)
-			FlxG.sound.playMusic(Paths.music('freakyMenu'));
+		if(FlxG.sound.music == null) FlxG.sound.playMusic(Paths.music('freakyMenu'));
 
 		Conductor.changeBPM(titleJSON.bpm);
-		persistentUpdate = true;
 
 		var bg:FlxBackdrop = new FlxBackdrop(Paths.image("mnalk"), XY, 0, 0);
 		bg.velocity.set(100, 0);
-		// bg.antialiasing = PlankPrefs.data.globalAntialiasing;
-		// bg.setGraphicSize(Std.int(bg.width * 0.6));
-		// bg.updateHitbox();
 		add(bg);
 
 		swagShader = new ColorSwap();
@@ -112,87 +115,38 @@ class TitleState extends MusicBeatState
 		gfDance.animation.addByIndices('danceRight', 'gfDance', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
 		gfDance.antialiasing = PlankPrefs.data.globalAntialiasing;
 		gfDance.scale.set(0.9, 0.9);
-		gfDance.alpha = 1;
 		gfDance.angle = 330;
 
-		var bigtitleshit:FlxSprite = new FlxSprite(0).loadGraphic(Paths.image('titlescreenshite'));
-		bigtitleshit.screenCenter();
+		var bigtitleshit:FlxSprite = new FlxSprite(0, 0, Paths.image('titlescreenshite'));
 		bigtitleshit.antialiasing = PlankPrefs.data.globalAntialiasing;
 		
-		logoBl = new FlxSprite(titleJSON.titlex, titleJSON.titley);
-		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
-
-		logoBl.antialiasing = PlankPrefs.data.globalAntialiasing;
-		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
-		logoBl.animation.play('bump');
-		logoBl.updateHitbox();
-		// logoBl.color = FlxColor.BLACK;
+		logo = new FlxSprite(titleJSON.titlex, titleJSON.titley);
+		logo.frames = Paths.getSparrowAtlas('logoBumpin');
+		logo.antialiasing = PlankPrefs.data.globalAntialiasing;
+		logo.animation.addByPrefix('bump', 'logo bumpin', 24, false);
+		logo.animation.play('bump');
+		logo.updateHitbox();
 
 		add(gfDance);
 		add(bigtitleshit);
-		add(logoBl);
+		add(logo);
 
 		titleText = new FlxSprite(titleJSON.startx, titleJSON.starty);
-		#if (desktop && MODS_ALLOWED)
-		var path = "mods/" + Paths.currentModDirectory + "/images/titleEnter.png";
-		//trace(path, FileSystem.exists(path));
-		if (!FileSystem.exists(path)){
-			path = "mods/images/titleEnter.png";
-		}
-		//trace(path, FileSystem.exists(path));
-		if (!FileSystem.exists(path)){
-			path = "assets/images/titleEnter.png";
-		}
-		//trace(path, FileSystem.exists(path));
-		titleText.frames = FlxAtlasFrames.fromSparrow(BitmapData.fromFile(path),File.getContent(StringTools.replace(path,".png",".xml")));
-		#else
-
 		titleText.frames = Paths.getSparrowAtlas('titleEnter');
-		#end
-		var animFrames:Array<FlxFrame> = [];
-		@:privateAccess {
-			titleText.animation.findByPrefix(animFrames, "ENTER IDLE");
-			titleText.animation.findByPrefix(animFrames, "ENTER FREEZE");
-		}
 		
-		if (animFrames.length > 0) {
-			newTitle = true;
-			
-			titleText.animation.addByPrefix('idle', "ENTER IDLE", 24);
-			titleText.animation.addByPrefix('press', PlankPrefs.data.flashing ? "ENTER PRESSED" : "ENTER FREEZE", 24);
-		}
-		else {
-			newTitle = false;
-			
-			titleText.animation.addByPrefix('idle', "Press Enter to Begin", 24);
-			titleText.animation.addByPrefix('press', "ENTER PRESSED", 24);
-		}
-		
+		titleText.animation.addByPrefix('idle', 'ENTER IDLE', 24);
 		titleText.antialiasing = PlankPrefs.data.globalAntialiasing;
 		titleText.animation.play('idle');
 		add(titleText);
 
 		gfDance.shader = swagShader.shader;
-		logoBl.shader = swagShader.shader;
+		logo.shader = swagShader.shader;
 		titleText.shader = swagShader.shader;
 	}
 
-	var logoBl:FlxSprite;
-	var gfDance:FlxSprite;
-	var danceLeft:Bool = false;
-	var titleText:FlxSprite;
-	var swagShader:ColorSwap = null;
-
-	var transitioning:Bool = false;
-	
-	var newTitle:Bool = false;
-	var petAmmount:Int = 0;
-	var petThreshold:Int = 15;
-
 	override function update(elapsed:Float)
 	{
-		if (FlxG.sound.music != null)
-			Conductor.songPosition = FlxG.sound.music.time;
+		Conductor.songPosition = FlxG.sound.music.time;
 
 		if (FlxG.mouse.overlaps(gfDance) && FlxG.mouse.justPressed && petAmmount < petThreshold) {
 			petAmmount++;
@@ -204,7 +158,7 @@ class TitleState extends MusicBeatState
 				FlxTween.tween(gfDance.scale, {x: 10, y: 10}, 0.5, {onComplete: (twn) -> {
 					FlxG.game.visible = Main.fpsVar.visible = Main.border.forcedVisible = false;
 					FlxG.sound.music.stop();
-					Achievements.unlockAchievement('overpet', () -> Sys.exit(1));
+					Achievements.unlockAchievement('overpet', () -> Sys.exit(1), true);
 				}});
 			} else {
 				FlxG.sound.play(Paths.sound('pet${FlxG.random.int(1, 6)}'));
@@ -216,26 +170,20 @@ class TitleState extends MusicBeatState
 
 		var pressedEnter:Bool = FlxG.keys.justPressed.ENTER || controls.ACCEPT;
 
-		if (!transitioning)
+		if(pressedEnter && !transitioning)
 		{
-			if(pressedEnter)
-			{
-				FlxG.camera.flash(PlankPrefs.data.flashing ? FlxColor.WHITE : 0x4CFFFFFF, 1);
-				FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
+			FlxG.camera.flash(PlankPrefs.data.flashing ? FlxColor.WHITE : 0x4CFFFFFF, 1);
+			FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
 
-				transitioning = true;
+			transitioning = true;
 
-				new FlxTimer().start(1, function(tmr:FlxTimer) {
-					MusicBeatState.switchState(new MainMenuState());
-				});
-			}
+			new FlxTimer().start(1, function(tmr:FlxTimer) {
+				MusicBeatState.switchState(new MainMenuState());
+			});
 		}
 
-		if(swagShader != null)
-		{
-			if(controls.UI_LEFT) swagShader.hue -= elapsed * 0.1;
-			if(controls.UI_RIGHT) swagShader.hue += elapsed * 0.1;
-		}
+		if(controls.UI_LEFT) swagShader.hue -= elapsed * 0.1;
+		if(controls.UI_RIGHT) swagShader.hue += elapsed * 0.1;
 
 		super.update(elapsed);
 	}
@@ -244,8 +192,8 @@ class TitleState extends MusicBeatState
 	{
 		super.beatHit();
 
-		if(logoBl != null)
-			logoBl.animation.play('bump', true);
+		if(logo != null)
+			logo.animation.play('bump', true);
 
 		if(gfDance != null) {
 			danceLeft = !danceLeft;

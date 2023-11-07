@@ -111,7 +111,7 @@ class Main extends Sprite
 		PlankPrefs.loadPrefs();
 		Highscore.load();
 
-		addChild(fpsVar = new FPS(10, 3));
+		FlxG.stage.addChild(fpsVar = new FPS(10, 3));
 		Lib.current.stage.align = "tl";
 		Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
 		if(fpsVar != null)
@@ -126,7 +126,7 @@ class Main extends Sprite
 		}
 		#end
 
-		addChild(border = new WindowBorder(FlxG.stage.window));
+		FlxG.stage.addChild(border = new WindowBorder(FlxG.stage.window));
 		// border.alpha = 0.5;
 		border.addEventListener('show', (evnt) -> {
 			fpsVar.x = 8;

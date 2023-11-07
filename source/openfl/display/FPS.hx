@@ -92,7 +92,7 @@ class FPS extends Sprite {
 		if (currentMemory > maxMemory)
 			maxMemory = currentMemory;
 
-		text = 'fps: ${currentFPS}\n;emory: ${FlxStringUtil.formatBytes(currentMemory)} / ${FlxStringUtil.formatBytes(maxMemory)}';
+		text = 'pfs: ${currentFPS}\n;emory: ${FlxStringUtil.formatBytes(currentMemory)} / ${FlxStringUtil.formatBytes(maxMemory)}';
 
 		var mappedFPS = FlxMath.remapToRange(currentFPS, FlxG.drawFramerate, 0, 0, 1);
 

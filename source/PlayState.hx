@@ -698,11 +698,18 @@ class PlayState extends MusicBeatState
 		for (folder in foldersToCheck)
 			if (FileSystem.exists(folder))
 				for (file in FileSystem.readDirectory(folder))
-					if (file.endsWith('.lua') && !filesPushed.contains(file))
+					if (file.endsWith('.lua'))
 						Achievements.unlockAchievement('helpwithmyflower');
+
+		for (folder in foldersToCheck)
+			if (FileSystem.exists(folder))
+				for (file in FileSystem.readDirectory(folder))
+					if (file.endsWith('.hx'))
+						Achievements.unlockAchievement('pe07');
 
 		// STAGE SCRIPTS
 		startLuasOnFolder('stages/' + curStage + '.lua');
+		startLuasOnFolder('stages/' + curStage + '.hx');
 
 		var gfVersion:String = SONG.gfVersion;
 		if (gfVersion == null || gfVersion.length < 1) {
@@ -937,10 +944,15 @@ class PlayState extends MusicBeatState
 		// cameras = [FlxG.cameras.list[1]];
 		startingSong = true;
 
-		for (notetype in noteTypeMap.keys())
+		for (notetype in noteTypeMap.keys()) {
 			startLuasOnFolder('custom_notetypes/' + notetype + '.lua');
-		for (event in eventPushedMap.keys())
+			startLuasOnFolder('custom_notetypes/' + notetype + '.hx');
+		}
+
+		for (event in eventPushedMap.keys()) {
 			startLuasOnFolder('custom_events/' + event + '.lua');
+			startLuasOnFolder('custom_events/' + event + '.hx');
+		}
 		noteTypeMap.clear();
 		noteTypeMap = null;
 		eventPushedMap.clear();
@@ -971,8 +983,14 @@ class PlayState extends MusicBeatState
 		for (folder in foldersToCheck)
 			if (FileSystem.exists(folder))
 				for (file in FileSystem.readDirectory(folder))
-					if (file.endsWith('.lua') && !filesPushed.contains(file))
+					if (file.endsWith('.lua'))
 						Achievements.unlockAchievement('helpwithmyflower');
+
+		for (folder in foldersToCheck)
+			if (FileSystem.exists(folder))
+				for (file in FileSystem.readDirectory(folder))
+					if (file.endsWith('.hx'))
+						Achievements.unlockAchievement('pe07');
 
 		var daSong:String = Paths.formatToSongPath(curSong);
 		if (isStoryMode && !seenCutscene)
@@ -1201,41 +1219,16 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	function startCharacterLua(name:String)
-	{
-		var doPush:Bool = false;
+	function startCharacterLua(name:String) {
 		var luaFile:String = 'characters/' + name + '.lua';
-		#if MODS_ALLOWED
-		if (FileSystem.exists(Paths.modFolders(luaFile)))
-		{
-			luaFile = Paths.modFolders(luaFile);
-			doPush = true;
-		}
-		else
-		{
-			luaFile = Paths.getPreloadPath(luaFile);
-			if (FileSystem.exists(luaFile))
-			{
-				doPush = true;
-			}
-		}
-		#else
 		luaFile = Paths.getPreloadPath(luaFile);
 		if (Assets.exists(luaFile))
-		{
-			doPush = true;
-		}
-		#end
-
-		if (doPush)
-		{
-			for (script in luaArray)
-			{
-				if (script.scriptName == luaFile)
-					return;
-			}
 			Achievements.unlockAchievement('helpwithmyflower');
-		}
+
+		var hxFile:String = 'characters/' + name + '.hx';
+		hxFile = Paths.getPreloadPath(hxFile);
+		if (Assets.exists(hxFile))
+			Achievements.unlockAchievement('pe07');
 	}
 
 	public function getLuaObject(tag:String, text:Bool = true):FlxSprite
@@ -3067,6 +3060,8 @@ class PlayState extends MusicBeatState
 			}
 			playbackRate = 1;
 
+			if (SONG.song.toLowerCase() == 'luzny') Achievements.unlockAchievement('luzny');
+
 			if (chartingMode)
 			{
 				openChartEditor();
@@ -4080,31 +4075,13 @@ class PlayState extends MusicBeatState
 		callOnLuas('onSectionHit', []);
 	}
 
-	public function startLuasOnFolder(luaFile:String)
-	{
-		for (script in luaArray)
-			if (script.scriptName == luaFile)
-				return false;
-
-		#if MODS_ALLOWED
-		var luaToLoad:String = Paths.modFolders(luaFile);
-		if (FileSystem.exists(luaToLoad)) {
-			Achievements.unlockAchievement('helpwithmyflower');
-			return true;
-		} else {
-			luaToLoad = Paths.getPreloadPath(luaFile);
-			if (FileSystem.exists(luaToLoad)) {
-				Achievements.unlockAchievement('helpwithmyflower');
-				return true;
-			}
-		}
-		#elseif sys
+	public function startLuasOnFolder(luaFile:String) {
 		var luaToLoad:String = Paths.getPreloadPath(luaFile);
 		if (OpenFlAssets.exists(luaToLoad)) {
-			Achievements.unlockAchievement('helpwithmyflower');
+			trace(luaFile);
+			Achievements.unlockAchievement(luaFile.endsWith('.lua') ? 'helpwithmyflower' : 'pe07');
 			return true;
 		}
-		#end
 		return false;
 	}
 

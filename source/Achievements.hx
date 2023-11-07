@@ -24,12 +24,14 @@ class Achievements {
 		["the fuck are you doing",		"set your fps cap higher than your refresh rate",	'fps',					false],
 		["overpetted",					"what have you done",								'overpet',				false],
 		["help with my flower",			"try to run a lua script",					'helpwithmyflower',				false],
+		["this isnt even pe 0.7 what the fuck",		"try to run a hscript file",			'pe07',					false],
+		["LUŹNY",						"luźny.",											'luzny',				false],
 	];
 
 	public static var achievementsMap:Map<String, Bool> = new Map<String, Bool>();
 
 	public static var henchmenDeath:Int = 0;
-	public static function unlockAchievement(name:String, ?onComplete:Void->Void):Void {
+	public static function unlockAchievement(name:String, ?onComplete:Void->Void, ?parentOutsideOfGame:Bool = false):Void {
 		if (isAchievementUnlocked(name)) { if (onComplete != null) onComplete(); return;} // doesent really make sence but shut up
 		FlxG.log.add('Completed achievement "' + name +'"');
 		achievementsMap.set(name, true);
@@ -42,10 +44,10 @@ class Achievements {
 			FlxG.sound.play(sound, 0.7);
 			thingamabob.alpha = 0;
 			Actuate.tween(thingamabob, 0.25, {alpha: 1});
-			FlxG.stage.addChild(thingamabob);
+			if (parentOutsideOfGame) FlxG.stage.addChild(thingamabob) else FlxG.addChildBelowMouse(thingamabob);
 			Actuate.tween(thingamabob, 0.25, {alpha: 0}, false).onComplete(() -> {
 				Paths.dumpExclusions.remove('assets/images/achievements/$name.png');
-				FlxG.stage.removeChild(thingamabob);
+				if (parentOutsideOfGame) FlxG.stage.removeChild(thingamabob) else FlxG.removeChild(thingamabob);
 				if (onComplete != null) onComplete();
 			}).delay(6);
 		}, 1000);

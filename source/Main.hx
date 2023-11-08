@@ -156,7 +156,7 @@ class Main extends Sprite
 		dateNow = dateNow.replace(" ", "_");
 		dateNow = dateNow.replace(":", "'");
 
-		path = "./crash/" + "PsychEngine_" + dateNow + ".txt";
+		path = "./crash/" + "dghfghdgfhdghfgdhgfhdghfgdhg_" + dateNow + ".txt";
 
 		for (stackItem in callStack)
 		{
@@ -169,9 +169,9 @@ class Main extends Sprite
 			}
 		}
 
-		trace(errMsg);
+		Sys.stderr().writeString('$errMsg\n');
 
-		errMsg += "\nUncaught Error: " + message + "\nPlease report this error to the GitHub page: https://github.com/ShadowMario/FNF-PsychEngine\n\n> Crash Handler written by: sqirra-rng";
+		errMsg += "\nUncaught Error: " + message + "\nplease DONT report this to the psych engine github\nthis mod's source is basically modified to hell and back";
 
 		if (!FileSystem.exists("./crash/"))
 			FileSystem.createDirectory("./crash/");
@@ -181,18 +181,19 @@ class Main extends Sprite
 		Sys.println(errMsg);
 		Sys.println("Crash dump saved in " + Path.normalize(path));
 
-		#if hl
-		var flags:haxe.EnumFlags<hl.UI.DialogFlags> = new haxe.EnumFlags<hl.UI.DialogFlags>();
-		flags.set(hl.UI.DialogFlags.IsError);
-		hl.UI.dialog("Error!", errMsg, flags);
-		#else
-		Application.current.window.alert(errMsg, "Error!");
-		#end
+		var log:hl.UI.WinLog = new hl.UI.WinLog('guh????', 500, 400);
+		log.setTextContent(errMsg, false);
 
-		#if discord_rpc
-		DiscordClient.shutdown();
-		#end
-		Sys.exit(1);
+		// someone later remind me to override one class to add the restart and continue options
+		var close:hl.UI.Button = new hl.UI.Button(log, 'close');
+		// var restart:hl.UI.Button = new hl.UI.Button(log, 'restart game');
+		// var continueB:hl.UI.Button = new hl.UI.Button(log, 'continue');
+		close.onClick = () -> Sys.exit(1);
+		// restart.onClick = () -> {FlxG.resetGame(); hl.UI.stopLoop();}
+		// continueB.onClick = () ->  hl.UI.stopLoop();
+
+		while(hl.UI.loop(true) != Quit) {}
+		log.destroy();
 	}
 	#end
 }

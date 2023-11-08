@@ -29,7 +29,7 @@ import Discord.DiscordClient;
 
 //crash handler stuff
 #if CRASH_HANDLER
-import openfl.events.UncaughtErrorEvent;
+import openfl.events.UncaughtErrorEvent;	
 import haxe.CallStack;
 import haxe.io.Path;
 import sys.FileSystem;
@@ -39,6 +39,7 @@ import sys.io.Process;
 
 using StringTools;
 
+@:access(openfl.display.Stage)
 class Main extends Sprite
 {
 	var game = {
@@ -62,7 +63,6 @@ class Main extends Sprite
 	public function new()
 	{
 		super();
-
 		if (stage != null)
 			init();
 		else
@@ -79,19 +79,13 @@ class Main extends Sprite
 
 	private function setupGame():Void
 	{
-		#if (CRASH_HANDLER && !hl)
-		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);
-		#end
-		
-		#if (CRASH_HANDLER && hl)
+		stage.onError.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);
 		hl.Api.setErrorHandler(onCrash);
-		#end
 
 		var stageWidth:Int = Lib.current.stage.stageWidth;
 		var stageHeight:Int = Lib.current.stage.stageHeight;
 
-		if (game.zoom == -1.0)
-		{
+		if (game.zoom == -1.0) {
 			var ratioX:Float = stageWidth / game.width;
 			var ratioY:Float = stageHeight / game.height;
 			game.zoom = Math.min(ratioX, ratioY);
@@ -126,6 +120,8 @@ class Main extends Sprite
 		}
 		#end
 
+		balls;
+
 		FlxG.stage.addChild(border = new WindowBorder(FlxG.stage.window));
 		// border.alpha = 0.5;
 		border.addEventListener('show', (evnt) -> {
@@ -145,7 +141,7 @@ class Main extends Sprite
 	{
 		var message:String = "";
 		if ((e is UncaughtErrorEvent))
-			message = e.error;
+			message = try Std.string(e.error) catch(_:haxe.Exception) "Unknown";
 		else
 			message = try Std.string(e) catch(_:haxe.Exception) "Unknown";
 		var errMsg:String = "";
@@ -186,14 +182,15 @@ class Main extends Sprite
 
 		// someone later remind me to override one class to add the restart and continue options
 		var close:hl.UI.Button = new hl.UI.Button(log, 'close');
-		// var restart:hl.UI.Button = new hl.UI.Button(log, 'restart game');
-		// var continueB:hl.UI.Button = new hl.UI.Button(log, 'continue');
+		var restart:hl.UI.Button = new hl.UI.Button(log, 'restart game');
+		var continueB:hl.UI.Button = new hl.UI.Button(log, 'continue');
 		close.onClick = () -> Sys.exit(1);
-		// restart.onClick = () -> {FlxG.resetGame(); hl.UI.stopLoop();}
-		// continueB.onClick = () ->  hl.UI.stopLoop();
+		restart.onClick = () -> {FlxG.resetGame(); hl.UI.stopLoop();}
+		continueB.onClick = () ->  hl.UI.stopLoop();
 
 		while(hl.UI.loop(true) != Quit) {}
 		log.destroy();
+		stage.__rendering = false; // make it render again
 	}
 	#end
 }

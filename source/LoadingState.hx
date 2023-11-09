@@ -5,6 +5,7 @@ import lime.app.Future;
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.FlxSprite;
+import flixel.sound.FlxSound;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import flixel.graphics.frames.FlxAtlasFrames;
@@ -45,6 +46,7 @@ class LoadingState extends MusicBeatState
 
 	var funkay:FlxSprite;
 	var loadBar:FlxSprite;
+	var souddn:FlxSound;
 
 	override function create() {
 		if (showLoading) openSubState(new ShatterTransition(pastStateBitmap));
@@ -53,14 +55,18 @@ class LoadingState extends MusicBeatState
 
 		var imagePath:String = FileSystem.absolutePath('assets\\images\\hdgfhdgfhgdhfgdhfgdhgfhdgfhdgfhdgfhdgfhdghfgdhfghdgfhdghfghfgdhgfhdgfhdg');
 		var tomboyFiles:Array<String> = FileSystem.readDirectory(imagePath);
+		var hdfg:Int = FlxG.random.int(0, tomboyFiles.length - 1);
 
-		funkay = new FlxSprite(0, 0, Paths.directGraphic('$imagePath\\${tomboyFiles[FlxG.random.int(0, tomboyFiles.length - 1)]}'));
+		funkay = new FlxSprite(0, 0, Paths.directGraphic('$imagePath\\${tomboyFiles[hdfg]}'));
 		funkay.setGraphicSize(FlxG.width, FlxG.height);
 		funkay.updateHitbox();
 		funkay.antialiasing = PlankPrefs.data.globalAntialiasing;
 		add(funkay);
 		funkay.scrollFactor.set();
 		funkay.screenCenter();
+
+		if (Paths.fileExists('sounds/LOAD/${Path.withoutExtension(tomboyFiles[hdfg])}.ogg', SOUND))
+			souddn = FlxG.sound.load(Paths.sound('LOAD/${Path.withoutExtension(tomboyFiles[hdfg])}'));
 
 		loadBar = new FlxSprite(0, FlxG.height - 20).makeGraphic(FlxG.width, 10, 0xffff16d2);
 		loadBar.screenCenter(X);
@@ -70,15 +76,16 @@ class LoadingState extends MusicBeatState
 		FlxG.camera.zoom = 1.1;
 		FlxTween.tween(FlxG.camera, {zoom: 1}, 0.75, {ease: FlxEase.quartInOut});
 
-		initSongsManifest().onComplete(function(lib)
-		{
+		initSongsManifest().onComplete((lib) -> {
+
 			callbacks = new MultiCallback(onLoad);
 			var introComplete = callbacks.add("introComplete");
-			/*if (PlayState.SONG != null) {
-				checkLoadSong(getSongPath());
-				if (PlayState.SONG.needsVoices)
-					checkLoadSong(getVocalPath());
-			}*/
+			if (souddn != null) {
+				var soundComplete = callbacks.add("soundComplete");
+				souddn.onComplete = soundComplete;
+				souddn.play();
+			}
+
 			checkLibrary("shared");
 			if (directory != null && directory.length > 0 && directory != 'shared')
 				checkLibrary(directory);

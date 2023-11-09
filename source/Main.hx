@@ -120,8 +120,6 @@ class Main extends Sprite
 		}
 		#end
 
-		balls;
-
 		FlxG.stage.addChild(border = new WindowBorder(FlxG.stage.window));
 		// border.alpha = 0.5;
 		border.addEventListener('show', (evnt) -> {

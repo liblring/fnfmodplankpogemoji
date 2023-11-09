@@ -29,9 +29,9 @@ class BGSprite extends FlxSprite
 		antialiasing = PlankPrefs.data.globalAntialiasing;
 	}
 
-	public function dance(?forceplay:Bool = false) {
+	public function dance(?forced:Bool = false) {
 		if(idleAnim != null) {
-			animation.play(idleAnim, forceplay);
+			animation.play(idleAnim, forced);
 		}
 	}
 }

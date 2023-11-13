@@ -27,8 +27,7 @@ import Controls;
 
 using StringTools;
 
-class BaseOptionsMenu extends MusicBeatSubstate
-{
+class BaseOptionsMenu extends MusicBeatSubstate {
 	private var curOption:Option = null;
 	private var curSelected:Int = 0;
 	private var optionsArray:Array<Option>;
@@ -87,8 +86,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		descText.borderSize = 2.4;
 		add(descText);
 
-		for (i in 0...optionsArray.length)
-		{
+		for (i in 0...optionsArray.length) {
 			var optionText:Alphabet = new Alphabet(290, 260, optionsArray[i].name, false);
 			optionText.isMenuItem = true;
 			/*optionText.forceX = 300;
@@ -101,10 +99,9 @@ class BaseOptionsMenu extends MusicBeatSubstate
 				checkbox.sprTracker = optionText;
 				checkbox.ID = i;
 				checkboxGroup.add(checkbox);
-			} else {
+			} else if (optionsArray[i].type != 'none') {
 				optionText.x -= 80;
 				optionText.startPosition.x -= 80;
-				//optionText.xAdd -= 80;
 				var valueText:AttachedText = new AttachedText('' + optionsArray[i].getValue(), optionText.width + 80);
 				valueText.sprTracker = optionText;
 				valueText.copyAlpha = true;
@@ -112,12 +109,9 @@ class BaseOptionsMenu extends MusicBeatSubstate
 				grpTexts.add(valueText);
 				optionsArray[i].setChild(valueText);
 			}
-			//optionText.snapToPosition(); //Don't ignore me when i ask for not making a fucking pull request to uncomment this line ok
 
 			if(optionsArray[i].showBoyfriend && boyfriend == null)
-			{
 				reloadBoyfriend();
-			}
 			updateTextFrom(optionsArray[i]);
 		}
 
@@ -133,35 +127,25 @@ class BaseOptionsMenu extends MusicBeatSubstate
 	var nextAccept:Int = 5;
 	var holdTime:Float = 0;
 	var holdValue:Float = 0;
-	override function update(elapsed:Float)
-	{
+
+	override function update(elapsed:Float) {
 		if (controls.UI_UP_P)
-		{
 			changeSelection(-1);
-		}
 		if (controls.UI_DOWN_P)
-		{
 			changeSelection(1);
-		}
 
 		if (controls.BACK) {
 			close();
-			FlxG.sound.play(Paths.sound('cancelMenu'));
+			FlxG.sound.play(Paths.sound('cancelMenu.wav'));
 		}
 
-		if(nextAccept <= 0)
-		{
-			var usesCheckbox = true;
-			if(curOption.type != 'bool')
-			{
-				usesCheckbox = false;
-			}
+		if(nextAccept <= 0) {
+			var usesCheckbox = curOption.type == 'bool';
 
-			if(usesCheckbox)
-			{
-				if(controls.ACCEPT)
-				{
-					FlxG.sound.play(Paths.sound('scrollMenu'));
+			if (curOption.type == 'none') if (controls.ACCEPT) curOption.change();
+			if(usesCheckbox) {
+				if(controls.ACCEPT) {
+					FlxG.sound.play(Paths.sound('scrollMenu.wav'));
 					curOption.setValue((curOption.getValue() == true) ? false : true);
 					curOption.change();
 					reloadCheckboxes();
@@ -172,56 +156,48 @@ class BaseOptionsMenu extends MusicBeatSubstate
 					if(holdTime > 0.5 || pressed) {
 						if(pressed) {
 							var add:Dynamic = null;
-							if(curOption.type != 'string') {
+							if(curOption.type != 'string')
 								add = controls.UI_LEFT ? -curOption.changeValue : curOption.changeValue;
-							}
 
-							switch(curOption.type)
-							{
+							switch(curOption.type) {
 								case 'int' | 'float' | 'percent':
 									holdValue = curOption.getValue() + add;
 									if(holdValue < curOption.minValue) holdValue = curOption.minValue;
 									else if (holdValue > curOption.maxValue) holdValue = curOption.maxValue;
 
-									switch(curOption.type)
-									{
+									switch(curOption.type) {
 										case 'int':
 											holdValue = Math.round(holdValue);
 											curOption.setValue(holdValue);
-
 										case 'float' | 'percent':
 											holdValue = FlxMath.roundDecimal(holdValue, curOption.decimals);
 											curOption.setValue(holdValue);
 									}
-
 								case 'string':
 									var num:Int = curOption.curOption; //lol
 									if(controls.UI_LEFT_P) --num;
 									else num++;
 
-									if(num < 0) {
+									if(num < 0)
 										num = curOption.options.length - 1;
-									} else if(num >= curOption.options.length) {
+									else if(num >= curOption.options.length)
 										num = 0;
-									}
 
 									curOption.curOption = num;
 									curOption.setValue(curOption.options[num]); //lol
-									//trace(curOption.options[num]);
 							}
+
 							updateTextFrom(curOption);
 							curOption.change();
-							FlxG.sound.play(Paths.sound('scrollMenu'));
+							FlxG.sound.play(Paths.sound('scrollMenu.wav'));
 						} else if(curOption.type != 'string') {
 							holdValue += curOption.scrollSpeed * elapsed * (controls.UI_LEFT ? -1 : 1);
 							if(holdValue < curOption.minValue) holdValue = curOption.minValue;
 							else if (holdValue > curOption.maxValue) holdValue = curOption.maxValue;
 
-							switch(curOption.type)
-							{
+							switch(curOption.type) {
 								case 'int':
 									curOption.setValue(Math.round(holdValue));
-								
 								case 'float' | 'percent':
 									curOption.setValue(FlxMath.roundDecimal(holdValue, curOption.decimals));
 							}
@@ -230,42 +206,33 @@ class BaseOptionsMenu extends MusicBeatSubstate
 						}
 					}
 
-					if(curOption.type != 'string') {
+					if(curOption.type != 'string')
 						holdTime += elapsed;
-					}
-				} else if(controls.UI_LEFT_R || controls.UI_RIGHT_R) {
-					clearHold();
-				}
+				} else if(controls.UI_LEFT_R || controls.UI_RIGHT_R) clearHold();
 			}
 
-			if(controls.RESET)
-			{
-				for (i in 0...optionsArray.length)
-				{
+			if(controls.RESET) {
+				for (i in 0...optionsArray.length) {
 					var leOption:Option = optionsArray[i];
 					leOption.setValue(leOption.defaultValue);
-					if(leOption.type != 'bool')
-					{
+					if(leOption.type != 'bool') {
 						if(leOption.type == 'string')
-						{
 							leOption.curOption = leOption.options.indexOf(leOption.getValue());
-						}
 						updateTextFrom(leOption);
 					}
+
 					leOption.change();
 				}
-				FlxG.sound.play(Paths.sound('cancelMenu'));
+				FlxG.sound.play(Paths.sound('cancelMenu.wav'));
 				reloadCheckboxes();
 			}
 		}
 
-		if(boyfriend != null && boyfriend.animation.curAnim.finished) {
+		if(boyfriend != null && boyfriend.animation.curAnim.finished)
 			boyfriend.dance();
-		}
 
-		if(nextAccept > 0) {
+		if(nextAccept > 0)
 			nextAccept -= 1;
-		}
 		super.update(elapsed);
 	}
 
@@ -277,21 +244,16 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		option.text = text.replace('%v', Std.string(val)).replace('%d', Std.string(def));
 	}
 
-	function clearHold()
-	{
-		if(holdTime > 0.5) {
-			FlxG.sound.play(Paths.sound('scrollMenu'));
-		}
+	function clearHold() {
+		if(holdTime > 0.5)
+			FlxG.sound.play(Paths.sound('scrollMenu.wav'));
 		holdTime = 0;
 	}
 	
-	function changeSelection(change:Int = 0)
-	{
+	function changeSelection(change:Int = 0) {
 		curSelected += change;
-		if (curSelected < 0)
-			curSelected = optionsArray.length - 1;
-		if (curSelected >= optionsArray.length)
-			curSelected = 0;
+		if (curSelected < 0) curSelected = optionsArray.length - 1;
+		if (curSelected >= optionsArray.length) curSelected = 0;
 
 		descText.text = optionsArray[curSelected].description;
 		descText.screenCenter(Y);
@@ -304,15 +266,14 @@ class BaseOptionsMenu extends MusicBeatSubstate
 			bullShit++;
 
 			item.alpha = 0.6;
-			if (item.targetY == 0) {
+			if (item.targetY == 0)
 				item.alpha = 1;
-			}
 		}
+
 		for (text in grpTexts) {
 			text.alpha = 0.6;
-			if(text.ID == curSelected) {
+			if(text.ID == curSelected)
 				text.alpha = 1;
-			}
 		}
 
 		descBox.setPosition(descText.x - 10, descText.y - 10);
@@ -320,16 +281,14 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		descBox.updateHitbox();
 
 		if(boyfriend != null)
-		{
 			boyfriend.visible = optionsArray[curSelected].showBoyfriend;
-		}
 		curOption = optionsArray[curSelected]; //shorter lol
-		FlxG.sound.play(Paths.sound('scrollMenu'));
+		FlxG.sound.play(Paths.sound('scrollMenu.wav'));
 	}
 
-	public function reloadBoyfriend()
-	{
+	public function reloadBoyfriend() {
 		var wasVisible:Bool = false;
+
 		if(boyfriend != null) {
 			wasVisible = boyfriend.visible;
 			boyfriend.kill();
@@ -345,9 +304,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		boyfriend.visible = wasVisible;
 	}
 
-	function reloadCheckboxes() {
-		for (checkbox in checkboxGroup) {
+	function reloadCheckboxes()
+		for (checkbox in checkboxGroup)
 			checkbox.daValue = (optionsArray[checkbox.ID].getValue() == true);
-		}
-	}
 }

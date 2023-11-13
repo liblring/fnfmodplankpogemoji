@@ -11,8 +11,12 @@ class DumbassWaringScreenState extends FlxState {
 		add(new FlxSprite(0, 0, Paths.image('dumb')));
 
 		FlxG.camera.fade(0xFF000000, 1, true, () ->
-			new FlxTimer().start(3.5, (_) -> FlxG.camera.fade(0xFF000000, 1, false, () ->
-				FlxG.switchState(new FlashingState())))
+				new FlxTimer().start(3.5, (_) -> FlxG.camera.fade(0xFF000000, 1, false, () -> {
+						if (FlxG.save.data.flashing == null) FlxG.switchState(new FlashingState());
+						else FlxG.switchState(new TitleState());
+					}
+				)
+			)
 		);
 	}
 }

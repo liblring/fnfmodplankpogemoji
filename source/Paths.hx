@@ -14,6 +14,7 @@ import openfl.utils.Assets as OpenFlAssets;
 import lime.utils.Assets;
 import flixel.FlxSprite;
 #if sys
+import haxe.io.Path;
 import sys.io.File;
 import sys.FileSystem;
 #end
@@ -27,14 +28,15 @@ using StringTools;
 
 class Paths
 {
-	inline public static var SOUND_EXT = "ogg";
-	inline public static var VIDEO_EXT = "mp4";
+	inline public static var SOUND_EXT 		= "ogg";
+	inline public static var VIDEO_EXT 		= "mp4";
 
 	inline static public function instPath(song:String, ?withLibrary:Bool = true):String
 		return if (withLibrary) 'songs:assets/songs/${formatToSongPath(song)}/Inst.$SOUND_EXT' else 'assets/songs/${formatToSongPath(song)}/Inst.$SOUND_EXT';
 	
 	inline static public function voicesPath(song:String, ?withLibrary:Bool = true):String
 		return if (withLibrary) 'songs:assets/songs/${formatToSongPath(song)}/Voices.$SOUND_EXT' else 'assets/songs/${formatToSongPath(song)}/Voices.$SOUND_EXT';
+
 
 	#if MODS_ALLOWED
 	public static var ignoreModFolders:Array<String> = [
@@ -280,7 +282,8 @@ class Paths
 
 	public static var currentTrackedSounds:Map<String, Sound> = [];
 	public static function returnSound(path:String, key:String, ?library:String) {
-		var gottenPath:String = getPath('$path/$key.$SOUND_EXT', SOUND, library);
+		if (Path.withoutExtension(key) == key) key += '.$SOUND_EXT';
+		var gottenPath:String = getPath('$path/$key', SOUND, library);
 		gottenPath = gottenPath.substring(gottenPath.indexOf(':') + 1, gottenPath.length);
 		if(!currentTrackedSounds.exists(gottenPath))
 			currentTrackedSounds.set(gottenPath, Sound.fromFile('./' + gottenPath));
@@ -320,20 +323,6 @@ class Paths
 	inline static public function modsTxt(key:String) {
 		return modFolders('images/' + key + '.txt');
 	}
-
-	/* Goes unused for now
-
-	inline static public function modsShaderFragment(key:String, ?library:String)
-	{
-		return modFolders('shaders/'+key+'.frag');
-	}
-	inline static public function modsShaderVertex(key:String, ?library:String)
-	{
-		return modFolders('shaders/'+key+'.vert');
-	}
-	inline static public function modsAchievements(key:String) {
-		return modFolders('achievements/' + key + '.json');
-	}*/
 
 	static public function modFolders(key:String) {
 		if(currentModDirectory != null && currentModDirectory.length > 0) {

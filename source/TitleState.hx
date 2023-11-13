@@ -142,6 +142,11 @@ class TitleState extends MusicBeatState
 		gfDance.shader = swagShader.shader;
 		logo.shader = swagShader.shader;
 		titleText.shader = swagShader.shader;
+
+		// var ass = new LesbianText('my balls itch');
+		// ass.x = 500;
+		// ass.y = 500;
+		// add(ass);
 	}
 
 	override function update(elapsed:Float)
@@ -173,7 +178,7 @@ class TitleState extends MusicBeatState
 		if(pressedEnter && !transitioning)
 		{
 			FlxG.camera.flash(PlankPrefs.data.flashing ? FlxColor.WHITE : 0x4CFFFFFF, 1);
-			FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
+			FlxG.sound.play(Paths.sound('confirmMenu.wav'), 0.7);
 
 			transitioning = true;
 

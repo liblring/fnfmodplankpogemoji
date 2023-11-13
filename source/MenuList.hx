@@ -93,7 +93,7 @@ class MenuList extends FlxTypedSpriteGroup<FlxSprite> {
 			curSelection = Std.int(FlxMath.wrap(curSelection, 0, members.length - 1));
 		}
 		onMove.dispatch(curSelection);
-		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+		FlxG.sound.play(Paths.sound('scrollMenu.wav'), 0.4);
 
 		forEach((spr) -> {
 			var index:Int = members.indexOf(spr);

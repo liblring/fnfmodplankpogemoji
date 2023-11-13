@@ -262,7 +262,7 @@ class PaidplayState extends MusicBeatState
 			if(colorTween != null) {
 				colorTween.cancel();
 			}
-			FlxG.sound.play(Paths.sound('cancelMenu'));
+			FlxG.sound.play(Paths.sound('cancelMenu.wav'));
 			MusicBeatState.switchState(new MainMenuState());
 		}
 
@@ -306,7 +306,7 @@ class PaidplayState extends MusicBeatState
 		{
 			persistentUpdate = false;
 			// openSubState(new ResetScoreSubState(songs[grpOptions.curSelection].songName, curDifficulty, songs[grpOptions.curSelection].songCharacter));
-			FlxG.sound.play(Paths.sound('scrollMenu'));
+			FlxG.sound.play(Paths.sound('scrollMenu.wav'));
 		}*/
 		super.update(elapsed);
 	}
@@ -343,7 +343,7 @@ class PaidplayState extends MusicBeatState
 
 	function changeSelection(change:Int = 0)
 	{
-		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+		FlxG.sound.play(Paths.sound('scrollMenu.wav'), 0.4);
 
 		var sogn:SongMetadata = cast (songs[grpOptions.curSelection], SongMetadata);
 		var newColor:Int = sogn.color;

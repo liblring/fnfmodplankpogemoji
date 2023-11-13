@@ -129,7 +129,7 @@ class ControlsSubState extends MusicBeatSubstate {
 			if (controls.BACK) {
 				PlankPrefs.reloadControls();
 				close();
-				FlxG.sound.play(Paths.sound('cancelMenu'));
+				FlxG.sound.play(Paths.sound('cancelMenu.wav'));
 			}
 
 			if(controls.ACCEPT && nextAccept <= 0) {
@@ -137,7 +137,7 @@ class ControlsSubState extends MusicBeatSubstate {
 					PlankPrefs.data.keyBinds = PlankPrefs.defaultKeys.copy();
 					reloadKeys();
 					changeSelection();
-					FlxG.sound.play(Paths.sound('confirmMenu'));
+					FlxG.sound.play(Paths.sound('confirmMenu.wav'));
 				} else if(!unselectableCheck(curSelected)) {
 					bindingTime = 0;
 					rebindingKey = true;
@@ -146,7 +146,7 @@ class ControlsSubState extends MusicBeatSubstate {
 					} else {
 						grpInputs[getInputTextNum()].alpha = 0;
 					}
-					FlxG.sound.play(Paths.sound('scrollMenu'));
+					FlxG.sound.play(Paths.sound('scrollMenu.wav'));
 				}
 			}
 		} else {
@@ -162,7 +162,7 @@ class ControlsSubState extends MusicBeatSubstate {
 				PlankPrefs.data.keyBinds.set(optionShit[curSelected][1], keysArray);
 
 				reloadKeys();
-				FlxG.sound.play(Paths.sound('confirmMenu'));
+				FlxG.sound.play(Paths.sound('confirmMenu.wav'));
 				rebindingKey = false;
 			}
 
@@ -173,7 +173,7 @@ class ControlsSubState extends MusicBeatSubstate {
 				} else {
 					grpInputs[curSelected].alpha = 1;
 				}
-				FlxG.sound.play(Paths.sound('scrollMenu'));
+				FlxG.sound.play(Paths.sound('scrollMenu.wav'));
 				rebindingKey = false;
 				bindingTime = 0;
 			}
@@ -239,7 +239,7 @@ class ControlsSubState extends MusicBeatSubstate {
 				}
 			}
 		}
-		FlxG.sound.play(Paths.sound('scrollMenu'));
+		FlxG.sound.play(Paths.sound('scrollMenu.wav'));
 	}
 
 	function changeAlt() {
@@ -262,7 +262,7 @@ class ControlsSubState extends MusicBeatSubstate {
 				break;
 			}
 		}
-		FlxG.sound.play(Paths.sound('scrollMenu'));
+		FlxG.sound.play(Paths.sound('scrollMenu.wav'));
 	}
 
 	private function unselectableCheck(num:Int, ?checkDefaultKey:Bool = false):Bool {

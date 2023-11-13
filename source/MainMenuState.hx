@@ -58,6 +58,8 @@ class MainMenuState extends MusicBeatState
 		'daniel',
 		'sockngvoskcn;kvscnknvsck',
 		'plankprefs',
+		'arab',
+		'egypt',
 	  ];
 
 	override function create()
@@ -186,7 +188,7 @@ class MainMenuState extends MusicBeatState
 	// Unlocks "Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky Freaky" achievement
 	// function giveAchievement() {
 	// 	// add(new AchievementObject('friday_night_play', camAchievement));
-	// 	// FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
+	// 	// FlxG.sound.play(Paths.sound('confirmMenu.wav'), 0.7);
 	// 	// trace('Giving achievement "friday_night_play"');
 	// }
 	#end
@@ -204,24 +206,24 @@ class MainMenuState extends MusicBeatState
 
 		if (!selectedSomethin) {
 			if (controls.UI_UP_P) {
-				FlxG.sound.play(Paths.sound('scrollMenu'));
+				FlxG.sound.play(Paths.sound('scrollMenu.wav'));
 				changeItem(-1);
 			}
 
 			if (controls.UI_DOWN_P) {
-				FlxG.sound.play(Paths.sound('scrollMenu'));
+				FlxG.sound.play(Paths.sound('scrollMenu.wav'));
 				changeItem(1);
 			}
 
 			if (controls.BACK) {
 				selectedSomethin = true;
-				FlxG.sound.play(Paths.sound('cancelMenu'));
+				FlxG.sound.play(Paths.sound('cancelMenu.wav'));
 				MusicBeatState.switchState(new TitleState());
 			}
 
 			if (controls.ACCEPT) {
 				selectedSomethin = true;
-				FlxG.sound.play(Paths.sound('confirmMenu'));
+				FlxG.sound.play(Paths.sound('confirmMenu.wav'));
 
 				// if(PlankPrefs.data.flashing) FlxFlicker.flicker(magenta, 1.1, 0.15, false);
 

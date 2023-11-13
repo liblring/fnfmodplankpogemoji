@@ -60,34 +60,25 @@ class Option
 		this.options = options;
 
 		if(defaultValue == 'null variable value')
-		{
-			switch(type)
-			{
-				case 'bool':
-					defaultValue = false;
-				case 'int' | 'float':
-					defaultValue = 0;
-				case 'percent':
-					defaultValue = 1;
+			switch(type) {
+				case 'bool': defaultValue = false;
+				case 'int' | 'float': defaultValue = 0;
+				case 'percent': defaultValue = 1;
 				case 'string':
 					defaultValue = '';
-					if(options.length > 0) {
+					if(options.length > 0)
 						defaultValue = options[0];
-					}
+				case 'none': defaultValue = null;
 			}
-		}
 
-		if(getValue() == null) {
+		if(getValue() == null)
 			setValue(defaultValue);
-		}
 
-		switch(type)
-		{
+		switch(type) {
 			case 'string':
 				var num:Int = options.indexOf(getValue());
-				if(num > -1) {
+				if(num > -1)
 					curOption = num;
-				}
 	
 			case 'percent':
 				displayFormat = '%v%';
@@ -100,51 +91,37 @@ class Option
 	}
 
 	public function change()
-	{
-		//nothing lol
-		if(onChange != null) {
+		if(onChange != null)
 			onChange();
-		}
-	}
 
 	public function getValue():Dynamic
-	{
 		return Reflect.getProperty(PlankPrefs.data, variable);
-	}
 	public function setValue(value:Dynamic)
-	{
 		Reflect.setProperty(PlankPrefs.data, variable, value);
-	}
 
 	public function setChild(child:Alphabet)
-	{
 		this.child = child;
-	}
 
-	private function get_text()
-	{
-		if(child != null) {
+	private function get_text() {
+		if(child != null)
 			return child.text;
-		}
-		return null;
-	}
-	private function set_text(newValue:String = '')
-	{
-		if(child != null) {
-			child.text = newValue;
-		}
 		return null;
 	}
 
-	private function get_type()
-	{
+	private function set_text(newValue:String = '') {
+		if(child != null)
+			child.text = newValue;
+		return null;
+	}
+
+	private function get_type() {
 		var newValue:String = 'bool';
-		switch(type.toLowerCase().trim())
-		{
-			case 'int' | 'float' | 'percent' | 'string': newValue = type;
+		switch(type.toLowerCase().trim()) {
+			case 'int' | 'float' | 'percent' | 'string' | 'none': newValue = type;
 			case 'integer': newValue = 'int';
 			case 'str': newValue = 'string';
 			case 'fl': newValue = 'float';
+			case 'null': newValue = 'none';
 		}
 		type = newValue;
 		return type;

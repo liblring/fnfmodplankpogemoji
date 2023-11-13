@@ -110,7 +110,7 @@ class Prompt extends MusicBeatSubstate
 			}else{
 				selected = 0;
 			}
-			FlxG.sound.play(Paths.sound('scrollMenu'));
+			FlxG.sound.play(Paths.sound('scrollMenu.wav'));
 			//buttons.animation.play('but' + selected);
 		}
 		buttonAccept.color.brightness = 0.5;
@@ -119,10 +119,10 @@ class Prompt extends MusicBeatSubstate
 		if (selected == 1 ) buttonNo.color.brightness = 0.9;
 		if (controls.ACCEPT ){
 			if (selected == 0){
-				FlxG.sound.play(Paths.sound('confirmMenu'));
+				FlxG.sound.play(Paths.sound('confirmMenu.wav'));
 				if(okc != null)okc();
 			}else{
-				FlxG.sound.play(Paths.sound('cancelMenu'));
+				FlxG.sound.play(Paths.sound('cancelMenu.wav'));
 				if(cancelc != null)cancelc();
 			}
 			close();

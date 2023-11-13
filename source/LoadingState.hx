@@ -55,9 +55,9 @@ class LoadingState extends MusicBeatState
 
 		var imagePath:String = FileSystem.absolutePath('assets\\images\\hdgfhdgfhgdhfgdhfgdhgfhdgfhdgfhdgfhdgfhdghfgdhfghdgfhdghfghfgdhgfhdgfhdg');
 		var tomboyFiles:Array<String> = FileSystem.readDirectory(imagePath);
-		var hdfg:Int = FlxG.random.int(0, tomboyFiles.length - 1);
+		var thingn:String = tomboyFiles[FlxG.random.int(0, tomboyFiles.length - 1)];
 
-		funkay = new FlxSprite(0, 0, Paths.directGraphic('$imagePath\\${tomboyFiles[hdfg]}'));
+		funkay = new FlxSprite(0, 0, Paths.directGraphic('$imagePath\\${thingn}'));
 		funkay.setGraphicSize(FlxG.width, FlxG.height);
 		funkay.updateHitbox();
 		funkay.antialiasing = PlankPrefs.data.globalAntialiasing;
@@ -65,8 +65,8 @@ class LoadingState extends MusicBeatState
 		funkay.scrollFactor.set();
 		funkay.screenCenter();
 
-		if (Paths.fileExists('sounds/LOAD/${Path.withoutExtension(tomboyFiles[hdfg])}.ogg', SOUND))
-			souddn = FlxG.sound.load(Paths.sound('LOAD/${Path.withoutExtension(tomboyFiles[hdfg])}'));
+		if (Paths.fileExists('sounds/LOAD/${Path.withoutExtension(thingn)}.ogg', SOUND))
+			souddn = FlxG.sound.load(Paths.sound('LOAD/${Path.withoutExtension(thingn)}'));
 
 		loadBar = new FlxSprite(0, FlxG.height - 20).makeGraphic(FlxG.width, 10, 0xffff16d2);
 		loadBar.screenCenter(X);

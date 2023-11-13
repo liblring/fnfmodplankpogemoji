@@ -15,10 +15,8 @@ import flixel.util.FlxColor;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import flixel.group.FlxSpriteGroup;
-#if MODS_ALLOWED
 import sys.FileSystem;
 import sys.io.File;
-#end
 import lime.utils.Assets;
 import flxgif.FlxGifSprite;
 import flixel.util.typeLimit.OneOfTwo;
@@ -205,7 +203,7 @@ class CreditsState extends MusicBeatState
 			{
 				if(colorTween != null)
 					colorTween.cancel();
-				FlxG.sound.play(Paths.sound('cancelMenu'));
+				FlxG.sound.play(Paths.sound('cancelMenu.wav'));
 				MusicBeatState.switchState(new MainMenuState());
 				FlxG.sound.playMusic(Paths.music('freakyMenu'), 1, true);
 				quitting = true;

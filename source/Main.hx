@@ -20,6 +20,9 @@ import openfl.geom.Rectangle;
 import openfl.events.MouseEvent;
 import openfl.ui.MouseCursor;
 import openfl.ui.Mouse;
+import motion.Actuate;
+import motion.easing.Expo;
+import sys.thread.Thread;
 
 import haxe.Timer;
 
@@ -178,7 +181,6 @@ class Main extends Sprite
 		var log:hl.UI.WinLog = new hl.UI.WinLog('guh????', 500, 400);
 		log.setTextContent(errMsg, false);
 
-		// someone later remind me to override one class to add the restart and continue options
 		var close:hl.UI.Button = new hl.UI.Button(log, 'close');
 		var restart:hl.UI.Button = new hl.UI.Button(log, 'restart game');
 		var continueB:hl.UI.Button = new hl.UI.Button(log, 'continue');
@@ -232,6 +234,13 @@ class WindowBorder extends Sprite {
 
 		captionContainer = new Sprite();
 		captionContainer.x = captionContainer.y = 8;
+
+		try borderColor = GameframeNatives.getRealAccentColour() catch(e)
+			try borderColor = Std.int(GameframeNatives.getAccentColour()) catch(estrogen)
+				try borderColor = GameframeNatives.getSystemColour(10) catch(estrogen) {}
+
+		GameframeNatives.hookShadow();
+		GameframeNatives.setShadow(true);
 
 		captionContainer.addEventListener(MouseEvent.MOUSE_DOWN, (evnt) -> {
 			if (evnt.stageX >= captionButtons.x + captionContainer.x) return; // OPENFL IS STUPID !!!!!
@@ -293,7 +302,7 @@ class WindowBorder extends Sprite {
 			captionButtons.addChild(buttonSprite);
 			buttonSprite.addEventListener(MouseEvent.MOUSE_UP, (evnt) -> {
 				switch (bitmap) {
-					case 'close': Sys.exit(0);
+					case 'close': targetWindow.onClose.dispatch();
 					case 'minimize': targetWindow.minimized = !targetWindow.minimized;
 					case 'maximize': targetWindow.maximized = !targetWindow.maximized;
 					default: throw 'whar ???';
@@ -337,8 +346,8 @@ class WindowBorder extends Sprite {
 				if (topRight) resizeAnchors = [0, 1];
 				if (bottomLeft) resizeAnchors = [1, 0];
 				if (bottomRight) resizeAnchors = [0, 0];
+				if (evnt.stageX <= 4) resizeAnchors = [1, 0];
 				resizeSize = [targetWindow.width, targetWindow.height];
-				resizePos = [targetWindow.x, targetWindow.y];
 				Mouse.cursor = targetCursor;
 			}
 			timeout();
@@ -353,14 +362,48 @@ class WindowBorder extends Sprite {
 			if (resizing) {
 				if (resizeBools[0]) targetWindow.width = (xBalls - targetWindow.x + (resizeSize[0] * resizeAnchors[0]));
 				if (resizeBools[1]) targetWindow.height = (yBalls - targetWindow.y + (resizeSize[1] * resizeAnchors[1]));
-				if (resizeAnchors[0] == 1) targetWindow.x = resizePos[0] + resizeSize[0] - targetWindow.width;
-				if (resizeAnchors[1] == 1) targetWindow.y = resizePos[1] + resizeSize[1] - targetWindow.height;
+				// if (resizeAnchors[0] == 1) targetWindow.x = xBalls;
+				// if (resizeAnchors[1] == 1) targetWindow.y = resizePos[1] + resizeSize[1] - targetWindow.height;
+				// resizePos = [xBalls, yBalls];
 			}
 			if (dragging) targetWindow.move(xBalls - Std.int(dragOffset[0]) - 8, yBalls - Std.int(dragOffset[1]) - 8);
 		});
+
 		targetWindow.onResize.add((x, y) -> redraw());
-		targetWindow.onMaximize.add(() -> cast(buttonArray[1].getChildAt(1), Bitmap).bitmapData = Paths.image('gameframe/unmaximize').bitmap);
-		targetWindow.onRestore.add(() -> cast(buttonArray[1].getChildAt(1), Bitmap).bitmapData = Paths.image('gameframe/maximize').bitmap);
+		targetWindow.onMaximize.add(() -> {
+			cast(buttonArray[1].getChildAt(1), Bitmap).bitmapData = Paths.image('gameframe/unmaximize').bitmap;
+			GameframeNatives.setShadow(false);
+		});
+
+		targetWindow.onRestore.add(() -> {
+			cast(buttonArray[1].getChildAt(1), Bitmap).bitmapData = Paths.image('gameframe/maximize').bitmap;
+			GameframeNatives.setShadow(true);
+		});
+
+		#if !debug
+		targetWindow.onClose.add(() -> {
+			targetWindow.onClose.cancel();
+			FlxG.vcr.pause();
+			FlxG.sound.pause();
+			FlxG.autoPause = false;
+			FlxG.sound.play(Paths.sound('table')).onComplete = () -> Sys.exit(0);
+			var heightBalls = GameframeNatives.getMetrics(1);
+			Actuate.tween(targetWindow, 0.5, {y: heightBalls}).onComplete(() -> {
+				Thread.create(() -> {
+					var hdc = GameframeNatives.getHdc();
+					var widthBalls = GameframeNatives.getMetrics(0);
+					var heightBalls = GameframeNatives.getMetrics(1);
+					while (true) {
+						var finalX:Int = FlxG.random.int(12, -12);
+						var finalY:Int = FlxG.random.int(12, -12);
+						GameframeNatives.blit(hdc, finalX, finalY, widthBalls, heightBalls, hdc, 0, 0, 0x00CC0020);
+						Sys.sleep(1 / 30);
+					}
+				});
+			}).ease(Expo.easeIn);
+		});
+		#end
+
 		timeout();
 	}
 
@@ -391,44 +434,9 @@ class WindowBorder extends Sprite {
 		captionButtons.x = targetWindow.width - 16 - captionButtons.width;
 	}
 
-
-	private static function getRegistryKey(path:String, value:String):String { 
-		var rorcers:Process = new Process('reg', ['query', path, '/v', value]);
-		if(rorcers.exitCode() != 0) {
-			var error:String = rorcers.stderr.readAll().toString();
-			rorcers.close();
-			throw 'thats such a retro error,.,.,., $error';
-		}
-
-		var response = rorcers.stdout.readAll().toString();
-		rorcers.close();
-		var lines = response.split('\n');
-		for(line in lines) {
-			line = line.trim();
-			if(line.substr(0, 'path'.length).toLowerCase() == 'path') {
-				var column = 0;
-				var wasSpace = false;
-				for(pos in 0...line.length) {
-					var isSpace = line.isSpace(pos);
-					if(wasSpace && !isSpace) {
-						column++;
-						if(column == 2) {
-							return line.substr(pos);
-						}
-					}
-					wasSpace = isSpace;
-				}
-			}
-		}
-		throw 'wtfs that return is weird,.,.,.,., $response';
-	}
-
-	private static function __init__() {
-		try borderColor = GameframeNatives.getRealAccentColour() catch(e)
-			try borderColor = Std.int(GameframeNatives.getAccentColour()) catch(estrogen)
-				try borderColor = GameframeNatives.getSystemColour(10) catch(estrogen) {}
-	}
 }
+
+typedef HDC = hl.Abstract<"HDC">;
 
 @:hlNative('gameframe')
 class GameframeNatives {
@@ -441,4 +449,8 @@ class GameframeNatives {
 	public static function hookShadow():Void {}
 	public static function setShadow(enabled:Bool):Void {}
 	public static function getShadow():Bool return false;
+
+	public static function getHdc():HDC return null;
+	public static function getMetrics(buh:Int):Int return 0;
+	public static function blit(dst:HDC, x:Int, y:Int, cx:Int, cy:Int, dst:HDC, x1:Int, y1:Int, balls:Int):Bool return false;
 }

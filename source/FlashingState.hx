@@ -16,10 +16,16 @@ class FlashingState extends MusicBeatState
 	public static var leftState:Bool = false;
 	var myballs:Float = 0;
 
+	var fromOptions:Bool = false;
 	var warnText:FlxText;
 	var goober:FlxSprite;
-	override function create()
-	{
+
+	public function new(fromOptions:Bool = false) {
+		super();
+		this.fromOptions = fromOptions;
+	}
+
+	override function create() {
 		persistentUpdate = true;
 		persistentDraw = true;
 		
@@ -55,46 +61,44 @@ class FlashingState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-		if (FlxG.sound.music != null)
-			Conductor.songPosition = FlxG.sound.music.time;
+		if (FlxG.sound.music != null) Conductor.songPosition = FlxG.sound.music.time;
 		myballs += elapsed;
 		warnText.angle = Math.sin(myballs) * 2.5;
 		warnText.y = (FlxG.height / 2 - warnText.height / 2) + Math.cos(myballs) * 5;
-		if(!leftState) {
-			var back:Bool = controls.BACK;
-			if (controls.ACCEPT || back) {
-				FlxG.sound.music.stop();
-				FlxG.sound.music.destroy();
-				FlxG.sound.music = null;
-				leftState = true;
-				FlxTransitionableState.skipNextTransIn = true;
-				FlxTransitionableState.skipNextTransOut = true;
-				FlxG.camera.zoom += 0.15;
-				FlxTween.tween(FlxG.camera, {zoom: 1}, Conductor.crochet / 1000, {ease: flixel.tweens.FlxEase.expoOut});
-				beatHit();
-				if(back) {
-					PlankPrefs.data.flashing = false;
-					PlankPrefs.saveSettings();
-					goober.loadGraphic(Paths.image('disagree'));
-					FlxG.camera.flash(FlxColor.RED, 1);
-					FlxG.sound.play(Paths.sound('cancelMenu'));
-					FlxTween.tween(warnText, {alpha: 0}, 1, {
-						onComplete: function (twn:FlxTween) {
-							Achievements.unlockAchievement('rude');
+		var back:Bool = controls.BACK;
+		if (controls.ACCEPT || back) {
+			FlxG.sound.music.stop();
+			FlxG.sound.music.destroy();
+			FlxG.sound.music = null;
+
+			FlxG.camera.zoom += 0.15;
+			FlxTween.tween(FlxG.camera, {zoom: 1}, Conductor.crochet / 1000, {ease: flixel.tweens.FlxEase.expoOut});
+
+			beatHit();
+			PlankPrefs.data.flashing = !back;
+			PlankPrefs.saveSettings();
+			goober.loadGraphic(Paths.image(PlankPrefs.data.flashing ? 'thumbsup' : 'disagree'));
+			FlxG.sound.play(Paths.sound(PlankPrefs.data.flashing ? 'confirmMenu.wav' : 'cancelMenu.wav'));
+			FlxG.camera.flash((PlankPrefs.data.flashing ? FlxColor.GREEN : 0xAAFF0000), 1);
+			if (!PlankPrefs.data.flashing)
+				FlxTween.tween(warnText, {alpha: 0}, 1, {
+					onComplete: (_) -> {
+						Achievements.unlockAchievement('rude');
+						if (fromOptions)
+							MusicBeatState.switchState(new options.OptionsState());
+						else
 							MusicBeatState.switchState(new TitleState());
-						}
-					});
-				} else {
-					goober.loadGraphic(Paths.image('thumbsup'));
-					FlxG.sound.play(Paths.sound('confirmMenu'));
-					FlxG.camera.flash(FlxColor.GREEN, 1);
-					FlxFlicker.flicker(warnText, 1, 0.1, false, true, function(flk:FlxFlicker) {
-						new FlxTimer().start(0.5, function (tmr:FlxTimer) {
+					}
+				});
+			else
+				FlxFlicker.flicker(warnText, 1, 0.1, false, true, (_) -> {
+					new FlxTimer().start(0.5, (_) -> {
+						if (fromOptions)
+							MusicBeatState.switchState(new options.OptionsState());
+						else
 							MusicBeatState.switchState(new TitleState());
-						});
 					});
-				}
-			}
+				});
 		}
 		super.update(elapsed);
 	}

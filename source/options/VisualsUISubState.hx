@@ -57,10 +57,11 @@ class VisualsUISubState extends BaseOptionsMenu
 		addOption(option);
 
 		var option:Option = new Option('Flashing Lights',
-			"Uncheck this if you're sensitive to flashing lights!",
+			"Configure flashing lights.",
 			'flashing',
-			'bool',
-			true);
+			'none'
+			);
+		option.onChange = () -> FlxG.switchState(new FlashingState(true));
 		addOption(option);
 
 		var option:Option = new Option('Camera Zooms',

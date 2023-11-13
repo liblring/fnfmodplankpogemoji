@@ -220,7 +220,7 @@ class WindowBorder extends Sprite {
 	private var captionButtons:Sprite;
 	private var buttonArray:Array<Sprite> = [];
 
-	private static final doubleClickTime:Int = GameframeNatives.getDoubleClickTime();
+	private static final doubleClickTime:Int = WindowblindNatives.getDoubleClickTime();
 
 	@:allow(flixel.system.ui.FlxSoundTray)
 	private static var borderColor(default, null):Int = 0x99008c;
@@ -235,12 +235,12 @@ class WindowBorder extends Sprite {
 		captionContainer = new Sprite();
 		captionContainer.x = captionContainer.y = 8;
 
-		try borderColor = GameframeNatives.getRealAccentColour() catch(e)
-			try borderColor = Std.int(GameframeNatives.getAccentColour()) catch(estrogen)
-				try borderColor = GameframeNatives.getSystemColour(10) catch(estrogen) {}
+		try borderColor = WindowblindNatives.getRealAccentColour() catch(e)
+			try borderColor = Std.int(WindowblindNatives.getAccentColour()) catch(estrogen)
+				try borderColor = WindowblindNatives.getSystemColour(10) catch(estrogen) {}
 
-		GameframeNatives.hookShadow();
-		GameframeNatives.setShadow(true);
+		WindowblindNatives.hookShadow();
+		WindowblindNatives.setShadow(true);
 
 		captionContainer.addEventListener(MouseEvent.MOUSE_DOWN, (evnt) -> {
 			if (evnt.stageX >= captionButtons.x + captionContainer.x) return; // OPENFL IS STUPID !!!!!
@@ -358,7 +358,7 @@ class WindowBorder extends Sprite {
 		FlxG.stage.addEventListener(Event.ENTER_FRAME, (evnt) -> {
 			if (dragging || resizing) targetWindow.onRender.cancel(); // prevent lime from shitting itself when moving the window
 			var xBalls = 0, yBalls = 0;
-			GameframeNatives.getMousePos(xBalls, yBalls);
+			WindowblindNatives.getMousePos(xBalls, yBalls);
 			if (resizing) {
 				if (resizeBools[0]) targetWindow.width = (xBalls - targetWindow.x + (resizeSize[0] * resizeAnchors[0]));
 				if (resizeBools[1]) targetWindow.height = (yBalls - targetWindow.y + (resizeSize[1] * resizeAnchors[1]));
@@ -372,12 +372,12 @@ class WindowBorder extends Sprite {
 		targetWindow.onResize.add((x, y) -> redraw());
 		targetWindow.onMaximize.add(() -> {
 			cast(buttonArray[1].getChildAt(1), Bitmap).bitmapData = Paths.image('gameframe/unmaximize').bitmap;
-			GameframeNatives.setShadow(false);
+			WindowblindNatives.setShadow(false);
 		});
 
 		targetWindow.onRestore.add(() -> {
 			cast(buttonArray[1].getChildAt(1), Bitmap).bitmapData = Paths.image('gameframe/maximize').bitmap;
-			GameframeNatives.setShadow(true);
+			WindowblindNatives.setShadow(true);
 		});
 
 		#if !debug
@@ -387,20 +387,7 @@ class WindowBorder extends Sprite {
 			FlxG.sound.pause();
 			FlxG.autoPause = false;
 			FlxG.sound.play(Paths.sound('table')).onComplete = () -> Sys.exit(0);
-			var heightBalls = GameframeNatives.getMetrics(1);
-			Actuate.tween(targetWindow, 0.5, {y: heightBalls}).onComplete(() -> {
-				Thread.create(() -> {
-					var hdc = GameframeNatives.getHdc();
-					var widthBalls = GameframeNatives.getMetrics(0);
-					var heightBalls = GameframeNatives.getMetrics(1);
-					while (true) {
-						var finalX:Int = FlxG.random.int(12, -12);
-						var finalY:Int = FlxG.random.int(12, -12);
-						GameframeNatives.blit(hdc, finalX, finalY, widthBalls, heightBalls, hdc, 0, 0, 0x00CC0020);
-						Sys.sleep(1 / 30);
-					}
-				});
-			}).ease(Expo.easeIn);
+			Actuate.tween(targetWindow, 0.5, {y: targetWindow.display.bounds.height}).ease(Expo.easeIn);
 		});
 		#end
 
@@ -436,10 +423,8 @@ class WindowBorder extends Sprite {
 
 }
 
-typedef HDC = hl.Abstract<"HDC">;
-
-@:hlNative('gameframe')
-class GameframeNatives {
+@:hlNative('windowblinds')
+class WindowblindNatives {
 	public static function getMousePos(x:hl.Ref<Int>, y:hl.Ref<Int>):Void {}
 	public static function getDoubleClickTime():Int return 0;
 	public static function getSystemColour(index:Int):Int return 0;
@@ -449,8 +434,4 @@ class GameframeNatives {
 	public static function hookShadow():Void {}
 	public static function setShadow(enabled:Bool):Void {}
 	public static function getShadow():Bool return false;
-
-	public static function getHdc():HDC return null;
-	public static function getMetrics(buh:Int):Int return 0;
-	public static function blit(dst:HDC, x:Int, y:Int, cx:Int, cy:Int, dst:HDC, x1:Int, y1:Int, balls:Int):Bool return false;
 }

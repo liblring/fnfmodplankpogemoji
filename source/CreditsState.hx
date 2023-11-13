@@ -71,7 +71,7 @@ class CreditsState extends MusicBeatState
 		var pisspoop:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color - image folder
 			['lario forest'],
 			['libing',	'lib',		'director or some shit i forgot (im on crack while writing this)',							'https://www.youtube.com/channel/UCwH4gcjdN-gWPGunlBxAnQQ',	'51bd78', 'liber'],
-			['PlankDev','plank',    'coder + like composer + like the guy who turned this into a serious mod bravo plank!',		'https://github.com/ThePlank',		'4a2e00',                          'plnk'],
+			['plank','plank',    'coder + like composer + like the guy who turned this into a serious mod bravo plank!',		'https://plankdev.carrd.co/',		'6B327C',                          'plnk'],
 			['Nick',    'dantesguy','coder + like artist + like animator, made opd sprites for mnalk lets fokin go mate innit',	'https://github.com/NickMGC',		'ffffff',                          'nick'],
 			['FlyingFeltBoot','flyingfeltwhat','help with random bullshit like hypothesis dantes sprites i guess',	            'https://github.com/Nikerlo',		'7a4a35'],
 			['Betopia', 'betty',    'so like, artist, i guess',		                                                            'https://twitter.com/betpowo',		'996666',                          'betp'],
@@ -80,6 +80,10 @@ class CreditsState extends MusicBeatState
 			['sinnvakr','sinn',     'i dunno this guy just randomly joined i dont know anything about him',	            		'https://www.youtube.com/@sinnvakr','c7feff',						   'sinn'],
 			['wacker',  'wacker',	'coder, charter, stuff like that, i frogot sorry',	           							    'https://www.youtube.com/@wackynix171/videos','6c4bdf',				   'wack'],
 			["Nint","Nint",          "joined, fucked up the source, fixed it, changed a number by .001, and pushed random shit daily",                              "https://www.bigrat.monster",		"ff8000",                          "mint"],
+			['ToufG','touf',			'is it glade or toufg? idk i forgot anyway idk he composed or something',				'https://twitter.com/YtToufG',	'4b18d9', 'totoototoootofkgokfokgorkfogktfo'],
+			['cicada','cicadascries',	'she va\'d gorflen and idk jkgsnlijkvhcnljkb,fcjxolkbhxnlkhbflhnblkvhkblgvhjojlvhn;ln', 'https://twitter.com/sillycicada/', 'a21df0', 'bug'],
+			['maplesucks','maplse',		'compos\ni thikn',																		'https://fxtwitter.com/mapledope/',	'FF613A', 'mapl'],
+			['SMB','SMB',				'allan please add details',																'https://smb-bio.carrd.co/',	'EC1C26', 'ssmsmmsmmmsmmmsmmmbmsmbmsmmbmsmbmmsmbmsmbmmsmbmsmmbsmmbmsmbmsmmbmmmbmsmmbsmmbmsmmbmsmmbmsmmbmsmbmsmmbmsmbsmmbmsmbsmmbmsmmbsmmbmsmmbmsm'],
 			[''],
 			['d'],
 			['d',	    'd',		'd (dont press enter)',						                                                'https://www.youtube.com/watch?v=mYiBdMnIT88',               'FFFF00',    'd'],
@@ -100,7 +104,7 @@ class CreditsState extends MusicBeatState
 			['Keoiki',				'keoiki',			'cat',		'https://twitter.com/Keoiki_',			'D2D2D2'],
 			['Shadow Mario',		'shadowmario',		'oh god',	'https://twitter.com/Shadow_Mario_',	'444444'],
 			['Keoiki',				'keoiki',			'cat',		'https://twitter.com/Keoiki_',			'D2D2D2'],
-			['Keoiki',				'keoiki',			'cat',		'https://twitter.com/Keoiki_',			'D2D2D2'],
+			['Keoiki',				'keoiki',			(FlxG.random.bool(1) ? 'fakekeoiki' : 'cat'),		'https://twitter.com/Keoiki_',			'D2D2D2'],
 			[''],
 			["keioki Crew"],
 			['Keoiki',				'keoiki',			'cat',		'https://twitter.com/Keoiki_',			'D2D2D2'],
@@ -109,9 +113,8 @@ class CreditsState extends MusicBeatState
 			['Keoiki',				'keoiki',			'cat',		'https://twitter.com/Keoiki_',			'D2D2D2']
 		];
 		
-		for(i in pisspoop){
+		for(i in pisspoop)
 			creditsStuff.push(i);
-		}
 	
 		for (i in 0...creditsStuff.length)
 		{
@@ -122,8 +125,12 @@ class CreditsState extends MusicBeatState
 			optionText.active = isSelectable;
 
 			if(isSelectable) {
-				var icon:FlxSprite = new FlxSprite(optionText.text.length * (42 / 2) + 12, 0, Paths.image('credits/' + creditsStuff[i][1]));
+				var icon:FlxSprite = new FlxSprite(0, 0, Paths.image('creditorial!!!/' + creditsStuff[i][1]));
+				if (creditsStuff[i][1] == 'plank') icon.setGraphicSize(150);
+				icon.updateHitbox();
+				icon.x = optionText.textField.textWidth + 12;
 				icon.y = optionText.height / 2 - icon.height / 2;
+				if (creditsStuff[i][1] == 'plank') icon.x += 15; // uhdagshgoievdhfigjefvhoijgrefhco9ughevfousxhougrhfsoughervoifejhgoevfdhuogvhef ocshigevrfhcsikjghvefjkchgikvefhcikhgvefiscuoigvefidhgiurefhsiygehgirevfhighverfuihgivefhjihrfschuoghefoshghrfucyyguorvhfscijgouieshoguirevhfosujghnerouijhogiuerjhcsnouigrehvoisuhreoiusgghgiefjgigefjgkugrsuixhgouwdshugwrhdscaughwrsvohngiorvlkshoilkrwhdsokhgguoishoiguirhsniughrnduihgrwuidhoiguwdhuhguowdhijghojishgijvcxhijghfczuoijkhouriklhhugrjkhnoguiorhefnduoghrfnohgreuofchguoirefhcnjighroeufiyhgujvrfhcuojgvrhefcuokhgvuwfhokghvuoeriwjhgugoievfhscoijgerushguivefhsouihjerupdhgouvredsuohgjihvrousichjlgnvreuoskhxngouvirkdhsnouifkhvrdoukgyhroueiskhgouvohhcklngvuliczhlngoufklhjmgojhvfoskjcmgjfwovfcsjovjwrndjiohfjvfohirwhiosd
 	
 				// using a FlxGroup is too much fuss!
 				iconArray.push(icon);
@@ -172,7 +179,7 @@ class CreditsState extends MusicBeatState
 		changeSelection(grpOptions.curSelection);
 		FlxG.cameras.add(sorryguys = new FlxCamera(0,0,FlxG.width,FlxG.height), false);
 		sorryguys.bgColor.alpha = 0;
-		hiimnint = new FlxSprite(0,0,"assets/images/creditorial!!!/yow/silly.jpg");
+		hiimnint = new FlxSprite(0, 0, 'assets/images/creditorial!!!/yow/silly.jpg');
 		hiimnint.setGraphicSize(FlxG.width, FlxG.height);
 		hiimnint.updateHitbox();
 		hiimnint.alpha = 0.00001;
@@ -183,7 +190,7 @@ class CreditsState extends MusicBeatState
 
 	override public function beatHit() {
 		super.beatHit();
-		FlxG.camera.zoom += 0.02;
+		FlxG.camera.zoom += 0.01;
 	}
 
 	var quitting:Bool = false;
@@ -192,9 +199,7 @@ class CreditsState extends MusicBeatState
 	{
 		Conductor.songPosition = FlxG.sound.music.time;
 		if (FlxG.sound.music.volume < 0.7)
-		{
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
-		}
 		FlxG.camera.zoom = FlxMath.lerp(FlxG.camera.zoom, 1, 0.16);
 
 		if(!quitting)

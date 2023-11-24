@@ -32,14 +32,10 @@ class FlxSoundTray extends Sprite
 	public var silent:Bool = false;
 	
 	var volumeText:TextField;
-	var bg:Shape;
 
 	public function new()
 	{
 		super();
-
-		bg = new Shape();
-		addChild(bg);
 
 		volumeText = new TextField();
 		volumeText.y = 4;
@@ -62,20 +58,20 @@ class FlxSoundTray extends Sprite
 	public var barHeight:Int = 15;
 
 	public function redrawBar() {
-		bg.graphics.clear();
-		bg.graphics.beginFill(WindowBorder.borderColor, 0.2);
-		bg.graphics.drawRoundRect(0, 0, FlxG.stage.window.width - 16, 35, 5);
-		bg.graphics.endFill();
+		graphics.clear();
+		graphics.beginFill(WindowBorder.borderColor, 0.2);
+		graphics.drawRoundRect(0, 0, FlxG.stage.window.width - 16, 35, 5);
+		graphics.endFill();
 
 		var barWidth:Float = width - volumeText.textWidth - 44;
 
-		bg.graphics.beginFill(0xFFFFFF, 0.2);
-		bg.graphics.drawRoundRect(volumeText.textWidth + 16, 8, barWidth, 35 - 16, 5);
-		bg.graphics.endFill();
+		graphics.beginFill(0xFFFFFF, 0.2);
+		graphics.drawRoundRect(volumeText.textWidth + 16, 8, barWidth, 35 - 16, 5);
+		graphics.endFill();
 
-		bg.graphics.beginFill(0xFFFFFF, 1);
-		bg.graphics.drawRoundRect(volumeText.textWidth + 16, 8, barWidth * FlxG.sound.volume, 35 - 16, 5);
-		bg.graphics.endFill();
+		graphics.beginFill(0xFFFFFF, 1);
+		graphics.drawRoundRect(volumeText.textWidth + 16, 8, barWidth * FlxG.sound.volume, 35 - 16, 5);
+		graphics.endFill();
 	}
 
 	public function screenCenter() {
@@ -85,23 +81,15 @@ class FlxSoundTray extends Sprite
 		// :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 :3 
 	}
 
-	public var balls:Float;
-	public var boobs:FlxTween;
-	public var titties:Timer;
-
 	public function update(delta:Float):Void {}
 
 	public function show(up:Bool = false):Void {
 		active = visible = true;
-		titties?.stop();
-		titties = Timer.delay(() -> {
-			active = visible = false;
-			if (FlxG.save.isBound) {
-				FlxG.save.data.mute = FlxG.sound.muted;
-				FlxG.save.data.volume = FlxG.sound.volume;
-				FlxG.save.flush();
-			}
-		}, 1500);
+		if (FlxG.save.isBound) {
+			FlxG.save.data.mute = FlxG.sound.muted;
+			FlxG.save.data.volume = FlxG.sound.volume;
+			FlxG.save.flush();
+		}
 
 		if (!silent) {
 			var sound = Paths.sound((up ? 'volumeUp' : 'volumeDown'));
@@ -111,8 +99,7 @@ class FlxSoundTray extends Sprite
 
 		volumeText.text = '${Math.round(FlxG.sound.volume * 100) * (FlxG.sound.muted ? 0 : 1)}%';
 		redrawBar();
-
-		active = visible = true;
+		Main.border.timeout();
 	}
 }
 #end

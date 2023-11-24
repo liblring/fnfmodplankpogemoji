@@ -188,6 +188,7 @@ class Alphabet extends FlxSpriteGroup
 		trace('nint i will kill you i swear keep one eye open');
 		trace("thanks im looking forward to it colon three");
 	} 
+	
 	private static var Y_PER_ROW:Float = 85;
 
 	private function createLetters(newText:String)

@@ -50,8 +50,6 @@ class LoadingState extends MusicBeatState
 
 	override function create() {
 		if (showLoading) openSubState(new ShatterTransition(pastStateBitmap));
-		var bg:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, 0xffcaff4d);
-		add(bg);
 
 		var imagePath:String = FileSystem.absolutePath('assets\\images\\hdgfhdgfhgdhfgdhfgdhgfhdgfhdgfhdgfhdgfhdghfgdhfghdgfhdghfghfgdhgfhdgfhdg');
 		var tomboyFiles:Array<String> = FileSystem.readDirectory(imagePath);

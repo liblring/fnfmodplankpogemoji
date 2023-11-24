@@ -196,6 +196,12 @@ class Paths
 	inline static public function getPathForURLRequest(path:String):String
 		return 'file://${FileSystem.absolutePath('assets/$path')}';
 
+	inline static public function gameOverMusic(song:String):Any
+		return returnSound('songs', '${formatToSongPath(song)}/gameOver');
+
+	inline static public function gameOverEndMusic(song:String):Any
+		return returnSound('songs', '${formatToSongPath(song)}/gameOverEnd');
+
 	inline static public function voices(song:String):Any
 		return returnSound('songs', '${formatToSongPath(song)}/Voices');
 

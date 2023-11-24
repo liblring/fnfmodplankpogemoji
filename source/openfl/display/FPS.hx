@@ -9,10 +9,10 @@ import flixel.util.FlxColor;
 import flixel.util.FlxStringUtil;
 import flixel.tweens.FlxEase;
 import flixel.FlxG;
-#if gl_stats
+// #if gl_stats
 import openfl.display._internal.stats.Context3DStats;
 import openfl.display._internal.stats.DrawCallContext;
-#end
+// #end
 #if flash
 import openfl.Lib;
 #end
@@ -76,16 +76,16 @@ class FPS extends Sprite {
 
 	}
 
+	var anusTime:Float = 0; 
+
 	// Event Handlers
 	private override function __enterFrame(deltaTime:Float):Void {
-		currentFPS = Math.floor(Math.max(1 / (deltaTime / 1000), 0)); // clamp the value so it doesent go to -2147483647 FPS
+		var curTime = Sys.time();
+		currentFPS = Math.floor(1 / (curTime - anusTime));
 
 
-		#if (gl_stats && !disable_cffi && (!html5 || !canvas))
-		text += "\ntotalDC: " + Context3DStats.totalDrawCalls();
-		text += "\nstageDC: " + Context3DStats.contextDrawCalls(DrawCallContext.STAGE);
-		text += "\nstage3DDC: " + Context3DStats.contextDrawCalls(DrawCallContext.STAGE3D);
-		#end
+		// #if (gl_stats && !disable_cffi && (!html5 || !canvas))
+		// #end
 
 		var stats = System.totalMemory;
 		currentMemory = stats;
@@ -93,10 +93,14 @@ class FPS extends Sprite {
 			maxMemory = currentMemory;
 
 		text = 'pfs: ${currentFPS}\n;emory: ${FlxStringUtil.formatBytes(currentMemory)} / ${FlxStringUtil.formatBytes(maxMemory)}';
+		// text += "\ntotalDC: " + Context3DStats.totalDrawCalls();
+		// text += "\nstageDC: " + Context3DStats.contextDrawCalls(DrawCallContext.STAGE);
+		// text += "\nstage3DDC: " + Context3DStats.contextDrawCalls(DrawCallContext.STAGE3D);
 
 		var mappedFPS = FlxMath.remapToRange(currentFPS, FlxG.drawFramerate, 0, 0, 1);
 
 		baseText.textColor = FlxColor.interpolate(normalColor, maxColor, FlxEase.cubeIn(mappedFPS));
+		anusTime = curTime;
 	}
 
 	private function set_text(value:String):String {

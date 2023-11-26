@@ -11,6 +11,7 @@ import openfl.display.FPS;
 import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.display.StageScaleMode;
+import openfl.display.DisplayObject;
 import lime.app.Application;
 import flash.display.Shape;
 import openfl.text.TextField;
@@ -138,21 +139,8 @@ class Main extends Sprite
 			FlxG.sound.soundTray.visible = false;
 		});
 
-		// var balls = Application.current.createWindow({
-		// 	width: 500,
-		// 	height: 400,
-		// 	resizable: false,
-		// 	title: 'kill yourself!!!!',
-		// 	context: {
-		// 		vsync: true,
-		// 		type: CAIRO,
-		// 		hardware: true,
-		// 	}
-		// });
-		// balls.stage.align = "tl";
-		// balls.stage.scaleMode = StageScaleMode.NO_SCALE;
-		// balls.focus();
-		// balls.stage.addChild(new WindowBorder(balls, 'shit yourself!!!!'));
+		// onCrash('my balls itch');
+
 	}
 
 	// Code was entirely made by sqirra-rng for their fnf engine named "Izzy Engine", big props to them!!!
@@ -188,29 +176,85 @@ class Main extends Sprite
 
 		Sys.stderr().writeString('$errMsg\n');
 
-		errMsg += "\nUncaught Error: " + message + "\nplease DONT report this to the psych engine github\nthis mod's source is basically modified to hell and back";
-
 		if (!FileSystem.exists("./crash/"))
 			FileSystem.createDirectory("./crash/");
 
-		File.saveContent(path, errMsg + "\n");
+		File.saveContent(path, errMsg + '\nUncaught Error: $message\nplease DONT report this to the psych engine github\nthis mod\'s source is basically modified to hell and back');
 
 		Sys.println(errMsg);
 		Sys.println("Crash dump saved in " + Path.normalize(path));
 
-		var log:hl.UI.WinLog = new hl.UI.WinLog('guh????', 500, 400);
-		log.setTextContent(errMsg, false);
+		var balls = Application.current.createWindow({
+			width: 500,
+			height: 400,
+			resizable: false,
+			title: 'kill yourself!!!!',
+			context: {
+				vsync: true,
+				type: CAIRO,
+				hardware: true,
+			}
+		});
+		balls.stage.align = "tl";
+		balls.stage.scaleMode = StageScaleMode.NO_SCALE;
+		balls.focus();
+		var golour:FlxColor = WindowblindNatives.getRealAccentColour();
+		golour.alpha = 0x99;
+		WindowblindNatives.enableBlur(golour);
+		balls.stage.addChild(new WindowBorder(balls, 'shit yourself!!!!', true));
 
-		var close:hl.UI.Button = new hl.UI.Button(log, 'close');
-		var restart:hl.UI.Button = new hl.UI.Button(log, 'restart game');
-		var continueB:hl.UI.Button = new hl.UI.Button(log, 'continue');
-		close.onClick = () -> Sys.exit(1);
-		restart.onClick = () -> {FlxG.resetGame(); hl.UI.stopLoop();}
-		continueB.onClick = () ->  hl.UI.stopLoop();
+		balls.onClose.add(() -> Sys.exit(0));
 
-		while(hl.UI.loop(true) != Quit) {}
-		log.destroy();
-		stage.__rendering = false; // make it render again
+		var crashHeader:TextField = new TextField();
+		crashHeader.selectable = false;
+		crashHeader.mouseEnabled = false;
+		crashHeader.width = 500;
+		crashHeader.x = 8;
+		crashHeader.y = 8 + 35 + 2;
+		crashHeader.text = 'whoops, looks like the game shit itself\nwell heres a crashlog';
+		crashHeader.defaultTextFormat = new TextFormat(Paths.font('segoeui.ttf'), 24, 0xFFFFFF);
+		balls.stage.addChild(crashHeader);
+
+
+		var crashlog:TextField = new TextField();
+		crashlog.selectable = false;
+		crashlog.mouseEnabled = false;
+		crashlog.width = 500;
+		crashlog.x = 8;
+		crashlog.y = crashHeader.y + crashHeader.height - 24;
+		crashlog.height = 400 - 80 - crashlog.y;
+		crashlog.text = '$message\n$errMsg';
+		crashlog.defaultTextFormat = new TextFormat(Paths.font('segoeui.ttf'), 12, 0xFFFFFF);
+		balls.stage.addChild(crashlog);
+
+		var m:Array<String> = ['continue', 'restart game', 'close'];
+
+		var pastButton:WindowblindButton = null;
+
+		for (button in 0...m.length) {
+			var thing:TextField = new TextField();
+			thing.selectable = false;
+			thing.mouseEnabled = false;
+			thing.width = 500;
+			thing.text = m[button];
+			thing.defaultTextFormat = new TextFormat(Paths.font('segoeui.ttf'), 18, 0xFFFFFF);
+			thing.width = thing.textWidth + 20;
+			thing.height = 40;
+			thing.defaultTextFormat.align = CENTER;
+			var buttonnnnnnn:WindowblindButton = new WindowblindButton(thing, true);
+			buttonnnnnnn.y = crashlog.y + crashlog.height + 12;
+			thing.x += 2;
+			thing.y += 2;
+			if (pastButton != null) buttonnnnnnn.x = pastButton.x + pastButton.width;
+			buttonnnnnnn.x += 8;
+			balls.stage.addChild(buttonnnnnnn);
+			pastButton = buttonnnnnnn;
+		}
+
+
+		FlxG.vcr.pause();
+		FlxG.autoPause = false;
+		stage.__rendering = true;
 	}
 	#end
 }
@@ -252,17 +296,20 @@ class WindowBorder extends Sprite {
 
 	public var resizeFlag:Int = WindowBlindsDragFlags.NONE;
 
+	private var drawAlpha:Float = 0.2;
+
 	private var hideTimer:Timer;
 	private var captionButtons:Sprite;
 	private var buttonArray:Array<Sprite> = [];
 
 	private static final doubleClickTime:Int = WindowblindNatives.getDoubleClickTime();
+	private static final frameColorPath:String = 'SOFTWARE\\Microsoft\\Windows\\DWM';
+	private static final frameColorValue:String = 'AccentColor';
 
-	@:allow(flixel.system.ui.FlxSoundTray)
-	private static var borderColor(default, null):Int = 0x99008c;
+	public static var borderColor(default, null):Int = 0x99008c;
 
 	private var targetWindow:lime.ui.Window;
-	public function new(target:lime.ui.Window, ?borderTitle:String) {
+	public function new(target:lime.ui.Window, ?borderTitle:String, ?solid:Bool = false) {
 		targetWindow = target;
 		targetWindow.borderless = true;
 		super();
@@ -271,6 +318,9 @@ class WindowBorder extends Sprite {
 		captionContainer = new Sprite();
 		captionContainer.x = captionContainer.y = 8;
 
+		if (solid) drawAlpha = 1;
+
+		WindowblindNatives.getRealAccentColour();
 		try borderColor = WindowblindNatives.getRealAccentColour() catch(e)
 			try borderColor = Std.int(WindowblindNatives.getAccentColour()) catch(estrogen)
 				try borderColor = WindowblindNatives.getSystemColour(10) catch(estrogen) {}
@@ -325,17 +375,13 @@ class WindowBorder extends Sprite {
 		var balls = ['close', 'maximize', 'minimize'];
 		balls.reverse();
 		for (bitmap in balls) {
-			var buttonSprite:Sprite = new Sprite();
-			var bg:Shape = new Shape();
 			var bitmapBalls:Bitmap = new Bitmap(Paths.image('gameframe/$bitmap').bitmap, ALWAYS, false);
-			bg.graphics.beginFill((bitmap == 'close' ? 0xFF0000 : 0xFFFFFF), 1);
-			bg.graphics.drawRoundRect(0, 0, bitmapBalls.width, bitmapBalls.height, 5);
+			var buttonSprite:WindowblindButton = new WindowblindButton(bitmapBalls, false, (bitmap == 'close' ? 0xFF0000 : 0xFFFFFF));
 
 			buttonArray.push(buttonSprite);
-			buttonSprite.addChild(bg);
-			buttonSprite.addChild(bitmapBalls);
 			buttonSprite.x = 45 * balls.indexOf(bitmap);
 			captionButtons.addChild(buttonSprite);
+
 			buttonSprite.addEventListener(MouseEvent.MOUSE_UP, (evnt) -> {
 				switch (bitmap) {
 					case 'close': targetWindow.onClose.dispatch();
@@ -344,20 +390,7 @@ class WindowBorder extends Sprite {
 					default: throw 'whar ???';
 				}
 			});
-
-			var targetAlpha:Float = 0;
-			var fade:Float = 0;
-			buttonSprite.addEventListener(MouseEvent.MOUSE_DOWN, (evnt) -> targetAlpha = fade = 0.7);
-			buttonSprite.addEventListener(MouseEvent.MOUSE_OVER, (evnt) -> targetAlpha = 1);
-			buttonSprite.addEventListener(MouseEvent.MOUSE_OUT, (evnt) -> targetAlpha = 0);
-			buttonSprite.addEventListener(Event.ENTER_FRAME, (evnt) -> {
-				if (targetAlpha > 0) fade = Math.min(fade + FlxG.elapsed / 0.2, targetAlpha)
-				else fade = Math.max(fade - FlxG.elapsed / 0.2, 0);
-
-				bg.alpha = fade * 0.3;
-			});
 		}
-
 
 		redraw();
 
@@ -471,15 +504,51 @@ class WindowBorder extends Sprite {
 		borderShape.graphics.clear();
 		captionShape.graphics.clear();
 
-		borderShape.graphics.lineStyle(2, borderColor, 0.3, true, NONE, SQUARE, MITER, 1.414);
+		borderShape.graphics.lineStyle(2, borderColor, drawAlpha, true, NONE, SQUARE, MITER, 1.414);
 		borderShape.graphics.drawRect(4, 4, targetWindow.width - 8, targetWindow.height - 8);
 
-		captionShape.graphics.beginFill(borderColor, 0.2);
+		captionShape.graphics.beginFill(borderColor, drawAlpha);
 		captionShape.graphics.drawRoundRect(0, 0, targetWindow.width - 16, 35, 5);
 		captionText.width = targetWindow.width - 16 - 30 - captionButtons.width;
 		captionButtons.x = targetWindow.width - 16 - captionButtons.width;
 	}
 
+}
+
+class WindowblindButton extends Sprite {
+	public function new(label:DisplayObject, hasBg:Bool = false, hightlightColor:Int = 0xFFFFFF) {
+		super();
+		if (hasBg) {
+			graphics.beginFill(WindowBorder.borderColor, 1);
+			graphics.drawRoundRect(0, 0, label.width, label.height, 5);	
+			graphics.endFill();
+		}
+
+		var highlight:Shape = new Shape();
+		highlight.graphics.beginFill(hightlightColor, 1);
+		highlight.graphics.drawRoundRect(0, 0, label.width, label.height, 5);	
+		highlight.graphics.endFill();
+		addChild(highlight);
+		addChild(label);
+
+		var targetAlpha:Float = 0;
+		var fade:Float = 0;
+
+		addEventListener(MouseEvent.MOUSE_DOWN, (evnt) -> targetAlpha = fade = 0.7);
+		addEventListener(MouseEvent.MOUSE_OVER, (evnt) -> targetAlpha = 1);
+		addEventListener(MouseEvent.MOUSE_OUT, (evnt) -> targetAlpha = 0);
+
+		var anusTime:Float = 0; 
+		addEventListener(Event.ENTER_FRAME, (evnt) -> {
+			var curTime = Sys.time();
+			var elapsed = curTime - anusTime;
+			if (targetAlpha > 0) fade = Math.min(fade + elapsed / 0.2, targetAlpha)
+			else fade = Math.max(fade - elapsed / 0.2, 0);
+
+			highlight.alpha = fade * 0.3;
+			anusTime = curTime;
+		});
+	}
 }
 
 @:hlNative('windowblinds')
@@ -488,10 +557,10 @@ class WindowblindNatives {
 	public static function getDoubleClickTime():Int return 0;
 	public static function getSystemColour(index:Int):Int return 0;
 	public static function getAccentColour():hl.F64 return 0;
-	public static function getRealAccentColour():Int return 0;
 
 	public static function hookShadow():Void {}
 	public static function setShadow(enabled:Bool):Void {}
 	public static function getShadow():Bool return false;
-	public static function enableBlur():Void {};
+	public static function enableBlur(coluor:Int):Void {};
+	public static function getRealAccentColour():Int return 0;
 }

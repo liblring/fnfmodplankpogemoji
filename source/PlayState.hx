@@ -3022,7 +3022,7 @@ class PlayState extends MusicBeatState
 			}
 			else
 			{
-				trace('WENT BACK TO FREEPLAY??');
+				trace('WENT BACK TO PAIDPLAY??');
 				WeekData.loadTheFirstEnabledMod();
 				cancelMusicFadeTween();
 				if (FlxTransitionableState.skipNextTransIn)
@@ -3321,8 +3321,7 @@ class PlayState extends MusicBeatState
 			}
 
 			var spr:StrumNote = playerStrums.members[key];
-			if (strumsBlocked[key] != true && spr != null && spr.animation.curAnim.name != 'confirm')
-			{
+			if (strumsBlocked[key] != true && spr != null && spr.animation.curAnim.name != 'confirm') {
 				spr.playAnim('pressed');
 				spr.resetAnim = 0;
 			}
@@ -3602,10 +3601,8 @@ class PlayState extends MusicBeatState
 
 		var time:Float = 0.15;
 		if (note.isSustainNote && !note.animation.curAnim.name.endsWith('end'))
-		{
 			time += 0.15;
-		}
-		StrumPlayAnim(true, Std.int(Math.abs(note.noteData)), time);
+		StrumPlayAnim(true, Std.int(Math.abs(note.noteData)), time, note.isSustainNote && !note.isSustainEnd);
 		note.hitByOpponent = true;
 
 		callOnLuas('opponentNoteHit', [
@@ -3692,7 +3689,7 @@ class PlayState extends MusicBeatState
 				var charToAnimate:Character = (note.gfNote && gf != null ? gf : boyfriend);
 				charToAnimate.playAnim(animToPlay + note.animSuffix, true);
 				charToAnimate.holdTimer = 0;
-				charToAnimate.animation.curAnim.paused = note.isSustainNote;
+				charToAnimate.animation.curAnim.paused = note.isSustainNote && !note.isSustainEnd;
 				//the urge to check for animation name so hold ends unpause the animation
 
 				if (note.noteType == 'Hey!')
@@ -3717,17 +3714,15 @@ class PlayState extends MusicBeatState
 			{
 				var time:Float = 0.15;
 				if (note.isSustainNote && !note.animation.curAnim.name.endsWith('end'))
-				{
 					time += 0.15;
-				}
-				StrumPlayAnim(false, Std.int(Math.abs(note.noteData)), time);
+				StrumPlayAnim(false, Std.int(Math.abs(note.noteData)), time, note.isSustainNote && !note.isSustainEnd);
 			}
 			else
 			{
 				var spr = playerStrums.members[note.noteData];
-				if (spr != null)
-				{
+				if (spr != null) {
 					spr.playAnim('confirm', true);
+					spr.animation.curAnim.paused = note.isSustainNote && !note.isSustainEnd;
 				}
 			}
 			note.wasGoodHit = true;
@@ -3980,7 +3975,7 @@ class PlayState extends MusicBeatState
 		#end
 	}
 
-	function StrumPlayAnim(isDad:Bool, id:Int, time:Float)
+	function StrumPlayAnim(isDad:Bool, id:Int, time:Float, pause:Bool = false)
 	{
 		var spr:StrumNote = null;
 		if (isDad)
@@ -3992,9 +3987,9 @@ class PlayState extends MusicBeatState
 			spr = playerStrums.members[id];
 		}
 
-		if (spr != null)
-		{
+		if (spr != null) {
 			spr.playAnim('confirm', true);
+			spr.animation.curAnim.paused = pause;
 			spr.resetAnim = time;
 		}
 	}

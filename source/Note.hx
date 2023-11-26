@@ -41,6 +41,7 @@ class Note extends FlxSprite
 
 	public var sustainLength:Float = 0;
 	public var isSustainNote:Bool = false;
+	public var isSustainEnd(get, never):Bool;
 	public var noteType(default, set):String = null;
 
 	public var eventName:String = '';
@@ -95,6 +96,9 @@ class Note extends FlxSprite
 
 	public var hitsoundDisabled:Bool = false;
 	public var willKillYouInstantly:Bool = false;
+
+	private function get_isSustainEnd():Bool
+		return animation.curAnim.name.endsWith('end');
 	
 	private function set_multSpeed(value:Float):Float {
 		resizeByRatio(value / multSpeed);
@@ -199,8 +203,7 @@ class Note extends FlxSprite
 		if(prevNote!=null)
 			prevNote.nextNote = this;
 
-		if (isSustainNote && prevNote != null)
-		{
+		if (isSustainNote && prevNote != null) {
 			alpha = 0.6;
 			multAlpha = 0.6;
 			hitsoundDisabled = true;
@@ -218,15 +221,12 @@ class Note extends FlxSprite
 			if (PlayState.isPixelStage)
 				offsetX += 30;
 
-			if (prevNote.isSustainNote)
-			{
+			if (prevNote.isSustainNote) {
 				prevNote.animation.play(colArray[prevNote.noteData % 4] + 'hold');
 
 				prevNote.scale.y *= Conductor.stepCrochet / 100 * 1.05;
 				if(PlayState.instance != null)
-				{
 					prevNote.scale.y *= PlayState.instance.songSpeed;
-				}
 
 				if(PlayState.isPixelStage) {
 					prevNote.scale.y *= 1.19;

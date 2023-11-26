@@ -82,7 +82,7 @@ class CreditsState extends MusicBeatState
 			["Nint","Nint",          "joined, fucked up the source, fixed it, changed a number by .001, and pushed random shit daily",                              "https://www.bigrat.monster",		"ff8000",                          "mint"],
 			['ToufG',		'touf',			'is it glade or toufg? idk i forgot anyway idk he composed or something',				'https://twitter.com/YtToufG',	'4b18d9', 'totoototoootofkgokfokgorkfogktfo'],
 			['cicada',		'cicadascries',	'she va\'d gorflen and idk jkgsnlijkvhcnljkb,fcjxolkbhxnlkhbflhnblkvhkblgvhjojlvhn;ln', 'https://twitter.com/sillycicada/', 'a21df0', 'bug'],
-			['maplesucks',	'maplse',		'compos\ni thikn',																		'https://fxtwitter.com/mapledope/',	'FF613A', 'mapl'],
+			['maplesucks',	'maplse',		'compos\ni thikn',																		'https://twitter.com/maplesuckss/',	'FF613A', 'mapl'],
 			['SMB',			'SMB',			'allan please add details',																'https://smb-bio.carrd.co/',	'EC1C26', 'ssmsmmsmmmsmmmsmmmbmsmbmsmmbmsmbmmsmbmsmbmmsmbmsmmbsmmbmsmbmsmmbmmmbm'],
 			[''],
 			['d'],

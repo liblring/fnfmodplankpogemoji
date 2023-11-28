@@ -1,10 +1,14 @@
 package;
 
 #if (!hl)
-import Sys.sleep;
 import discord_rpc.DiscordRpc;
 #end
 
+#if hl 
+import discord.Api;
+#end
+
+import Sys.sleep;
 #if LUA_ALLOWED
 import llua.Lua;
 import llua.State;
@@ -104,39 +108,35 @@ class DiscordClient
 	#end
 	#else
 	public static var isInitialized:Bool = false;
-	public function new()
-	{
-		//stub
+	public function new() {
+		trace("Discord Client starting...");
+		Api.init("1115276156841771090", '');
+		trace("Discord Client started.");
 	}
 	
 	public static function shutdown()
-	{
-		//stub
-	}
-	
-	static function onReady()
-	{
-		//stub
+		Api.release();
+
+	public static function initialize() {
+		var discordDaemon = sys.thread.Thread.create(() -> new DiscordClient());
+		trace("Discord Client initialized");
+		isInitialized = true;
 	}
 
-	static function onError(_code:Int, _message:String)
-	{
-		trace('Error! $_code : $_message');
-	}
+	public static function changePresence(details:String, state:Null<String>, ?smallImageKey : String, ?hasStartTimestamp : Bool, ?endTimestamp: Float) {
+		var startTimestamp:Float = if(hasStartTimestamp) Date.now().getTime() else 0;
 
-	static function onDisconnected(_code:Int, _message:String)
-	{
-		trace('Disconnected! $_code : $_message');
-	}
+		if (endTimestamp > 0)
+			endTimestamp = startTimestamp + endTimestamp;
 
-	public static function initialize()
-	{
-		//stub
-	}
+		Api.updateLargeImageKey('icon', false);
+		Api.updateLargeImageText("mod editioner: " + MainMenuState.psychEngineVersion, false);
+		if (smallImageKey != null) Api.updateSmallImageKey(smallImageKey, false);
+		Api.updateStartTimestamp(Std.int(startTimestamp / 1000), false);
+		Api.updateEndTimestamp(Std.int(endTimestamp / 1000), false);
 
-	public static function changePresence(details:String, state:Null<String>, ?smallImageKey : String, ?hasStartTimestamp : Bool, ?endTimestamp: Float)
-	{
-		// stub
+		if (state != null) Api.updateState(state, false);
+		Api.updateDetails(details, true);
 	}
 
 	#if LUA_ALLOWED

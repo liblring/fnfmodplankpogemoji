@@ -140,7 +140,6 @@ class Main extends Sprite
 		});
 
 		// onCrash('my balls itch');
-
 	}
 
 	// Code was entirely made by sqirra-rng for their fnf engine named "Izzy Engine", big props to them!!!
@@ -251,10 +250,7 @@ class Main extends Sprite
 			pastButton = buttonnnnnnn;
 		}
 
-
-		FlxG.vcr.pause();
-		FlxG.autoPause = false;
-		stage.__rendering = true;
+		stage.window.onRender.add((ctx) -> stage.window.onRender.cancel());
 	}
 	#end
 }

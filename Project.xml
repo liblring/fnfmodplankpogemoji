@@ -134,8 +134,8 @@
 	<haxelib name="hlvideo"/>
 	<haxelib name="faxe" if='switch'/>
 	<haxelib name="actuate" />
+	<haxelib name="hldiscord" />
 	<!--<haxelib name="polymod"/> -->
-	<haxelib name="discord_rpc" if="cpp"/>
 
 	<!-- Enables a terminal log prompt on debug builds -->
 	<!--<haxelib name="hxcpp-debug-server" if="debug"/> KILL YOURSELF -->

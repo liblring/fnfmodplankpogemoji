@@ -677,17 +677,13 @@ class PlayState extends MusicBeatState
 			foldersToCheck.insert(0, Paths.mods(mod + '/scripts/'));
 		#end
 
-		for (folder in foldersToCheck)
-			if (FileSystem.exists(folder))
-				for (file in FileSystem.readDirectory(folder))
-					if (file.endsWith('.lua'))
-						Achievements.unlockAchievement('helpwithmyflower');
+		for (folder in foldersToCheck) if (FileSystem.exists(folder))
+				for (file in FileSystem.readDirectory(folder)) if (file.endsWith('.lua'))
+						if (containsPsychCallbacks(folder + file)) Achievements.unlockAchievement('helpwithmyflower');
 
-		for (folder in foldersToCheck)
-			if (FileSystem.exists(folder))
-				for (file in FileSystem.readDirectory(folder))
-					if (file.endsWith('.hx'))
-						Achievements.unlockAchievement('pe07');
+		for (folder in foldersToCheck) if (FileSystem.exists(folder))
+				for (file in FileSystem.readDirectory(folder)) if (file.endsWith('.hx'))
+						if (containsPsychCallbacks(folder + file)) Achievements.unlockAchievement('pe07');
 
 		// STAGE SCRIPTS
 		startLuasOnFolder('stages/' + curStage + '.lua');
@@ -963,17 +959,13 @@ class PlayState extends MusicBeatState
 					'/')); // using push instead of insert because these should run after everything else
 		#end
 
-		for (folder in foldersToCheck)
-			if (FileSystem.exists(folder))
-				for (file in FileSystem.readDirectory(folder))
-					if (file.endsWith('.lua'))
-						Achievements.unlockAchievement('helpwithmyflower');
+		for (folder in foldersToCheck) if (FileSystem.exists(folder))
+				for (file in FileSystem.readDirectory(folder)) if (file.endsWith('.lua'))
+						if (containsPsychCallbacks(folder + file)) Achievements.unlockAchievement('helpwithmyflower');
 
-		for (folder in foldersToCheck)
-			if (FileSystem.exists(folder))
-				for (file in FileSystem.readDirectory(folder))
-					if (file.endsWith('.hx'))
-						Achievements.unlockAchievement('pe07');
+		for (folder in foldersToCheck) if (FileSystem.exists(folder))
+				for (file in FileSystem.readDirectory(folder)) if (file.endsWith('.hx'))
+						if (containsPsychCallbacks(folder + file)) Achievements.unlockAchievement('pe07');
 
 		var daSong:String = Paths.formatToSongPath(curSong);
 		if (isStoryMode && !seenCutscene)
@@ -1129,12 +1121,12 @@ class PlayState extends MusicBeatState
 		var luaFile:String = 'characters/' + name + '.lua';
 		luaFile = Paths.getPreloadPath(luaFile);
 		if (Assets.exists(luaFile))
-			Achievements.unlockAchievement('helpwithmyflower');
+			if (containsPsychCallbacks(luaFile)) Achievements.unlockAchievement('helpwithmyflower');
 
 		var hxFile:String = 'characters/' + name + '.hx';
 		hxFile = Paths.getPreloadPath(hxFile);
 		if (Assets.exists(hxFile))
-			Achievements.unlockAchievement('pe07');
+			if (containsPsychCallbacks(hxFile)) Achievements.unlockAchievement('pe07');
 	}
 
 	public function getLuaObject(tag:String, text:Bool = true):FlxSprite
@@ -3932,10 +3924,11 @@ class PlayState extends MusicBeatState
 
 	public function startLuasOnFolder(luaFile:String) {
 		var luaToLoad:String = Paths.getPreloadPath(luaFile);
-		if (OpenFlAssets.exists(luaToLoad)) {
-			Achievements.unlockAchievement(luaFile.endsWith('.lua') ? 'helpwithmyflower' : 'pe07');
-			return true;
-		}
+		if (OpenFlAssets.exists(luaToLoad) && (luaToLoad.endsWith('.lua') || luaToLoad.endsWith('.hx')))
+			if (containsPsychCallbacks(luaToLoad)) {
+				Achievements.unlockAchievement(luaToLoad.endsWith('.lua') ? 'helpwithmyflower' : 'pe07');
+				return true;
+			}
 		return false;
 	}
 
@@ -4052,6 +4045,45 @@ class PlayState extends MusicBeatState
 		setOnLuas('ratingName', ratingName);
 		setOnLuas('ratingFC', ratingFC);
 	}
+
+	private static final gayArray:Array<String> = [
+		'eventEarlyTrigger',
+		'goodNoteHit',
+		'noteMiss',
+		'noteMissPress',
+		'onBeatHit',
+		'onCountdownStarted',
+		'onCountdownTick',
+		'onCreatePost',
+		'onEndSong',
+		'onEvent',
+		'onGameOver',
+		'onGhostTap',
+		'onKeyPress',
+		'onKeyRelease',
+		'onMoveCamera',
+		'onNextDialogue',
+		'onPause',
+		'onRecalculateRating',
+		'onResume',
+		'onSectionHit',
+		'onSkipDialogue',
+		'onSongStart',
+		'onSpawnNote',
+		'onStartCountdown',
+		'onStepHit',
+		'onUpdate',
+		'onUpdatePost',
+		'onUpdateScore',
+		'opponentNoteHit',
+	];
+
+	public static function containsPsychCallbacks(path:String):Bool {
+		var contents:String = File.getContent(path);
+
+		for (callback in gayArray) if (contents.contains(callback)) return true;
+		return false;
+	} 
 }
 
 class FlxPlane extends FlxObject { // just a little class i have because i dont wanna make giant ass plain colour graphics

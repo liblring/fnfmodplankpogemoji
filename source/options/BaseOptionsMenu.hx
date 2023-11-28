@@ -36,7 +36,7 @@ class BaseOptionsMenu extends MusicBeatSubstate {
 	private var checkboxGroup:FlxTypedGroup<CheckboxThingie>;
 	private var grpTexts:FlxTypedGroup<AttachedText>;
 
-	private var boyfriend:Character = null;
+	private var tenhourburstman:FlxSprite = null;
 	private var descBox:FlxSprite;
 	private var descText:FlxText;
 
@@ -110,7 +110,7 @@ class BaseOptionsMenu extends MusicBeatSubstate {
 				optionsArray[i].setChild(valueText);
 			}
 
-			if(optionsArray[i].showBoyfriend && boyfriend == null)
+			if(optionsArray[i].showBoyfriend && tenhourburstman == null)
 				reloadBoyfriend();
 			updateTextFrom(optionsArray[i]);
 		}
@@ -228,9 +228,6 @@ class BaseOptionsMenu extends MusicBeatSubstate {
 			}
 		}
 
-		if(boyfriend != null && boyfriend.animation.curAnim.finished)
-			boyfriend.dance();
-
 		if(nextAccept > 0)
 			nextAccept -= 1;
 		super.update(elapsed);
@@ -280,8 +277,8 @@ class BaseOptionsMenu extends MusicBeatSubstate {
 		descBox.setGraphicSize(Std.int(descText.width + 20), Std.int(descText.height + 25));
 		descBox.updateHitbox();
 
-		if(boyfriend != null)
-			boyfriend.visible = optionsArray[curSelected].showBoyfriend;
+		if(tenhourburstman != null)
+			tenhourburstman.visible = optionsArray[curSelected].showBoyfriend;
 		curOption = optionsArray[curSelected]; //shorter lol
 		FlxG.sound.play(Paths.sound('scrollMenu.wav'));
 	}
@@ -289,19 +286,22 @@ class BaseOptionsMenu extends MusicBeatSubstate {
 	public function reloadBoyfriend() {
 		var wasVisible:Bool = false;
 
-		if(boyfriend != null) {
-			wasVisible = boyfriend.visible;
-			boyfriend.kill();
-			remove(boyfriend);
-			boyfriend.destroy();
+		if(tenhourburstman != null) {
+			wasVisible = tenhourburstman.visible;
+			tenhourburstman.kill();
+			remove(tenhourburstman);
+			tenhourburstman.destroy();
 		}
 
-		boyfriend = new Character(840, 170, 'bf', true);
-		boyfriend.setGraphicSize(Std.int(boyfriend.width * 0.75));
-		boyfriend.updateHitbox();
-		boyfriend.dance();
-		insert(1, boyfriend);
-		boyfriend.visible = wasVisible;
+		tenhourburstman = new FlxSprite(0, 0);
+		tenhourburstman.frames = Paths.getSparrowAtlas('optinions/10hbm');
+		tenhourburstman.animation.addByPrefix('10 burst man', 'hoodirony', 16);
+		tenhourburstman.animation.play('10 burst man');
+		tenhourburstman.setGraphicSize(FlxG.width, FlxG.height);
+		tenhourburstman.updateHitbox();
+		tenhourburstman.x = tenhourburstman.y = 0;
+		insert(1, tenhourburstman);
+		tenhourburstman.visible = wasVisible;
 	}
 
 	function reloadCheckboxes()

@@ -56,9 +56,8 @@ class PlankData {
 
 	var comboOffset:Array<Int> = [0, 0, 0, 0];
 	var ratingOffset:Int = 0;
-	var sickWindow:Int = 45;
-	var goodWindow:Int = 90;
-	var badWindow:Int = 135;
+	var coolWindow:Int = 45;
+	var midWindow:Int = 135;
 	var safeFrames:Float = 10;
 
 	var camFollowShit:Bool = true;

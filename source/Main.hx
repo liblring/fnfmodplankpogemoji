@@ -3,6 +3,7 @@ package;
 import flixel.graphics.FlxGraphic;
 import flixel.FlxG;
 import flixel.FlxGame;
+import flixel.FlxObject;
 import flixel.util.FlxColor;
 import flixel.FlxState;
 import openfl.Assets;
@@ -97,7 +98,7 @@ class Main extends Sprite
 			game.width = Math.ceil(stageWidth / game.zoom);
 			game.height = Math.ceil(stageHeight / game.zoom);
 		}
-	
+		
 		PlankPrefs.loadDefaultKeys();
 		addChild(new FlxGame(game.width, game.height, game.initialState, game.framerate, game.framerate, game.skipSplash, game.startFullscreen));
 
@@ -302,7 +303,7 @@ class WindowBorder extends Sprite {
 	private static final frameColorPath:String = 'SOFTWARE\\Microsoft\\Windows\\DWM';
 	private static final frameColorValue:String = 'AccentColor';
 
-	public static var borderColor(default, null):Int = 0x99008c;
+	public static var borderColor(default, null):FlxColor = 0xFF99008c;
 
 	private var targetWindow:lime.ui.Window;
 	public function new(target:lime.ui.Window, ?borderTitle:String, ?solid:Bool = false) {
@@ -320,6 +321,28 @@ class WindowBorder extends Sprite {
 		try borderColor = WindowblindNatives.getRealAccentColour() catch(e)
 			try borderColor = Std.int(WindowblindNatives.getAccentColour()) catch(estrogen)
 				try borderColor = WindowblindNatives.getSystemColour(10) catch(estrogen) {}
+
+
+		// i swear to got getting this window colour code working correctly and displaying the correct colour was hell
+		// why windows
+		// why is it in brg
+		// why
+		// why
+		// why
+		// why
+		// why
+		// why
+		// why
+		// why
+		// why
+		// why
+		// why
+
+		// why do some thing like SetWindowCompositionAttribute use rgb but not this
+		// i know that SetWindowCompositionAttribute is undocumented and shouldnt be used but
+		// gah 
+		borderColor = borderColor.setRGB(borderColor.blue, borderColor.green, borderColor.red);
+		borderColor = borderColor.to24Bit();
 
 		WindowblindNatives.hookShadow();
 		WindowblindNatives.setShadow(true);

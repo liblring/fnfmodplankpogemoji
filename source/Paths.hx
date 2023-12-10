@@ -233,6 +233,8 @@ class Paths
 		return Assets.getText(getPath(key, TEXT));
 	}
 
+	@:keep inline static public function dump() hl.Gc.dumpMemory();
+
 	inline static public function font(key:String)
 		return 'assets/fonts/$key';
 

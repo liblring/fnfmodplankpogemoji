@@ -1,7 +1,289 @@
 {
 	"song": {
+		"speed": 3,
+		"stage": "stage",
+		"validScore": true,
 		"player1": "bf",
 		"player2": "bf",
+		"player3": null,
+		"gfVersion": "gf",
+		"events": [
+			[
+				251.396648044693,
+				[
+					[
+						"changeLyrics",
+						"(awesome wmusic)",
+						""
+					]
+				]
+			],
+			[
+				1927.37430167598,
+				[
+					[
+						"changeLyrics",
+						"PE",
+						""
+					]
+				]
+			],
+			[
+				2178.77094972067,
+				[
+					[
+						"changeLyrics",
+						"PEP",
+						""
+					]
+				]
+			],
+			[
+				2430.16759776536,
+				[
+					[
+						"changeLyrics",
+						"PEPPI",
+						""
+					]
+				]
+			],
+			[
+				2681.56424581006,
+				[
+					[
+						"changeLyrics",
+						"PEPPINO",
+						""
+					]
+				]
+			],
+			[
+				2849.16201117318,
+				[
+					[
+						"Flash Camera",
+						"1",
+						""
+					],
+					[
+						"Change Character",
+						"BF",
+						"transperant"
+					],
+					[
+						"Intense",
+						"1",
+						"100"
+					]
+				]
+			],
+			[
+				2932.96089385475,
+				[
+					[
+						"changeLyrics",
+						"(NOWAY)",
+						""
+					]
+				]
+			],
+			[
+				3925.97765363128,
+				[
+					[
+						"changeLyrics",
+						"PE",
+						""
+					]
+				]
+			],
+			[
+				3938.54748603352,
+				[
+					[
+						"Change Character",
+						"BF",
+						"bf"
+					]
+				]
+			],
+			[
+				4143.85474860335,
+				[
+					[
+						"changeLyrics",
+						"PEPPI-",
+						""
+					]
+				]
+			],
+			[
+				4357.54189944134,
+				[
+					[
+						"changeLyrics",
+						"",
+						""
+					]
+				]
+			],
+			[
+				4608.93854748603,
+				[
+					[
+						"changeLyrics",
+						"PE",
+						""
+					]
+				]
+			],
+			[
+				4818.43575418994,
+				[
+					[
+						"changeLyrics",
+						"PEPPI",
+						""
+					]
+				]
+			],
+			[
+				5111.73184357542,
+				[
+					[
+						"changeLyrics",
+						"PEPPINO",
+						""
+					]
+				]
+			],
+			[
+				5279.32960893855,
+				[
+					[
+						"changeLyrics",
+						"(HOLY SHIT)",
+						""
+					]
+				]
+			],
+			[
+				5363.12849162011,
+				[
+					[
+						"Change Character",
+						"BF",
+						"transperant"
+					],
+					[
+						"Intense",
+						"1",
+						"150"
+					]
+				]
+			],
+			[
+				7016.06145251397,
+				[
+					[
+						"changeLyrics",
+						"THE",
+						""
+					]
+				]
+			],
+			[
+				7122.90502793296,
+				[
+					[
+						"changeLyrics",
+						"THE NO",
+						""
+					]
+				]
+			],
+			[
+				7458.10055865922,
+				[
+					[
+						"changeLyrics",
+						"THE NOSU",
+						""
+					]
+				]
+			],
+			[
+				7709.49720670391,
+				[
+					[
+						"changeLyrics",
+						"(OH my GHod its fucker)",
+						""
+					]
+				]
+			],
+			[
+				7793.29608938548,
+				[
+					[
+						"Intense",
+						"1",
+						"200"
+					],
+					[
+						"Flash Camera",
+						"1",
+						""
+					],
+					[
+						"Change Character",
+						"BF",
+						"fucker-real"
+					]
+				]
+			],
+			[
+				9871.50837988827,
+				[
+					[
+						"changeLyrics",
+						"PE",
+						""
+					]
+				]
+			],
+			[
+				9888.26815642458,
+				[
+					[
+						"Change Character",
+						"BF",
+						"bf"
+					]
+				]
+			],
+			[
+				10055.8659217877,
+				[
+					[
+						"changeLyrics",
+						"PEPPI",
+						""
+					]
+				]
+			],
+			[
+				10391.061452514,
+				[
+					[
+						"changeLyrics",
+						"PEPPINO-",
+						""
+					]
+				]
+			]
+		],
 		"notes": [
 			{
 				"lengthInSteps": 16,
@@ -887,350 +1169,89 @@
 				"mustHitSection": true
 			},
 			{
-				"sectionBeats": 4,
-				"sectionNotes": [],
-				"typeOfSection": 0,
-				"gfSection": false,
 				"altAnim": false,
+				"gfSection": false,
+				"typeOfSection": 0,
+				"sectionNotes": [],
+				"bpm": 179,
 				"mustHitSection": true,
-				"changeBPM": false,
-				"bpm": 179
+				"sectionBeats": 4,
+				"changeBPM": false
 			},
 			{
-				"sectionBeats": 4,
-				"sectionNotes": [],
-				"typeOfSection": 0,
-				"gfSection": false,
 				"altAnim": false,
+				"gfSection": false,
+				"typeOfSection": 0,
+				"sectionNotes": [],
+				"bpm": 179,
 				"mustHitSection": true,
-				"changeBPM": false,
-				"bpm": 179
+				"sectionBeats": 4,
+				"changeBPM": false
 			},
 			{
-				"gfSection": false,
 				"altAnim": false,
+				"gfSection": false,
 				"typeOfSection": 0,
 				"sectionNotes": [],
 				"bpm": 179,
+				"mustHitSection": true,
 				"sectionBeats": 4,
-				"changeBPM": false,
-				"mustHitSection": true
+				"changeBPM": false
 			},
 			{
-				"gfSection": false,
 				"altAnim": false,
+				"gfSection": false,
 				"typeOfSection": 0,
 				"sectionNotes": [],
 				"bpm": 179,
+				"mustHitSection": true,
 				"sectionBeats": 4,
-				"changeBPM": false,
-				"mustHitSection": true
+				"changeBPM": false
 			},
 			{
-				"gfSection": false,
 				"altAnim": false,
+				"gfSection": false,
 				"typeOfSection": 0,
 				"sectionNotes": [],
 				"bpm": 179,
+				"mustHitSection": true,
 				"sectionBeats": 4,
-				"changeBPM": false,
-				"mustHitSection": true
+				"changeBPM": false
 			},
 			{
-				"gfSection": false,
 				"altAnim": false,
+				"gfSection": false,
 				"typeOfSection": 0,
 				"sectionNotes": [],
 				"bpm": 179,
+				"mustHitSection": true,
 				"sectionBeats": 4,
+				"changeBPM": false
+			},
+			{
+				"altAnim": false,
+				"bpm": 179,
 				"changeBPM": false,
-				"mustHitSection": true
+				"gfSection": false,
+				"mustHitSection": true,
+				"sectionBeats": 4,
+				"sectionNotes": [],
+				"typeOfSection": 0
+			},
+			{
+				"altAnim": false,
+				"bpm": 179,
+				"changeBPM": false,
+				"gfSection": false,
+				"mustHitSection": true,
+				"sectionBeats": 4,
+				"sectionNotes": [],
+				"typeOfSection": 0
 			}
 		],
-		"gfVersion": "gf",
-		"events": [
-			[
-				251.396648044693,
-				[
-					[
-						"changeLyrics",
-						"(awesome wmusic)",
-						""
-					]
-				]
-			],
-			[
-				1927.37430167598,
-				[
-					[
-						"changeLyrics",
-						"PE",
-						""
-					]
-				]
-			],
-			[
-				2178.77094972067,
-				[
-					[
-						"changeLyrics",
-						"PEP",
-						""
-					]
-				]
-			],
-			[
-				2430.16759776536,
-				[
-					[
-						"changeLyrics",
-						"PEPPI",
-						""
-					]
-				]
-			],
-			[
-				2681.56424581006,
-				[
-					[
-						"changeLyrics",
-						"PEPPINO",
-						""
-					]
-				]
-			],
-			[
-				2849.16201117318,
-				[
-					[
-						"Flash Camera",
-						"1",
-						""
-					],
-					[
-						"Change Character",
-						"BF",
-						"transperant"
-					],
-					[
-						"Intense",
-						"1",
-						"100"
-					]
-				]
-			],
-			[
-				2932.96089385475,
-				[
-					[
-						"changeLyrics",
-						"(NOWAY)",
-						""
-					]
-				]
-			],
-			[
-				3925.97765363128,
-				[
-					[
-						"changeLyrics",
-						"PE",
-						""
-					]
-				]
-			],
-			[
-				3938.54748603352,
-				[
-					[
-						"Change Character",
-						"BF",
-						"bf"
-					]
-				]
-			],
-			[
-				4143.85474860335,
-				[
-					[
-						"changeLyrics",
-						"PEPPI-",
-						""
-					]
-				]
-			],
-			[
-				4357.54189944134,
-				[
-					[
-						"changeLyrics",
-						"",
-						""
-					]
-				]
-			],
-			[
-				4608.93854748603,
-				[
-					[
-						"changeLyrics",
-						"PE",
-						""
-					]
-				]
-			],
-			[
-				4818.43575418994,
-				[
-					[
-						"changeLyrics",
-						"PEPPI",
-						""
-					]
-				]
-			],
-			[
-				5111.73184357542,
-				[
-					[
-						"changeLyrics",
-						"PEPPINO",
-						""
-					]
-				]
-			],
-			[
-				5279.32960893855,
-				[
-					[
-						"changeLyrics",
-						"(HOLY SHIT)",
-						""
-					]
-				]
-			],
-			[
-				5363.12849162011,
-				[
-					[
-						"Change Character",
-						"BF",
-						"transperant"
-					],
-					[
-						"Intense",
-						"1",
-						"150"
-					]
-				]
-			],
-			[
-				7016.06145251397,
-				[
-					[
-						"changeLyrics",
-						"THE",
-						""
-					]
-				]
-			],
-			[
-				7122.90502793296,
-				[
-					[
-						"changeLyrics",
-						"THE NO",
-						""
-					]
-				]
-			],
-			[
-				7458.10055865922,
-				[
-					[
-						"changeLyrics",
-						"THE NOSU",
-						""
-					]
-				]
-			],
-			[
-				7709.49720670391,
-				[
-					[
-						"changeLyrics",
-						"(OH my GHod its fucker)",
-						""
-					]
-				]
-			],
-			[
-				7793.29608938548,
-				[
-					[
-						"Intense",
-						"1",
-						"200"
-					],
-					[
-						"Flash Camera",
-						"1",
-						""
-					],
-					[
-						"Change Character",
-						"BF",
-						"fucker"
-					]
-				]
-			],
-			[
-				9871.50837988827,
-				[
-					[
-						"changeLyrics",
-						"PE",
-						""
-					]
-				]
-			],
-			[
-				9888.26815642458,
-				[
-					[
-						"Change Character",
-						"BF",
-						"bf"
-					]
-				]
-			],
-			[
-				10055.8659217877,
-				[
-					[
-						"changeLyrics",
-						"PEPPI",
-						""
-					]
-				]
-			],
-			[
-				10391.061452514,
-				[
-					[
-						"changeLyrics",
-						"PEPPINO-",
-						""
-					]
-				]
-			]
-		],
-		"player3": null,
+		"bpm": 179,
+		"shitass": [],
 		"song": "pejpeeeno",
-		"validScore": true,
-		"needsVoices": false,
-		"stage": "stage",
-		"speed": 3,
-		"bpm": 179
+		"needsVoices": false
 	}
 }

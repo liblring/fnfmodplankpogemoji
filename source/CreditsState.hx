@@ -84,6 +84,7 @@ class CreditsState extends MusicBeatState
 			['cicada',		'cicadascries',	'she va\'d gorflen and idk jkgsnlijkvhcnljkb,fcjxolkbhxnlkhbflhnblkvhkblgvhjojlvhn;ln', 'https://twitter.com/sillycicada/', 'a21df0', 'bug'],
 			['maplesucks',	'maplse',		'compos\ni thikn',																		'https://twitter.com/maplesuckss/',	'FF613A', 'mapl'],
 			['SMB',			'SMB',			'allan please add details',																'https://smb-bio.carrd.co/',	'EC1C26', 'ssmsmmsmmmsmmmsmmmbmsmbmsmmbmsmbmmsmbmsmbmmsmbmsmmbsmmbmsmbmsmmbmmmbm'],
+			['Ghost Bunny',			'ghosbunny',			'iDK i thin k they did art or soem thign.,.,..,.,',				'https://linktr.ee/ghostbnuuy',	'D7D8DB', 'ghos'],
 			[''],
 			['d'],
 			['d',	    'd',		'd (dont press enter)',						                                                'https://www.youtube.com/watch?v=mYiBdMnIT88',               'FFFF00',    'd'],

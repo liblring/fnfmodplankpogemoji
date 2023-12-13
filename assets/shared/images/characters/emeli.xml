@@ -2,15 +2,15 @@
 <TextureAtlas imagePath="emeli.png">
 	<!-- Created with Adobe Animate version 20.5.0.29329 -->
 	<!-- http://www.adobe.com/products/animate.html -->
-	<SubTexture name="dow0000" x="2" y="1100" width="348" height="547"/>
-	<SubTexture name="dow0001" x="352" y="1100" width="348" height="547"/>
-	<SubTexture name="idl0000" x="1051" y="1100" width="347" height="547"/>
-	<SubTexture name="idl0001" x="702" y="2" width="348" height="546" frameX="0" frameY="-1" frameWidth="347" frameHeight="547"/>
-	<SubTexture name="idl0002" x="353" y="550" width="348" height="546" frameX="0" frameY="-1" frameWidth="347" frameHeight="547"/>
-	<SubTexture name="lef0000" x="1052" y="551" width="347" height="547"/>
-	<SubTexture name="lef0001" x="702" y="1099" width="347" height="547"/>
-	<SubTexture name="rit0000" x="1052" y="2" width="347" height="547"/>
-	<SubTexture name="rit0001" x="703" y="550" width="347" height="547"/>
+	<SubTexture name="dow0000" x="353" y="2" width="348" height="547"/>
+	<SubTexture name="dow0001" x="353" y="551" width="348" height="547"/>
+	<SubTexture name="idl0000" x="1402" y="551" width="347" height="547" frameX="0" frameY="0" frameWidth="347" frameHeight="548"/>
+	<SubTexture name="idl0001" x="703" y="2" width="348" height="546" frameX="0" frameY="-1" frameWidth="347" frameHeight="548"/>
+	<SubTexture name="idl0002" x="703" y="550" width="348" height="546" frameX="0" frameY="-1" frameWidth="347" frameHeight="548"/>
+	<SubTexture name="lef0000" x="1402" y="2" width="347" height="547"/>
+	<SubTexture name="lef0001" x="1751" y="2" width="347" height="547"/>
+	<SubTexture name="rit0000" x="1053" y="2" width="347" height="547"/>
+	<SubTexture name="rit0001" x="1053" y="551" width="347" height="547"/>
 	<SubTexture name="u0000" x="2" y="2" width="349" height="547"/>
 	<SubTexture name="u0001" x="2" y="551" width="349" height="547"/>
 </TextureAtlas>

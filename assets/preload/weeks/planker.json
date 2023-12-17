@@ -1,0 +1,95 @@
+{
+	"songs": [
+		[
+			"plankyer",
+			"plank",
+			[
+				100,
+				72,
+				22
+			]
+		],
+		[
+			"metalyer",
+			"metalyersheet",
+			[
+				201,
+				201,
+				201
+			]
+		],
+		[
+			"mnalk",
+			"mnalk",
+			[
+				255,
+				255,
+				255
+			]
+		],
+		[
+			"tilt-controls",
+			"plankrivals",
+			[
+				255,
+				255,
+				255
+			]
+		],
+		[
+			"hypothesis",
+			"schibing",
+			[
+				255,
+				255,
+				255
+			]
+		],
+		[
+			"3zloty",
+			"zlibty",
+			[
+				125,
+				132,
+				151
+			]
+		],
+		[
+			"blo",
+			"overblow",
+			[
+				120,
+				182,
+				255
+			]
+		],
+		[
+			"planksexuality",
+			"emeli",
+			[
+				90,
+				173,
+				95
+			]
+		]
+	],
+	"hiddenUntilUnlocked": false,
+	"hideFreeplay": false,
+	"weekBackground": "stage",
+	"difficulties": "hard",
+	"weekCharacters": [
+		"dad",
+		"bf",
+		"gf"
+	],
+	"storyName": "im using controls",
+	"weekName": "ctrls?",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"hideStoryMode": false,
+	"weekBefore": "tutorial",
+	"startUnlocked": true
+}

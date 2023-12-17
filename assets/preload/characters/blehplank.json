@@ -1,0 +1,133 @@
+{
+	"animations": [
+		{
+			"indices": [],
+			"offsets": [
+				0,
+				0
+			],
+			"fps": 9,
+			"anim": "idle",
+			"loop": true,
+			"name": "idl"
+		},
+		{
+			"indices": [],
+			"offsets": [
+				80,
+				0
+			],
+			"fps": 9,
+			"anim": "singLEFT",
+			"loop": false,
+			"name": "lef"
+		},
+		{
+			"indices": [],
+			"offsets": [
+				40,
+				-180
+			],
+			"fps": 9,
+			"anim": "singDOWN",
+			"loop": false,
+			"name": "dow"
+		},
+		{
+			"indices": [],
+			"offsets": [
+				-39,
+				-112
+			],
+			"fps": 9,
+			"anim": "singUP",
+			"loop": false,
+			"name": "u"
+		},
+		{
+			"indices": [],
+			"offsets": [
+				-90,
+				-10
+			],
+			"fps": 9,
+			"anim": "singRIGHT",
+			"loop": false,
+			"name": "rit"
+		},
+		{
+			"indices": [],
+			"offsets": [
+				90,
+				630
+			],
+			"fps": 1,
+			"anim": "singLEFTmiss",
+			"loop": false,
+			"name": "explo.jpg"
+		},
+		{
+			"indices": [],
+			"offsets": [
+				90,
+				630
+			],
+			"fps": 1,
+			"anim": "singDOWNmiss",
+			"loop": false,
+			"name": "explo.jpg"
+		},
+		{
+			"indices": [],
+			"offsets": [
+				90,
+				630
+			],
+			"fps": 1,
+			"anim": "singUPmiss",
+			"loop": false,
+			"name": "explo.jpg"
+		},
+		{
+			"indices": [],
+			"offsets": [
+				90,
+				630
+			],
+			"fps": 1,
+			"anim": "singRIGHTmiss",
+			"loop": false,
+			"name": "explo.jpg"
+		},
+		{
+			"indices": [],
+			"offsets": [
+				90,
+				630
+			],
+			"fps": 1,
+			"anim": "miss",
+			"loop": false,
+			"name": "explo.jpg"
+		}
+	],
+	"camera_position": [
+		100,
+		120
+	],
+	"flip_x": true,
+	"healthbar_colors": [
+		209,
+		197,
+		255
+	],
+	"healthicon": "bleh",
+	"image": "characters/blehplank",
+	"no_antialiasing": false,
+	"position": [
+		-130,
+		100
+	],
+	"scale": 1,
+	"sing_duration": 2.5
+}

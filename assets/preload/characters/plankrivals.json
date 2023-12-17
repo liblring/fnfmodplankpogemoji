@@ -1,0 +1,78 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				-130,
+				-320
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "idle"
+		},
+		{
+			"offsets": [
+				-44,
+				-302
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "left"
+		},
+		{
+			"offsets": [
+				-192,
+				-304
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "right"
+		},
+		{
+			"offsets": [
+				-146,
+				-312
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "down"
+		},
+		{
+			"offsets": [
+				-144,
+				-272
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "up"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/plankriavls",
+	"position": [
+		0,
+		0
+	],
+	"healthicon": "plankrivals",
+	"flip_x": false,
+	"healthbar_colors": [
+		100,
+		72,
+		22
+	],
+	"camera_position": [
+		40,
+		310
+	],
+	"sing_duration": 4,
+	"scale": 1.4
+}

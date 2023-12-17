@@ -1,0 +1,34 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				1321,
+				130
+			],
+			"anim": "idle",
+			"fps": 24,
+			"name": "idlelmao",
+			"indices": []
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/transperant",
+	"position": [
+		0,
+		0
+	],
+	"healthicon": "a",
+	"flip_x": false,
+	"healthbar_colors": [
+		255,
+		255,
+		255
+	],
+	"camera_position": [
+		60,
+		380
+	],
+	"sing_duration": 4,
+	"scale": 0.5
+}

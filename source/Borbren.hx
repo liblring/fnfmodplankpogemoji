@@ -1,0 +1,3 @@
+package;
+
+typedef Borbren = Character;

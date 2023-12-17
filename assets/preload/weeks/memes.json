@@ -1,0 +1,59 @@
+{
+	"songs": [
+		[
+			"pejpeeeno",
+			"thenoid",
+			[
+				126,
+				88,
+				80
+			]
+		],
+		[
+			"trumpetin",
+			"trumpet",
+			[
+				255,
+				255,
+				255
+			]
+		],
+		[
+			"bouncer",
+			"bouncer",
+			[
+				255,
+				255,
+				255
+			]
+		],
+		[
+			"luzny",
+			"a",
+			[
+				255,
+				255,
+				255
+			]
+		]
+	],
+	"hiddenUntilUnlocked": false,
+	"hideFreeplay": false,
+	"weekBackground": "stage",
+	"difficulties": "what",
+	"weekCharacters": [
+		"dad",
+		"bf",
+		"gf"
+	],
+	"storyName": "Your New Week",
+	"weekName": "mórmus",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"hideStoryMode": false,
+	"weekBefore": "planker",
+	"startUnlocked": true
+}

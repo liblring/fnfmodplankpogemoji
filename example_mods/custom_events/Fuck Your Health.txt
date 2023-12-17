@@ -1,3 +1,0 @@
-Hides the health bar
-
-value1 = 1 to hide or 0 to bring it back

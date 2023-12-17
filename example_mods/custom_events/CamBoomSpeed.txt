@@ -1,3 +1,0 @@
-Value 1: speed
-
-Value 2: intensity

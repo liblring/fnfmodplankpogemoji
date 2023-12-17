@@ -1,3 +1,0 @@
-This adds words onto screen
-value 1: the words
-value 2: the icon (optional)

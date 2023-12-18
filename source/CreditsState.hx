@@ -70,7 +70,7 @@ class CreditsState extends MusicBeatState
 
 		var pisspoop:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color - image folder
 			['lario forest'],
-			['libing',	'lib',		'director or some shit i forgot (im on crack while writing this)',							'https://www.youtube.com/channel/UCwH4gcjdN-gWPGunlBxAnQQ',	'51bd78', 'liber'],
+			['libing',	'lib',		'director or some shit i forgot (im on crack while writing this (is a goober))',			'https://www.youtube.com/channel/UCwH4gcjdN-gWPGunlBxAnQQ',	'51bd78', 'liber'],
 			['plank','plank',    'coder + like composer + like the guy who turned this into a serious mod bravo plank!',		'https://plankdev.carrd.co/',		'6B327C',                          'plnk'],
 			['Nick',    'dantesguy','coder + like artist + like animator, made opd sprites for mnalk lets fokin go mate innit',	'https://github.com/NickMGC',		'ffffff',                          'nick'],
 			['FlyingFeltBoot','flyingfeltwhat','help with random bullshit like hypothesis dantes sprites i guess',	            'https://github.com/Nikerlo',		'7a4a35'],

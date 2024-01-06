@@ -263,6 +263,8 @@ class PlayState extends MusicBeatState
 	var grpLimoDancers:FlxTypedGroup<BackgroundDancer>;
 	var fastCar:BGSprite;
 
+	var pounce:FlxSprite;
+
 	var upperBoppers:BGSprite;
 	var bottomBoppers:BGSprite;
 	var santa:BGSprite;
@@ -352,7 +354,7 @@ class PlayState extends MusicBeatState
 		'toturiel' => 'wingding.ttf',
 	];
 
-	private var defaultFont:String = 'vcr.ttf';
+	private final defaultFont:String = 'vcr.ttf';
 	private var curFont:String;
 
 	override public function create()
@@ -512,7 +514,7 @@ class PlayState extends MusicBeatState
 				yourmom = new FlxSprite(0, 300);
 				yourmom.loadGraphic(Paths.image('plink'), true, 1280, 720);
 				yourmom.scrollFactor.set(0.5, 0.5);
-				yourmom.alpha = 0.000001;
+				yourmom.alpha = 0.00001;
 				yourmom.scale.set(1.2, 1.2);
 				yourmom.screenCenter();
 				yourmom.y = 100;
@@ -802,6 +804,16 @@ class PlayState extends MusicBeatState
 		// startCountdown();
 
 		generateSong(SONG.song);
+
+		if (SONG.player2 == 'pouncyyy') {
+			pounce = new FlxSprite(0, 0, Paths.image('pounce'));
+			pounce.setGraphicSize(FlxG.width, FlxG.height);
+			pounce.updateHitbox();
+			pounce.alpha = 0.00001;
+			pounce.camera = camHUD;
+			pounce.scrollFactor.set();
+			add(pounce);
+		}
 
 		if (SONG.song.toLowerCase() == 'planksexuality') 
 			if (FlxG.random.bool(5))
@@ -1108,12 +1120,12 @@ class PlayState extends MusicBeatState
 	function startCharacterLua(name:String) {
 		var luaFile:String = 'characters/' + name + '.lua';
 		luaFile = Paths.getPreloadPath(luaFile);
-		if (Assets.exists(luaFile))
+		if (FileSystem.exists(luaFile))
 			if (containsPsychCallbacks(luaFile)) Achievements.unlockAchievement('helpwithmyflower');
 
 		var hxFile:String = 'characters/' + name + '.hx';
 		hxFile = Paths.getPreloadPath(hxFile);
-		if (Assets.exists(hxFile))
+		if (FileSystem.exists(hxFile))
 			if (containsPsychCallbacks(hxFile)) Achievements.unlockAchievement('pe07');
 	}
 
@@ -1711,6 +1723,8 @@ class PlayState extends MusicBeatState
 				unspawnNotes.push(swagNote);
 				var floorSus:Int = Math.floor(susLength);
 
+				if (!gottaHitNote && !dad.showNotes) swagNote.visible = false;
+
 				if (floorSus > 0)
 				{
 					for (susNote in 0...floorSus + 1)
@@ -1727,6 +1741,7 @@ class PlayState extends MusicBeatState
 						sustainNote.scrollFactor.set();
 						swagNote.tail.push(sustainNote);
 						sustainNote.parent = swagNote;
+						sustainNote.visible = swagNote.visible;
 						unspawnNotes.push(sustainNote);
 						if (sustainNote.mustPress)
 						{
@@ -1870,6 +1885,8 @@ class PlayState extends MusicBeatState
 				}
 				opponentStrums.add(babyArrow);
 			}
+
+			if (player == 0 && !dad.showNotes) babyArrow.visible = false;
 
 			strumLineNotes.add(babyArrow);
 			babyArrow.postAddedToGroup();
@@ -3058,6 +3075,7 @@ class PlayState extends MusicBeatState
 
 		for (i in 0...10)
 			Paths.image(pixelShitPart1 + 'num' + i + pixelShitPart2);
+		Paths.image('numbers');
 	}
 
 	private function popUpScore(note:Note = null):Void {
@@ -3165,7 +3183,18 @@ class PlayState extends MusicBeatState
 		var daLoop:Int = 0;
 		var xThing:Float = 0;
 		for (i in seperatedScore) {
-			var numScore:FlxSprite = new FlxSprite(gayballs + (43 * daLoop) - 90, ballsgay + 80, Paths.image(pixelShitPart1 + 'num' + Std.int(i) + pixelShitPart2));
+			var numScore:FlxSprite; 
+
+			if (pixelShitPart1 != null) {
+				numScore = new FlxSprite(0, 0, Paths.image(pixelShitPart1 + 'num' + Std.int(i) + pixelShitPart2));
+			} else {
+				numScore = new FlxSprite().loadGraphic(Paths.image('numbers'), true, 111, 135);
+				for (scoreThingy in 0...10) numScore.animation.add(Std.string(scoreThingy), [scoreThingy], 0);
+				numScore.animation.play(Std.string(i));
+			}
+
+			numScore.x = gayballs + (43 * daLoop) - 90;
+			numScore.y = ballsgay + 80;
 
 			if (!PlankPrefs.data.comboStacking)
 				lastScore.push(numScore);
@@ -3556,22 +3585,15 @@ class PlayState extends MusicBeatState
 			var altAnim:String = note.animSuffix;
 
 			if (SONG.notes[curSection] != null)
-			{
 				if (SONG.notes[curSection].altAnim && !SONG.notes[curSection].gfSection)
-				{
 					altAnim = '-alt';
-				}
-			}
 
 			var char:Character = dad;
 			var animToPlay:String = singAnimations[Std.int(Math.abs(note.noteData))] + altAnim;
 			if (note.gfNote)
-			{
 				char = gf;
-			}
 
-			if (char != null)
-			{
+			if (char != null && dad.showNotes) {
 				char.playAnim(animToPlay, true);
 				char.holdTimer = 0;
 				if (note.isSustainNote) char.animation.curAnim.pause();
@@ -3586,6 +3608,12 @@ class PlayState extends MusicBeatState
 			time += 0.15;
 		StrumPlayAnim(true, Std.int(Math.abs(note.noteData)), time, note.isSustainNote && !note.isSustainEnd);
 		note.hitByOpponent = true;
+
+		if (SONG.player2 == 'pouncyyy') {
+			FlxTween.cancelTweensOf(pounce);
+			pounce.alpha = 1;
+			FlxTween.tween(pounce, {alpha: 0}, Conductor.crochet / 1000);
+		}
 
 		callOnLuas('opponentNoteHit', [
 			notes.members.indexOf(note),

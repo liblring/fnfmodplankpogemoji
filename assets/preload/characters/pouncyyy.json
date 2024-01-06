@@ -1,0 +1,35 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				-1463,
+				-835
+			],
+			"anim": "idle",
+			"fps": 24,
+			"name": "idle",
+			"indices": [0]
+		}
+	],
+	"no_antialiasing": true,
+	"image": "characters/pouncycolonthree",
+	"position": [
+		-1310,
+		-350
+	],
+	"healthicon": "bouncer",
+	"flip_x": false,
+	"healthbar_colors": [
+		255,
+		255,
+		255
+	],
+	"camera_position": [
+		1380,
+		890
+	],
+	"sing_duration": 4,
+	"scale": 1.15,
+	"show_notes": false
+}

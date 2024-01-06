@@ -32,6 +32,7 @@ typedef CharacterFile = {
 	var flip_x:Bool;
 	var no_antialiasing:Bool;
 	var healthbar_colors:Array<Int>;
+	var show_notes:Bool;
 }
 
 typedef AnimArray = {
@@ -49,6 +50,7 @@ class Character extends FlxSprite
 	public var debugMode:Bool = false;
 	@:isVar
 	public var isPlayer:Bool = false;
+	public var showNotes:Bool = true;
 	public var curCharacter:String = DEFAULT_CHARACTER;
 
 	public var colorTween:FlxTween;
@@ -120,6 +122,7 @@ class Character extends FlxSprite
 				#end
 
 				var json:CharacterFile = cast Json.parse(rawJson);
+				var lessRawJsonButStillKindaRaw:Dynamic = Json.parse(rawJson);
 				var spriteType = "sparrow";
 				//sparrow
 				//packer
@@ -189,6 +192,8 @@ class Character extends FlxSprite
 
 				antialiasing = !noAntialiasing;
 				if(!PlankPrefs.data.globalAntialiasing) antialiasing = false;
+
+				if (lessRawJsonButStillKindaRaw.show_notes != null) showNotes = json.show_notes;
 
 				animationsArray = json.animations;
 				if(animationsArray != null && animationsArray.length > 0) {

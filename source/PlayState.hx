@@ -3100,7 +3100,7 @@ class PlayState extends MusicBeatState
 		for (i in seperatedScore) {
 			var numScore:FlxSprite; 
 
-			if (pixelShitPart1 != null) {
+			if (pixelShitPart1 != '') {
 				numScore = new FlxSprite(0, 0, Paths.image(pixelShitPart1 + 'num' + Std.int(i) + pixelShitPart2));
 			} else {
 				numScore = new FlxSprite().loadGraphic(Paths.image('numbers'), true, 111, 135);
@@ -3413,7 +3413,7 @@ class PlayState extends MusicBeatState
 
 		totalPlayed++;
 		recalculateRating(true);
-
+		
 		var char:Character = boyfriend;
 		if (daNote.gfNote)
 		{

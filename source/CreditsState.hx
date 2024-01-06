@@ -79,7 +79,7 @@ class CreditsState extends MusicBeatState
 			['plank','plank',    'retarded bitch',		'https://plankdev.carrd.co/',		'6B327C',                          'plnk'],
 			*/
 			['Nick',    'dantesguy','coder + like artist + like animator, made opd sprites for mnalk lets fokin go mate innit',	'https://github.com/NickMGC',		'ffffff',                          'nick'],
-			['FlyingFeltBoot','flyingfeltwhat','help with random bullshit like hypothesis dantes sprites i guess',	            'https://github.com/Nikerlo',		'7a4a35'],
+			['FlyingFeltBoot','flyingbeltfoot','help with random bullshit like hypothesis dantes sprites i guess',	            'https://github.com/Nikerlo',		'7a4a35'],
 			['Betopia', 'betty',    'so like, artist, i guess',		                                                            'https://twitter.com/betpowo',		'996666',                          'betp'],
 			['chi',     'chii',     'artist, animator, stuff, gay sex i dunno',	                        						'https://www.tumblr.com/cheddarchiing?source=share', '8C00FF'],
 			['Unholywanderer','mod','guy, did stuff, coded 1 single line in',	                        						'https://gamebanana.com/members/1908754', '1abc96',					   'holy'],

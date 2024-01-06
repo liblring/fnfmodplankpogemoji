@@ -60,6 +60,7 @@ class Main extends Sprite
 
 	public static var fpsVar:FPS;
 	public static var border:WindowBorder;
+	var crashAlreadyHappening:Bool = false;
 
 	// You can pretty much ignore everything from here on - your code should go in your states.
 
@@ -126,6 +127,7 @@ class Main extends Sprite
 		}
 		#end
 
+		FlxG.stage.window.resizable = true; // ffs lime why isnt this enabled even though i enabled it in project.xml
 		FlxG.stage.addChild(border = new WindowBorder(FlxG.stage.window));
 		FlxG.sound.soundTray.parent.removeChild(FlxG.sound.soundTray);
 		border.addChild(FlxG.sound.soundTray); // terrible fix but eh fuck it
@@ -140,7 +142,16 @@ class Main extends Sprite
 			FlxG.sound.soundTray.visible = false;
 		});
 
-		// onCrash('my balls itch');
+		#if !debug
+		FlxG.stage.window.onClose.add(() -> {
+			targetWindow.onClose.cancel();
+			FlxG.vcr.pause();
+			FlxG.sound.pause();
+			FlxG.autoPause = false;
+			FlxG.sound.play(Paths.sound('table')).onComplete = () -> Sys.exit(0);
+			Actuate.tween(targetWindow, 0.5, {y: targetWindow.display.bounds.height}).ease(Expo.easeIn);
+		});
+		#end
 	}
 
 	// Code was entirely made by sqirra-rng for their fnf engine named "Izzy Engine", big props to them!!!
@@ -148,6 +159,8 @@ class Main extends Sprite
 	#if CRASH_HANDLER
 	function onCrash(e:Dynamic):Void
 	{
+		if (crashAlreadyHappening) return;
+		crashAlreadyHappening = true;
 		var message:String = "";
 		if ((e is UncaughtErrorEvent))
 			message = try Std.string(e.error) catch(_:haxe.Exception) "Unknown";
@@ -186,7 +199,7 @@ class Main extends Sprite
 
 		var balls = Application.current.createWindow({
 			width: 500,
-			height: 400,
+			height: 372,
 			resizable: false,
 			title: 'kill yourself!!!!',
 			context: {
@@ -201,9 +214,9 @@ class Main extends Sprite
 		var golour:FlxColor = WindowblindNatives.getRealAccentColour();
 		golour.alpha = 0x99;
 		WindowblindNatives.enableBlur(golour);
-		balls.stage.addChild(new WindowBorder(balls, 'shit yourself!!!!', true));
-
-		balls.onClose.add(() -> Sys.exit(0));
+		var die = new WindowBorder(balls, 'shit yourself!!!!', false, false);
+		balls.stage.addChild(die);
+		die.doTimeout = false;
 
 		var crashHeader:TextField = new TextField();
 		crashHeader.selectable = false;
@@ -228,8 +241,11 @@ class Main extends Sprite
 		balls.stage.addChild(crashlog);
 
 		var m:Array<String> = ['continue', 'restart game', 'close'];
+		var killme:Array<Void->Void> = [() -> return, FlxG.resetGame, () -> Sys.exit(0)];
 
 		var pastButton:WindowblindButton = null;
+
+		function renderHook(ctx):Void stage.window.onRender.cancel();
 
 		for (button in 0...m.length) {
 			var thing:TextField = new TextField();
@@ -239,19 +255,25 @@ class Main extends Sprite
 			thing.text = m[button];
 			thing.defaultTextFormat = new TextFormat(Paths.font('segoeui.ttf'), 18, 0xFFFFFF);
 			thing.width = thing.textWidth + 20;
-			thing.height = 40;
+			thing.height = 35;
 			thing.defaultTextFormat.align = CENTER;
 			var buttonnnnnnn:WindowblindButton = new WindowblindButton(thing, true);
-			buttonnnnnnn.y = crashlog.y + crashlog.height + 12;
-			thing.x += 2;
+			buttonnnnnnn.y = crashlog.y + crashlog.height + 8;
+			thing.x += 5;
 			thing.y += 2;
 			if (pastButton != null) buttonnnnnnn.x = pastButton.x + pastButton.width;
 			buttonnnnnnn.x += 8;
 			balls.stage.addChild(buttonnnnnnn);
 			pastButton = buttonnnnnnn;
+			buttonnnnnnn.addEventListener(MouseEvent.MOUSE_UP, (evnt) -> {
+				stage.window.onRender.remove(renderHook);
+				balls.close();
+				crashAlreadyHappening = false;
+				killme[button]();
+			});
 		}
 
-		stage.window.onRender.add((ctx) -> stage.window.onRender.cancel());
+		stage.window.onRender.add(renderHook);
 	}
 	#end
 }
@@ -281,6 +303,8 @@ class WindowBorder extends Sprite {
 	private var captionIcon:Bitmap;
 	public var forcedVisible:Bool = true;
 
+	public var doTimeout:Bool = true;
+
 	private var lastClickTime:Float = 0;
 	private var dragging:Bool = false;
 	private var resizing:Bool = false;
@@ -306,7 +330,7 @@ class WindowBorder extends Sprite {
 	public static var borderColor(default, null):FlxColor = 0xFF99008c;
 
 	private var targetWindow:lime.ui.Window;
-	public function new(target:lime.ui.Window, ?borderTitle:String, ?solid:Bool = false) {
+	public function new(target:lime.ui.Window, ?borderTitle:String, ?hasIcon:Bool = true, ?hasButtons:Bool = true) {
 		targetWindow = target;
 		targetWindow.borderless = true;
 		super();
@@ -314,8 +338,6 @@ class WindowBorder extends Sprite {
 
 		captionContainer = new Sprite();
 		captionContainer.x = captionContainer.y = 8;
-
-		if (solid) drawAlpha = 1;
 
 		WindowblindNatives.getRealAccentColour();
 		try borderColor = WindowblindNatives.getRealAccentColour() catch(e)
@@ -354,16 +376,6 @@ class WindowBorder extends Sprite {
 		});
 
 		captionContainer.addEventListener(MouseEvent.MOUSE_UP, (evnt) -> dragging = false);
-		captionContainer.addEventListener(MouseEvent.CLICK, (evnt) -> {
-			var curTime = Lib.getTimer();
-			if ((curTime - lastClickTime) < doubleClickTime) {
-				targetWindow.stage.window.maximized = !targetWindow.stage.window.maximized;
-				lastClickTime = 0;
-				return;
-			} 
-			lastClickTime = curTime;
-		});
-
 		captionShape = new Shape();
 		captionButtons = new Sprite();
 
@@ -376,18 +388,18 @@ class WindowBorder extends Sprite {
 		captionText = new TextField();
 		captionText.text = (borderTitle != null ? borderTitle : targetWindow.application.meta.get('name'));
 		captionText.defaultTextFormat = new TextFormat(Paths.font('segoeui.ttf'), 16, 0xFFFFFF);
-		captionText.x = 30;
+		captionText.x = (hasIcon ? 30 : 10);
 		captionText.y = 2;
 		captionText.selectable = false;
 		captionText.mouseEnabled = false;
  
 		addChild(borderShape);
 		captionContainer.addChild(captionShape);
-		captionContainer.addChild(captionIcon);
+		if (hasIcon) captionContainer.addChild(captionIcon);
 		captionContainer.addChild(captionText);
 
 		addChild(captionContainer);
-		captionContainer.addChild(captionButtons);
+		if (hasButtons) captionContainer.addChild(captionButtons);
 
 		captionButtons.scaleX = 1.2;
 		captionButtons.scaleY = 1.2;
@@ -424,20 +436,27 @@ class WindowBorder extends Sprite {
 			WindowblindNatives.setShadow(true);
 		});
 
-		#if !debug
-		targetWindow.onClose.add(() -> {
-			targetWindow.onClose.cancel();
-			FlxG.vcr.pause();
-			FlxG.sound.pause();
-			FlxG.autoPause = false;
-			FlxG.sound.play(Paths.sound('table')).onComplete = () -> Sys.exit(0);
-			Actuate.tween(targetWindow, 0.5, {y: targetWindow.display.bounds.height}).ease(Expo.easeIn);
-		});
-		#end
-
 		timeout();
 
-		// if (!target.resizable) return;
+		targetWindow.stage.addEventListener(Event.ENTER_FRAME, (evnt) -> {
+			if (!dragging) return;
+			var xBalls = 0, yBalls = 0;
+			WindowblindNatives.getMousePos(xBalls, yBalls);
+			targetWindow.move(xBalls - Std.int(dragOffset[0]) - 8, yBalls - Std.int(dragOffset[1]) - 8);
+		});
+		targetWindow.stage.addEventListener(MouseEvent.MOUSE_MOVE, (evnt) -> timeout());
+
+		if (!target.resizable) return;
+
+		captionContainer.addEventListener(MouseEvent.CLICK, (evnt) -> {
+			var curTime = Lib.getTimer();
+			if ((curTime - lastClickTime) < doubleClickTime) {
+				targetWindow.stage.window.maximized = !targetWindow.stage.window.maximized;
+				lastClickTime = 0;
+				return;
+			} 
+			lastClickTime = curTime;
+		});
 
 		targetWindow.stage.addEventListener(MouseEvent.MOUSE_MOVE, (evnt) -> {
 			if (!resizing) {
@@ -464,7 +483,6 @@ class WindowBorder extends Sprite {
 				resizePosBalls = [targetWindow.x, targetWindow.y, 
 				targetWindow.x + targetWindow.width, targetWindow.y + targetWindow.height];
 			}
-			timeout();
 		});
 
 		targetWindow.stage.addEventListener(MouseEvent.MOUSE_DOWN, (evnt) -> if (resizeFlag != 0) resizing = true);
@@ -501,11 +519,11 @@ class WindowBorder extends Sprite {
 					default:
 				}
 			}
-			if (dragging) targetWindow.move(xBalls - Std.int(dragOffset[0]) - 8, yBalls - Std.int(dragOffset[1]) - 8);
 		});
 	}
 
 	public function timeout() {
+		if (!doTimeout) {FlxG.mouse.visible = visible = true; return;}
 		if (forcedVisible) {
 			FlxG.mouse.visible = visible = true;
 			dispatchEvent(new Event('show'));
@@ -538,7 +556,7 @@ class WindowblindButton extends Sprite {
 	public function new(label:DisplayObject, hasBg:Bool = false, hightlightColor:Int = 0xFFFFFF) {
 		super();
 		if (hasBg) {
-			graphics.beginFill(WindowBorder.borderColor, 1);
+			graphics.beginFill(WindowBorder.borderColor, 0.2);
 			graphics.drawRoundRect(0, 0, label.width, label.height, 5);	
 			graphics.endFill();
 		}

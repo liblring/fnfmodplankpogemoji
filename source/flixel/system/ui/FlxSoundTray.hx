@@ -17,7 +17,7 @@ import flixel.math.FlxMath;
 import haxe.Timer;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
-import Main.WindowBorder;
+import windowblinds.Windowblinds;
 
 /**
  * The flixel sound tray, the little volume meter that pops down sometimes.
@@ -59,7 +59,7 @@ class FlxSoundTray extends Sprite
 
 	public function redrawBar() {
 		graphics.clear();
-		graphics.beginFill(WindowBorder.borderColor, 0.2);
+		graphics.beginFill(Windowblinds.borderColor, 0.2);
 		graphics.drawRoundRect(0, 0, FlxG.stage.window.width - 16, 35, 5);
 		graphics.endFill();
 

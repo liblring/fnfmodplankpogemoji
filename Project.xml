@@ -107,6 +107,7 @@
 	<haxelib name="linc_luajit" if="LUA_ALLOWED"/>
 	<haxelib name="hxCodec" if="VIDEOS_ALLOWED"/>
 	<haxelib name="hlvideo"/>
+	<haxelib name="format"/>
 	<haxelib name="faxe" if='switch'/>
 	<haxelib name="actuate" />
 	<haxelib name="hldiscord" />

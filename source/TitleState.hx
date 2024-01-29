@@ -161,7 +161,8 @@ class TitleState extends MusicBeatState
 				add(gfDance);
 				FlxG.sound.play(Paths.sound('jumpscare'));
 				FlxTween.tween(gfDance.scale, {x: 10, y: 10}, 0.5, {onComplete: (twn) -> {
-					FlxG.game.visible = Main.fpsVar.visible = Main.border.forcedVisible = false;
+					FlxG.game.visible = Main.fpsVar.visible = true;
+					Main.border.forcedHide = true;
 					FlxG.sound.music.stop();
 					Achievements.unlockAchievement('overpet', () -> Sys.exit(1), true);
 				}});
